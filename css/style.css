@@ -1,0 +1,10 @@
+body {
+    font-family: sans-serif;
+    margin: 40px;
+}
+
+pre {
+    background: #f4f4f4;
+    padding: 15px;
+    border: 1px solid #ccc;
+}

@@ -1,0 +1,2 @@
+This text file is loaded via AJAX
+from GitHub Pages.
