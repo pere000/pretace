@@ -1,9 +1,5 @@
 This text file is loaded via AJAX
 from GitHub Pages.
-
-
 From now on, whenever you:
-
 Edit files locally → git add ., git commit -m "...", git push
-
 Your GitHub Pages site updates automatically
