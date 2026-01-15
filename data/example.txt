@@ -1,5 +1,9 @@
-This text file is loaded via AJAX
-from GitHub Pages.
-From now on, whenever you:
-Edit files locally → git add ., git commit -m "...", git push
-Your GitHub Pages site updates automatically
+<div style='color:maroon'>This text file is loaded via AJAX
+from GitHub Pages.</div>
+
+
+From now on, whenever you:<br>
+
+Edit files locally → git add ., git commit -m "...", git push<br>
+
+

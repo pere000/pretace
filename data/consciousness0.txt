@@ -1,0 +1,1411 @@
+     1	Neuroscience of Consciousness, 2022, 7(2), 1–13
+     2	DOI: https://doi.org/10.1093/nc/niab034
+       
+     3	Review Article
+       
+     4	Special Issue: Consciousness science and its theories
+       
+     5	Naotsugu Tsuchiya1,2,3,† and Hayato Saigo 4,‡
+     6	1
+       
+     7	School of Psychological Sciences and Turner Institute for Brain and Mental Health, Monash University, Melbourne, VIC 3800, Australia; 2 Center for Information
+     8	and Neural Networks (CiNet), National Institute of Information and Communications Technology (NICT), Suita, Osaka 565-0871, Japan; 3 Advanced
+     9	Telecommunications Research Computational Neuroscience Laboratories, 2-2-2 Hikaridai, Seika-cho, Soraku-gun, Kyoto 619-0288, Japan; 4 Nagahama Institute of
+    10	Bio-Science and Technology, 1266 Tamura-cho, Nagahama, Shiga 526-0829, Japan
+    11	†
+    12	Naotsugu Tsuchiya, http://orcid.org/0000-0003-4216-8701
+    13	‡
+    14	Hayato Saigo, http://orcid.org/0000-0002-4209-352X
+    15	*Correspondence address. Biomedical Imaging facility, Clayton, School of Psychological Sciences and Turner Institute for Brain and Mental Health, Monash
+    16	University, 770 Blackburn Monash, VIC 3168, Australia. Tel:+61-3-9905-4564; E-mail: naotsugu.tsuchiya@monash.edu.
+       
+    17	Abstract
+    18	Characterizing consciousness in and of itself is notoriously difficult. Here, we propose an alternative approach to characterize, and eventually define, consciousness through exhaustive descriptions of consciousness’ relationships to all other consciousness. This approach
+    19	is founded in category theory. Indeed, category theory can prove that two objects A and B in a category can be equivalent if and only
+    20	if all the relationships that A holds with others in the category are the same as those of B; this proof is called the Yoneda lemma. To
+    21	introduce the Yoneda lemma, we gradually introduce key concepts of category theory to consciousness researchers. Along the way, we
+    22	propose several possible definitions of categories of consciousness, both in terms of level and contents, through the usage of simple
+    23	examples. We propose to use the categorical structure of consciousness as a gold standard to formalize empirical research (e.g. color
+    24	qualia structure at fovea and periphery) and, especially, the empirical testing of theories of consciousness.
+       
+    25	Keywords: consciousness; contents of consciousness; level of consciousness; qualia; category theory; yoneda lemma; functor; natural
+    26	transformation
+       
+    27	Problems in characterizing consciousness
+    28	on its own
+    29	Over the last few decades, the question of the nature of consciousness is gaining a respected position as the target of scientific
+    30	inquiry. Much of the empirical research has tried to identify the
+    31	neural correlates of consciousness (Koch et al. 2016). Building on
+    32	the massive amount of empirical evidence, some models or theories have been proposed to explain the link between various
+    33	features and aspects of the neural activity and the associated
+    34	functions and phenomena of consciousness (Engel and Singer
+    35	2001; Graziano and Kastner 2011; Lamme 2015; Northoff and
+    36	Huang 2017; Brown et al. 2019; Mashour et al. 2020).
+    37	Another distinct approach to consciousness is to study it using
+    38	a mathematical framework (Hoffman 1966, 1980; Stanley 1999;
+    39	Tononi 2004; Fekete and Edelman 2011; Yoshimi 2011; Prentner 2019; Kleiner 2020; Prakash et al. 2020; Signorelli et al.
+    40	2021). Among these, the Integrated Information Theory (IIT) of
+       
+    41	consciousness by Tononi and colleagues (Oizumi et al. 2014;
+    42	Tononi et al. 2016) is arguably the most developed and discussed
+    43	in the literature. IIT takes a unique approach, where it tries
+    44	to first identify the essential properties of consciousness, which
+    45	are always true to any experience. These essential properties
+    46	are called “phenomenological axioms,” and IIT tries to derive
+    47	mathematical postulates that any physical system should satisfy to support these properties. IIT then proposes an explanatory
+    48	“identity” between phenomenal consciousness and information
+    49	structure (Haun and Tononi 2019).
+    50	In the past (Tsuchiya et al. 2016), we, the authors, have suggested that, rather than trying to propose the explanatory “identity” between the two in a single step, it would be empirically
+    51	more tractable to break up the IIT project into the following
+    52	three subprojects: (i) to characterize the structure of conscious
+    53	phenomenology as a category; (ii) to characterize the structure
+    54	of information as a category; and (iii) to assess the degree of
+    55	similarity between the structures. For the second issue, we and
+       
+    56	Received: 9 March 2021; Revised: 18 August 2021; Accepted: 24 September 2021
+    57	© The Author(s) 2021. Published by Oxford University Press.
+    58	This is an Open Access article distributed under the terms of the Creative Commons Attribution License (https://creativecommons.org/licenses/by/4.0/), which
+    59	permits unrestricted reuse, distribution, and reproduction in any medium, provided the original work is properly cited.
+       
+    60	Downloaded from https://academic.oup.com/nc/article/2021/2/niab034/6397521 by guest on 14 January 2026
+       
+    61	A relational approach to consciousness: categories of
+    62	level and contents of consciousness
+       
+    63	2
+       
+    64	Tsuchiya and Saigo
+    65	(including B) are the same (up to natural equivalence defined in
+    66	“Functor category, whose objects and arrows are functors and natural transformations”) as those between B and the rest (including
+    67	A). Importantly, this is true, even if A and B themselves are difficult to characterize in and of themselves, as in the case of black
+    68	holes in cosmology or infinity in mathematics. While defining consciousness directly in a way where everyone agrees is not easy,
+    69	characterizing consciousness through a rich set of relationships
+    70	is much more feasible.
+    71	Note that we will not offer a definitive definition(s) of consciousness in this article. Rather, our plan is to introduce a novel
+    72	perspective on how we can start doing so through the application of the Yoneda lemma. Through our proposed approach,
+    73	eventually, we would hope to completely justify the relational
+    74	definition of consciousness. But first things first. To apply the
+    75	Yoneda lemma, we need to propose several possible categories of
+    76	consciousness. After introducing key concepts in category theory,
+    77	we will come back to the issue of how we can apply the Yoneda
+    78	lemma in consciousness research and discuss what it means for
+    79	consciousness research. For example, the Yoneda lemma will
+    80	enable us to address the question of the equivalence of color
+    81	qualia structure at the fovea and the periphery in a systematic
+    82	way.1
+       
+    83	What’s the category in category theory?
+    84	Categories of consciousness
+    85	In this section, we will explain the basics of category theory,
+    86	which is necessary to explain the Yoneda lemma with a view to
+    87	its application in consciousness research. We will propose two
+    88	categories: category of level of consciousness, Lv, and category
+    89	of contents of consciousness, Q Note that we are not claiming
+    90	that these examples are “the” only possible formulation of categories of consciousness. They are invoked here as a starting point.
+    91	For an accessible introduction to category theory, see Lawvere
+    92	and Schanuel (2009); Spivak (2014); Bradley (2017); Northoff et al.
+    93	(2019).
+    94	The basis of category theory is three concepts: (i) category,
+    95	(ii) functor, and (iii) natural transformation. Let us start with a
+    96	category.
+    97	Definition: For a collection of objects to be considered as a category,
+    98	they must satisfy the following five axioms.
+    99	1. An arrow has its “source” object called domain and “target” object
+   100	called codomain.
+   101	2. For every object, there is a self-referential arrow called identity.
+   102	3. A pair of arrows is composable if the domain of one arrow equals
+   103	the codomain of another.
+   104	4. Identities do not change other arrows by composition.
+   105	5. Composition is associative.
+   106	In other words, a category is a system consisting of “objects”
+   107	and “arrows.” Figure 1 explains the above definition with a diagram
+   108	in an intuitive manner.
+   109	For a category of level of consciousness, we consider global
+   110	states of consciousness or the degree of wakefulness as an object.
+   111	The level of consciousness is usually assumed to go from 0 in dead
+   112	humans, which is lower than deeply anesthetized or dreamless
+   113	1
+   114	We assume that many readers of this article are unfamiliar with category theory and have no or little background training in mathematics. These
+   115	readers are our primary target audience. To make the mathematical aspects as
+   116	accessible as possible, we provided informal interpretations of mathematical
+   117	concepts and their concrete examples in the context of consciousness research.
+   118	We found this highly effective in introducing category theory to scientists with
+   119	no or little mathematical background (Spivak 2014).
+       
+   120	Downloaded from https://academic.oup.com/nc/article/2021/2/niab034/6397521 by guest on 14 January 2026
+       
+   121	others have made some initial efforts on the mathematical side
+   122	(Northoff et al. 2019; Kleiner and Tull 2020; Tull and Kleiner 2020).
+   123	Notably, there has been progress on the application of category
+   124	theoretical approaches toward stochastic processes (Manin and
+   125	Marcolli 2020) to formalize information structures (Baudot and
+   126	Bennequin 2015; Baudot et al. 2019). For the third issue, we also
+   127	made an initial attempt (Haun et al. 2017). Here, we deal with the
+   128	first issue: how we can characterize the structure of consciousness as a category. Note that category theory has been proposed to
+   129	model aspects of cognition and how they are supported by neural
+   130	networks in the brain (Ehresmann and Vanbremeersch 1987, 1996;
+   131	Arzi-Gonczarowski 1999; Healy et al. 2008; Phillips and Wilson
+   132	2010, 2016; Ehresmann and Gomez-Ramirez 2015; Phillips 2020).
+   133	Precisely defining consciousness has been notoriously difficult (Dennett 1988; Sloman 1991; Stanovich 1991; Chalmers 1996;
+   134	Velmans 2009; Kleiner 2020), but certain characterizations of consciousness are accepted by many for use in empirical consciousness research (Koch et al. 2016; Mashour et al. 2020). One of the
+   135	widespread consensus is to distinguish the “level” and “contents”
+   136	of consciousness (Laureys 2005; Boly et al. 2013). For example,
+   137	Searle (Searle 2000) gives the following definition: “Consciousness
+   138	consists of inner, qualitative, subjective states and processes of
+   139	sentience or awareness.” Consciousness, so defined, begins when
+   140	we wake in the morning from a dreamless sleep and continues
+   141	until we fall asleep again, die, go into a coma, or otherwise become
+   142	“unconscious.” In the case of the contents of consciousness, a particular conscious experience of red color, often called a red quale
+   143	(Kanai and Tsuchiya 2012), is typically characterized as “redness
+   144	of red” or “red like this wine.” In these cases, consciousness is
+   145	characterized in reference to another conscious experience. This
+   146	relational nature of consciousness appears to be one of the fundamental characteristics of consciousness (Nagel 1974; Chalmers
+   147	1996; Kleiner 2020).
+   148	In this paper, by introducing several notions of category theory,
+   149	we offer mathematical justification for the relational characterization of consciousness. In fact, situations where a particular
+   150	object is not possible to define or even characterize on its own
+   151	arise relatively often outside of consciousness research. In these
+   152	situations, what has been effective is to rely on the relationships between the object to be defined and its surroundings. For
+   153	example, some linguists consider that meanings of a word can be
+   154	understood only through how the word is related to other words
+   155	and how they are put into the context in the sentence (e.g. Frege
+   156	1980; De Saussure 2011). In ecology, it is essential to characterize
+   157	any life form within an ecosystem; defining a tree without mentioning the geological area in which it lives and which animals,
+   158	insects, and other plants interact with it and in what way would
+   159	miss the very essence of what that tree is. In quantum theory,
+   160	the essence of quantum features is that they are only possible
+   161	to explain through the interactions between the objects (Coecke
+   162	and Kissinger 2017). In cosmology, black holes are, in themselves,
+   163	impossible to measure and characterize, but their interaction with
+   164	their neighbors can be measured and used to characterize their
+   165	properties. In mathematics, various types of infinity can be distinguished through what types of relationships they have with other
+   166	mathematical objects.
+   167	There is a deep mathematical foundation in why these theoretical fields can dispense with a direct definition of an object in
+   168	favor of characterizing its interaction with its surroundings. That
+   169	is what we introduce to consciousness research in this paper: the
+   170	Yoneda lemma. In short, the Yoneda lemma allows us to equate
+   171	A with B (up to isomorphism defined in “What does it mean for
+   172	objects to be the same in a category? Isomorphic objects in a
+   173	category”) if the relationships between A and the rest of objects
+       
+   174	A relational approach to consciousness
+       
+   175	Figure 1. Requirements of a category. (a) Composition: if A, B, and C are
+   176	objects in category X, and f: A → B and g: B → C are arrows in category
+   177	X, then we can compose (or combine) f and g to obtain an arrow, f;g: A →
+   178	C. Note f;g reads as “f then g” and it is often denoted as g◦ f (Fong and
+   179	Spivak 2019). (b) Associativity: if f, g, and h are arrows in category X, then
+   180	the order to compose the arrows does not matter: (f;g);h = f;(g;h). A, B, C,
+   181	and D are objects in category X. (c) Unit: For any object A in category X,
+   182	there is a self-referential arrow A → A, which is called identity arrow: 1A.
+   183	For any arrow f: A → B, the following is always satisfied: 1A;f = f = f;1B
+       
+   184	A category of level of consciousness
+   185	Let us verify whether our proposed objects and arrows for level of
+   186	consciousness, Lv, can qualify as a category. Objects are certain
+   187	levels of consciousness supported by a human brain, such as A, B,
+   188	C, etc. An arrow f exists between two conscious levels A and B, if
+   189	level of consciousness A “is higher than or equal to” B.
+   190	Consider the requirement of composition. Suppose that f: A
+   191	→ B and g: B → C exist as arrows for objects A, B, and C in consciousness level category Lv. That is, the level of consciousness
+   192	A is higher or the same as B, and B is higher or the same as C.
+   193	Then, it follows that A is higher than C or the same. In other words,
+   194	there is an arrow from A to C, which is the combination of f and g,
+   195	which we denote as f;g. Therefore, the condition for composition
+   196	is satisfied.
+   197	Next, let us consider associativity. We assume that for levels
+   198	of consciousness A, B, C, and D, three arrows exist f: A → B, g: B
+   199	→ C, and h: C → D. Then, (f;g);h means that (i) we first confirm
+   200	that A is higher than or the same as C (i.e. f;g) and (ii) due to h
+       
+   201	(i.e. C is higher than or equal to D), we conclude that A is higher
+   202	than or the same as D. On the other hand, f;(g;h) means that (i) we
+   203	first confirm g;h, that is, B is higher than or equal to D, and (ii) we
+   204	conclude A is higher than or equal to D. In other words, associativity requires these two conclusions to be exactly the same. In the
+   205	diagram (Fig. 1b), this translates to the fact that two conclusions
+   206	via two paths are exactly the same if the starting and the ending
+   207	points are the same.
+   208	Finally, let us check the unit. This is the reason why we have
+   209	added “or equal to” as a part of the definition of the arrow. For any
+   210	level of consciousness A, there exists an arrow 1A: A → A because
+   211	A is always higher than or equal to A. If f:A → B exists, then If f:
+   212	A → B exists, then 1A;f means the following. (i) We confirm that
+   213	A is the same as A. Then (ii) we conclude that A is higher than or
+   214	equal to B. Similarly, f;1B means the following. (i) We confirm A
+   215	is higher than or equal to B. Then, (ii) we confirm B is equal to B.
+   216	If we define f: A → B as A is strictly higher than B, our proposed
+   217	system of objects and arrows for level of consciousness Lv does
+   218	not qualify as a category.
+   219	Our category of level of consciousness Lv is an example of categories called “preordered sets.” Preordered sets are categories such
+   220	that between any two objects there is at most one arrow. The
+   221	arrows in preordered sets are called “preorder.”
+       
+   222	A category of contents
+   223	Next, let us examine if our proposed definition can make a system
+   224	of contents of consciousness Q into a category. Here, objects are
+   225	the contents of consciousness. Let us consider a system Q that
+   226	consists of only three objects, A = red sunset, B = red crayon, and
+   227	C = red wine. For simplicity, we consider a case of a preordered set;
+   228	that is, between two objects, there is either one arrow or none at
+   229	all. Suppose there is an arrow from A to B when the contents of the
+   230	two consciousness are “nearly indistinguishable” in terms of their
+   231	color [for those who are concerned about the gradual degradation
+   232	of distinguishability, see Tsuchiya et al. (2021)]. In other words, if
+   233	there is an arrow f between the two contents of consciousness A
+   234	and B, then f: A → B, and A is subjectively felt as nearly the same
+   235	as B in terms of their color. It is clear that the composition holds.
+   236	In other words, if the redness of sunset and crayon are similar,
+   237	and the redness of crayon and wine are similar, then the redness
+   238	of sunset and wine are also similar. Mathematically speaking, if
+   239	f: A → B and g: B → C, then f;g: A → C also holds. Associativity
+   240	holds as well. The unit is also valid (these two proofs are simple
+   241	and left to the reader). Therefore, our proposed system of objects
+   242	and arrows Q can constitute a category.
+   243	Here, since arrows mean “nearly indistinguishable,” the direction of an arrow does not matter. Now that we are considering a
+   244	preorder, there is only one arrow in either direction. This implies
+   245	that any arrow in this category is invertible. That is, any arrow has
+   246	an arrow of a reverse direction such that the composition of the
+   247	two is the identity arrow. Invertible arrows are also called “isomorphism” not only in preordered sets but also in categories in
+   248	general. When all arrows are isomorphism, the category is called
+   249	“groupoid.” In sum, we proposed an exemplar category Q, which is
+   250	preorder and groupoid, where all arrows are isomorphism (if there
+   251	are multiple isomorphisms between objects, then such a category
+   252	is groupoid but not preorder).
+       
+   253	What does it mean for objects to be the same in a
+   254	category? Isomorphic objects in a category
+   255	So far, we have introduced categories Lv and Q for level and contents of consciousness. Next, to deepen our understanding of
+       
+   256	Downloaded from https://academic.oup.com/nc/article/2021/2/niab034/6397521 by guest on 14 January 2026
+       
+   257	sleep, and highest in fully wakeful states (Mormann and Koch
+   258	2007). Note that one object can contain many elements. As an
+   259	example, let us consider a fully wakeful state as an object. One
+   260	can distinguish each moment of experience as different elements.
+   261	An object in this case is a group of these elements considered as
+   262	one entity, much like the colloquial use of a “category.” Mathematically speaking, an object does not have to be one element.
+   263	For a category of contents, we can consider any possible content of consciousness, such as color, sound, and pain. As is usually
+   264	the case in mathematics, however, starting from the most general
+   265	situation, encompassing all levels of consciousness in all animals
+   266	or all types of contents, is not a wise strategy to make progress.
+   267	Accordingly, we will consider a very concrete case of consciousness categories below and leave generalization of these categories
+   268	to future work.
+   269	An arrow, →, relates an object with another object. For example, f: A → B denotes a relationship f between object A and object
+   270	B. In the case of level of consciousness category Lv, we can define
+   271	the meaning of f to be the level of consciousness in A “is higher or
+   272	equal to” B. Soon, it will become clear why we need “equal to.” Read
+   273	on! In the case of content category Q, we can define the meaning
+   274	of f to be that A “is experienced as nearly indistinguishable with”
+   275	B in a certain aspect.
+   276	If the system consisting of objects and arrows satisfy further
+   277	three conditions (composition, associativity, and unit) as depicted
+   278	in Fig. 1, then it qualifies as a category. We visualize these three
+   279	requirements concisely and intuitively using diagrams. This is one
+   280	of the most powerful aspects of category theory: simply visualizing complex relationships to facilitate the understanding of the
+   281	subject matter.
+       
+   282	3
+       
+   283	4
+       
+   284	Tsuchiya and Saigo
+   285	conscious states, where we can never subjectively compare which
+   286	state is “higher” as conscious level. For example, which is higher
+   287	in level of consciousness between vivid dreaming and drowsy
+   288	awakening states? Or, what about between deep general anesthesia and coma, where consciousness completely disappears?
+   289	We believe that these issues arise because the scholars who criticize the concept of level of consciousness implicitly assume that
+   290	“level” is something that is “isomorphic” to natural numbers (or
+   291	positive real numbers), where it is always possible to rank the
+   292	order between two objects. Such a strongly ordered structure is
+   293	called “total order” in mathematics. We believe that the total
+   294	order assumption is not necessary at all for the concept of level
+   295	of consciousness to be useful. We propose that a looser concept,
+   296	preorder, is a useful and appropriate concept for level of consciousness. As for preorder, any two objects (levels) may or may
+   297	not have a relationship “≦.”
+   298	Our proposed category Lv can be applied to many cases. Compared to the fully wakeful states, deeply anesthetized, dreamless
+   299	sleep, or coma would be lower in the level of consciousness. In Lv,
+   300	we will have no arrows between cases of lower level of consciousness, where subjects have no ability to compare their levels and
+   301	do not show any behavioral outputs to be meaningfully compared.
+   302	Likewise, Lv can be proposed across animals without proposing
+   303	any arrows between animal species but only considering arrows
+   304	within animals (between fully wakeful and deeply anesthetized,
+   305	deep sleep, or coma).
+   306	Note that the two categories Lv and Q proposed here are just toy
+   307	examples and we are not claiming that they are “the” categories
+   308	of consciousness. In both level and contents of consciousness, it
+   309	is possible to focus on other aspects of consciousness and consider the corresponding categories. For example, by focusing on
+   310	an aspect of consciousness that changes over time, one can propose a “category of mobility” (Saigo et al. 2019). Another kind
+   311	of category, called “co-slice category,” is effective in capturing
+   312	association possibilities and metaphorical structures of meaning (Fuyama and Saigo 2018) [note that the subjective experience
+   313	of “meaning” of a word is not accepted widely, however; see
+   314	Kemmerer (2015) and McClelland and Bayne (2016) for recent discussions on this issue]. Tsuchiya et al. (2021) explains a further
+   315	framework to loosen the condition of arrows in Q by making it
+   316	in variable degrees of similarity using a concept of enriched categories (Lawvere 1973; Leinster and Meckes 2017; Fong and Spivak
+   317	2019).
+   318	The point of this section was to provide the readers an understanding that it is not difficult to propose a category of consciousness. Some readers may think that as a mathematical theory,
+   319	category theory cannot be applied to the problem of consciousness, especially because of the problem in composition (Pitt 2018).
+   320	As we explained, however, category theory can be applied if
+   321	“objects” and “arrows” are appropriately defined and if they satisfy
+   322	a few conditions.
+       
+   323	Preliminary conclusion and discussion
+       
+   324	In simple terms, a functor is an arrow between two categories (for
+   325	a graphical definition, see Fig. 2). Importantly, a functor needs to
+   326	map one category to another category while keeping the “structure” of the category (e.g. commutativity). From the viewpoint
+   327	of equivalence discussed in the last chapter, “the existence of a
+   328	functor” is one important condition to consider as the sameness
+   329	between categories. The sameness as “existence of a functor” is
+   330	much weaker than the other types of sameness discussed in this
+   331	paper.
+       
+   332	We believe that introducing the concept of preordered sets
+   333	as a category of level of consciousness Lv has an important implication in consciousness research. Some authors
+   334	have raised issues with the concept of level of consciousness (Bayne et al. 2016; Pautz 2019). One of the issues is
+   335	that this concept seems to imply a gradual change from
+   336	unconsciousness to full consciousness, which is not widely
+   337	agreed upon. Another issue is the existence of certain pairs of
+       
+   338	What is a functor?
+   339	A functor is an arrow between categories
+       
+   340	Downloaded from https://academic.oup.com/nc/article/2021/2/niab034/6397521 by guest on 14 January 2026
+       
+   341	what it means to define an object, we will consider what it means
+   342	for objects A and B to be equivalent.
+   343	When we say that A and B are the “same” in everyday life,
+   344	it means that they are equivalent with respect to some definitions or assumptions and ignoring various aspects. For example,
+   345	when there are two apples on the right and the left, they may
+   346	be similar in terms of their color or a category within the fruit,
+   347	but they are different in their surface textures. In fact, they are
+   348	not the same thing, being located in different places. Category
+   349	theory provides a wealth of mathematical tools to handle these
+   350	subtle differences in “sameness” (Tsuchiya et al. 2016) in that it
+   351	characterizes different kinds of sameness using various types of
+   352	relationships.
+   353	Let us explain the sameness between objects in a category,
+   354	called “isomorphism.”
+   355	Definition: The objects A and B in a certain category C are isomorphic if there is an “invertible” arrow (called isomorphism) between them.
+   356	When the arrow f: A → B is “invertible,” there exists an arrow g: B → A
+   357	with f ;g = 1A and g;f = 1B.
+   358	In the case of category Lv, if coma level A is lower than minimally consciousness level B, the reverse of the arrow f: A → B
+   359	does not exist. In our proposed example of the category of contents with three objects, all arrows are isomorphisms (see Section
+   360	2.3), that is, any pair of objects is isomorphic if there exists an
+   361	arrow between them.
+   362	This concept of isomorphism is much looser and more flexible than the usual concept of “equalities.” For example, under
+   363	the framework of set theory, a set of alphabets {a, b, c, d, e} is
+   364	not equal to a set of numbers {1, 2, 3, 4, 5}. The difference in
+   365	terms of “elements” disqualifies them to be considered as equal
+   366	sets. Now, consider a category Set whose objects are sets and
+   367	arrows are functions or mappings between sets. Within the category Set, two objects (i.e. sets) {a, b, c, d, e} and {1, 2, 3, 4, 5}
+   368	are considered as isomorphic objects in the sense that each element can be mapped from one set to the other set in a one-to-one
+   369	manner. In fact, a concept of a number, such as 5, is “defined”
+   370	when we regard these “different” sets as the “equivalent” in a certain respect. In this sense, isomorphism captures the concept of
+   371	“essential sameness” in the category. As another example of isomorphism between objects in a category, consider a category of
+   372	topological space, Top, which is the foundation of the mathematical field called topology. In Top, objects are topological spaces
+   373	and arrows are continuous maps. While coffee cups and donuts
+   374	are usually considered as “completely different” objects, they are
+   375	isomorphic in Top.
+   376	In order to make progress in consciousness research, equivalence in the sense of isomorphism is not powerful enough. As
+   377	we discuss later, we believe that different types of sameness in
+   378	category theory will be more useful and find wider application in
+   379	consciousness research. In particular, isomorphism between categories, or even looser sameness, called categorical equivalence
+   380	will be critical. To introduce these concepts, we need to introduce
+   381	two concepts: functors and natural transformations, which are
+   382	the topics of the next two chapters.
+       
+   383	A relational approach to consciousness
+       
+   384	Definition: A mapping F, which maps an object and an arrow in category C to an object and an arrow in category D, is called a functor if it
+   385	satisfies the following three conditions:
+   386	1) F(1X) = 1 F(X), that is, the identity arrow of X will map to the
+   387	identity arrow of F(X).
+   388	2) f:X → Y will map to F(f):F(X) → F(Y), that is, the arrow from X to
+   389	Y maps to the arrow from F(X) to F(Y).
+   390	3) a composite arrow f;g in category C is preserved as F(f;g) = F(f);F(g).
+   391	To see the relevance of functors in consciousness research, let
+   392	us examine a functor from categories of level of consciousness Lv.
+   393	To remind you, Lv is a preordered set; objects and arrows in Lv are
+   394	level of consciousness and “≦” as introduced previously. As we
+   395	argued ‘there’ the construction of category Lv and clarifying its
+   396	specific structure itself is a difficult research program in itself. But
+   397	here, we focus on the other problem: to establish a consciousness
+   398	meter, which translates to a construction of a functor from category Lv to a convenient preorder category D. As an example,
+   399	consider a category D whose objects and arrows are natural numbers and ≦. Readers can check easily that D is a preorder category;
+   400	any pair of objects have at most one arrow (e.g. 1 ≦ 2), any arrows
+   401	can be composed in an associative manner (e.g. 1 ≦ 2 ≦ 3) and
+   402	that each object has a unit arrow (e.g. 1 ≦ 1).
+   403	Let us consider a mapping F that maps from category Lv to category D and satisfies the conditions to be a functor. In other words,
+   404	F maps any object of Lv, that is, any level of consciousness, into a
+   405	natural number, while all ≦ relations in Lv are preserved in D. In
+   406	other words, searching for a functor F is the same as the construction of a consciousness meter as strived for by some consciousness
+   407	researchers. We also note here that mapping in the other direction, that is, from D to Lv does not have to be a functor. In other
+   408	words, the validity of a consciousness meter, F, is not compromised if two objects with one arrow (e.g. 1 ≦ 2 in D) do not map
+   409	onto Lv functorially. For example, from D to Lv, a mapping G may
+   410	map 1 to coma and 2 to deep general anesthesia. If G does not map
+   411	≦ in D into ≦ in Lv, then G is not a functor. However, as we pointed
+   412	out in the last section, it is unclear whether ≦ exists between
+   413	coma and deep anesthesia; thus, this itself is not a problem for
+   414	F as a valid consciousness meter.
+       
+   415	Figure 3. Exemplar functors between categories QX and QY. (a) In
+   416	category QX, there exist arrows for all possible object pairs (only three
+   417	arrows are depicted here). In category QY, there are no arrows except for
+   418	identity arrows for each object (not drawn). (b) One of 27 (=33 ) functors
+   419	from QY to QX that preserve structures of QY. (c) One of three functors
+   420	from QX to QY. This functor has to map all objects in QX into one object
+   421	in QY and all arrows in QX to the identity arrow in QY
+       
+   422	Next, let us consider a functor F for category Q for contents of
+   423	consciousness as considered in the last section. Q is a groupoid,
+   424	and its three objects are A = red sunset, B = red crayons, and
+   425	C = red wine. Arrows are “nearly indistinguishable” in terms of
+   426	color. Here, we consider two persons’ categories QX and QY. For
+   427	Ms X, all objects’ colors are nearly indistinguishable; thus, there
+   428	are arrows for any pair of objects AX, BX, and CX. However, for Mr
+   429	Y, all objects are distinguishable; thus, there are no arrows among
+   430	AY, BY, and CY (Fig. 3a).
+   431	In this situation, there are 27 functors that map from category
+   432	QY to category QX since the destination of each object in category
+   433	QY can be any of AX, BX, and CX. For example, one functor F1
+   434	maps AY to AX, while it maps BY and CY into BX (Fig. 3b). The only
+   435	arrows in QY are the identity arrows. The identity for AY maps
+   436	to that for AX, while those for BY and CY maps to that for BX.
+   437	The requirement of composition is also satisfied (because the only
+   438	way to compose arrows in QX is to compose the identity with the
+   439	identity, which is the identity).
+   440	What about functors from category QX to category QY? Like
+   441	the above example, if F collapses all objects in QX into one
+   442	object in QY, F can satisfy all conditions to be a functor. If F
+   443	does not collapse them, what happens? For example, if AX is
+   444	mapped to AY, while BX is mapped to BY. Because Mr Y can
+   445	distinguish AY and BY, there is no arrow between AY and BY.
+   446	However, Ms X sees AX as indistinguishable from BX. Thus, the
+   447	arrow that connects AX and BX is lost in translation during this
+   448	mapping. Such a faulty mapping does not qualify as a functor.
+   449	From a viewpoint of equivalence, there is a certain “structural
+   450	similarity” in subjective similarity characterized by categories QX
+   451	and QY in a sense that there exists a functor from one category to the other. But the richness of the structure is “different” as can be quantified from the number of arrows in each
+   452	category. This nicely represents the situation of the subjective
+   453	experience of Ms X and Mr Y—they experience the objects with
+   454	certain structural similarity and difference in richness in the
+   455	structure.
+   456	In sum, functors can be used to compare structures between
+   457	categories. In terms of categories of contents of consciousness Q,
+   458	functors are not limited in the usage of comparison of similarity
+   459	structures among individuals as in our examples. Functors can be
+       
+   460	Downloaded from https://academic.oup.com/nc/article/2021/2/niab034/6397521 by guest on 14 January 2026
+       
+   461	Figure 2. What is a functor? A structural mapping F between category C
+   462	to D is called a functor if the following three conditions are satisfied:
+   463	(i) an arrow f: X → Y in category C is mapped onto a corresponding
+   464	arrow F(f): F(X) → F(Y) in category D; and (ii) a composite arrow f;g in
+   465	category C is preserved as F(f;g) = F(f);F(g); and (iii) an identify arrow 1X
+   466	for an object X in category C is preserved as F(1X) = 1 F(X)
+       
+   467	5
+       
+   468	6
+       
+   469	Tsuchiya and Saigo
+       
+   470	used to compare structures of content category of color with content category of shape, content category of meaning, etc. within
+   471	individuals. This is one of the possible future directions of category
+   472	theoretical research of conscious contents.
+       
+   473	Category of categories
+       
+   474	What is a natural transformation?
+   475	A natural transformation is the central concept in category theory.
+   476	Indeed, category theory was originally invented to introduce the
+   477	concept of natural transformation. To explain natural transformation, the concept of functor was introduced. And to explain the
+   478	concept of functor, the concept of category was introduced. Natural transformations are necessary to state and prove the Yoneda
+   479	lemma. The Yoneda lemma and its inspiration for consciousness
+   480	research is the central message of the paper: even if it is difficult
+   481	or impossible to characterize consciousness per se, we can do so
+   482	by characterizing all arrows in the relevant category.
+       
+   483	A natural transformation is an arrow between
+   484	functors
+   485	A natural transformation maps a functor to another functor while
+   486	keeping the structure of the functor. The basic structure of category theory can be stated in terms of categories, functors, and
+   487	natural transformations. While there are more, solid understanding up to natural transformation is critical to handle category
+   488	theory. It is important to develop an intuition about a natural
+   489	transformation. It is a family of arrows in the category, which a
+   490	functor maps the original category into. The graphical definition
+   491	in Fig. 4 helps understand this concept.
+   492	Definition: Consider functors F and G that map category C to category D. When a mapping t from functor F to G satisfies the following two
+   493	conditions, t is called a natural transformation and we write t: F G.
+   494	1. Given an object X in category C, t gives an arrow tX: F(X) → G(X)
+   495	in category D.
+   496	2. For any arrow f: X → Y in category C, tX;G(f) = F(f);tY holds in
+   497	category D.
+   498	tX is called the X component of t.
+       
+   499	Natural transformation for category Lv
+   500	To understand the relevance of natural transformations in
+   501	consciousness research, let us first consider the category of level
+   502	of consciousness Lv and the functors. Suppose Ms F proposed a
+   503	functor F as a consciousness meter, which maps all levels in preorder category Lv to preorder category D (objects and arrows are
+       
+   504	Figure 4. What is a natural transformation? (a) Category C (consisting of
+   505	objects X and Y and an arrow f) is mapped into category D by two
+   506	functors F and G. Each functor preserves the structure of category C in D
+   507	(e.g. F(f):F(X) → F(Y), G(f):G(X) → G(Y)). Natural transformation t maps
+   508	functor F into G while preserving its structure. t can be considered as a
+   509	family of arrows in category D, such as tX and tY. Each arrow is specified
+   510	by an object in the original category C, such as tX, which maps an object
+   511	F(X) to G(X) in category D. b) Visualizing t as a family of arrows in the
+   512	destination category D
+       
+   513	natural numbers and ≦). F maps all objects in Lv to numbers in
+   514	D and ≦ in Lv into ≦ in D. On F’s monitor, level of consciousness
+   515	under deep general anesthesia shows up as number 10, while that
+   516	under the wakeful state is 100. Then Mr G also developed another
+   517	functor G as a consciousness meter. On G’s meter, the level under
+   518	deep general anesthesia is 20 and the wakeful state is 200. In both
+   519	cases, the arrow in category C is preserved as the arrow in category D as ≦. Now, we ask: what is the nature of the relationship
+   520	between F’s and G’s consciousness meters?
+   521	Let us assume that there exists a natural transformation t
+   522	between functors F and G. Then, according to Condition 1 above,
+   523	the natural transformation t gives us two arrows tA and tW for two
+   524	objects that we considered in category Lv: A for anesthesia and W
+   525	for wakefulness. tA and tW are two arrows in category D, which
+   526	satisfies the following: tA: F(A) = 10 → G(A) = 20, tW: F(W) = 100 →
+   527	G(W) = 200. Interestingly, this arrow corresponds to ≦, the arrow
+   528	in D.
+   529	Moreover, according to Condition 2, with respect to two objects
+   530	A and W and the arrow f:A → W in category Lv, we have
+   531	tA;G(≦) = F(≦);tW. The left-hand side of this equation means that
+   532	(i) we first evaluate the value for anesthesia in F (=10) to translate
+   533	into the value in G (=20), then (ii) we confirm the relation between
+   534	A and W (≦) in category Lv to be translated into the relation in G’s
+   535	monitor (20 ≦ 200). The right hand side of the equation means
+   536	that (i) we first translate the relation A ≦ W in category Lv into
+   537	category D (F(A) = 10 ≦ F(W) = 100) and then (ii) we map the value
+   538	for wakefulness in F’s monitor (=100) into G’s monitor (=200). In
+   539	sum, this family of arrows in category D guarantees a lawful relationship between two functors, preserving the original relations
+   540	in category Lv (note that we also have two more relations with
+   541	respect to the identity arrows for 1A and 1 W in category Lv).
+       
+   542	Natural transformation for category Q
+   543	Next, let us consider a natural transformation for the category of
+   544	contents Q. We consider two categories based on Q introduced in
+   545	the section on “A category of contents” and consider a situation
+   546	that can be tested in a psychophysical experiment. For simplicity,
+   547	we consider two objects as subjective experience of a red Apple (A)
+   548	and a red Berry (B) and arrows as a relationship for “nearly indistinguishable” in terms of color (Fig. 5). Category C refers to objects
+       
+   549	Downloaded from https://academic.oup.com/nc/article/2021/2/niab034/6397521 by guest on 14 January 2026
+       
+   550	In a category of categories, Cat, objects and arrows are categories
+   551	and functors (and this is the origin of the title for the last section).
+   552	This is an interesting characteristic of category theory; depending
+   553	on the viewpoint, what we are talking about can be considered as
+   554	objects in a certain category or arrows in another category. Furthermore, a functor, which is considered as an arrow between two
+   555	categories in this section, will be considered as an object in the
+   556	later section. All of this comes from the fact that category theory
+   557	is mathematics that focuses on “relationships.”
+   558	Let us consider a category of categories using an example of
+   559	category of content Q. We ask Ms X and Mr Y to come back on the
+   560	stage. If we consider category QX and QY as objects and functor
+   561	F as arrows, the example in Fig. 3 is an exemplar category of
+   562	category Q.
+       
+   563	A relational approach to consciousness
+       
+   564	7
+       
+   565	Functor category, whose objects and arrows are
+   566	functors and natural transformations
+       
+   567	and arrows in the Central visual field, while category E refers to
+   568	those in the Entire visual field, which includes the central, left,
+   569	and right visual field. A mapping R from C to E translates objects
+   570	and arrows to those in the Right visual field. Likewise, a mapping L
+   571	from C to E translates those in the Left visual field. The mappings L
+   572	and R are likely to be functors in healthy subjects. One way to test
+   573	this idea is to operationally define category C with objects as a set
+   574	of perceptual objects and arrows as similarity relationships. Likewise category E, which includes C but also across the entire visual
+   575	field. Under this condition, psychophysical experiments measuring similarity relationships can test if the mapping L and R satisfies
+   576	the functor conditions. In the following, we assume L and R satisfy
+   577	the functor conditions.
+   578	Natural transformation t can clarify the relationship between
+   579	functors L and R. Let us go through this example slowly as
+   580	this is an important point. Assume the existence of a natural
+   581	transformation t from functor L to functor R. Now, with respect
+   582	to objects A (Apple) and B (Berry) as well as its arrow f (f:A → B; A
+   583	is nearly indistinguishable from B in terms of color) in category
+   584	C for Central visual field, a natural transformation is a collection of arrows in category E for Entire visual field. These arrows
+   585	include tA: L(A) → R(A) and tB: L(B) → R(B) (Condition 1), both of
+   586	which mean “nearly indistinguishable” in terms of color, which
+   587	are indeed the arrows in category E. tA means that Apple is nearly
+   588	indistinguishable in terms of color in the Left and Right visual
+   589	field.
+   590	Condition 2 says for an arrow f:A → B in category C, we have
+   591	tA;R(f) = L(f);tB. The left side of this equation first confirms that
+   592	Apple is indistinguishable between Left and Right visual fields,
+   593	then it confirms that Apple in Right is indistinguishable from Berry
+   594	in Right. The right side of the equation first confirms that Apple is
+   595	indistinguishable from Berry in Left, then Berry in Left is indistinguishable from Berry in Right. In other words, Condition 2 means
+   596	that the color of Left Apple is indistinguishable from the color of
+   597	Right Berry, and it allows us to go in either way to prove this fact.
+   598	The power of the natural transformation t is to handle a lot of
+   599	arrows, such as tA and tB, all at once in a lawful manner.
+       
+   600	Downloaded from https://academic.oup.com/nc/article/2021/2/niab034/6397521 by guest on 14 January 2026
+       
+   601	Figure 5. Natural transformation. Objects are Apples (A) and Berries (B)
+   602	in categories C (central visual field) and E (entire visual field). Arrows in
+   603	categories C and E are “nearly indistinguishable” in terms of color. Thus,
+   604	category C is included in E. Central vision (C) is mapped to Left and Right
+   605	visual fields by functor L and R, respectively, preserving objects and
+   606	arrows. If natural transformation t exists from functor L to functor R,
+   607	then indistinguishability of Left Apple to Right Berry can be established
+   608	by both through Left Berry (=L(f);tB) or Right Apple (=tA;R(f)), that is,
+   609	there is no path dependency. Note that tA is an arrow in category E,
+   610	indicating that Apple in the Left is “nearly indistinguishable” from Apple
+   611	in the Right. Same goes with tB for Berry in the Left and Right
+       
+   612	Using the concept of natural transformation, we introduce
+   613	another critical concept to prove the Yoneda lemma: functor category. Functor categories and equivalence defined in this manner,
+   614	we suspect, is something that is likely to be completely missing in
+   615	current language in consciousness research, and it is very useful
+   616	for future conceptual analyses.
+   617	Definition: Functor category, Fun(C, D), considers objects and arrows
+   618	as functors from category C to category D and natural transformations
+   619	between them.
+   620	From the viewpoint of the contents category, let us consider
+   621	a functor category. We extend the example categories C and
+   622	E in Fig. 5. Simply, treating functor L and R as objects and a
+   623	natural transformation t as an arrow constructs a functor category Fun(C, E).
+   624	What is the benefit of considering a functor category? One of
+   625	the benefits is to allow us to introduce two concepts: “natural
+   626	equivalence” and “categorical equivalence.” Categorical equivalence is likely to be a critical target to establish in empirical studies
+   627	of the structure of consciousness within a framework of category
+   628	theory; for example, one application is the examination of categorical equivalence of color similarity structure at the fovea and
+   629	the periphery.
+   630	Previously, peripheral and central color vision have been
+   631	claimed to be “essentially the same” (Tyler 2015; Haun et al. 2017)
+   632	or not (Dennett 1991; Lau and Rosenthal 2011). Between these
+   633	visual fields, objective resolutions are different; yet, when the size
+   634	of objects are matched for the resolution, essential visual phenomenology, including color experience, seems “essentially the
+   635	same” (Gordon and Abramov 1977; Hansen et al. 2009; Webster
+   636	et al. 2010). How can we proceed to extract and quantify the
+   637	sameness of obviously different objects?
+   638	First, you might think of “isomorphism” between category C
+   639	and E for Central and Entire visual fields, respectively (Remember
+   640	the section on “What does it mean for objects to be the same in
+   641	a category? Isomorphic objects in a category”). As we introduced
+   642	in the section “Category of categories”, C and E are objects of Cat
+   643	(category of categories), where arrows are functors. Isomorphism
+   644	in Cat, which is also called “categorical isomorphism,” requires
+   645	that, for functor F: C → E, there exists functor G: E → C such that
+   646	1 C = F;G and 1E = G;F. This turns out to be a very strong requirement and it does not work in the case between C and E here. This
+   647	is because functor G collapses E into its subset C; thus, F cannot
+   648	recover the original E from C.
+   649	On the other hand, what occurs if we consider the “isomorphism” instead of equality in 1 C = F;G and in 1E = G;F? “Isomorphism” here is nothing but an invertible natural transformation,
+   650	which is called natural equivalence, in functor categories Fun(C,
+   651	C) and Fun (E, E). In this case, we obtain a weaker, yet very
+   652	proper and flexible, kind of equivalence. In this sense, two categories C and E are equivalent. This is the level of equivalence
+   653	that we are looking for, and potentially useful for consciousness research. The sameness, obtained through natural equivalence, is called “categorical equivalence” between category C
+   654	and E.
+   655	Definition: Categories C and E are categorical isomorphic if there are
+   656	functor F: C → E and functor G: E → C such that 1 C = F;G and 1E = G;F.
+   657	Category C and E are categorically equivalent if there are invertible
+   658	natural transformations from 1C to F;G and 1E to G;F
+       
+   659	8
+       
+   660	Tsuchiya and Saigo
+       
+   661	Explaining the Yoneda lemma
+   662	Finally, we are ready to introduce one of the most important
+   663	results of category theory, the Yoneda lemma, to consciousness
+   664	research. If we can apply the Yoneda lemma to consciousness
+   665	research, we can characterize consciousness through its relationships with the others even if we cannot describe what consciousness is per se. To be more precise, the general conclusion of the
+   666	Yoneda lemma is that the characterization of an object in a category is determined up to isomorphism by its arrows to the other
+   667	objects in that category. We believe this is a substantial change of
+   668	perspective, especially in the context of consciousness research:
+   669	properties of an object are essentially the same as how the object
+   670	relates with the others.
+   671	Having said that, some may say that a concise and general
+   672	direct definition of an object is vastly superior to the exhaustive
+   673	characterizations of its relationships to other objects. However,
+   674	as we noted in problems in characterizing consciousness on its
+   675	own, the difficulty in dealing with consciousness is its difficulty
+   676	to describe it in itself. How can I examine my definition of “redness” at the fovea compared to my “redness” at the periphery? As
+   677	a start, I can compare my “redness” at fovea to all other experiences, including “redness” at periphery. Next, I can do the same by
+   678	comparing my “redness” at periphery to all other experiences. This
+   679	is an empirical approach to characterize a structural relationship.
+   680	This procedure can establish equivalence of color experiences at
+   681	the fovea and the periphery. The Yoneda lemma provides a mathematical footing to this empirical approach: we can eventually
+   682	establish equivalence of my redness across the visual fields.
+       
+   683	Hom sets and hom functors
+   684	Before applying the Yoneda lemma to consciousness categories,
+   685	let us introduce only two more concepts: hom sets and hom
+   686	functors.
+   687	Definition: A collection of arrows from object X to object Y in category
+   688	Q is called a hom set and written as homQ (X, Y). A hom functor maps
+       
+   689	a)
+       
+   690	b)
+       
+   691	c)
+   692	hA(B) = homQ(A,B)
+       
+   693	Category Q
+       
+   694	a
+       
+   695	homQ(A,B)
+       
+   696	f
+       
+   697	hA(f) = homQ(A,f)
+       
+   698	a⨾f
+       
+   699	hA(C) = homQ(A,C)
+   700	d)
+   701	Hom functor
+   702	h(A,-)
+   703	- A set of arrows
+   704	from A to all
+   705	objects
+       
+   706	A
+       
+   707	A
+       
+   708	Hom functor
+   709	h(-, A)
+   710	- A set of arrows
+   711	from all objects to
+   712	A
+       
+   713	Figure 6. What are hom sets and hom functors? (a) A hom set, homQ (A,
+   714	B), is a set of arrows from Apple (A) to Berry (B) in category Q. homQ (A,
+   715	B) includes our familiar arrow, “nearly indistinguishable in color” but
+   716	also many other different arrows (e.g. “indistinguishably tasty,”
+   717	“indistinguishably sour,” etc). (b) A hom functor, hA, maps objects B and
+   718	C in category Q into objects hA(B) and hA(C) in category Set. (c) hA also
+   719	maps an arrow f in category Q into an arrow in category Set. (d) Visual
+   720	depiction of hA: all sets of arrows emanating from A; and Ah: all sets of
+   721	arrows pointing to A
+       
+   722	an object X in category Q into a set, which is an object in category Set. A
+   723	hom functor also maps an arrow f in category Q into a function, which is
+   724	an arrow in category Set. A function maps a set to another set in category
+   725	Set (see Fig. 6a for hom sets and 6b and c for hom functors).
+   726	Among hom functors, one that is obtained by fixing an object
+   727	A in category Q is called hom functor hA. Let us go back to our
+   728	familiar example: an object A for Apple. Then, hom functor hA
+   729	can be understood as “all relationships that Apple has with other
+   730	objects in category Q.” Formally, hA is a functor from category Q to
+   731	category Set. This is because hA maps objects Berry (B) and Cherry
+   732	(C) in category Q into homQ (A, B) and homQ (A, C) in category
+   733	Set, which can be understood as “how Apple relates to Berry in
+   734	all possible ways” and “how Apple relates to Cherry in all possible
+   735	ways.” hA also maps an arrow f to homQ(A, f), which is an arrow
+   736	in category Set. Note that an arrow in Set is a function from a set
+   737	to another set. For unfamiliar readers, homQ(A, f) is a little confusing. To understand this, recall that f is one of the arrows from
+   738	object A to B in category Q, which can mean “nearly indistinguishable,” for example. Let us single out one of the arrows in homQ
+   739	(A, B) as an arrow “a,” which means A is “nearly indistinguishable
+   740	in its color” with B. Then, a can be composed with f to obtain a;f.
+   741	This compositional situation means as follows: A is related to C (in
+   742	a sense of “a;f”), where C is related to B (in a sense of “f”), which is
+   743	related to A as “nearly indistinguishable in its color”. Note that, in
+   744	categories where there are more than one arrows between objects,
+   745	an arrow from A to C, which means “nearly indistinguishable in
+   746	its color,” may be a distinct arrow from a;f. hA(f) maps a particular arrow from A to B into the corresponding arrow from A to C.
+   747	If you consider arrows as elements in a set, this means that hA(f)
+   748	is a function between two sets of arrows, that is, homQ (A, B) and
+   749	homQ (A, C).
+   750	Note that until the last paragraph, we have always considered
+   751	only one arrow from one object to the other, that is, we have simply considered categories of preorder in order to simplify various
+   752	concepts in category theory. However, we will need to consider
+   753	many arrows from one object to another object. homQ (A, B) is a
+   754	powerful conceptual tool to think about such situations. We can
+   755	consider homQ (A, B) as a list of properties of Berry in terms of
+   756	relationship from Apple.
+       
+   757	Downloaded from https://academic.oup.com/nc/article/2021/2/niab034/6397521 by guest on 14 January 2026
+       
+   758	In our example of Central and Entire visual fields (Fig. 5), C
+   759	and E will not be “categorically isomorphic,” which implies oneto-one relation on object and arrows since a functor from E to
+   760	C should collapse the multiple objects or arrows into the same
+   761	object or arrow. On the other hand, C and E can be “categorically
+   762	equivalent” since it allows such multiplicity up to isomorphisms.
+   763	If this can be experimentally verified, then we can conclude
+   764	that content structures are “essentially the same” across visual
+   765	fields. If, however, something essential is lost within a part of
+   766	the visual field, say, blindspot, scotoma (Ramachandran and
+   767	Blakeslee 1998), or colorblindness in a quadrant (Gallant et al.
+   768	2000), then, categorical equivalence would not hold any more.
+   769	Empirically, we can possibly test the existence of categorical equivalence between color similarity structures as content categories between the fovea and the periphery. While
+   770	color similarity structure has been extensively studied in psychophysics (Kuehni 2010), most experiments allowed subjects to move their eyes freely in an unlimited time. As a
+   771	result, the structure of color experiences is understood better at the fovea than the periphery, resulting in disputes
+   772	(Cohen et al. 2020; Cohen and Rubenstein 2020; Dennett 1991; Lau
+   773	and Rosenthal 2011; Tyler 2015; Haun et al. 2017). We surmise that
+   774	a weaker notion of categorical equivalence is much more likely to
+   775	be applicable in various types of structures of consciousness and
+   776	more fruitful to seek for than the other stronger notions of the
+   777	sameness (e.g. categorical isomorphism).
+       
+   778	A relational approach to consciousness
+       
+   779	9
+       
+   780	Pushing this idea further, we can denote a list of properties of
+   781	all objects in category Q from the perspective of Apple as homQ
+   782	(A, -) = hA. We use “-” to denote the argument in which any object
+   783	in category Q can be substituted. For example, homQ (A,-) contains homQ(A, B) (i.e. a set of arrows from A to B, listing the
+   784	properties of Berry from Apple’s viewpoint) as well as homQ(A,
+   785	C) (i.e. a set of arrows from A to C). Thus, hA can be interpreted
+   786	as all sets of arrows emanating from A to characterize the viewpoint of Apple. The dual notion is homQ (-, A) = Ah, which can be
+   787	interpreted as all sets of arrows pointing to Apple. In other words,
+   788	Ah is a list of properties of Apple, from the viewpoints of each and
+       
+   789	What can we say from the Yoneda lemma?
+   790	The Yoneda lemma says:
+   791	For each object A of C, the natural transformations Nat (hA,
+   792	F) ≡ Hom(Hom(A,-), F) from hA to F are in one-to-one correspondence
+   793	with the elements of F(A), that is, Hom(Hom(A,-)F) ∼
+   794	= F(A). Moreover,
+   795	this isomorphism is natural in A and F when both sides are regarded as
+   796	functors from C × Fun(C, Set) to Set.
+   797	Due to the technicality, we will omit the proof of the Yoneda
+   798	lemma here. The readers who grasped all concepts introduced so
+   799	far can understand the proof in a standard textbook of category
+   800	theory (Awodey 2010; Leinster 2014). The important theorem that
+   801	follows from the Yoneda lemma is as follows:
+   802	Theorem: For objects A and B in category Q, hA ∼
+   803	= hB is a
+   804	necessary and sufficient condition for A ∼
+   805	= B.
+   806	Here, A ∼
+   807	= B means that A and B are isomorphic objects in category Q. hA ∼
+   808	= hB means that there exists a natural equivalence
+   809	between hA and hB. A natural equivalence is a natural transformation from functor hA to hB, which is invertible. Remember a
+   810	functor category, which we introduced previously. Given that hA
+   811	and hB are both functors from category Q to category Set, they
+   812	are objects of Fun(Q, Set). Thus, “hA ∼
+   813	= hB” means hA and hB
+   814	are isomorphic objects in Fun(Q, Set). In other words, there is
+   815	an invertible natural transformation (i.e. a natural equivalence)
+   816	between them.
+   817	Let us translate the theorem into English. hA (and hB) means
+   818	all relationships that A has with all other objects in category Q.
+   819	Thus, hA ∼
+   820	= hB means that all relationships for A and those for
+   821	B are “naturally convertible” to each other (note that hA and hB
+   822	includes the relationship from A to B and B to A as well). If A and
+   823	B are isomorphic objects in category Q, then it is relatively easy
+   824	to prove hA ∼
+   825	= hB. However, a nontrivial mathematical fact is that
+   826	hA ∼
+   827	= hB can prove A ∼
+   828	= B. Even if it is impossible to directly compare A and B, we can make a conclusion about it by examining how
+   829	A and B relate to others. This approach is akin to the approaches
+   830	taken in other fields; when studying meaning in semantics, environments in ecology, and astronomical objects in cosmology. Of
+   831	course, the exact and precise approach is taken in mathematics.
+   832	Here, we are proposing its application for consciousness research.
+   833	∼ hB is more difficult to test
+   834	Some readers may think that hA =
+   835	empirically than A ∼
+   836	B.
+   837	Surprisingly,
+   838	however, there are many
+   839	=
+   840	cases where it is overwhelmingly easier to check hA ∼
+   841	= hB than
+   842	A∼
+   843	= B. There is no shortage of examples in mathematics. Next, we
+   844	consider it in the context of consciousness research.
+       
+   845	A simple application of the Yoneda lemma in
+   846	consciousness research
+   847	Let us apply the above theorem for category of contents Q. To gain
+   848	some insights, we consider the Checkershadow illusion (Adelson
+       
+   849	Figure 7. Applying the Yoneda lemma to category Q. (a) Checkershadow
+   850	Illusion. The two squares labeled A and B look “different” in brightness
+   851	as in complementary squares in a checkerboard. (b) Removing the
+   852	surrounding of A and B to obtain A* and B*, whose brightness looks the
+   853	“same”
+       
+   854	1995) (Fig. 7a). In this “illusion,” square A looks very dark, while
+   855	square B looks quite bright. In Fig. 7b, we show square A* and
+   856	B* without any background, which makes it easy to see that the
+   857	brightness of A* and B* are physically the same. The striking effect
+   858	of this “illusion” does not reduce even if you try to cognitively convince yourself that it is just a 2D image or that the direction of the
+   859	shadow in the image is contradictory to the lighting condition in
+   860	your room. It exemplifies the fact that the subjective experience
+   861	of brightness of an object strongly depends on the context of the
+   862	objects.
+   863	Are the brightness of A and B the same? Can we define the
+   864	subjective brightness of A and B? If there are individual differences
+   865	in how we perceive brightness, is there any way to systematically
+   866	examine and characterize subjective brightness?
+   867	Let us consider squares A and B in Fig. 7a from a perspective of
+   868	category theory. Within category Q, A and B are not isomorphic.
+   869	Why? Here, we consider objects as squares denoted by A, B, i, ii,
+   870	iii, and iv and arrows as “nearly indistinguishable” as before.
+   871	First, consider if there is an arrow from A to i. Due to the
+   872	clear boundary between A and i, they look quite different; thus,
+   873	there is no arrow. Meanwhile, there is an arrow from B to i partly
+   874	due to the fact that the bottom right part of i is indeed the same
+   875	as that of B. However, if you pay attention to the top left part
+   876	of the i, it becomes clear that i has a gradation and that i and
+   877	B are not that similar. Yet, the cylinder on the top right provides an explanation of this difference within i as an effect of
+   878	shadow. Furthermore, the overall configuration of the checkerboard also facilitates the sameness between B and i. In the end,
+   879	we conclude the existence of an arrow from B to i. At this point,
+   880	there is already a difference between a collection of relationships
+   881	between A and the other objects and those between B and the
+   882	others; thus, A and B cannot be isomorphic. This prediction coincides with our subjective phenomenology of “difference” between
+   883	A and B, which provides a preliminary support of our framework of
+   884	category Q.
+   885	What has been said above applies similarly to i, ii, iii, and iv.
+   886	According to our framework, this collection of arrows created a
+   887	conscious experience where A and B do not look the same. Meanwhile, the theorem predicts that A and B should look the same
+   888	if we erase the sources that generate the discordances between
+   889	arrows from A and arrows from B. And this is a more meaningful aspect of the theorem: if hA ∼
+   890	= hB, then A ∼
+   891	= B. The sources of
+   892	discordance may include the green column and its shadow, the
+   893	regularity of the checkerboard pattern, etc. Let us consider any
+       
+   894	Downloaded from https://academic.oup.com/nc/article/2021/2/niab034/6397521 by guest on 14 January 2026
+       
+   895	every object in category Q. These concepts are schematically represented in Fig. 6d. hA and Ah are likely to be useful to consider
+   896	the issue of subjective viewpoints in consciousness research.
+       
+   897	10
+       
+   898	Tsuchiya and Saigo
+       
+   899	Discussion
+   900	In this paper, we introduced categories of consciousness in several
+   901	forms and showed that the Yoneda lemma can be applied to obtain
+   902	novel perspectives and predictions on consciousness. While the
+   903	exact and concise definition of consciousness remains difficult,
+   904	its characterization through indirect characterization of its relationships to others using convergent methods (see, for example,
+   905	(Velmans 2009)) is actually a valid way as guaranteed by category
+   906	theory and, in particular, the Yoneda lemma.
+   907	We can already use some tools from category theory to characterize some aspects of consciousness in terms of level and
+   908	contents in relational terms, as we demonstrate with some simple
+   909	toy models. As the research makes progress, we surmise that we
+   910	can possibly characterize all aspects of consciousness in relational
+   911	terms in principle. For other related proposals of a relational characterization of concepts, see Chalmers (1996), Edelman (1996),
+   912	Goldstone et al. (2005), Kleiner (2020), Loorits (2014), Signorelli et al.
+   913	(2021), and Fink et al. (2021).
+   914	As a future prospect, we think it is critical to consider various
+   915	categories of consciousness within a larger structure of category
+   916	of consciousness categories. Categorical equivalence between two
+   917	conscious contents categories clarifies “in what sense” these consciousnesses are essentially the same.
+   918	The importance and novelty of our proposal here can be better
+   919	appreciated by the following criticism on similarity judgment in
+   920	consciousness research by Pautz (2019):
+   921	“To see how Similarity-Congruence falls short, let us return to
+   922	hypothetical case … some unfamiliar sentient organism, Karl.
+       
+   923	of experiences, E1, E2, and E3, such that E1 is more like E2
+   924	than E3. But, as a simple point of logic, Similarity-Congruence
+   925	is not logically strong enough to tell us precisely what those
+   926	experiences are… it doesn’t tell us whether they are colour
+   927	experiences of similar shades of red, or whether they are colour
+   928	experiences of similar shades of green. In fact, it doesn’t tell
+   929	us whether they are experiences of colour or experiences of
+   930	(say) smell. That is, it doesn’t entail the specific, determinate
+   931	qualitative contents of those experiences.”
+       
+   932	Our proposal, specifically with the Yoneda lemma, is all about
+   933	the power of “a collection of arrows (or relationships)” that is necessary to determine the color experience of red or green, the smell
+   934	of fish, the sound of a bell, etc. And the essential role of a collection
+   935	of relations does make sense in light of the fact that there has been
+   936	no clinical report of a patient who lost color of red but not others.
+   937	When brain damage causes color blindness, the reported cases
+   938	are all about the entire loss of color experience (and associated
+   939	concepts) in specific visual location (Gallant et al. 2000) but not
+   940	a particular color or range of colors.2 Similar things can be said
+   941	about visual motion (Zihl et al. 1983). Loss of a single category of
+   942	perception, such as faces (e.g. prosopagnosia) and objects, has
+   943	been linked to some specific brain lesions (Milner and Goodale
+   944	1995; Kanwisher and Yovel 2006) but rarely on a particular face
+   945	[except for the loss of “familiar” faces and objects, called “Capgras
+   946	Syndrome” (Ramachandran and Blakeslee 1998)]. On the other
+   947	hand, loss of a single linguistic concept (i.e. forgetting) is common.
+   948	Why can we lose a specific single concept in the linguistic case but
+   949	not for the experiences of color or motion, which is bound to the
+   950	retinal locations? While anatomical localizations and functional
+   951	mapping in neuroscience can give us a hint, they do not address
+   952	this theoretical question.
+   953	We believe that one possible answer to this riddle is to do with
+   954	the Yoneda lemma. We hypothesize that the essence of the color
+   955	experiences resides in relations with other colors (which may or
+   956	may not be perceived at a given time), that is, without the entire
+   957	sets of relations, color experiences just cannot emerge. On the
+   958	other hand, we hypothesize that the essence of linguistic conceptual experiences [if any (Kemmerer 2015; McClelland and Bayne
+   959	2016)] is its relational structure that allows one concept to be
+   960	missing from the web of relations. In retrospect, therefore, the
+   961	essential role of a collection of relations in consciousness may
+   962	be obvious (Palmer 1999). Yet, we are not aware if a collection
+   963	of massive similarity ratings has been ever collected or considered in consciousness research. Replacing the characterization of
+   964	conscious experiences with a collection of comparative descriptions with other experiences can have a mathematically solid
+   965	foundation: the Yoneda lemma in category theory.
+   966	Combining the perspective of the Yoneda lemma with quantitative theories of consciousness, such as IIT (Oizumi et al. 2014;
+   967	Tononi et al. 2016), we should be able to establish a new research
+   968	program into animal consciousness (Tsuchiya 2017). Pioneering
+   969	works in monkeys have introduced highly creative behavioral
+   970	experimental tasks, such as binocular rivalry (Leopold et al. 2003)
+   971	and no-report paradigms (Wilke et al. 2009), well beyond simple button press reports, which poorly characterize consciousness
+   972	even in humans [also see Matsuzawa (1985) and Matsuno et al.
+   973	(2004)]. These animal researchers have already brought various
+       
+   974	You want to determine exactly what experiences Karl has…
+   975	Karl is presented with three objects consecutively … three Tshapes such that T1 is more like T2 than T3. Then, given
+   976	Similarity-Congruence, you can deduce that Karl has some trio
+       
+   977	2
+   978	Note that most people with color deficiency do not report having loss of
+   979	a particular red and/or green. In fact, previous studies suggest these colordeficient people may be experiencing unique color dimensions, as revealed by
+   980	the similarity rating experiments (Bosten et al. 2005).
+       
+   981	Downloaded from https://academic.oup.com/nc/article/2021/2/niab034/6397521 by guest on 14 January 2026
+       
+   982	points in the display as a potential object. Here, we assume A has
+   983	a “nearly indistinguishable” arrow with a set of objects. Note that
+   984	this set of objects include A itself (as “identity”) and B. If B has the
+   985	arrow with the same set of objects, then mathematically, from
+   986	hA ∼
+   987	= hB, we can prove A ∼
+   988	= B.
+   989	In fact, after painting squares i, ii, iii, and iv into a white color as
+   990	in the background, one of the authors (H.S.) now feels that A and
+   991	B look the same. The other author (N.T.) feels that A and B became
+   992	much more similar than before but they are still distinguishable.
+   993	By removing further contextual cues, as in Fig. 7b, A* and B* look
+   994	the same to most people. At this point, some readers may find that
+   995	the arrows that we have adopted so far, signifying “nearly indistinguishable,” are too coarse to be useful in this situation. To capture
+   996	different degrees of perceived similarity, we believe that “enriched
+   997	category” will be useful (Lawvere 1973; Leinster and Meckes 2017;
+   998	Fong and Spivak 2019; Tsuchiya et al. 2021). The Yoneda lemma
+   999	is also known to exist in the enriched category (Bonsangue et al.
+  1000	1998); thus, our argument here still holds in the enriched category.
+  1001	Note that we are not claiming that this is a novel explanation about the Checker shadow illusion. In fact, the application of
+  1002	the Yoneda lemma is never surprising as long as we work on preorder sets, where there exists at most one arrow between objects.
+  1003	Unfortunately, there have been very few empirical psychophysics
+  1004	studies that examined multiple arrows between objects so far.
+  1005	This is a highly promising avenue of future research.
+  1006	In sum, the Yoneda lemma predicts that two objects A and B
+  1007	should look the same if we eliminate the discordances of relationships between A and the others vs B and the others.
+       
+  1008	A relational approach to consciousness
+       
+  1009	Conclusion
+  1010	In this paper, we intentionally limited most of our examples into
+  1011	cases where up to one arrow can exist from one object to the other
+  1012	(preorder category). However, it is easy to extend our category Q
+  1013	to have multiple arrows between objects, such as “nearly indistinguishable in terms of X,” where X can be color, shape, size,
+  1014	location, etc. The richer the arrows, the better the structure of
+  1015	the category can be understood. In addition to what we introduced in this paper, there are many more tools in category theory,
+  1016	which are likely to be illuminating in consciousness research.
+  1017	Some of these conceptual tools will clarify complex theoretical
+  1018	concepts about consciousness, which have been discussed by
+  1019	philosophers and psychologists for long. Such conceptual clarification will inspire further theoretical and empirical research ideas
+  1020	to come in the near future.
+       
+  1021	Acknowledgements
+  1022	The authors thank Ariel Zeleznikow-Johnston and Steven Phillips
+  1023	for their comments on the earlier version of this manuscript.
+       
+  1024	Funding
+  1025	This work was supported by Australian Research Council (N.T.,
+  1026	grant number DP180104128, DP180100396); National Health Medical Research Council (N.T., grant number APP1183280); Japan
+  1027	Science and Technology Agency (H.S., grant number JPMJCR17N2);
+  1028	Foundational Question Institute (N.T. and H.S.); and Japan Promotion Science, Grant-in-Aid for Transformative Research Areas (N.T.
+  1029	and H.S.). This project/research was supported by grant number
+  1030	FQXi-RFP-CPW-2017 from the Foundational Questions Institute
+  1031	and Fetzer Franklin Fund, a donor advised fund of Silicon Valley
+  1032	Community Foundation.
+       
+  1033	Conflict of interest statement
+  1034	None declared.
+       
+  1035	References
+  1036	Adelson EH. Checkershadow Illusion. 1995. http://persci.mit.
+  1037	edu/gallery/checkershadow. (16 September 2021, date last
+  1038	accessed).
+  1039	Arzi-Gonczarowski Z. Perceive this as that–analogies, artificial perception, and category theory. Ann Math Artif Intell 1999;26:215–52.
+  1040	Awodey S. Category Theory. Oxford: OUP, 2010.
+  1041	Barron AB, Klein C. What insects can tell us about the origins of
+  1042	consciousness. Proc Natl Acad Sci U S A 2016;113:4900–8.
+  1043	Baudot P, Bennequin D. The homological nature of entropy. Entropy
+  1044	2015;17:3253–318.
+  1045	Baudot P, Tapia M, Bennequin D et al. Topological information data
+  1046	analysis. Entropy 2019;21:869.
+  1047	Bayne T, Hohwy J, Owen AM. Are there levels of consciousness? Trends
+  1048	Cogn Sci 2016;20: P405–13.
+  1049	Block N. Consciousness, accessibility, and the mesh between psychology and neuroscience. BBS 2007;30:481–99.
+  1050	Boly M, Seth A, Wilke M et al. Consciousness in humans and nonhuman animals: recent outstanding advances, and possible
+  1051	future directions. Front Psy 2013;4:1–20.
+  1052	Bonsangue MM, Van Breugel F, Rutten JJ. Generalized metric spaces:
+  1053	completion, topology, and powerdomains via the Yoneda embedding. Theor Comp Sci 1998;193:1–51.
+       
+  1054	Downloaded from https://academic.oup.com/nc/article/2021/2/niab034/6397521 by guest on 14 January 2026
+       
+  1055	“arrows” in category Q for nonhuman primates. This type of
+  1056	research can be extended to other animals, such as dolphins,
+  1057	birds, octopuses, mice, and even insects such as flies (Boly et al.
+  1058	2013; Barron and Klein 2016, Leung et al. 2021).
+  1059	What other new perspectives can category theoretical analyses bring into consciousness research? Normally, researchers
+  1060	consider properties of the external world, such as the amount of
+  1061	light, as objective and physical reality. And, we call our perception
+  1062	“veridical” under the situation, where our subjective experience
+  1063	matches with these objective properties as in Fig. 7b. On the
+  1064	other hand, we call our perception “illusory” when our perception disagrees with the objective properties as in Fig. 7a. This
+  1065	“disagreement” invites some to call this figure as Checkershadow
+  1066	“Illusion.”
+  1067	However, the very usage of the term “illusion” already implies
+  1068	the world view of the researchers. To some, what is “real” is the
+  1069	outside world and what we perceive can be “illusory.” This view
+  1070	is not necessarily endorsed by many consciousness researchers,
+  1071	especially by those who take phenomenology more seriously [also,
+  1072	see an argument from evolutionary game theory to claim that conscious percepts should not be “veridical” in this sense (Prakash
+  1073	et al. 2020)].
+  1074	Category theoretical perspective allows researchers to keep
+  1075	a distance from metaphysical debates and to focus on what is
+  1076	empirically possible to investigate about conscious experience: its
+  1077	relationships with other experiences. Such an attitude is ontologically neutral. This, in turn, can potentially facilitate an interdisciplinary investigation of the contextual effects across experimental
+  1078	psychologists, neurophysiologists, and computational neuroscientists, philosophers, mathematicians under the same hood. To
+  1079	accelerate collaborations with category theory and some mathematical theories of consciousness, such as IIT, it will be necessary
+  1080	to develop further notions in stochastic categories (Manin and
+  1081	Marcolli 2020), information structures (Baudot and Bennequin
+  1082	2015; Baudot et al. 2019), enriched categories (Tsuchiya et al. 2021),
+  1083	and category algebra (Saigo 2021).
+  1084	Some readers may think that the Yoneda lemma application
+  1085	in Fig. 7 is an overkill as A and B can be directly compared in
+  1086	that example. Of course, this is a simple example to make a
+  1087	point. However, various controversies surrounding consciousness
+  1088	research are rooted in a question of whether conscious experiences are equivalent between two conditions, under which direct
+  1089	comparisons are difficult. For example, with or without paying
+  1090	attention, are conscious experiences essentially the same (Block
+  1091	2007; Cohen et al. 2016; Haun et al. 2017)? Are the foveal vision and
+  1092	peripheral vision equivalent? What is, if any, the effect of expectation on conscious experience? In these situations, objects are
+  1093	difficult to compare in two conditions directly.
+  1094	The indirect approach of the Yoneda lemma is especially effective in these situations. What is particularly powerful is that it
+  1095	makes an explicit prediction about our phenomenology. For example, if similarity relationships between object A and others are the
+  1096	same as object B and others, then A and B should be experienced
+  1097	as equivalent. And the prediction is possible to test empirically
+  1098	through experimentation. Category theory, indeed, is not just
+  1099	a conceptual framework to summarize what we already know.
+  1100	Its power originates from its predictions as we demonstrated in
+  1101	a preliminary way in Fig. 7. Researchers can make meaningful predictions about various outcomes in other situations where
+  1102	contextual effects play a key role, for example. Contextual modulatory effects are one of the essential features of conscious
+  1103	experiences in any modalities; thus, its applicability is likely to
+  1104	be vast.
+       
+  1105	11
+       
+  1106	12
+       
+  1107	Tsuchiya and Saigo
+  1108	Haun A, Oizumi M, Kawasaki H et al. Conscious perception as
+  1109	integrated information patterns in human electrocorticography.
+  1110	eNeuro 2017;4. ENEURO.0085-17.2017.
+  1111	Haun A, Tononi G. Why does space feel the way it does? Towards a
+  1112	principled account of spatial experience. Entropy 2019;21:1160.
+  1113	Haun A, Tononi G, Koch C et al. Are we underestimating the richness
+  1114	of visual experience? Neuro Consc 2017;1–4.
+  1115	Healy M, Caudell T, Goldsmith T. A model of human categorization
+  1116	and similarity based upon category theory. 2008.
+  1117	Hoffman WC. The Lie algebra of visual perception. J Math Psychol
+  1118	1966;3:65–98.
+  1119	Hoffman WC. Subjective geometry and geometric psychology. Math
+  1120	Modell 1980;1:349–67.
+  1121	Kanai R, Tsuchiya N. Qualia. Curr Biol 2012;22:R392–6.
+  1122	Kanwisher N, Yovel G. The fusiform face area: a cortical region specialized for the perception of faces. Philos Trans R Soc Lond B Biol Sci
+  1123	2006;361:2109–28.
+  1124	Kemmerer D. Are we ever aware of concepts? A critical question for the global neuronal workspace, integrated information,
+  1125	and attended intermediate-level representation theories of consciousness. Neurosci Conscious 2015;2015:1–10.
+  1126	Kleiner J. Mathematical models of consciousness. Entropy 2020;
+  1127	22:609.
+  1128	Kleiner J, Tull S. The mathematical structure of integrated information theory. arXiv preprint arXiv:2002.07655, 2020.
+  1129	Koch C, Massimini M, Boly M et al. Neural correlates of consciousness:
+  1130	progress and problems. Nat Rev Neuro 2016;17:307–21.
+  1131	Kuehni R. Color spaces. Scholarpedia 2010;5:9606.
+  1132	Lamme VAF. The Crack of Dawn. Perceptual Functions and Neural Mechanisms that Mark the Transition from Unconscious Processing to Conscious Vision. Barbara Wengeler Stiftung, Open MIND. Frankfurt
+  1133	am Main: MIND Group, 2014.
+  1134	Lau H, Rosenthal D. Empirical support for higher-order theories of
+  1135	conscious awareness. TICS 2011;15:365–73.
+  1136	Laureys S. The neural correlate of (un)awareness: lessons from the
+  1137	vegetative state. Trends Cogn Sci 2005;9:556–9.
+  1138	Lawvere FW. Metric spaces, generalized logic, and closed categories.
+  1139	Rep Math Phy 1973;43:135–66.
+  1140	Lawvere FW, Schanuel SH. Conceptual mathematics. Cambridge: CUP,
+  1141	2009.
+  1142	Leinster T. Basic Category Theory. Vol. 143 Cambridge: Cambridge
+  1143	University Press, 2014.
+  1144	Leinster T, Meckes MW. The magnitude of a metric space: from category theory to geometric measure theory. In: Measure Theory in
+  1145	Non-Smooth Spaces. 2017, 156–93.
+  1146	Leopold DA, Maier A, Logothetis N. Measuring subjective visual
+  1147	perception in the nonhuman primate. J Conscious Stud
+  1148	2003;10:115–30.
+  1149	Leung A, Cohen D, van Swinderen B et al. Integrated information structure collapses with anesthetic loss of conscious
+  1150	arousal in Drosophila melanogaster. PLoS Comput Biol 2021;17:
+  1151	e1008722.
+  1152	Loorits K. Structural qualia: a solution to the hard problem of
+  1153	consciousness. Front Psychol 2014;5:237.
+  1154	Manin Y, Marcolli M. Homotopy theoretic and categorical models
+  1155	of neural information networks. arXiv preprint arXiv:2006.15136,
+  1156	2020.
+  1157	Mashour GA, Roelfsema P, Changeux JP et al. Conscious processing and the global neuronal workspace hypothesis. Neuron
+  1158	2020;105:776–98.
+  1159	Matsuno T, Kawai N, Matsuzawa T. Color classification by chimpanzees (Pan troglodytes) in a matching-to-sample task. Behav
+  1160	Brain Res 2004;148:157–65.
+       
+  1161	Downloaded from https://academic.oup.com/nc/article/2021/2/niab034/6397521 by guest on 14 January 2026
+       
+  1162	Bosten J, Robinson J, Jordan G et al. Multidimensional scaling reveals
+  1163	a color dimension unique to “color-deficient” observers. Curr Biol
+  1164	2005;15:R950–2.
+  1165	Bradley T-D. The yoneda perspective. 2017. https://www.ma
+  1166	th3ma.com/blog/the-yoneda-perspective. (16 September 2021,
+  1167	date last accessed).
+  1168	Brown R, Lau H, LeDoux JE. Understanding the higherorder approach to consciousness. Trends Cogn Sci 2019;23:
+  1169	754–68.
+  1170	Chalmers DJ. The Conscious Mind. New York: OUP, 1996.
+  1171	Coecke B, Kissinger A. Picturing Quantum Processes. Cambridge: Cambridge University Press, 2017.
+  1172	Cohen MA, Botch TL, Robertson CE. The limits of color awareness during active, real-world vision. Proc Natl Acad Sci
+  1173	2020;117:13821–7.
+  1174	Cohen MA, Dennett DC, Kanwisher N. What is the bandwidth of
+  1175	perceptual experience? TICS 2016;20:324–35.
+  1176	Cohen MA, Rubenstein J. How much color do we see in the blink of
+  1177	an eye? Cognition 2020;200:104268.
+  1178	De Saussure F. Course in General Linguistics. Columbia: Columbia
+  1179	University Press, 2011.
+  1180	Dennett DC. Quining qualia. In: Marcel AJ, Bisiach E (eds.), Consciousness in contemporary science. Clarendon Press/Oxford University
+  1181	Press, 1988, 42–77.
+  1182	Dennett DC. Consciousness Explained. London: Penguin Books, 1991.
+  1183	Edelman S. Representation is representation of similarities. 1996.
+  1184	Ehresmann AC, Gomez-Ramirez J. Conciliating neuroscience and
+  1185	phenomenology via category theory. Prog Biophys Mol Biol
+  1186	2015;119:347–59.
+  1187	Ehresmann AC, Vanbremeersch J-P. Hierarchical evolutive systems:
+  1188	a mathematical model for complex systems. Bull Math Biol
+  1189	1987;49:13–50.
+  1190	Ehresmann AC, Vanbremeersch J-P. Multiplicity principle and emergence in memory evolutive systems. Syst Anal Model Simul
+  1191	1996;26:81–117.
+  1192	Engel AK, Singer W. Temporal binding and the neural correlates of
+  1193	sensory awareness. TICS 2001;5:16–25.
+  1194	Fekete T, Edelman S. Towards a computational theory of experience.
+  1195	Conscious Cogn 2011;20:807–27.
+  1196	Fink SB, Kob L, Lyre H. A structural constraint on neural correlates of
+  1197	consciousness. Philos Mind Sci 2021;2:7.
+  1198	Fong B, Spivak DI. An Invitation to Applied Category Theory. Cambridge:
+  1199	CUP, 2019.
+  1200	Frege G. The Foundations of Arithmetic: A Logico-mathematical Enquiry
+  1201	into the Concept of Number. Chicago: Northwestern University Press,
+  1202	1980.
+  1203	Fuyama M, Saigo H. Meanings, metaphors, and morphisms: Theory
+  1204	of Indeterminate Natural Transformation (TINT). arXiv preprint
+  1205	arXiv:1801.10542, 2018.
+  1206	Gallant JL, Shoup RE, Mazer JA. A human extrastriate area functionally homologous to macaque V4. Neuron 2000;27:227–35.
+  1207	Goldstone RL, Feng Y, Rogosky BJ. Connecting concepts to each
+  1208	other and the world. In: Diane P, Rolf Z (eds.), Grounding Cognition: The Role of Perception and Action in Memory, Language,
+  1209	and Thinking. Cambridge: Cambridge University Press, 2005,
+  1210	292–314.
+  1211	Gordon J, Abramov I. Color vision in the peripheral retina. II. Hue and
+  1212	saturation. JOSA 1977;67:202–7.
+  1213	Graziano MS, Kastner S. Human consciousness and its relationship to social neuroscience: A novel hypothesis. Cogn Neurosci
+  1214	2011;2:98–113.
+  1215	Hansen T, Pracejus L, Gegenfurtner KR. Color perception in the
+  1216	intermediate periphery of the visual field. JOV 2009;9:26.
+       
+  1217	A relational approach to consciousness
+       
+  1218	Saigo H, Naruse M, Okamura K et al. Analysis of soft robotics
+  1219	based on the concept of category of mobility. Complexity 2019;
+  1220	2019:1–12.
+  1221	Searle JR. Consciousness. Annu Rev Neurosci 2000;23:557–78.
+  1222	Signorelli CM, Wang Q, Khan I. A compositional model of consciousness based on consciousness-only. Entropy (Basel) 2021;23:1–18.
+  1223	Sloman A. Developing concepts of consciousness. Behav Brain Sci
+  1224	1991;14:694–5.
+  1225	Spivak DI. Category Theory for the Sciences. Masachusetts: MIT Press,
+  1226	2014.
+  1227	Stanley RP. Qualia space. J Conscious Stud 1999;6:49–60.
+  1228	Stanovich KE. Damn! There goes that ghost again!. Behav Brain Sci
+  1229	1991;14:696–8.
+  1230	Tononi G. An information integration theory of consciousness. BMC
+  1231	Neurosci 2004;5:42.
+  1232	Tononi G, Boly M, Massimini M et al. Integrated information theory: from consciousness to its physical substrate. Nat Rev Neuro
+  1233	2016;17:450–61.
+  1234	Tsuchiya N. “What is it like to be a bat?” - a pathway to the
+  1235	answer from the integrated information theory. Philos Compass
+  1236	2017;12:e12407.
+  1237	Tsuchiya N, Phillips S, Saigo H. Enriched category as a model of qualia
+  1238	structure based on similarity judgements. OSF preprints, 2021.
+  1239	https://osf.io/ucjmz/. (16 September 2021, date last accessed).
+  1240	Tsuchiya N, Taguchi S, Saigo H. Using category theory to assess the
+  1241	relationship between consciousness and integrated information
+  1242	theory. Neurosci Res 2016;107:1–7.
+  1243	Tull S, Kleiner J. Integrated information in process theories. Arxiv
+  1244	arXiv:2002.07654v1. 2020.
+  1245	Tyler CW. Peripheral color demo. i-Perception 2015;6.
+  1246	Velmans M. How to define consciousness: and how not to define
+  1247	consciousness. J Conscious Stud 2009;16:139–56.
+  1248	Webster MA, Halen K, Meyers AJ et al. Colour appearance and compensation in the near periphery. Proc R Soc London, Ser B: Biol Sci
+  1249	2010;277:1817–25.
+  1250	Wilke M, Mueller KM, Leopold DA. Neural activity in the visual thalamus reflects perceptual suppression. Proc Natl Acad Sci USA
+  1251	2009;106:9465–70.
+  1252	Yoshimi J. Phenomenology and connectionism. Front Psychol
+  1253	2011;2:288.
+  1254	Zihl J, Von Cramon D, Mai N. Selective disturbance of movement
+  1255	vision after bilateral brain damage. Brain 1983;106:313–40.
+       
+  1256	Downloaded from https://academic.oup.com/nc/article/2021/2/niab034/6397521 by guest on 14 January 2026
+       
+  1257	Matsuzawa T. Colour naming and classification in a chimpanzee (Pan
+  1258	troglodytes). J Hum Evol 1985;14:283–91.
+  1259	McClelland T, Bayne T. Concepts, contents, and consciousness.
+  1260	Neurosci Conscious 2016;2016:1–9.
+  1261	Milner DA, Goodale MA. The Visual Brain in Action. Oxford: Oxford
+  1262	University Press, 1995.
+  1263	Mormann F, Koch C. Neural correlates of consciousness. Scholarpedia
+  1264	2007;2:1740.
+  1265	Nagel T. What is it like to be a bat? Philos Rev 1974;83:435–50.
+  1266	Northoff G, Huang Z. How do the brain’s time and space mediate consciousness and its different dimensions? Temporo-spatial
+  1267	theory of consciousness (TTC). Neurosci Biobehav Rev 2017;80:
+  1268	630–45.
+  1269	Northoff G, Tsuchiya N, Saigo H. Mathematics and the brain: a category theoretical approach to go beyond the neural correlates of
+  1270	consciousness. Entropy 2019;21:1234.
+  1271	Oizumi M, Albantakis L, Tononi G. From the phenomenology to the
+  1272	mechanisms of consciousness: integrated information theory 3.0.
+  1273	PLoS Comp 2014;10:e1003588.
+  1274	Palmer SE. Color, consciousness, and the isomorphism constraint.
+  1275	BBS 1999;22:923–43.
+  1276	Pautz A. What is the integrated information theory of consciousness?: A catalogue of questions. J Conscious Stud 2019;26:
+  1277	188–215.
+  1278	Phillips S. Sheaving—a universal construction for semantic compositionality. Phil Trans Roy Soc B 2020;375:20190303.
+  1279	Phillips S, Wilson WH. Categorial compositionality: a category theory explanation for the systematicity of human cognition. PLoS
+  1280	Comput Biol 2010;6:e1000858.
+  1281	Phillips S, Wilson WH. Second-order systematicity of associative
+  1282	learning: a paradox for classical compositionality and a coalgebraic resolution. PLoS One 2016;11:e0160619.
+  1283	Pitt D. Phenomenal compositionality and context effects. Inquiry
+  1284	2018;61:494–8.
+  1285	Prakash C, Fields C, Hoffman DD et al. Fact, fiction, and fitness.
+  1286	Entropy (Basel) 2020;22:1–23.
+  1287	Prentner R. Consciousness and topologically structured phenomenal
+  1288	spaces. Conscious Cogn 2019;70:25–38.
+  1289	Ramachandran VS, Blakeslee S. Phantoms in the Brain: Probing the
+  1290	Mysteries of the Human Mind. New York: William Morrow, 1998.
+  1291	Saigo H. Category algebras and states on categories. Symmetry
+  1292	2021;13:1172.
+       
+  1293	13
+       
+  1294	

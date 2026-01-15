@@ -1,10 +1,11 @@
-function loadText() {
+function loadText(filename) {
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", "data/example.txt", true);
+    xhr.open("GET", "data/" + filename + "?t=" + new Date().getTime(), true);
 
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
-            document.getElementById("output").textContent = xhr.responseText;
+            // Render HTML instead of plain text
+            document.getElementById("output").innerHTML = xhr.responseText;
         }
     };
 
