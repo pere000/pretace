@@ -1,0 +1,62 @@
+a[href] {
+    text-decoration: none !important;
+    color: #83881B !important;
+    font-style: italic !important;
+    font-weight: bold !important;
+}
+
+
+@font-face {
+    font-family: "Toto";
+    src: url("BravenRegular.woff2") format("woff2");
+    font-family: "Schoolbook";
+    src: url("Schoolbook Regular.ttf") format("truetype");
+
+}
+
+body {
+    background: white;
+    color: black;
+    font-family: 'Schoolbook', sans-serif;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    font-size:24px;
+    text-align:justify;
+
+
+
+}
+
+.container {
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.toto {
+    font-family: "Toto", Arial, sans-serif;
+    color: #83881B;
+    font-weight:bold;
+}
+.school {
+    font-family: "Schoolbook", sans-serif;
+    color: #83881B;
+    font-weight:bold;
+}
+.content {
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid navy;
+    border-radius: 8px;
+    min-height: 150px;
+}
+
+i {
+    color: #0897F7;
+}
+
+        /*flex */
+.bullet { display:flex;margin-bottom:8px; }
+.bullet > span { margin-right:0.4em; }
+.bullet > div { flex:1; }
