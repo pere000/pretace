@@ -1,0 +1,3 @@
+npx surge .
+npx surge . nursing.surge.sh
+nursing.sh

@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="robots" content="index, follow">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Breath Care – Nursing Protocols</title>
+    <meta name="description" content="Breath care nursing protocols. JavaScript-based tool for measuring respiratory data and storing it locally on the device.">
+    <meta name="keywords" content="breath care, nursing protocols, respiratory care, healthcare, medical javascript">
+
+<script>
+var ctrl=0
+
+        let startTime = 15000; // 15 seconds in milliseconds
+        let endTime = 0;
+        let interval;
+        let beeping = false;
+        let audioContext, oscillator;
+
+        function Chrono() {
+            clearInterval(interval); // Reset any existing timer
+            let start = performance.now(); // Get high-precision start time
+            let timerElement = document.getElementById("timer");
+
+            function updateTimer() {
+                let elapsed = performance.now() - start;
+                let remaining = Math.max(startTime - elapsed, endTime);
+                timerElement.textContent = Math.ceil(remaining);
+
+                if (remaining > 0) {
+                    requestAnimationFrame(updateTimer); // Smooth updates
+                } else {
+                    timerElement.textContent = "0";
+                    startBeeping();
+                }
+            }
+
+            requestAnimationFrame(updateTimer);
+        }
+
+        function startBeeping() {
+            beeping = true;
+
+            // Create an AudioContext (Web Audio API)
+            audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
+            function beep() {
+                if (beeping) {
+                    oscillator = audioContext.createOscillator();
+                    oscillator.type = "sine"; // Beep sound
+                    oscillator.frequency.setValueAtTime(1000, audioContext.currentTime); // 1000 Hz
+                    oscillator.connect(audioContext.destination);
+                    oscillator.start();
+                    setTimeout(() => {
+                        oscillator.stop();
+                        if (beeping) setTimeout(beep, 1000); // Beep every second
+                    }, 200);
+                }
+            }
+
+            beep();
+        }
+
+        // Stop beeping when clicking anywhere on the page
+        document.addEventListener("click", () => {
+            beeping = false;
+            if (oscillator) oscillator.stop();
+            if (audioContext) audioContext.close();
+        });
+
+ function restart() {
+	 document.getElementById('bStart').style.visibility = 'visible'
+	 document.getElementById('bStop').style.visibility = 'hidden'
+	 document.getElementById('bEnd').style.visibility = 'hidden'
+	 document.getElementById('bRStart').style.visibility = 'hidden'
+	 document.getElementById('bSave').style.visibility = 'hidden'
+
+        chronoRunning = false; // or 0 if you really want a numeric representation of false
+        chronoInterval = null; // or 0
+        beepInterval = null; // or 0
+        //timestamp = Date.now(); //miliseconds
+        state = 'Stop';
+
+        elapsed = 0;
+        startTimestamp = 0;
+        stopTimestamp = 0;
+        remainingTime = 0;
+        spO2 = 0;
+        hr = 0;
+        pi = 0;
+        rr = 0;
+        age = 0
+        wieght = 0
+        height = 0
+
+        ta = 0;
+        TAS = 0;
+        TAD = 0;
+        position = '';
+        activiy = '';
+        pattern = '';
+        logDiv = '';
+        logStore='';
+        dataToSend = []
+        dataValues = ''
+
+        document.getElementById("logEntries").innerHTML = ''
+        document.getElementById("age").innerHTML = '0'
+        document.getElementById("weight").innerHTML = '0'
+        document.getElementById("height").innerHTML = '0'
+        document.getElementById("ta").innerHTML = '0'
+        document.getElementById("tas").innerHTML = '0'
+        document.getElementById("tad").innerHTML = '0'
+        document.getElementById("chrono").innerHTML = 0
+        document.getElementById('timer').innerHTML = '1500'
+        document.getElementById('viewMin').value = 0
+        document.getElementById('position').value = null
+        document.getElementById('activity').value = null
+        document.getElementById('pattern').value = null
+        document.getElementById('spO2').value = null
+        document.getElementById('hr').value = null
+        document.getElementById('pi').value = null
+        document.getElementById('rr').value = null
+        document.getElementById('note').value = ''
+
+}
+</script>
+	
+    <style>
+.container {
+    display: flex;
+    justify-content: flex-start; /* Aligns the boxes to the left */
+    align-items: flex-start; /* Aligns them to the top */
+    width: 100%; /* Ensures the container takes the full width of the parent */
+}
+
+.left {
+    width: 25%; /* Sets the width of the left box */
+    text-align:center;
+    padding: 10px 15px 20px 10px;
+    margin: 5px;
+    background-color: navy;
+}
+
+.free {
+    width: 20%; /* Sets the width of the left box */
+    text-align:center;
+    padding: 10px 15px 20px 0;
+    margin: 5px;
+    background-color: white;
+}
+
+.middle {
+    text-align:left;
+    width: 25%; /* Sets the width of the middle box */
+    text-align:center;
+    padding: 0 15px 0 0;
+    margin: 5px;
+    background-color: yellow;
+}
+
+.right {
+    text-align: left;
+    width: 30%; /* Sets the width of the right box */
+    padding: 10px 15px 20px 10px;
+    margin: 5px;
+    color: white;
+    font-weight: bold;
+    background-color: navy;
+}
+
+
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+
+
+
+        .buttons {
+            margin: 10px 0;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 5px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .start {
+            background: green;
+            color: white;
+        }
+        .stop {
+            background: red;
+            color: white;
+        }
+        .end-test {
+            background: blue;
+            color: white;
+        }
+        .chrono-display {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .data-entry {
+            margin-top: 20px;
+        }
+        input, select {
+            width: 20%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .log {
+            margin-top: 20px;
+            text-align: left;
+            padding: 10px;
+            background: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            height: 200px;
+            overflow-y: auto;
+        }
+        .error {
+            color: red;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+</style>
+</head>
+<body>
+<h1>Breath Care – Nursing Protocols</h1>
+<p>
+This page provides a local, privacy-preserving JavaScript tool
+to assist nursing breath care and respiratory monitoring.
+</p>
+<div class="container">
+
+
+<div class="left">
+    <div class="data-entry">
+                    <span style='font-weight:bold;color:white;font-size:20px;'>Anatomical Position </span><span id='pos1' style='color:white;font-size:20px;cursor:pointer;' onclick="showPop('pos');">▲</span>
+                    <div id='pos' style='display:none;color:yellow;text-align:justify;font-size:12px;'>
+                    <br>L/min: [<span style='color:white'>0, 0.5, 1, 1.5, etc.</span>]Position: [<span style='color:white'>S, TP, PP, RLD, LLD, SD</span>]
+                        <br><br>
+                    </div>
+
+                    <input style='width:400px' list="positions" id="position" name="position" placeholder="Select:[Position]" />
+                    <datalist id="positions">
+                        <option value="Standing">
+                       <option value="Sitting90">
+                        <option value="Sitting45">
+                        <option value="Prono">
+                        <option value="RLD">
+                        <option value="LLD">
+                        <option value="SD">
+                    </datalist>
+                <br>
+
+                <label for="pattern" style='color:yellow;font-size:12px;'>
+                <span style='font-weight:bold;color:white;font-size:20px;'>Breathing Pattern</span></label><span id='pat1' style='color:white;font-size:20px;cursor:pointer;' onclick="showPop('pat');">▲</span><br>
+                <div id='pat' style='display:none;text-align:justify;color:yellow;'>
+                    <span style='color:white;font-weight:bold'>IRB</span>=Spontaneous breathing.<br>
+                    <span style='color:white;font-weight:bold'>IRB+</span>=IRB plus voluntary abdominal muscles (<b>extremely useful with BPL</b>).<br>
+                    <span style='color:white;font-weight:bold'>IRB*FE</span>=IRB adding forced exhalation.<br>
+                    <span style='color:white;font-weight:bold'>IRB+FE</span>=IRB+ adding forced exhalation.
+                </div>
+                <input style='width:400px' list="patterns" id="pattern" name="pattern" placeholder="Select: [Pattern]-Optional Type: [+BPL]" />
+                <datalist id="patterns">
+                    <option value="IRB+">
+                    <option value="TVB+">
+                    <option value="AVB+">
+                    <option value="AVB-FE+">
+                    <option value="IRB-FE+">
+
+
+                </datalist>
+
+                <br>
+                    <label for="activity" style='color:yellow;font-size:12px;'>
+                    <span style='font-weight:bold;color:white;font-size:20px;'>Activity Test</span><span id='act1' style='color:white;font-size:20px;cursor:pointer;' onclick="showPop('act');">▲</span>
+                    <div id='act' style='display:none;color:yellow;text-align:justify;'>
+                        <br>Activity (<span style='color:white'>Resting, metersSlow Walk, metersMedium Walk, metersFast walk, stepsGo Up, stepsGo Down, stepsUp/Down U/D, Gym List Name, Tai-Chi Table Name)</span><br>
+                        </label>
+                    </div><br>
+
+                    <input style='width:400px' list="activities" id="activity" name="activity" placeholder="Select Activity: [Test]-Type: [O2 L/min] ie: Rest-Room Air" />
+                    <datalist id="activities">
+                        <option value="Rest-">
+                        <option value="1Walk-">
+                        <option value="2Walk-">
+                        <option value="3Run-">
+                       <option value="6Minute-">
+
+                        <option value="Step-">
+                        <option value="StepUD-">
+                        <option value="Exercise-">
+                        <option value="Table-">
+                    </datalist>
+                <br><br>
+   </div>
+</div>
+
+
+
+<div class="free"><br><h1 style='color:red;font-weight:bold;text-align:center;'>Health Care</h1><br><span style='color:gray;'>(<i>not required</i>)<br><br>
+<?php echo shell_exec('cat config.txt');?>
+<table style='width:100%'>
+<tr><td>Age</td><td>Weight</td><td>Height</td><td>Sex-bio</td></tr>
+<tr><td><span id='age' style='border: 1px solid red;padding: 2px;display:inline-block;min-width: 90px;font-size:12px;' onclick="document.getElementById(this.id).innerHTML = '';" contenteditable>0</span></td>
+<td><span id='weight' style='border: 1px solid red;padding: 2px;display:inline-block;min-width: 90px;font-size:12px;' onclick="document.getElementById(this.id).innerHTML = '';" contenteditable>0</span></td>
+<td><span id='height' style='border: 1px solid red;padding: 2px;display:inline-block;min-width: 90px;font-size:12px;' onclick="document.getElementById(this.id).innerHTML = '';" contenteditable>0</span></td>
+<td><span id='sex' style='border: 1px solid red;padding: 2px;display:inline-block;min-width: 70px;font-size:12px;' onclick="document.getElementById(this.id).innerHTML = '';" contenteditable>M/F</span></td></tr>
+<tr id='conf' style='display:none;'><td colspan='4' style='background-color:yellow;'>button</td></tr>
+</table>
+<table style='width:100%'>
+<tr><td>Tª</td><td>SP</td><td>DP</td></tr>
+<tr><td><span id='ta' style='border: 1px solid red;padding: 2px;display:inline-block;min-width: 60px;font-size:12px;' onclick="document.getElementById(this.id).innerHTML = '';" contenteditable>0</span></td>
+<td><span id='tas' style='border: 1px solid red;padding: 2px;display:inline-block;min-width: 60px;font-size:12px;' onclick="document.getElementById(this.id).innerHTML = ''" contenteditable>0</span></td>
+<td><span id='tad' style='border: 1px solid red;padding: 2px;display:inline-block;min-width: 60px;font-size:12px;' onclick="document.getElementById(this.id).innerHTML = ''" contenteditable>0</span></td></tr>
+</table>
+
+                <div style='padding-top:20px;font-size:25px;color:red;'><audio id="beep" src="https://www.soundjay.com/button/beep-07.wav" preload="auto"></audio></div>
+                <div class="error" id="errorMessage"></div><br>
+</div>
+
+
+<div class="right">
+        <label>SpO2:</label><br>
+            <input style='width:200px;' id="spO2" placeholder="Type SpO2 Level"><br>
+        <label>HR:</label><br>
+            <input style='width:200px;' id="hr" placeholder="Type Heart Rate"><br>
+        <label>PI:</label><br>
+            <input style='width:200px;' id="pi" placeholder="Type Perfusion Index"><br>
+        <label>RR: Use 15 s X 4</label><br>
+            <input style='width:200px;' id="rr" placeholder='Type Respiratory Rate'><button onclick="Chrono()">Rate 15 s</button> <span id="timer" style='font-size:30px;font-weight:bold;color:white;'>15000</span>
+</div>
+
+<div class="middle">
+                <div style=''><H2 style='color:blue'>Exploration Values</H2>
+                    <div class="buttons" style='padding-top:20px;'>
+                        <button id='bStart' style='visibility:visible' class="start" onclick="startChrono()">Start Data</button>
+                        <input id='viewMin' type='text' style='width:50px;font-size:12px;text-align:center;' value='0' onclick="document.getElementById(this.id).value = ''"> min
+                            <button id='bStop' style='visibility:visible' class="stop" onclick="stopChrono()">Stop Chrono</button>
+                    <div class="chrono-display">Time: <span id="chrono">0</span> ms</div>
+                    <div style='text-align:center;'>
+                        <button id='bEnd' style='visibility:visible' class='end-test' onclick="endTest()">End Test</button>
+						<button id='bSave' style='visibility:visible'  style='background-color:white;color:red;' onclick="sendData(dataToSend, phpScriptURL);"><b>Save Data</b></button><br><button id='bRStart' style='visibility:hidden' class='stop' onclick="restart()">Restart</button>
+                    </div>
+                    </div>
+                <div class="error" id="errorMessage"></div>
+
+                </div><br>
+</div>
+</div>
+<div>    <div style='text-align:left;color:white;weight:bold;font-weight:bold;'>Log Data:
+
+            <div id="logEntries" class="log" style='color:black'></div>
+            </div><table style="width:100%;"> <tr><td style='color:#d4960f;text-align:left;'><b>Timestamp Convertion</b></td><td style='color:#d4960f;text-align:left;'><b>Record Note</b></td></tr>
+                        <tr><td><input style='width:100%;text-align:left;' type="text" id="convert" value="" placeHolder='Type' onclick="data=document.getElementById(this.id).value;document.getElementById(this.id).value=new Date(Number(data)).toLocaleString();"></td><td><input  style='width:100%;text-align:left;' type="text" id="note" value="" placeHolder='Type' ></td></tr>
+                        </table>
+            </div>
+
+
+<div style='text-align:justify;color:red;'><b>License</b><span id='ht1' style='cursor:pointer;' onclick="showPop('ht');">▲</span></div><br>
+<span id='ht' style='text-align:justify;display:none'>
+Copyright 04.03.2025 07:15:31 Las Palmas de Gran Canaria (Canary Islands-EU) (Timestamp 1741072523717)<YEAR> <COPYRIGHT Peregrino Alemán Armas>
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge,
+publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:<br><br>
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.<br><br>
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
+FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.<br><br>
+
+
+<a href='https://diaspora.psyco.fr/tags/trondiasporapsycofr_36644899' target='_blank'>Contacto en Comentarios</a><br>
+<a href='https://docs.google.com/document/d/1pTBaoMm6ctGu9ZbgqlhP4Gyt_EoCdOhfiz9PEVMIwZI/edit?usp=sharing' target='_blank'>Google.docs</a><br>
+</code>
+
+<br><br></span>
+</div>
+<div style='text-align:justify;'><b>Pulmonary Function Tests (PFTs) table</b><span id='table1' style='cursor:pointer;' onclick="showPop('table');">▲</span></div><br>
+    <table id='table' style='display:none;' border="1" cellspacing="0" cellpadding="5">
+        <thead>
+            <tr>
+                <th>Test Category</th>
+                <th>Example Tests</th>
+                <th>Main Purpose</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Spirometry</td>
+                <td>FVC, FEV₁, FEV₁/FVC</td>
+                <td>Obstructive diseases (Asthma, COPD)</td>
+            </tr>
+            <tr>
+                <td>Lung Volumes</td>
+                <td>TLC, VC, RV, FRC</td>
+                <td>Restrictive diseases (Fibrosis, Neuromuscular)</td>
+            </tr>
+            <tr>
+                <td>Gas Exchange</td>
+                <td>DLCO, A-a Gradient</td>
+                <td>Oxygen diffusion (Emphysema, ILD)</td>
+            </tr>
+            <tr>
+                <td>Oxygenation Tests</td><td>Pulse Oximetry, ABG</td><td>Hypoxia, respiratory failure</td>
+            </tr>
+            <tr>
+                <td>Bronchodilator Reversibility</td>
+                <td>Pre/Post Albuterol Spirometry</td>
+                <td>Distinguish Asthma vs COPD</td>
+            </tr>
+            <tr>
+                <td>Bronchial Provocation</td>
+                <td>Methacholine, Exercise Test</td>
+                <td>Detect asthma/hyperreactivity</td>
+            </tr>
+            <tr>
+                <td>Respiratory Muscle Strength</td>
+                <td>MIP, MEP</td>
+                <td>Neuromuscular disorders</td>
+            </tr>
+            <tr>
+                <td>Exercise Testing</td>
+                <td>CPET, VO₂ max</td>
+                <td>Dyspnea evaluation, fitness testing</td>
+            </tr>
+
+        </tbody>
+    </table><br><br>
+    <div style='text-align:justify;margin-top:-20px;'><b>Pulmonary Function Tests (PFTs)</b><span id='params1' style='cursor:pointer;' onclick="showPop('params');">▲</span></div>
+    <span id='params' style='text-align:justify;display:none;'><br>
+1. Volume Parameters:<br>
+Tidal Volume (<b>VT</b> or TV) → The amount of air inhaled or exhaled in a normal breath (~500 mL in adults).<br>
+Inspiratory Reserve Volume (<b>IRV</b>) → Extra air that can be inhaled after a normal inspiration (~3000 mL).<br>
+<span style='padding-left:100px;'>Inspiratory Capacity: TV + IRV ~ 3.500 ml</span><br>
+Expiratory Reserve Volume (<b>ERV</b>) → Extra air that can be exhaled after a normal expiration (~1100 mL).<br>
+Residual Volume (<b>RV</b>) → Air remaining in the lungs after a full exhalation (~1200 mL in adults).<br>
+Total Lung Capacity (<b>TLC</b>) → The maximum volume of air the lungs can hold.<br>
+VC (Vital Capacity) → The maximum amount of air a person can exhale after a full inhalation. It represents the total volume of air that can be moved in and out of the lungs voluntarily.<br>
+Functional Residual Capacity (<b>FRC</b>) → ~2,300 mL Air remaining in the lungs after passive exhalation.<br>
+Dead space air (150 mL): This part never reaches the alveoli and remains in the airways. When you exhale, it's the first to leave.<br>
+Alveolar air (~350 mL): This portion reaches the alveoli, participates in gas exchange, and mixes with the already existing air in the Functional Residual Capacity (FRC), which is the air remaining after passive exhalation.
+<br>
+<br>
+VC = TV + IRV + ERV<br>
+TLC = VC + RV<br><br>
+
+2. Flow and Capacity Parameters:<br>
+Forced Vital Capacity (FVC) → Maximum air exhaled after a full inspiration.<br>
+Forced Expiratory Volume in 1 Second (FEV₁) → Air volume exhaled in the first second of an FVC maneuver.<br>
+FEV₁/FVC Ratio → Percentage of FVC exhaled in the first second; helps diagnose obstructive diseases.<br>
+Peak Expiratory Flow (PEF or PEFR) → Maximum speed of exhalation.<br><br>
+
+<br>
+<div style='text-align:left;margin-left:20px;'>escalas mMRC de disnea:<br><br>
+leve: 0-1, FEV1% ≥80%<br>
+moderada: 2, moderada: 50-80%<br>
+intensa: 3, grave: 30-50%<br>
+muy intensa: 4, muy grave: &#60;30%<br>
+</div><br>
+3. Additional Parameters:<br>
+Forced Expiratory Flow (FEF 25-75%) → Measures flow rate between 25% and 75% of FVC; sensitive to small airway disease.<br>
+Inspiratory Capacity (IC) → Maximum air that can be inspired after normal exhalation:<br><br>
+IC=VT+IRV<br><br>
+Functional Residual Capacity (FRC) → Air left in lungs after normal exhalation:<br><br>
+FRC=ERV+RV<br><br>
+Minute Ventilation (VE) → Total air volume inhaled/exhaled per minute:<br><br>
+VE=VT×RespiratoryRate<br>
+<br>
+Clinical Relevance:<br>
+Obstructive diseases (e.g., COPD, asthma): ↓ FEV₁, ↓ FEV₁/FVC ratio.<br>
+Restrictive diseases (e.g., fibrosis): ↓ TLC, ↓ FVC, but normal or high FEV₁/FVC.<br><br>
+
+1. Spirometry Tests (Basic Lung Function)<br>
+Forced Vital Capacity (FVC) → Maximum air exhaled after deep inhalation.<br>
+Forced Expiratory Volume in 1 second (FEV₁) → Air exhaled in the first second of FVC.<br>
+FEV₁/FVC Ratio → Used to diagnose obstructive lung diseases.<br>
+Peak Expiratory Flow (PEF or PEFR) → Fastest speed of exhalation.<br>
+Forced Expiratory Flow (FEF 25-75%) → Assesses small airway function.<br><br>
+2. Lung Volume Tests (Static Lung Volumes)<br>
+Total Lung Capacity (TLC) → Maximum air in lungs after full inhalation.<br>
+Vital Capacity (VC) → Maximum air exhaled after full inhalation.<br>
+Residual Volume (RV) → Air remaining in lungs after full exhalation.<br>
+Functional Residual Capacity (FRC) → Air left in lungs after normal exhalation.<br>
+Inspiratory Capacity (IC) → Maximum air inhaled after normal exhalation.<br>
+(Measured with spirometry, helium dilution, nitrogen washout, or body plethysmography.)
+<br>
+3. Gas Exchange and Diffusion Tests<br>
+Diffusing Capacity of the Lungs for Carbon Monoxide (DLCO or TLCO) → Measures how well gases move from the lungs to the blood.<br>
+Alveolar-Arterial Oxygen Gradient (A-a Gradient) → Assesses oxygen transfer efficiency.<br>
+(Used for interstitial lung disease, pulmonary fibrosis, and emphysema.)<br><br>
+
+4. Bronchodilator Reversibility Test<br>
+Spirometry before and after a bronchodilator (e.g., albuterol/salbutamol).<br>
+Helps distinguish asthma (reversible obstruction) from COPD (non-reversible obstruction).<br>
+5. Bronchial Provocation Test<br>
+Methacholine or Histamine Challenge Test → Evaluates airway hyperresponsiveness in asthma.<br>
+Exercise-Induced Bronchoconstriction Test → Assesses exercise-related breathing issues.<br><br>
+6. Maximum Respiratory Pressure Tests<br>
+Maximal Inspiratory Pressure (MIP or PIMAX) → Measures diaphragm and inspiratory muscle strength.<br>
+Maximal Expiratory Pressure (MEP or PEMAX) → Measures expiratory muscle strength.<br>
+(Used for neuromuscular diseases like ALS, muscular dystrophy.)<br><br>
+
+7. Cardiopulmonary Exercise Testing (CPET)<br>
+Measures oxygen uptake (VO₂ max), carbon dioxide output, and ventilation during exercise.<br>
+Used for evaluating dyspnea (shortness of breath), heart/lung conditions, and fitness levels.<br>
+8. Pulse Oximetry & Arterial Blood Gas (ABG)<br>
+Pulse Oximetry (SpO₂) → Estimates oxygen saturation in blood.<br>
+Arterial Blood Gas (ABG) → Measures oxygen (PaO₂), carbon dioxide (PaCO₂), pH, and bicarbonate levels.<br><br>
+
+8. VCO<sub>2</sub>: CO₂ production = ~200 mL/min (CO₂ exhaled/min)
+</span>
+	
+	
+</body>
+</html>
+
+<script>
+document.getElementById('bStop').style.visibility = 'hidden'
+document.getElementById('bEnd').style.visibility = 'hidden'
+document.getElementById('bSave').style.visibility = 'hidden'	
+	
+var dataToSend=[];
+var timestamp='';
+var state='';
+var dateTime=''
+var elapsed=''
+var startTimestamp_=''
+var stopTimestamp=''
+var dataValues = '';	
+var totalTable = '';	
+var tableHead = ''
+var phpScriptURL = 'dataToBash.php';	
+	
+// Toggle visibility of the popup
+function showPop(suId) {
+
+    if (document.getElementById(suId).style.display === "none") {
+        document.getElementById(suId).style.display = 'block';
+        document.getElementById(suId+'1').innerHTML= '▼';
+
+    }
+    else
+    {
+        document.getElementById(suId).style.display = "none";
+        document.getElementById(suId+'1').innerHTML= '▲'
+
+    }
+}
+
+	
+
+
+function sendData(dataToSend, phpTarget) {
+//alert(dataToSend)
+	//alert(phpTarget)
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', phpTarget, true);
+  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+  xhr.onload = function() {
+    if (xhr.status >= 200 && xhr.status < 300) {
+      //alert(xhr.responseText);
+      //SUCCESS
+    restart()
+
+    } else {
+      alert('Error triggering bash script. Status: ' + xhr.status);
+    }
+  };
+
+  xhr.onerror = function() {
+    alert('Network error while trying to trigger bash script.');
+  };
+
+  var params = '';
+  for (var i = 0; i < dataToSend.length; i++) {
+    params += 'dataToSend[]=' + encodeURIComponent(dataToSend[i]);
+    if (i < dataToSend.length - 1) {
+      params += '&';
+    }
+  }
+
+  xhr.send(params);
+}
+	
+	
+	
+function getDat() {
+
+    // Get values from the form (assuming these elements exist in your HTML)
+
+
+    position = document.getElementById("position").value;
+    activity = document.getElementById("activity").value;
+    pattern = document.getElementById("pattern").value;
+    spO2 = document.getElementById("spO2").value;
+    hr = document.getElementById("hr").value;
+    pi = document.getElementById("pi").value;
+    rr = document.getElementById("rr").value;
+    ta = document.getElementById("ta").innerHTML;
+    TAS = document.getElementById("tas").innerHTML;
+    TAD = document.getElementById("tad").innerHTML;
+    age = document.getElementById("age").innerHTML;
+    weight = document.getElementById("weight").innerHTML;
+    height = document.getElementById("height").innerHTML;
+
+
+
+
+}
+
+    var chronoRunning = ''
+    var startTimestamp = ''
+
+        function startChrono() {
+        //document.getElementById("logEntries").innerHTML = ''
+
+        if (ctrl < 1){alert("No End, no reset")}else{ ctrl = 0;alert("Post End => Reset. Turn ctrl = "+ctrl); return}
+
+
+
+        getDat()
+
+
+        state = 'Start'
+
+                if (!position || !activity || !pattern || !spO2 || !hr || !pi || !rr)
+                {
+                    document.getElementById("errorMessage").innerText = "All fields are required!";
+                    return;
+                }
+                errorMessage.innerText = ""; // Clear error message
+
+//alert('What?: ' + document.getElementById('viewMin').value);
+numb = document.getElementById('viewMin').value.trim();
+numb = Number(numb) * 60; // seconds
+
+if (numb >= 1) {
+alert('Backward');
+
+chronoBackward()
+
+                    }
+                    else
+                    {    //alert('go forward')
+					 
+					                chronoRunning = false;
+                clearInterval(chronoInterval);
+
+                    chronoForward()
+                    }
+        }
+
+	function chronoBackward(){
+		alert('In-backwards funtion')
+		document.getElementById('bStart').style.visibility = 'hidden'
+    document.getElementById('bStop').style.visibility = 'visible'
+
+    chronoRunning = true;
+    startTimestamp = Date.now(); // milliseconds
+                //first record
+                dataValues = startTimestamp+',none,'+position+','+activity+','+pattern+','+spO2+','+hr+','+pi+','+rr+','+ta+','+TAS+','+TAD+','+age+','+weight+','+height+','+state+','+document.getElementById('note').innerHTML;
+                dataToSend=[dataValues]
+                alert(dataValues)
+dataToSend.push(dataValues);
+            tableHead1 = '<table><tr style="color:maroon" ><ts><td style="width:5%">Begin</td><td style="width:5%">End</td><td style="width:5%">Position</td><td style="width:5%">Pattern</td><td style="width:5%">Activity</td><td style="width:5%">SpO2</td><td style="width:5%">HR</td><td style="width:5%">PI</td><td style="width:5%">RR</td><td style="width:5%">Tª</td><td style="width:5%">TAS</td><td style="width:5%">TAD</td><td style="width:5%">Age</td><td style="width:5%">Weight</td><td style="width:5%">Height</td><td style="width:5%">State</td></ts></tr>'
+            tableData1 = '<tr><td>'+startTimestamp+'</td><td>none</td><td>'+position+'</td><td>'+pattern+'</td><td>'+activity+'</td><td>'+spO2+'</td><td>'+hr+'</td><td>'+pi+'</td><td>'+rr+'</td><td>'+ta+'</td><td>'+TAS+'</td><td>'+TAD+'</td><td>'+age+'</td><td>'+weight+'</td><td>'+height+'</td><td>'+state+'</td></tr></table>'
+            totalTable=tableHead1+tableData1
+            document.getElementById("logEntries").innerHTML =  totalTable
+alert(numb)
+    remainingTime = numb * 1000; // mili seconds
+        stopTimestamp = startTimestamp + remainingTime; // mili seconds
+alert('startTimestamp: '+startTimestamp+' remainingTime: '+remainingTime+' stopTimestamp: '+stopTimestamp)
+
+
+    //alert('1 Chrono Backward');
+    chronoInterval = setInterval(function() {
+        currentTime = Date.now(); // milliseconds
+        remainingTime =  stopTimestamp - currentTime;
+//alert('remainingTime: '+remainingTime)
+        //Autostop
+        //startTimestamp = startTimestamp_
+        if (remainingTime <= 0) {
+            clearInterval(chronoInterval);
+            chronoRunning = false;
+              document.getElementById("chrono").innerText = "0";
+                        document.getElementById('bEnd').style.visibility = 'visible'
+                        document.getElementById('bSave').style.visibility = 'visible'
+                        document.getElementById('bRStart').style.visibility = 'visible'
+                        document.getElementById('bStop').style.visibility = 'hidden'
+                        document.getElementById('bStart').style.visibility = 'hidden'
+
+        } else {
+            document.getElementById("chrono").innerText = remainingTime; // Display in milliseconds
+
+
+        }
+    }, 10);
+
+}
+
+	function chronoForward(){
+    document.getElementById('bStop').style.visibility = 'visible'
+    document.getElementById('bRStart').style.visibility = 'hidden'
+//alert()
+if (chronoRunning){alert('running')}else{alert('no running')}
+
+		
+		
+                        //Run chrono
+                        if (!chronoRunning)
+                        {
+							//alert()
+                            chronoRunning = true;
+                            startTimestamp = Date.now();
+                            timestamp=startTimestamp
+							
+							if (ctrl == 0){
+								
+								if (!dataToSend.length) {
+								
+								//alert('inicio')
+								tableHead = '<table><tr><ts><td style="width:5%">Begin</td><td style="width:5%">End</td><td style="width:5%">Position</td><td style="width:5%">Pattern</td><td style="width:5%">Activity</td><td style="width:5%">SpO2</td><td style="width:5%">HR</td><td style="width:5%">PI</td><td style="width:5%">RR</td><td style="width:5%">Tª</td><td style="width:5%">TAS</td><td style="width:5%">TAD</td><td style="width:5%">Age</td><td style="width:5%">Weight</td><td style="width:5%">Height</td><td style="width:5%">State</td></ts></tr>'							
+									
+											dataValues = startTimestamp+',none,'+position+','+activity+','+pattern+','+spO2+','+hr+','+pi+','+rr+','+ta+','+TAS+','+TAD+','+age+','+weight+','+height+','+state+','+document.getElementById("note").value;
+											dataToSend=[dataValues]
+											let dataValuesSplit = dataToSend[0].split(',')
+											
+								tableData1 = '<tr><td>'+dataValuesSplit[0]+'</td><td>'+dataValuesSplit[1]+'</td><td>'+dataValuesSplit[2]+'</td><td>'+dataValuesSplit[3]+'</td><td>'+dataValuesSplit[4]+'</td><td>'+dataValuesSplit[5]+'</td><td>'+dataValuesSplit[6]+'</td><td>'+dataValuesSplit[7]+'</td><td>'+dataValuesSplit[8]+'</td><td>'+dataValuesSplit[9]+'</td><td>'+dataValuesSplit[10]+'</td><td>'+dataValuesSplit[11]+'</td><td>'+dataValuesSplit[12]+'</td><td>'+dataValuesSplit[13]+'</td><td>'+dataValuesSplit[14]+'</td><td>'+dataValuesSplit[15]+'</td></tr></table>'
+									totalTable=tableHead+tableData1
+									document.getElementById("logEntries").innerHTML =  totalTable							
+								}
+								else
+								{
+									//alert('again')
+								tableHead = '<table><tr><ts><td style="width:5%">Begin</td><td style="width:5%">End</td><td style="width:5%">Position</td><td style="width:5%">Pattern</td><td style="width:5%">Activity</td><td style="width:5%">SpO2</td><td style="width:5%">HR</td><td style="width:5%">PI</td><td style="width:5%">RR</td><td style="width:5%">Tª</td><td style="width:5%">TAS</td><td style="width:5%">TAD</td><td style="width:5%">Age</td><td style="width:5%">Weight</td><td style="width:5%">Height</td><td style="width:5%">State</td></ts></tr>'									
+								totalTable = tableHead;
+									
+									dataValues = startTimestamp+',none,'+position+','+activity+','+pattern+','+spO2+','+hr+','+pi+','+rr+','+ta+','+TAS+','+TAD+','+age+','+weight+','+height+','+state+','+document.getElementById("note").value;
+									dataToSend.push(dataValues);
+									
+									for (let i = 0; i < dataToSend.length; i++) {
+									  const set = dataToSend[i];
+									  const elem = set.split(',');
+									  let rowStr = ''; // Initialize rowStr for each row
+									  for (let k = 0; k <16; k++) { // Iterate over the elements in 'elem'
+										rowStr += '<td>' + elem[k] + '</td>';
+									  }
+									  totalTable += '<tr>' + rowStr + '</tr>';
+									}
+
+									totalTable += '</table>';
+									//alert('table '+totalTable);
+									document.getElementById("logEntries").innerHTML =  totalTable
+									
+																		
+								}
+									
+							//alert('Chrono forward')
+											chronoInterval = setInterval(() => {
+												elapsed = Date.now() - startTimestamp;
+													document.getElementById("chrono").innerText = elapsed;
+											}, 1);
+										}
+										else
+										{
+											
+										alert('Stopped exit: '+ctrl);	exit;
+										}
+						}
+}
+
+var chronoInterval=''
+        function stopChrono() {
+        ctrl = 1
+		document.getElementById('bStart').style.visibility = 'hidden'
+		document.getElementById('bStop').style.visibility = 'hidden'
+		document.getElementById('bEnd').style.visibility = 'visible'
+		document.getElementById('bSave').style.visibility = 'visible'
+        document.getElementById('bRStart').style.visibility = 'visible'
+		alert('stop')
+            if (chronoRunning) {
+                chronoRunning = false;
+                clearInterval(chronoInterval);
+                stopTimestamp = Date.now();
+                state = 'Stop';
+                elapsed = document.getElementById('chrono').innerHtml
+            }
+        }
+
+        function endTest() {alert('end')
+			document.getElementById('bStart').style.visibility = 'visible'
+			document.getElementById('bSave').style.visibility = 'visible'
+            document.getElementById('bRStart').style.visibility = 'visible'
+			document.getElementById('bEnd').style.visibility = 'hidden'			
+			document.getElementById('bStop').style.visibility = 'hidden'	
+			//alert('endTest ctrl = 0')
+			ctrl = 0;
+            chronoRunning = false;
+            clearInterval(chronoInterval);
+            state = 'Stop'
+            getDat()
+							//alert('EndTest startTimestamp: '+startTimestamp)
+                    dataValues = startTimestamp+','+stopTimestamp+','+position+','+activity+','+pattern+','+spO2+','+hr+','+pi+','+rr+','+ta+','+TAS+','+TAD+','+age+','+weight+','+height+','+state+','+document.getElementById("note").value;
+                    dataToSend.push(dataValues)
+                    //alert('endTest data Values: '+dataValues)
+
+
+
+
+previous = document.getElementById("logEntries").innerHTML
+previous = previous.replace("</tbody></table>", "");
+previous = previous.replace("<ts></ts>", "");
+previous = previous.replace("<tbody>", "");
+
+//alert(previous)
+
+            tableData1 = '<tr><td>'+startTimestamp+'</td><td>'+stopTimestamp+'</td><td>'+position+'</td><td>'+pattern+'</td><td>'+activity+'</td><td>'+spO2+'</td><td>'+hr+'</td><td>'+pi+'</td><td>'+rr+'</td><td>'+ta+'</td><td>'+TAS+'</td><td>'+TAD+'</td><td>'+age+'</td><td>'+weight+'</td><td>'+height+'</td><td>'+state+'</td></tr></table>'
+            let totalTable=previous+tableData1
+            //alert(totalTable)
+
+
+            document.getElementById("logEntries").innerHTML =  totalTable
+
+        }
+
+
+        function printResult() {
+        alert('Result')
+                //var dbText = timestamp+'|'+document.getElementById("chrono").innerText+'|'+position+'|'+activity+'|'+pattern+'|'+spO2+'|'+hr+'|'+pi+'|'+rr+'|'+state;
+        let previous = document.getElementById("logEntries").innerHTML
+        alert(previous)
+        exit
+                previous = previous.replace("</table>", "");if (previous.trim() !== "") {previous = previous.replace("</table>", "");}
+                alert('previou: '+previous)
+            tableRow1 = '<tr style="color:blue;"><td style="border: 1px solid black;">'+startTimestamp_+'</td><td style="border: 1px solid black;">'+stopTimestamp+'</td>'
+            tableRow2 = '<td style="border: 1px solid black;">'+position+'</td><td style="border: 1px solid black;">'+pattern+'</td><td style="border: 1px solid black;">'+activity+'</td>'
+            tableRow3 = '<td style="border: 1px solid black;">'+spO2+'</td><td style="border: 1px solid black;">'+hr+'</td><td style="border: 1px solid black;">'+pi+'</td><td style="border: 1px solid black;">'+rr+'</td>'
+            tableRow4 = '<td style="border: 1px solid black;">'+ta+'</td><td style="border: 1px solid black;">'+TAS+'</td><td style="border: 1px solid black;">'+TAD+'</td><td style="border: 1px solid black;">'+state+'</td></tr>'
+            logText = tableRow1+''+tableRow2+''+tableRow3+''+tableRow4
+alert(previous+' '+logText)
+        //document.getElementById("logEntries").innerHTML = previous+''+logText+'</table>';
+        alert('llega')
+        }
+
+
+
+
+</script>
+
