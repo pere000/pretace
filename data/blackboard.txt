@@ -51,23 +51,37 @@ Lack of EEG activity (a flatline) does not necessarily prove the absence of any 
 
 In some cases, brain electrical activity re‑emerges during CPR or after the arrest, and some survivors report awareness — but there isn’t direct evidence linking a specific moment of EEG activity to the content of an NDE.
 ___________________________
-
+https://diaspora.psyco.fr/camo/d62a03e7df74be44f7937a2ddd883eb9fa2a1601/68747470733a2f2f64696173706f72612d707379636f2e73332e65752d776573742d332e616d617a6f6e6177732e636f6d2f75706c6f6164732f696d616765732f7363616c65645f66756c6c5f30343061383266356663646463396632663231362e77656270
 Splitting neurological and phenomenological consciousness. When does an abstract process should be called neurological, psychological, mental (both) or 'spiritual (soul)'? https://chatgpt.com/s/t_6976680dfc3c8191b3f2d3f62dee9fe7
+
+Baars BA. A Cognitive Theory of Consciousness. Cambridge: Cambridge University Press, 1988. -> page 17 del ocdr local
+In The Principles of
+Psychology (1890/1983), James suggests a way of focusing on the issue of
+consciousness by contrasting comparable conscious and unconscious
+events. James himself was hindered in carrying out this program because
+he believed that psychology should not deal with unconscious processes;
+unconscious events, he thought, were physiological. In contrast, our
+current cognitive metatheory suggests that we can indeed talk psychologi-
+cally about both conscious and unconscious processes if we can infer the
+properties of both on the basis of public evidence. In cognitive psycholo-
+gy, conscious and unconscious events have the same status as any other
+scientific constructs. A weaith of information has now accumulated based
+on this reasoning.
 
 Exactly — in TACE, **spiritual/soul-level processes always involve intentionality**, but in a **stronger, metaphysical sense** than what occurs in the mental (mind) level. Let me clarify and revise the framework accordingly.
 
 ---
 
-## 1. **Neurological (Neuropsyche)**
-## 2. **Psychological / Phenomenological**
-## 3. **Mental (Mind)**
+## 1. **Neurological (Neuropsyche -> unconsciousness)**
+## 2. **Psychological / Phenomenological (neuropsyche -> consciousness**
+## 3. **Mental (Mind, both 1&2)**
 ## 4. **Spiritual / Soul**
 
 ### ✅ Key Distinction: Intentionality Across Levels
 
 | Level            | Intentionality Type   | Neurophysiology Required? | Phenomenology Required?   | Example                          |
 | ---------------- | --------------------- | ------------------------- | ------------------------- | -------------------------------- |
-| Neurological     | None                  | Yes                       | Sometimes (sensory input) | Reflex, pre-reaction             |
+| Neurological     | None                  | Yes                       | Sometimes (sensory input) | Reflex, pre-reaction             |eg. subliminal stimuli
 | Psychological    | Weak / “aboutness”    | Yes                       | Yes                       | Feeling, perception              |
 | Mental           | Moderate / rational   | Yes                       | Yes                       | Reasoning, planning              |
 | Spiritual / Soul | Strong / metaphysical | No (substrate optional)   | Yes                       | Conscience, metaphysical insight |
@@ -86,9 +100,9 @@ Key Insight
 3. Rational wonder is the mind’s way of exploring relations emanating from the Self, seeking causal or structural explanations for its own existence and development.
 ___________________________
 
+https://chatgpt.com/s/t_69767bb61adc8191962567dbd8d03e6e
 Mass is only an idea or concept — a relational structural form defined by Newton’s formula: m=F/a (it is not measured but inferred; it is abstract instead a physical substance). One cannot act on the mass of an object directly, but only by altering the object’s ‘rest state’, as understood within Einstein’s theory of relativity.
 
-https://chatgpt.com/s/t_69767bb61adc8191962567dbd8d03e6e
 
 
 
