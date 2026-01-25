@@ -39,7 +39,56 @@ The shape of things seemed to change by sounds and noises’ and ‘Noises seeme
 We know a lot about the neurobiology of psychedelics (for a detailed review see Nichols DE. Psychedelics. Pharmacol Rev 2016;68:264–355., javascript:;). For example, we know that psychedelics act predominantly through 5-HT2A receptor activation, and we know where these receptors are typically located in the brain.
 
 
+Boly, Melanie, et al. "Consciousness in humans and non-human animals: recent advances and future directions." Frontiers in psychology 4 (2013): 625. >> https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2013.00625/full
 
+Actual loss of consciousness due to various causes is typically accompanied by breakdown of brains' capacity to integrate neuronal activity across distant areas, especially via top-down or reentrant connectivity supported by the integrity of fronto-parietal areas.
+
+________________
+https://chatgpt.com/s/t_697662eb37f48191807b31e79d775994
+There is currently no verified EEG recording that simultaneously shows a flat EEG (true brain inactivity) and a concurrent NDE that can be confirmed as experienced at that moment.
+
+Lack of EEG activity (a flatline) does not necessarily prove the absence of any subjective experience — nor does a burst of activity confirm it.
+
+In some cases, brain electrical activity re‑emerges during CPR or after the arrest, and some survivors report awareness — but there isn’t direct evidence linking a specific moment of EEG activity to the content of an NDE.
+___________________________
+
+Splitting neurological and phenomenological consciousness. When does an abstract process should be called neurological, psychological, mental (both) or 'spiritual (soul)'? https://chatgpt.com/s/t_6976680dfc3c8191b3f2d3f62dee9fe7
+
+Exactly — in TACE, **spiritual/soul-level processes always involve intentionality**, but in a **stronger, metaphysical sense** than what occurs in the mental (mind) level. Let me clarify and revise the framework accordingly.
+
+---
+
+## 1. **Neurological (Neuropsyche)**
+## 2. **Psychological / Phenomenological**
+## 3. **Mental (Mind)**
+## 4. **Spiritual / Soul**
+
+### ✅ Key Distinction: Intentionality Across Levels
+
+| Level            | Intentionality Type   | Neurophysiology Required? | Phenomenology Required?   | Example                          |
+| ---------------- | --------------------- | ------------------------- | ------------------------- | -------------------------------- |
+| Neurological     | None                  | Yes                       | Sometimes (sensory input) | Reflex, pre-reaction             |
+| Psychological    | Weak / “aboutness”    | Yes                       | Yes                       | Feeling, perception              |
+| Mental           | Moderate / rational   | Yes                       | Yes                       | Reasoning, planning              |
+| Spiritual / Soul | Strong / metaphysical | No (substrate optional)   | Yes                       | Conscience, metaphysical insight |
+
+________________
+https://chatgpt.com/s/t_6976708d789c81918646fb4557799ee5
+Self-contained meaning as the Self
+In TACE, a self-contained meaning is the meaning that a subject knows immediately, without needing an external relation.
+This is experienced as the Self: the fundamental anchor of all conscious experience.
+Every self-conscious being necessarily experiences this Self, because it is the first actualized meaning that grounds all intentionality.
+
+Key Insight
+
+1. The Self is the first actualized meaning.
+2. Reflection (“how have I become what I am?”) requires the Self as an anchor.
+3. Rational wonder is the mind’s way of exploring relations emanating from the Self, seeking causal or structural explanations for its own existence and development.
+___________________________
+
+Mass is only an idea or concept — a relational structural form defined by Newton’s formula: m=F/a (it is not measured but inferred; it is abstract instead a physical substance). One cannot act on the mass of an object directly, but only by altering the object’s ‘rest state’, as understood within Einstein’s theory of relativity.
+
+https://chatgpt.com/s/t_69767bb61adc8191962567dbd8d03e6e
 
 
 
