@@ -1,3 +1,5 @@
+Tim Bayne, Olivia Carter, Dimensions of consciousness and the psychedelic state, Neuroscience of Consciousness, Volume 2018, Issue 1, 2018, niy008, https://doi.org/10.1093/nc/niy008
+
 In this chapter, three possible “containers” for states of consciousness are considered: (1) the soul, (2) the neuropsyche, and (3) a composite of both. The first corresponds to the classical metaphysical account, exemplified by Aristotle; the second reflects the physiological framework of Pavlovian reflex processes; and the third aligns with contemporary phenomenological psychology. The proper object of this third approach is better designated as the human mind, rather than the soul or the neuropsyche taken in isolation. On this account, non-human animals do not possess a mind in any sense, but only a neuropsyche operating through anticipative pre-reactions (not imagination) and reactive responses, without the actualization of qualia into meaning-bearing forms.
 
 
@@ -11,3 +13,36 @@ There is also evidence that the psychedelic state might be associated with an in
         Psilocybin has been found to cause reduced PPI, which is taken as evidence of lower levels of sensory gating. , there is compelling evidence for an increase in the intensity and volume of sensory information experienced at any given time. psychedelic drugs may increase the ‘bandwidth’ of perceptual experience.
 
         More sensory signals reach neuropsychical areas (perhaps specialized ones), which nodes are distributed and processed, structuring patterns of relative loci and quantic links (similar to engrams). These patterns traverse the Epistemological Bridge (Silver Bridge) to become actualized in consciousness. Before decisions are made, there may be looping activity between consciousness and the neuropsyche. “The experience of simply watching and tasting a sequencing arises when Q-substances are actualized in consciousness in temporal order, while reflexive looping is minimal. The subject perceives the sequence directly, integrating sensory patterns without intervening, resulting in a passive yet vivid experiencing story.” Creativity emerges from fewer looping breaks, allowing larger sequences of Q-substances to unfold in consciousness, which can subsequently be examined and critiqued.
+
+unimpaired on tests of declarative memory and measures of working memory
+slower reaction times but no reduction in accuracy during spatial working memory tasks involving the recall of spatial locations
+impairments in tasks involving mental control and the manipulation of new items
+impair measures of sustained (Quednow et al. 2012), divided (Carter et al. 2005) and covert orienting of attention (Gouzoulis-Mayfrank et al. 2002). Deshon et al. (1952) also describe difficulties in concentration as one of the disturbances
+ marked impairments in speech production seen across all subjects,  One participant experienced complete blocking of speech for around 3 h,
+unable to generate spontaneous utterances or answer questions except by gestures, inability to put into words the thoughts he wished to express
+ decreased capacity to use contextual information for semantic processing
+Comparing direct (e.g. ‘black-white’) and indirect (e.g. ‘lemon-sweet’) word pairs, psilocybin was found to significantly increase indirect but not direct semantic priming (Spitzer et al. 1996)
+An impairment in the capacity to detect contradictions could hardly foster abstract thought given the importance that this capacity plays in the evaluation of evidence and argument.
+
+In summary, psychedelics seem to impair many of the central elements of cognition: decision-making, memory, attention and abstract thought. Although psychedelics appear to enhance the capacity to generate novel ideas, they also seem to impair the capacity to evaluate these ideas and distinguish those that represent genuine cognitive advances from those that do not. Based on the evidence available, it seems plausible that the increase in salience and/or amount sensory information experience (real or imagery-based) may itself be sub-optimal for higher-level functions (Spitzer et al. (1996).
+
+(time) One key feature of the psychedelic state is a distorted experience of time, with subjects typically reporting that time has stopped or slowed (Ludwig 1966).  Using objective measures of time perception based on interval matching or reproduction, a number of studies have shown significant impairments in both humans (Wittmann et al. 2007; Wackermann et al. 2008) and mice (Halberstadt et al. 2016) in the psychedelic state >>> The structuring of time occurs in the neuropsyche
+
+(space) subjects often experience a breakdown in the perceived boundary between themselves and their environment, a phenomenon that is often termed ‘ego-dissolution’ (Lebedev et al. 2015; Millière 2017).
+
+psilocybin was not as clearly associated with a sense of disembodiment typical of dissociative anaesthetics such as ketamine. This distinction might reflect the fact that the experience of disembodiment requires a robust sense of the boundary between oneself and one’s environment.
+
+https://academic.oup.com/view-large/figure/121561730/niy008f1.tif
+
+The shape of things seemed to change by sounds and noises’ and ‘Noises seemed to influence what I saw’ (Studerus et al. 2010). >>> secondary to PPI? >> less filtering
+
+We know a lot about the neurobiology of psychedelics (for a detailed review see Nichols DE. Psychedelics. Pharmacol Rev 2016;68:264–355., javascript:;). For example, we know that psychedelics act predominantly through 5-HT2A receptor activation, and we know where these receptors are typically located in the brain.
+
+
+
+
+
+
+
+herbs: https://chatgpt.com/s/t_69764d52c4608191be188c79bc95ad37
+
