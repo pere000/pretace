@@ -1,3 +1,7 @@
+crucial
+https://diaspora.psyco.fr/posts/2a985e80dcdb013e6ae67a163edde882
+
+
 Tim Bayne, Olivia Carter, Dimensions of consciousness and the psychedelic state, Neuroscience of Consciousness, Volume 2018, Issue 1, 2018, niy008, https://doi.org/10.1093/nc/niy008
 
 In this chapter, three possible “containers” for states of consciousness are considered: (1) the soul, (2) the neuropsyche, and (3) a composite of both. The first corresponds to the classical metaphysical account, exemplified by Aristotle; the second reflects the physiological framework of Pavlovian reflex processes; and the third aligns with contemporary phenomenological psychology. The proper object of this third approach is better designated as the human mind, rather than the soul or the neuropsyche taken in isolation. On this account, non-human animals do not possess a mind in any sense, but only a neuropsyche operating through anticipative pre-reactions (not imagination) and reactive responses, without the actualization of qualia into meaning-bearing forms.
@@ -68,6 +72,10 @@ gy, conscious and unconscious events have the same status as any other
 scientific constructs. A weaith of information has now accumulated based
 on this reasoning.
 
+It makes not a bit of
+difference that Pavlov was a devout physicalist who felt that a scientific
+treatment of conscious experience was impossible.
+
 Exactly — in TACE, **spiritual/soul-level processes always involve intentionality**, but in a **stronger, metaphysical sense** than what occurs in the mental (mind) level. Let me clarify and revise the framework accordingly.
 
 ---
@@ -81,7 +89,21 @@ Exactly — in TACE, **spiritual/soul-level processes always involve intentional
 
 | Level            | Intentionality Type   | Neurophysiology Required? | Phenomenology Required?   | Example                          |
 | ---------------- | --------------------- | ------------------------- | ------------------------- | -------------------------------- |
-| Neurological     | None                  | Yes                       | Sometimes (sensory input) | Reflex, pre-reaction             |eg. subliminal stimuli
+| Neurological     | None                  | Yes                       | Sometimes (sensory input) | Reflex, pre-reaction             |eg. subliminal stimuli'there is considerable evidence that
+                                                                                                                                       unattended speech is nevertheless processed up to a point ... Now we can ask, given
+                                                                                                                                       that these paired events are so similar, why is one member of each pair
+                                                                                                                                       conscious but not the other? -- perhaps: It has never reached the soul-consciousness
+
+                                                                                                                                       Unattended speech remains a Q-pseudomateriasignal
+                                                                                                                                       It never becomes an actualized meaningl (it never reaches the soul)
+                                                                                                                                       Therefore, no experience of meaning occurs (it doesn't reach consciousness)
+
+                                            All forms are immaterial. However, Q-form is immaterial in a different sense than purely structural forms or spiritual forms (such as angelic form). Q-form is an immaterial force-substrate ordered toward the actualization of mathematical vectors in space–time, whereas angelic or spiritual forms are immaterial substances not ordered toward space–time actualization.
+                                            In TACE, remote memory is not understood as a persistent material trace within the neuropsyche, but as an immaterial form preserved in the Matrix, capable of being re-actualized as meaning in consciousness. Consequently, the quantity of memory in principle is not intrinsically limited by neural storage capacity, even though its access and actualization remain constrained by the neuropsyche.
+
+
+
+
 | Psychological    | Weak / “aboutness”    | Yes                       | Yes                       | Feeling, perception              |
 | Mental           | Moderate / rational   | Yes                       | Yes                       | Reasoning, planning              |
 | Spiritual / Soul | Strong / metaphysical | No (substrate optional)   | Yes                       | Conscience, metaphysical insight |
@@ -102,6 +124,75 @@ ___________________________
 
 https://chatgpt.com/s/t_69767bb61adc8191962567dbd8d03e6e
 Mass is only an idea or concept — a relational structural form defined by Newton’s formula: m=F/a (it is not measured but inferred; it is abstract instead a physical substance). One cannot act on the mass of an object directly, but only by altering the object’s ‘rest state’, as understood within Einstein’s theory of relativity.
+
+___________________________
+pp 33-34:46-48
+Today, the new cognitive metatheory has overcome this
+reluctance. The cognitive metatheory encourages psychologists to go
+beyond raw observations, to infer explanatory entities if the evidence for
+
+pp 36:37-38
+evidence for ‘blind sight’, where patients with occipital damage can
+name objects they claim not to experience
+
+TACE
+Blindsight shows that signals may guide behavior (Pavlovian' responsing) without becoming meanings, hylighting the distinction between neuropsyche and consciousness.
+
+In blindsight, the subject can correctly name objects (e.g., “its color is red”) despite reporting no visual experience. This indicates that stimuli can be processed by the neuropsyche through non-conscious mechanisms; that is, Pavlovian causal neurodynamic engrams can generate reflexive outputs without consciousness playing a relevant role.
+
+This may occur with the concurrence of cortically processed Q-neuropsychic signal outputs, which, upon crossing the Epistemic Bridge, are actualized as abstract signifieds. Consequently, consciousness experiences the superposition of (1) a layered pattern of graphical features with the teleological role of imagery representation (“I see a spot”), and (2) data directed toward object recognition, memorization, categorization, and higher-level processing (“its color is red”).
+
+As a result, the visual layer produces a minimal conscious experience — “I see a spot” — rather than a copy or cloned image, in contrast to the analytical layer, which informs consciousness through mathematical relations. The analytical layer thus produces actualized significative and identificative, measure-like meanings, enabling the subject to respond correctly in a questionnaire. This provides a conceptual, TACE-based hypothesis for explaining the blindsight phenomenon.
+
+Ideas, forms, and spiritual feelings, which are non-substances, can cross the Epistemic Bridge directly from the Matrix, as well as those originating from God or angels. These forms are already structured and ready for actualization in consciousness and are therefore experienced without mediation by the neuropsyche. In this sense, consciousness can experience non-material realities directly as meanings, feelings, or intentional contents.
+
+Feelings arising from the neuropsyche, by contrast, are Q-pseudomaterial signals. They represent bodily or neural states and can be evaluated, modulated, repressed, or otherwise acted upon by higher processes—whether due to neuropsychical causes, influences from consciousness, or external factors such as pharmacological agents (e.g., paracetamol, DMT) and other environmental causes.
+
+__________________
+Substances such as DMT do not generate pure oneness experiences but may facilitate them by modulating neuropsychical constraints, thereby allowing direct actualization of form-only experiences originating from the Matrix or spiritual sources.
+
+Mystical oneness is a direct form-only actualization from the Matrix or spiritual sources, inherently stable and unmediated by neuropsychical structures. DMT-oneness, by contrast, is an occasional, pharmacologically facilitated access to these forms: the neuropsyche is altered to allow EB crossing, but the experience is dependent on the altered pseudomaterial substrate, highly variable, and often accompanied by sensory and emotional artifacts.
+___________________________________
+Propofol → Epistemic Bridge (TACE-consistent synthesis)
+Propofol induces unconsciousness via two convergent mechanisms:
+
+1. Via PPI (gating mechanism)
+Propofol increases PPI, strengthening inhibitory gating.
+
+This results in a reduction of the in-flow of consciousness-relevant contents (meaning, imagery, awakeness potentials).
+
+2. Via GABAergic inhibition (generation mechanism)
+Propofol potentiates GABA_A–mediated inhibition, leading to:
+
+reduced neural excitability
+
+reduced responsiveness to inputs
+
+This causes a reduction in the generation and propagation of Q-pseudomaterial neurosignals.
+
+3. Convergent effect (necessary and sufficient)
+Together, increased gating (PPI) and reduced signal generation prevent a sufficient quantity and coherence of Q-pseudomaterial input from reaching the Epistemic Bridge, such that the probability of Q-substance actualization falls below threshold, resulting in unconsciousness.
+
+in summary
+Propofol increases inhibitory gating (PPI) and reduces signal generation (via GABAergic inhibition); together, these effects deprive the Epistemic Bridge of sufficiently structured and coherent Q-pseudomaterial input (meaning layer, imagery layer, awakeness layer), driving the system below the threshold for conscious actualization.
+
+Conscious experience arises when meaning, imagery, and awakeness vectors jointly exceed the Epistemic Bridge threshold in magnitude, coherence, and alignment; anesthesia reduces these vectors below actualization capacity.
+
+The Epistemic Bridge (EB) is not a locus.
+It is a relational boundary structure at the interface (edge) between Soul and Matrix,
+and it is the limiting condition that gives the soul its identity as a knower.
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
