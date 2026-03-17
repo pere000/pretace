@@ -1,9 +1,11 @@
 document.querySelectorAll('a[href]').forEach(a => {
     a.setAttribute('target', '_blank');
-
+    a.style.textDecoration = 'none';
+    a.addEventListener('mouseenter', () => a.style.textDecoration = 'none');
+    
     const icon = document.createElement('span');
     icon.textContent = '⏩️';
-    icon.style.fontSize = '18px';
+    icon.style.fontSize = '12px';
     icon.style.fontStyle = 'normal';
 
     a.prepend(icon);

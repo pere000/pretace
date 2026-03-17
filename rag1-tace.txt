@@ -1,0 +1,100 @@
+# TACE Glossary
+
+This file contains key concepts of the TACE framework, formatted for easy reference and RAG retrieval.
+
+---
+
+## Form
+**Definition:**  
+The principle of organization in a system; a structure that organizes matter into a coherent configuration.
+
+**Example Usage:**  
+- In programming: a class or template that defines the structure of objects  
+- In reasoning: the blueprint for how entities behave or interact
+
+---
+
+## Q-form
+**Definition:**  
+A “mathematical structure of space-time possibilities” that underlies all potential Qualia (Q-pseudomaterial substances). It is the abstract substrate from which forms can be instantiated.
+
+**Example Usage:**  
+- Represents potential shapes, structures, or behaviors before actualization  
+- In coding: a template or schema that could produce multiple concrete implementations
+
+---
+
+## Q-pseudomaterial substances
+**Definition:**  
+Potential Qualia derived from a Q-form; these are possibilities that exist but are not yet actualized as Q-substances.
+
+**Example Usage:**  
+- Possible states or variations of a system or object  
+- In programming: a function signature or data type specification not yet implemented
+
+---
+
+## Q-substance
+**Definition:**  
+Actual Qualia constructed by consciousness; the realized or instantiated form in space-time.
+
+**Example Usage:**  
+- A running program, a finished object, a completed computation
+
+---
+
+## Matrix
+**Definition:**  
+The repository of possible actualizations; the “field” containing all potential Q-substances. It is where consciousness selects or manifests possibilities.
+
+**Example Usage:**  
+- Conceptually, the Matrix contains all possible states and outcomes  
+- In programming: the set of all potential objects, functions, or system states
+
+---
+
+## Observer
+**Definition:**  
+The conscious agent interacting with the system, capable of selecting or actualizing potentialities.
+
+**Example Usage:**  
+- In coding: the programmer reading, modifying, and running code  
+- In TACE: the entity perceiving, measuring, or acting upon Q-substances
+
+---
+
+## Dyson Universe
+**Definition:**  
+The conceptual universe in which TACE operates; the environment containing all Q-forms, Q-substances, and their interactions.
+
+**Example Usage:**  
+- The “sandbox” where all potential and actualized forms exist  
+- Analogous to the programming environment or runtime context
+
+---
+
+## Hypostatic Connection
+**Definition:**  
+The link between the Observer and Q-substances; the relational bridge that allows consciousness to interact with potentialities.
+
+**Example Usage:**  
+- The mechanism of code execution: reading a template (Q-form) and producing an actual object (Q-substance)  
+- Any system where input transforms potential into actual
+
+---
+
+## Feeling vs Structural Change
+**Definition:**  
+A “feeling” represents a relative movement between Observer and observed; it does not imply a permanent structural change or change of nature.
+
+**Example Usage:**  
+- Observing a variable change during debugging is a “feeling”  
+- Actual code mutation is a structural change
+
+---
+
+## Notes for RAG Integration
+- Keep one concept per section for accurate retrieval  
+- Include usage examples to guide the model’s responses  
+- Update this glossary whenever new TACE concepts are introduced  
+
