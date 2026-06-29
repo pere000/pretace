@@ -191,6 +191,12 @@ Run TACE
 
 Repository Browser
 
+<br><br>
+
+<input type="button"
+       value="Export Module"
+       onclick="exportModule()">
+
 </div>
 
 
@@ -466,6 +472,73 @@ async function saveEdit(){
     currentConcept.data = c;
     currentEdit = null;
     renderConcept();
+}
+
+async function exportModule(){
+
+    const modulesResponse = await fetch('/ontology/modules');
+
+    if (!modulesResponse.ok){
+        alert('Could not load modules.');
+        return;
+    }
+
+    const modules = await modulesResponse.json();
+
+    if (!modules.length){
+        alert('No ontology modules available.');
+        return;
+    }
+
+    const selected = prompt(
+        'Select ontology module to export:\n\n' + modules.join('\n'),
+        modules[0]
+    );
+
+    if (!selected){
+        return;
+    }
+
+    const module = selected.trim();
+
+    if (!module){
+        return;
+    }
+
+    const response = await fetch('/ontology/export', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ module })
+    });
+
+    if (!response.ok){
+        let detail = response.statusText;
+        try {
+            const err = await response.json();
+            detail = err.detail || detail;
+        } catch (_) {
+        }
+        alert('Export failed: ' + detail);
+        return;
+    }
+
+    const blob = await response.blob();
+    const disposition = response.headers.get('Content-Disposition') || '';
+    const match = disposition.match(/filename="?([^";]+)"?/i);
+    const filename = match ? match[1] : (module + '.tace');
+
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+
+    alert('Export generated: ' + filename);
 }
 </script>
 
