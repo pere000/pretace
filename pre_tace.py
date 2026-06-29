@@ -1,0 +1,183 @@
+#!/usr/bin/env python3
+
+"""
+============================================================
+PreTACE Launcher
+============================================================
+
+ROLE
+----
+Main launcher of the new PreTACE application.
+
+STATUS
+------
+Migration
+
+SOURCE FILES
+------------
+None (new root launcher)
+
+TARGET FILES
+------------
+new_resource_menu.py
+new_ontology_menu.py
+new_rag_menu.py
+new_learning_menu.py
+new_models_menu.py
+new_system_status.py
+new_tace_runtime.py
+new_repository_browser.py
+new_ontology_browser.py
+
+USES
+----
+subprocess
+pathlib
+
+PUBLIC API
+----------
+main()
+
+NOTES
+-----
+This launcher dispatches ONLY new_*.py modules.
+Legacy files inside llmTace are never called directly.
+
+============================================================
+"""
+
+import subprocess
+import sys
+from pathlib import Path
+
+
+MENU = [
+
+    # --------------------------------------------------
+    # INITIALIZATION
+    # --------------------------------------------------
+
+    ("1", "Resources",          "new_resource_menu.py"),
+    ("2", "Ontologies",         "new_ontology_menu.py"),
+    ("3", "RAG",                "new_rag_menu.py"),
+    ("4", "Learning",           "new_learning_menu.py"),
+    ("5", "Models",             "new_models_menu.py"),
+    ("6", "System Status",      "new_system_status.py"),
+
+    # --------------------------------------------------
+    # RUNTIME
+    # --------------------------------------------------
+
+    ("7", "Run TACE",           "new_tace_runtime.py"),
+
+    # --------------------------------------------------
+    # TOOLS
+    # --------------------------------------------------
+
+    ("8", "Repository Browser", "new_repository_browser.py"),
+    ("9", "Ontology Browser",   "new_ontology_browser.py"),
+
+]
+
+
+def clear():
+    # Screen clearing intentionally disabled.
+    return
+
+
+def run(script):
+
+    print()
+    print()
+
+    Path("trash").mkdir(exist_ok=True)
+
+    if not Path(script).exists():
+
+        print("=" * 60)
+        print("MODULE NOT YET MIGRATED")
+        print("=" * 60)
+        print()
+        print(script)
+        return
+
+    try:
+
+        subprocess.run(
+            [sys.executable, script],
+            check=False
+        )
+
+    except Exception as e:
+
+        print()
+        print("Launcher error:")
+        print(type(e).__name__, e)
+
+
+def show():
+
+    clear()
+
+    print("=" * 60)
+    print("                       PreTACE")
+    print("      Tegmark-Aquinas Conceptual Ecpsystem")
+    print("=" * 60)
+
+    print()
+    print("INITIALIZATION")
+    print("-" * 60)
+
+    for n, t, s in MENU[:6]:
+        print(f"{n:>2}. {t}")
+
+    print()
+    print("RUNTIME")
+    print("-" * 60)
+
+    n, t, s = MENU[6]
+    print(f"{n:>2}. {t}")
+
+    print()
+    print("TOOLS")
+    print("-" * 60)
+
+    for n, t, s in MENU[7:]:
+        print(f"{n:>2}. {t}")
+
+    print()
+    print("-" * 60)
+    print(" 0. Exit")
+    print()
+
+
+def main():
+
+    while True:
+
+        show()
+
+        option = input("Option: ").strip()
+
+        if option == "0":
+            break
+
+        found = False
+
+        for n, title, script in MENU:
+
+            if option == n:
+
+                found = True
+                run(script)
+                break
+
+        if not found:
+
+            print()
+            print("Invalid option.")
+
+
+if __name__ == "__main__":
+
+    main()

@@ -1,0 +1,22 @@
+{
+    "ontology_authoritative": true,
+    "rag_enabled": true,
+    "learning_enabled": true,
+    "resources": {
+        "ontology": true,
+        "local_ai": true,
+        "free_search": false,
+        "paid_ai": false,
+        "rag": true,
+        "memory": false
+    },
+    "models": {
+        "local_ai": "qwen-3-8b-instruct",
+        "embedding": "nomic-embed-text"
+    },
+    "rag": {
+        "feed_folders": [
+            "/media/external_drive/knowledge"
+        ]
+    }
+}

@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8">
+
+<title>TACE-Aquinas Conceptual Ecosystem</title>
+
+<style>
+
+body{
+    font-family:Arial;
+    margin:20px;
+    background:#f5f5f5;
+}
+
+.panel{
+
+    display:none;
+
+    margin-top:15px;
+
+    padding:10px;
+
+
+
+
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<div style="font-size:26px;font-weight:bold;margin-bottom:10px;">
+TACE-Aquinas Conceptual Ecosystem
+</div>
+
+
+<div style="display:flex;justify-content:flex-start;">
+
+    <div style="padding:10px;">
+
+        <div style="color:navy;font-weight:bold">
+            INITIALIZATION
+        </div>
+
+        <input type="button" value="Resources" onclick="resources()">
+
+        <input type="button" value="Ontologies" onclick="ontologies()">
+
+        <input type="button" value="RAG" onclick="rag()">
+
+        <input type="button" value="Learning" onclick="learning()">
+
+        <input type="button" value="Models" onclick="models()">
+
+        <input type="button" value="System Status" onclick="status()">
+
+    </div>
+
+
+    <div style="padding:10px;">
+
+        <div style="color:navy;font-weight:bold">
+            RUNTIME
+        </div>
+
+        <input type="button"
+               value="Run TACE"
+               onclick="runtime()">
+
+    </div>
+
+
+    <div style="padding:10px;">
+
+        <div style="color:navy;font-weight:bold">
+            TOOLS
+        </div>
+
+        <input type="button"
+               value="Repository Browser"
+               onclick="repository()">
+
+        <input type="button"
+               value="Ontology Browser"
+               onclick="browser()">
+
+    </div>
+
+</div>
+
+
+<!-- ====================================================== -->
+
+<div id="resources_panel" class="panel">
+
+Resources
+
+</div>
+
+
+<div id="ontology_modules" class="panel">
+
+    <div style="color:navy;font-weight:bold">
+
+        ONTOLOGY MODULES
+
+    </div>
+
+    <br>
+
+    <input
+        type="button"
+        value="Aristotle_Aquinas"
+        onclick="openModule('Aristotle_Aquinas')">
+
+    <input
+        type="button"
+        value="Maturana_Varela"
+        onclick="openModule('Maturana_Varela')">
+
+    <input
+        type="button"
+        value="Mystici_Corporis_Christi"
+        onclick="openModule('Mystici_Corporis_Christi')">
+
+    <input
+        type="button"
+        value="TACE"
+        onclick="openModule('TACE')">
+
+    <input
+        type="button"
+        value="Tegmark"
+        onclick="openModule('Tegmark')">
+
+    <hr>
+
+    <div id="ontology_detail">
+
+        Select a module.
+
+    </div>
+
+</div>
+
+
+<div id="rag_panel" class="panel">
+
+RAG
+
+</div>
+
+
+<div id="learning_panel" class="panel">
+
+Learning
+
+</div>
+
+
+<div id="models_panel" class="panel">
+
+Models
+
+</div>
+
+
+<div id="status_panel" class="panel">
+
+System Status
+
+</div>
+
+
+<div id="runtime_panel" class="panel">
+
+Run TACE
+
+</div>
+
+
+<div id="repository_panel" class="panel">
+
+Repository Browser
+
+</div>
+
+
+<div id="browser_panel" class="panel">
+
+Ontology Browser
+
+</div>
+
+
+<script>
+
+function hideAll(){
+
+    document.querySelectorAll(".panel").forEach(
+
+        p => p.style.display = "none"
+
+    );
+
+}
+
+
+function resources(){
+
+    hideAll();
+
+    document.getElementById("resources_panel").style.display="block";
+
+}
+
+
+function ontologies(){
+
+    hideAll();
+
+    document.getElementById("ontology_modules").style.display="block";
+
+}
+
+
+function rag(){
+
+    hideAll();
+
+    document.getElementById("rag_panel").style.display="block";
+
+}
+
+
+function learning(){
+
+    hideAll();
+
+    document.getElementById("learning_panel").style.display="block";
+
+}
+
+
+function models(){
+
+    hideAll();
+
+    document.getElementById("models_panel").style.display="block";
+
+}
+
+
+function status(){
+
+    hideAll();
+
+    document.getElementById("status_panel").style.display="block";
+
+}
+
+
+function runtime(){
+
+    hideAll();
+
+    document.getElementById("runtime_panel").style.display="block";
+
+}
+
+
+function repository(){
+
+    hideAll();
+
+    document.getElementById("repository_panel").style.display="block";
+
+}
+
+
+function browser(){
+
+    hideAll();
+
+    document.getElementById("browser_panel").style.display="block";
+
+}
+
+
+
+async function openConcept(module, concept){
+
+    const r = await fetch(
+        "/ontology/concept/" +
+        encodeURIComponent(module) +
+        "/" +
+        encodeURIComponent(concept)
+    );
+
+    const c = await r.json();
+
+    let html = "";
+
+    html += "<div style='color:navy;font-weight:bold;font-size:18px'>";
+    html += c.concept_name;
+    html += "</div><br>";
+
+    const fields = [
+
+        ["Definition","definition"],
+        ["Assumptions","assumptions"],
+        ["Scope","scope"],
+        ["Historical Development","historical_development"],
+        ["TACE Transformation","tace_transformation"],
+        ["References","references_text"],
+        ["Status","status"]
+
+    ];
+
+    for(const f of fields){
+
+        html +=
+            "<div style='color:navy;font-weight:bold;margin-top:10px'>" +
+            f[0] +
+            "</div>";
+
+        html +=
+            "<div style='padding-left:10px'>" +
+            (c[f[1]] || "") +
+            "</div>";
+
+    }
+
+    document.getElementById("ontology_detail").innerHTML = html;
+
+}
+
+
+function openConcept(module,concept){
+
+    document.getElementById("ontology_detail").innerHTML +=
+        "<hr><b>Selected concept:</b> " +
+        concept;
+
+}
+
+
+</script>
+
+</body>
+
+</html>

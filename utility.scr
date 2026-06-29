@@ -1,0 +1,44 @@
+#!/bin/bash
+#if $1 is '../llmTace/compiler/phrase_detector.py'
+echo $1
+
+full_path="$1"
+
+newFileName="${full_path#../llm/llmTace/}"
+newFileName="new_${newFileName//\//_}"
+echo $newFileName
+    cp "../llmTace/$full_path" "$newFileName"
+
+
+
+exit
+
+
+
+
+
+
+
+exit
+echo '$2='"$2"
+echo '$3='"$3"
+exit
+newRepl="new_$(echo "$3" | sed 's|\.|_|g')"
+echo '$newRepl=' $newRepl
+#exit
+fileName="$1"
+
+# 1. Process the input string
+newFileName=$(echo "$fileName" | sed 's|^\.\./||; s|llmTace/|new_|; s|/|_|g')
+baseName="${newFileName%.*}"
+
+# 3. Print the results
+echo "$newFileName"
+echo "$baseName"
+
+
+
+cp "$fileName" "$newFileName"
+
+
+sed -i "s/$3/$newRepl/g" "$2"

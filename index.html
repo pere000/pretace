@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8">
+
+<title>TACE-Aquinas Conceptual Ecosystem</title>
+
+<style>
+
+body{
+    font-family:Arial;
+    margin:20px;
+    background:#f5f5f5;
+}
+
+.panel{
+
+    display:none;
+
+    margin-top:15px;
+
+    padding:10px;
+
+
+
+
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<div style="font-size:26px;font-weight:bold;margin-bottom:10px;">
+TACE-Aquinas Conceptual Ecosystem
+</div>
+
+
+<div style="display:flex;justify-content:flex-start;">
+
+    <div style="padding:10px;">
+
+        <div style="color:navy;font-weight:bold">
+            INITIALIZATION
+        </div>
+
+        <input type="button" value="Resources" onclick="resources()">
+
+        <input type="button" value="Ontologies" onclick="ontologies()">
+
+        <input type="button" value="RAG" onclick="rag()">
+
+        <input type="button" value="Learning" onclick="learning()">
+
+        <input type="button" value="Models" onclick="models()">
+
+        <input type="button" value="System Status" onclick="status()">
+
+    </div>
+
+
+    <div style="padding:10px;">
+
+        <div style="color:navy;font-weight:bold">
+            RUNTIME
+        </div>
+
+        <input type="button"
+               value="Run TACE"
+               onclick="runtime()">
+
+    </div>
+
+
+    <div style="padding:10px;">
+
+        <div style="color:navy;font-weight:bold">
+            TOOLS
+        </div>
+
+        <input type="button"
+               value="Repository Browser"
+               onclick="repository()">
+
+        <input type="button"
+               value="Ontology Browser"
+               onclick="browser()">
+
+    </div>
+
+</div>
+
+
+<!-- ====================================================== -->
+
+<div id="resources_panel" class="panel">
+
+Resources
+
+</div>
+
+
+<div id="ontology_modules" class="panel">
+
+    <div style="color:navy;font-weight:bold">
+
+        ONTOLOGY MODULES
+
+    </div>
+
+    <br>
+
+    <input
+        type="button"
+        value="Aristotle_Aquinas"
+        onclick="openModule('Aristotle_Aquinas')">
+
+    <input
+        type="button"
+        value="Maturana_Varela"
+        onclick="openModule('Maturana_Varela')">
+
+    <input
+        type="button"
+        value="Mystici_Corporis_Christi"
+        onclick="openModule('Mystici_Corporis_Christi')">
+
+    <input
+        type="button"
+        value="TACE"
+        onclick="openModule('TACE')">
+
+    <input
+        type="button"
+        value="Tegmark"
+        onclick="openModule('Tegmark')">
+
+    <hr>
+
+    <div id="ontology_detail">
+
+        Select a module.
+
+    </div>
+
+</div>
+
+
+<div id="rag_panel" class="panel">
+
+RAG
+
+</div>
+
+
+<div id="learning_panel" class="panel">
+
+Learning
+
+</div>
+
+
+<div id="models_panel" class="panel">
+
+Models
+
+</div>
+
+
+<div id="status_panel" class="panel">
+
+System Status
+
+</div>
+
+
+<div id="runtime_panel" class="panel">
+
+Run TACE
+
+</div>
+
+
+<div id="repository_panel" class="panel">
+
+Repository Browser
+
+</div>
+
+
+<div id="browser_panel" class="panel">
+
+Ontology Browser
+
+</div>
+
+
+<script>
+
+let currentConcept = null;
+let currentEdit = null;
+
+function hideAll(){
+
+    document.querySelectorAll(".panel").forEach(
+
+        p => p.style.display = "none"
+
+    );
+
+}
+
+
+function resources(){
+
+    hideAll();
+
+    document.getElementById("resources_panel").style.display="block";
+
+}
+
+
+function ontologies(){
+
+    hideAll();
+
+    document.getElementById("ontology_modules").style.display="block";
+
+}
+
+
+function rag(){
+
+    hideAll();
+
+    document.getElementById("rag_panel").style.display="block";
+
+}
+
+
+function learning(){
+
+    hideAll();
+
+    document.getElementById("learning_panel").style.display="block";
+
+}
+
+
+function models(){
+
+    hideAll();
+
+    document.getElementById("models_panel").style.display="block";
+
+}
+
+
+function status(){
+
+    hideAll();
+
+    document.getElementById("status_panel").style.display="block";
+
+}
+
+
+function runtime(){
+
+    hideAll();
+
+    document.getElementById("runtime_panel").style.display="block";
+
+}
+
+
+function repository(){
+
+    hideAll();
+
+    document.getElementById("repository_panel").style.display="block";
+
+}
+
+
+function browser(){
+
+    hideAll();
+
+    document.getElementById("browser_panel").style.display="block";
+
+}
+
+
+
+async function openModule(module){
+
+    const r = await fetch("/ontology/module/" + encodeURIComponent(module));
+
+    const concepts = await r.json();
+
+    let html = "";
+
+    html += "<div style='color:navy;font-weight:bold'>";
+    html += module;
+    html += "</div><br>";
+
+    for(const c of concepts){
+
+        html +=
+            "<input " +
+            "type='button' " +
+            "value='" + c + "' " +
+            "style='margin-right:4px;margin-bottom:4px;' " +
+            "onclick=\"openConcept('" + module + "','" + c + "')\"> ";
+
+    }
+
+    document.getElementById("ontology_detail").innerHTML = html;
+
+}
+
+
+
+
+async function openConcept(module, concept){
+
+    const r = await fetch(
+        "/ontology/concept/" +
+        encodeURIComponent(module) +
+        "/" +
+        encodeURIComponent(concept)
+    );
+
+    const c = await r.json();
+
+    currentConcept = {
+        module,
+        concept,
+        data: c,
+    };
+
+    renderConcept();
+}
+
+function renderConcept(){
+
+    const module = currentConcept.module;
+    const concept = currentConcept.concept;
+    const c = currentConcept.data;
+
+    let html = "";
+
+    html += "<div style='color:navy;font-weight:bold'>";
+    html += c.concept_name;
+    html += "</div><br>";
+
+    const fields = [
+        ["Definition","definition"],
+        ["Assumptions","assumptions"],
+        ["Scope","scope"],
+        ["Historical Development","historical_development"],
+        ["TACE Transformation","tace_transformation"],
+        ["References","references_text"],
+        ["Status","status"]
+    ];
+
+    const editableFields = new Set([
+        "definition",
+        "assumptions",
+        "scope",
+        "historical_development",
+        "tace_transformation",
+        "references_text"
+    ]);
+
+    for(const f of fields){
+
+        html += "<div style='color:navy;font-weight:bold;margin-top:10px'>";
+        html += f[0];
+        html += "</div>";
+
+        html += "<div style='margin-left:15px'>";
+
+        if (currentEdit && currentEdit.field === f[1]){
+            html += "<textarea id='edit_field_value' style='width:100%;min-height:120px'>" +
+                    (c[f[1]] || "") +
+                    "</textarea> ";
+            html += "<input type='button' value='Save' onclick='saveEdit()'> ";
+            html += "<input type='button' value='Cancel' onclick='cancelEdit()'>";
+        } else {
+            html += (c[f[1]] || "");
+
+            if (editableFields.has(f[1])){
+                html += " <input type='button' value='Edit' onclick=\"editField('" +
+                        module + "','" +
+                        concept + "','" +
+                        f[1] + "')\"> ";
+            }
+        }
+
+        html += "</div>";
+
+    }
+
+    document.getElementById("ontology_detail").innerHTML = html;
+}
+
+function editField(module,concept,field){
+
+    if (currentEdit && currentEdit.field !== field){
+        alert('Finish editing the current field before editing another field.');
+        return;
+    }
+
+    currentEdit = {
+        module,
+        concept,
+        field,
+    };
+
+    renderConcept();
+}
+
+function cancelEdit(){
+    currentEdit = null;
+    renderConcept();
+}
+
+async function saveEdit(){
+    if (!currentEdit){
+        return;
+    }
+
+    const value = document.getElementById('edit_field_value').value;
+
+    const payload = {
+        module: currentEdit.module,
+        concept: currentEdit.concept,
+        field: currentEdit.field,
+        value,
+    };
+
+    const r = await fetch('/ontology/update', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+    });
+
+    if (!r.ok){
+        const error = await r.json();
+        alert('Update failed: ' + (error.detail || r.statusText));
+        return;
+    }
+
+    const c = await r.json();
+
+    currentConcept.data = c;
+    currentEdit = null;
+    renderConcept();
+}
+</script>
+
+
+</body>
+
+</html>
