@@ -1,0 +1,21 @@
+Go to repo root
+cd /media/external_drive/llm/pretace
+
+Check if you have local changes
+git status -sb
+
+Save your work if needed (choose one)
+git add -A && git commit -m "WIP before update"
+or
+git stash push -u -m "wip-before-update"
+
+Download latest remote info
+git fetch --all --prune
+
+Update your current branch from remote
+git pull --rebase origin merge-to-main
+
+If you stashed in step 3, restore it
+git stash pop
+
+

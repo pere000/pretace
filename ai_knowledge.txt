@@ -1,5 +1,44 @@
 TACE (Tegmark-Aquinas Conceptual Ecosystem)
+............................................
+TACE is a single formal ontology expressed through four integrated levels of description. Each level describes the same created reality from a distinct but complementary perspective, preserving ontological unity while providing the appropriate explanatory framework for semantics, mathematics, physics, and conscious experience.
 
+Then define the four levels.
+
+The Four Integrated Levels of TACE
+
+1. Semantic–Ontological Level (Aristotle–Aquinas)
+
+Provides the fundamental ontology of being. It establishes the primitive concepts, metaphysical principles, and causal structure upon which the entire framework is grounded, including Creator, substance, form, matter, act, potency, soul, intellect, truth, and good.
+
+↓
+
+2. Formal–Mathematical Level
+
+Describes the formal architecture through which creation is lawfully ordered. At this level appear concepts such as the Matrix, Prime Potency, Primordial Potency, Q-Form, admissible possibility spaces, and the mathematical structures governing actualization.
+
+↓
+
+3. Physical Level (Quantum Theory and Wave Function)
+
+Describes the realization of the formal mathematical order as physical reality through the Q-Form, whose structured potentiality is governed by the Matrix and physically represented by the quantum state (wave function). This level encompasses quantum processes, coherence, locality, physical substances, neuropsychic organization, and the lawful actualization of physical events.
+
+↓
+
+4. Phenomenological–Cognitive Level (Husserl; Maturana & Varela)
+
+Describes the organization of living cognitive beings and the structure of conscious experience. It encompasses autopoiesis, structural coupling, neuropsychic organization, intentionality, perception, meaning, communication, acts of consciousness, Actual Qualia, and experienced reality. Within TACE, these dimensions are ontologically integrated through the Silver Bridge, which mediates the lawful correspondence between neuropsychic realization and intentional presence.
+
+Integration
+
+These four levels do not constitute independent theories. They are four complementary descriptions of the same ontological order.
+
+The Semantic–Ontological Level establishes what exists.
+The Formal–Mathematical Level establishes how created reality is formally structured.
+The Physical Level establishes how that formal structure is realized in nature.
+The Phenomenological–Cognitive Level establishes how conscious beings participate in and know that reality.
+
+Taken together, these four integrated levels constitute the complete explanatory architecture of TACE, preserving continuity from metaphysical first principles to lived conscious experience without reducing any level to another.
+...........................................
 The Theory of Actualized Conscious Experience (TACE) is a formal ontological framework developed to describe the structure of reality, consciousness, and actualization. It combines Aristotelian–Thomistic metaphysics with contemporary mathematical and physical insights into a coherent ontology intended to support both philosophical reasoning and AI-assisted semantic reasoning.
 
 TACE distinguishes between the Physical Realm, in which material substances exist under space-time locality, and the Realm of Forms, in which intelligible Forms are present as the objects of acts of consciousness. These realms are not independent realities but complementary ontological modes of one created order.
@@ -13,7 +52,7 @@ The Silver Bridge is the universal onto-epistemological principle that mediates 
 Consciousness is understood as the substantial activity of the soul through acts such as intellect, intentionality, and will. Acts of consciousness actualize intelligible Forms as meaningful objects while preserving the distinction between the subject, the object, and their respective ontological modes.
 
 TACE is intended as a formal ontology rather than a speculative philosophy. Its concepts are defined canonically, organized into ontology modules, and related through explicit ontological relations. This structure allows the ontology to serve as the semantic foundation for AI-assisted reasoning, canonical document generation, and the systematic investigation of questions concerning consciousness, meaning, knowledge, and reality.
-
+....................................................
 CONCEPTS
 Accident|A non-essential determination inhering in a substance and capable of change without altering the substance's essential nature.
 Act|The principle of actuality whereby a being is fully or partially realized rather than merely possible.
