@@ -1,0 +1,149 @@
+# ADR-002 — Resolved Concept
+
+**Status**
+
+Accepted
+
+**Date**
+
+2026-07-02
+
+---
+
+# Context
+
+Once semantic inheritance is separated from ontology storage (ADR-001), the output produced by semantic resolution must itself become a first-class architectural concept.
+
+A resolved ontology view is not merely a merged database record.
+
+It is a semantic artifact describing the concept after canonical semantic resolution has been applied.
+
+---
+
+# Decision
+
+A **Resolved Concept** is the **semantically resolved view** of a concept: explicit ontology together with semantically valid inherited ontology and resolved relationships, accompanied by semantic justification and provenance under an explicit resolution policy.
+
+Its canonical conceptual structure is:
+
+## 1. Semantic Identity
+
+The semantic identity of the concept within a specific ontology context and resolution state.
+
+## 2. Explicit Ontology
+
+Authoritative assertions directly attached to the concept.
+
+## 3. Inherited Ontology
+
+Ontology inherited through valid `IS_A` semantics after application of the declared resolution policy.
+
+## 4. Resolved Relationships
+
+The semantically resolved relationship set consisting of explicit relationships together with those inherited or semantically resolved according to the canonical ontology.
+
+## 5. Semantic Justification
+
+Ontological explanation describing why each resolved element is present, including inheritance basis, rule basis, and semantic path.
+
+## 6. Provenance
+
+Origin of every resolved element, including:
+
+- originating concept;
+- originating relation;
+- inheritance path;
+- semantic resolution basis.
+
+## 7. Resolution Policy
+
+Declared semantic policy governing:
+
+- inheritance;
+- overriding;
+- fill-empty behavior;
+- precedence;
+- conflict handling;
+- inheritance depth.
+
+## 8. Inheritance Graph
+
+Relevant `IS_A` structure employed during semantic resolution, including direct and transitive inheritance together with multiparent topology when applicable.
+
+## 9. Conflict Report
+
+Detected semantic conflicts, ambiguities, and policy decisions taken during resolution.
+
+## 10. Boundary Markers
+
+Explicit distinction between:
+
+- authoritative ontology;
+- semantically resolved inheritance;
+- higher reasoning layers.
+
+## 11. Canonical Signature
+
+Semantic-state identifier uniquely representing the resolved concept under a specific ontology state and resolution policy.
+
+The Canonical Signature enables:
+
+- semantic identity;
+- reproducibility;
+- semantic comparison;
+- semantic caching.
+
+---
+
+# Rationale
+
+The Resolved Concept establishes semantic resolution as an explicit architectural layer rather than an implementation detail.
+
+It preserves a strict distinction between:
+
+- explicit knowledge;
+- semantically resolved knowledge;
+- higher reasoning.
+
+---
+
+# Consequences
+
+Positive
+
+- Semantic resolution becomes explainable.
+- Provenance is preserved.
+- Future reasoning layers become independent.
+- Query engine gains explicit semantic artifacts.
+
+Negative
+
+- Introduces an additional abstraction.
+- Requires semantic resolution before presentation.
+
+---
+
+# Relationship to ADR-001
+
+ADR-002 depends upon ADR-001.
+
+OntologyInheritanceResolver produces Resolved Concepts.
+
+Resolved Concepts become the canonical semantic artifact returned by semantic resolution.
+
+---
+
+# Future Considerations
+
+Future TACE reasoning layers may operate upon Resolved Concepts without modifying their definition.
+
+Examples include:
+
+- logical reasoning;
+- contextual reasoning;
+- analogical reasoning;
+- probabilistic reasoning;
+- AI-generated hypotheses;
+- evidence weighting.
+
+These belong to higher semantic layers and therefore remain outside the scope of the Resolved Concept.

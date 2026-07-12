@@ -1,0 +1,117 @@
+# ADR-001 — Ontology Inheritance Resolver
+
+**Status**
+
+Accepted
+
+**Date**
+
+2026-07-02
+
+---
+
+# Context
+
+TACE distinguishes between authoritative ontology and inferred semantic knowledge.
+
+The ontology repository stores explicit concept records and canonical relations (e.g., `IS_A`, `HAS`, `PART_OF`).
+
+As the ontology evolved, it became necessary to support semantic inheritance through the canonical operator `IS_A`. The initial proposal was to implement inheritance directly inside `OntologyManager.get_concept()`.
+
+However, this would mix authoritative storage with semantic inference, violating the layered architecture of TACE.
+
+---
+
+# Decision
+
+Ontology inheritance SHALL NOT be implemented inside `OntologyManager`.
+
+Instead, TACE introduces a dedicated semantic resolution component:
+
+**OntologyInheritanceResolver**
+
+Responsibilities:
+
+- resolve semantic inheritance through `IS_A`;
+- compute semantically resolved concepts;
+- preserve provenance of inherited knowledge;
+- apply inheritance policies;
+- detect inheritance cycles;
+- optionally cache resolved concepts.
+
+Responsibilities of the remaining layers become:
+
+**OntologyManager**
+
+- explicit ontology storage;
+- explicit ontology retrieval;
+- ontology updates;
+- no semantic inference.
+
+**OntologyInheritanceResolver**
+
+- semantic inheritance;
+- concept resolution;
+- provenance generation;
+- inheritance policy application.
+
+**OntologyQuery**
+
+- decide whether explicit or resolved ontology is requested;
+- provide semantic access to resolved concepts.
+
+**Repository Browser**
+
+- presentation only;
+- never performs semantic inference.
+
+---
+
+# Rationale
+
+This preserves the architectural separation between:
+
+Repository
+
+↓
+
+Semantic Resolution
+
+↓
+
+Query
+
+↓
+
+Presentation
+
+while allowing future semantic resolvers to coexist independently.
+
+Examples include:
+
+- OntologyPartOfResolver
+- OntologyDependencyResolver
+- OntologyConsistencyResolver
+- OntologyExplanationResolver
+
+---
+
+# Consequences
+
+Positive
+
+- Repository remains authoritative.
+- Semantic inference becomes modular.
+- Provenance becomes naturally supported.
+- Future semantic extensions remain independent.
+
+Negative
+
+- Introduces one additional architectural layer.
+- Query layer must explicitly invoke semantic resolution.
+
+---
+
+# Future Considerations
+
+ADR-002 defines the semantic artifact produced by the OntologyInheritanceResolver: the **Resolved Concept**.

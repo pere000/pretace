@@ -1,0 +1,131 @@
+#!/usr/bin/env python3
+
+"""
+TACE Universe
+
+Owns the canonical knowledge of TACE.
+"""
+
+from new_universe_state import UniverseState
+from new_reasoning_engine import ReasoningEngine
+
+from new_ontology_models import (
+    OntologicalRelation,
+    OntologicalEntity,
+)
+
+
+class Universe:
+
+    def __init__(self):
+
+        self.state = UniverseState()
+
+        self.reasoner = ReasoningEngine()
+
+        self.history = []
+
+    @property
+    def relations(self):
+
+        return self.history
+
+    # ------------------------------------------
+    # Compatibility layer
+    # ------------------------------------------
+
+    @property
+    def asserted(self):
+
+        return self.state.asserted_relations
+
+    @property
+    def derived(self):
+
+        return self.state.derived_relations
+
+    def add(
+        self,
+        relation,
+        derived=False,
+    ):
+
+        # Avoid duplicated asserted facts
+        if (not derived) and (relation in self.history):
+            return
+
+        self.history.append(relation)
+
+        self.state.add_relation(
+            relation,
+            derived=derived,
+        )
+
+        # Never recurse on derived insertions
+        if derived:
+            return
+
+        facts = {
+
+            (
+                r.subject.lexical,
+                r.operator,
+                r.object.lexical,
+            )
+
+            for r in self.history
+
+        }
+
+        inferred = self.reasoner.derive(facts)
+
+        existing = facts
+
+        for s, o, t in inferred:
+
+            if (s, o, t) in existing:
+                continue
+
+            self.add(
+
+                OntologicalRelation(
+
+                    subject=OntologicalEntity(
+                        entity_id=None,
+                        concept_id=None,
+                        lexical=s,
+                    ),
+
+                    operator=o,
+
+                    object=OntologicalEntity(
+                        entity_id=None,
+                        concept_id=None,
+                        lexical=t,
+                    ),
+
+                ),
+
+                derived=True,
+
+            )
+
+    def statistics(self):
+
+        s = self.state.statistics()
+
+        s["events"] = len(self.history)
+
+        return s
+
+    def show(self):
+
+        self.state.show()
+
+        print("\\nHistory:")
+
+        print(" ", len(self.history), "event(s)")
+
+        print("\\nUniverse Statistics:")
+
+        print(self.statistics())

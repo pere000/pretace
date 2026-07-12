@@ -1,0 +1,135 @@
+# TACE CONTINUATION PROTOCOL
+
+This conversation continues the development of the **TACE (Theory of Actualized Conscious Experience)** project. Please treat this as a continuation rather than a new discussion.
+
+## Current Repository Status
+
+The constitutional framework is established:
+
+* TACE Philosophical Constitution (Canonical)
+* TACE Semantic Constitution (Canonical)
+* TACE Software Constitution (Canonical)
+
+These constitutions are normative for the project. All future architectural decisions must remain consistent with them unless they are explicitly amended through the project's constitutional process.
+
+Accepted ADRs:
+
+* ADR-001 — Ontology Inheritance Resolver
+* ADR-002 — Resolved Concept
+* ADR-003 — Interactive TACE Query Pipeline
+
+## ADR-003 Status
+
+ADR-003 has been extensively refined and implemented.
+
+Current architecture includes:
+
+* Canonical Ask TACE pipeline
+* Knowledge Realizer
+* Canonical Expansion Package
+* Recursive ontology retrieval
+* Recursive expansion with cycle protection
+* Immutable Canonical Expansion Package
+* Canonical provenance
+* Constitutional verification before AI assistance
+* Rendering modes:
+
+  * technical
+  * academic
+  * educational
+  * popular
+  * child
+* Controlled AI Assistance
+* AI acts only as a renderer, never as an ontology authority
+* Longest-match canonical concept extraction
+* Regression tests for canonical concept extraction
+* Shared `QueryEngine.ask()` pipeline used by both terminal and web interface
+
+The remaining architectural goal for ADR-003 is maintenance only.
+
+## Current Architecture
+
+```
+User
+ │
+ ▼
+ADR-003 Query Pipeline
+ │
+ ▼
+Canonical Retrieval
+ │
+ ▼
+Canonical Expansion Package
+ │
+ ▼
+Verification
+ │
+ ▼
+Knowledge Realizer
+ │
+ ▼
+Controlled AI Renderer
+ │
+ ▼
+Answer
+```
+
+The AI renderer must never:
+
+* invent ontology
+* infer definitions
+* create relations
+* modify canonical meaning
+
+It only renders the immutable Canonical Expansion Package.
+
+## Next Major Milestone
+
+The next architectural task is:
+
+**ADR-004 — Canonical Reasoning Engine**
+
+Purpose:
+
+Not:
+
+> "What does the ontology say?"
+
+but
+
+> "What logically follows from the ontology?"
+
+The Reasoning Engine should:
+
+* perform formal logical inference
+* derive canonical conclusions
+* preserve provenance
+* generate explicit proof chains
+* never use statistical inference
+* remain subordinate to the three constitutions and accepted ontology
+
+Target architecture:
+
+```
+Ontology
+        │
+        ▼
+Canonical Facts
+        │
+        ▼
+Reasoning Engine
+        │
+        ▼
+Derived Canonical Conclusions
+        │
+        ▼
+Knowledge Realizer
+        │
+        ▼
+Controlled AI Renderer
+```
+
+The AI remains only a renderer; all ontology retrieval and reasoning are performed by the canonical TACE components.
+
+Please continue from this point without revisiting previously completed constitutional or ADR work unless required by a new architectural issue. Treat the constitutions and accepted ADRs as authoritative project documents rather than discussion drafts.
+

@@ -1,0 +1,153 @@
+#!/usr/bin/env python3
+
+"""
+TACE Engine
+
+Permanent kernel.
+
+Owns:
+
+    Universe
+    Compiler
+    Ontology
+    Session
+"""
+
+from new_adapter_session import TACESession
+from new_compiler_relation_builder import RelationBuilder
+from new_ontology_transformer import OntologyTransformer
+from new_universe_universe import Universe
+from new_session_manager import SessionManager
+
+
+class TACEEngine:
+
+    def __init__(self):
+
+        self.builder = RelationBuilder()
+
+        self.transformer = OntologyTransformer()
+
+        self.ai = TACESession()
+
+        #
+        # Permanent Universe
+        #
+
+        self.universe = Universe()
+
+        self.session = SessionManager()
+
+        # Restore persistent Session Knowledge
+        self.load_session()
+
+    # ------------------------------
+
+    def learn(self, sentence, remember=True):
+
+        if remember:
+
+            self.session.add(sentence)
+
+        relation = self.builder.build(sentence)
+
+        if relation is None:
+
+            return None
+
+        relation = self.transformer.transform(
+            relation
+        )
+
+        self.universe.add(
+            relation
+        )
+
+        return relation
+
+    # ------------------------------
+
+
+
+    def load_session(self):
+
+        """
+        Rebuild the Universe from the current Session.
+        """
+
+        self.universe = Universe()
+
+        for sentence in self.session.all():
+
+            self.learn(
+
+                sentence,
+
+                remember=False,
+
+            )
+
+    def show(self):
+
+        self.universe.show()
+
+    # ------------------------------
+
+
+
+    def rebuild(self):
+
+        """
+        Rebuild Universe from SessionManager.
+        """
+
+        self.universe = Universe()
+
+        for sentence in self.session.all():
+
+            relation = self.builder.build(sentence)
+
+            if relation is None:
+
+                continue
+
+            relation = self.transformer.transform(
+                relation
+            )
+
+            self.universe.add(
+                relation
+            )
+
+
+
+    def ask(
+
+        self,
+
+        question,
+
+        mode="fallback",
+
+    ):
+
+        return self.ai.ask(
+
+            self.universe,
+
+            question,
+
+            mode,
+
+        )
+
+
+if __name__ == "__main__":
+
+    engine = TACEEngine()
+
+    engine.learn(
+        "John possesses the book."
+    )
+
+    engine.show()

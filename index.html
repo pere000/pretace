@@ -1,519 +1,764 @@
 <!DOCTYPE html>
-<!-- saved from url=(0055)https://idealistic-mosquito.static.domains/introduction -->
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    
-    <title>Tegmark-Aquinas Conceptual Ecosystem</title>
-    <style>
-        body {
-            font-family: Georgia, serif;
-            line-height: 1.6;
-            margin: 40px;
-            background-color: #fefefe;
-            color: #111;
-        }
-        h1, h2, h3, h4 {
-            color: #222;
-        }
-        h1 { font-size: 2em; margin-top: 1em; }
-        h2 { font-size: 1.75em; margin-top: 1em; }
-        h3 { font-size: 1.5em; margin-top: 1em; }
-        h4 { font-size: 1.25em; margin-top: 1em; }
-        p { margin-bottom: 1em; }
-        ul, ol { margin-left: 40px; margin-bottom: 1em; }
-        table { border-collapse: collapse; margin: 1em 0; width: 100%; }
-        th, td { border: 1px solid #333; padding: 8px 12px; text-align: left; }
-        blockquote {
-            margin: 1em 40px;
-            padding-left: 1em;
-            border-left: 4px solid #555;
-            color: #555;
-            font-style: italic;
-        }
-        code, pre { background-color: #eee; padding: 2px 6px; border-radius: 3px; font-family: monospace; }
-        u { text-decoration: underline; }
-        @page { size: A4 landscape; margin: 2cm; }
-        @media print { body { margin: 0; } }
-    </style>
+
+<html>
+
+<head>
+
+<meta charset="utf-8">
+
+<title>TACE-Aquinas Conceptual Ecosystem</title>
+
 <style>
-.uCgCIakYbatuHwVRgyerqSyF {
-  width: 152px !important;
-  position: fixed !important;
-  left: 20px !important;
-  bottom: 20px !important;
-  display: block !important;
-  background: #333333 !important;
-  color: #fff !important;
-  padding: 8px 10px !important;
-  z-index: 10000000 !important;
-  border-radius: 50px !important;
-  font-size: 0 !important;
-  overflow: hidden !important;
-  will-change: background, width !important;
-  transition: 0.25s background, 0.25s width !important;
-  display: flex  !important;
-  flex-direction: row  !important;
-  align-items: center  !important;
-  padding: 8px 12px  !important;
-  gap: 10px  !important;
-  box-shadow: 0px 5px 25px rgba(0, 0, 0, 0.1)  !important;
-  text-decoration: none !important;
+
+body{
+    font-family:Arial;
+    margin:20px;
+    background:#f5f5f5;
 }
-.uCgCIakYbatuHwVRgyerqSyF:hover {
-  opacity: 1 !important;
-  background: #0F8140 !important;
+
+.panel{
+
+    display:none;
+
+    margin-top:15px;
+
+    padding:10px;
+
 }
-.uCgCIakYbatuHwVRgyerqSyF:hover svg {
-  transform: scale(1.1) !important;
+
+.ontology-text{
+    white-space:pre-wrap;
+    word-break:break-word;
 }
-.uCgCIakYbatuHwVRgyerqSyF svg {
-  will-change: transform !important;
-  transition: 0.25s transform !important;
+
+.model-btn {
+    background: #e0e0e0;
+    border: 1px solid #a0a0a0;
+    padding: 6px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-family: Arial, sans-serif;
+    font-size: 13px;
 }
-.uCgCIakYbatuHwVRgyerqSyF p {
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif !important;
-  font-style: normal !important;
-  font-weight: 600 !important;
-  font-size: 12px !important;
-  line-height: 125% !important;
-  margin: 0 !important;
-  padding: 0 4px 0 0 !important;
-  color: #fff !important;
+
+.model-btn.active {
+    background: navy;
+    color: white;
+    border-color: navy;
+    font-weight: bold;
 }
-</style></head>
-<body style="text-align:justify">
-<div id="image" style="display:flex;flex-direction:column;align-items:center;width:100%;font-size:14px;color:navy;margin:0 auto;">
 
-<img style="width:50%;" src="./images/introduction.png" alt="image">
+</style>
 
-  <br>
-<div style="text-align:left;">
+</head>
 
-</div>
-</div>
-<div style="text-align:justify">
-<h1 style="text-align:left" ;="">1. Introduction</h1>
-<p>The problem of how a rational intellect comes to possess <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761920595127" target="_blank">immaterial</a> knowledge through its encounter with material reality remains one of the foundational questions in philosophical anthropology and metaphysics. Classical <a href="https://en.wikipedia.org/wiki/Hylomorphism" target="_blank">hylomorphism</a>, as developed by Thomas Aquinas, offers a principled distinction between matter and <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761922112062" target="_blank">form</a>, potency and act, sense and intellect. Yet modern interpretations often confront an apparent tension: if knowledge begins in <a href="https://en.wikipedia.org/wiki/Sense" target="_blank">sensation</a>, and <a href="https://en.wikipedia.org/wiki/Sense" target="_blank">sensation</a> involves neuro-physiological processes, how does the intellect reach a <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761922112062" target="_blank">form</a> that is <strong>universal, <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761920595127" target="_blank">immaterial</a>, and not reducible to neural configuration</strong>?</p>
-
-<p>Contemporary cognitive science, grounded largely in computational and representational models, seeks to explain cognition in terms of neural information processing. However, such accounts conflate <em>pattern recognition</em> with <em>meaning</em>, and thereby presuppose what they attempt to explain: namely, the existence of <strong>a domain of structured rational intelligibility</strong>. Conversely, strong dualist frameworks sever intellect entirely from the embodied subject, leaving unexplained how the intellect is <em>prompted</em> by sensible experience, or how intelligible structures correspond to structures in the external world.</p>
-
-<p>This paper proposes a third path. Drawing on <a href="https://en.wikipedia.org/wiki/Mathematical_universe_hypothesis" target="_blank">Max Tegmark’s hypothesis</a> that the universe is fundamentally a <strong><a href="https://en.wikipedia.org/wiki/Structure_(mathematical_logic)" target="_blank">mathematical structure</a></strong>, we argue that the correspondence between the <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761922112062" target="_blank">form</a> of the object known and the <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761922112062" target="_blank">form</a> apprehended by intellect is not contingent, accidental, or emergent from neural processes. Rather, the <a href="https://en.wikipedia.org/wiki/Isomorphism" target="_blank">isomorphism</a> between <strong><a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761922112062" target="_blank">form</a> in re</strong> (<a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761922112062" target="_blank">form</a> as present in the object) and <strong><a href="https://link.springer.com/article/10.1007/s11406-013-9481-y" target="_blank">species intelligibilis</a></strong> (<a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761922112062" target="_blank">form</a> as present in the intellect) is grounded in a <strong>universal structural order</strong> that governs both physical reality and rational intelligibility.</p>
-
-<p>On this view:</p>
-<ul>
-    <li>Material beings instantiate <strong>structured forms</strong> (Form A).</li>
-    <li>Sensory and neuro-organic systems register <strong>patterned correlates</strong> of these forms (Pattern B₁), without generating meaning.</li>
-    <li>The rational <a href="https://en.wikipedia.org/wiki/Soul" target="_blank">soul</a> abstracts from these patterns the <strong>intelligible <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761922112062" target="_blank">form</a></strong> (Form B₂), which is <strong><a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761920595127" target="_blank">immaterial</a>, universal, and not identical with neural states</strong>.</li>
-</ul>
-
-<p>This approach allows us to preserve:</p>
-<ul>
-    <li>The integrity of Thomistic <a href="https://en.wikipedia.org/wiki/Hylomorphism" target="_blank">hylomorphism</a>,</li>
-    <li>The explanatory scope of modern scientific models of perception,</li>
-    <li>A robust account of the intelligible domain,</li>
-    <li>And a non-reductionist ontology of mind.</li>
-</ul>
-
-<p>The result is a framework in which <strong>intelligibility is neither imposed nor invented</strong>, but arises from the participation of both intellect and world in a shared <a href="https://en.wikipedia.org/wiki/Structure_(mathematical_logic)" target="_blank">mathematical structure</a>. This resolves the classical <a href="https://en.wikipedia.org/wiki/Epistemology" target="_blank">epistemological</a> tension between material <a href="https://en.wikipedia.org/wiki/Sense" target="_blank">sensation</a> and <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761920595127" target="_blank">immaterial</a> understanding <strong>without resorting to dualistic separation or physicalist collapse</strong>.</p>
-
-<h1 style="text-align:left" ;="">2. Form, Matter, and Intellect in Aquinas</h1>
-<p>For Aquinas, all created beings composed of body are constituted as <strong><a href="https://en.wikipedia.org/wiki/Hylomorphism" target="_blank">hylomorphic</a> unities</strong>—that is, composites of <em>matter</em> (potency) and <em><a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761922112062" target="_blank">form</a></em> (act). Form is not merely a shape or configuration but the <strong>principle of intelligibility</strong> and actuality in a being. Matter provides the principle of individuation and potentiality: it is that which <em>can be</em> something. Form is that by which the being <em>is</em> what it is.</p>
-
-<p>In this framework:</p>
-<ul>
-    <li><strong>Form (Act)</strong> gives structure, identity, and function.</li>
-    <li><strong>Matter (Potency)</strong> receives structure and is rendered determinate by <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761922112062" target="_blank">form</a>.</li>
-    <li>Neither <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761922112062" target="_blank">form</a> nor matter alone constitutes a <strong>material</strong> <a href="https://en.wikipedia.org/wiki/Substance_theory" target="_blank">substance</a>; the unity of both does.<br><a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761920595127" target="">See a diagram</a></li>
-</ul>
-
-<h3 style="text-align:left" ;="">2.1 Sensation and the Animal Soul</h3>
-<table>
-    <tbody><tr>
-        <th>Soul Type</th>
-        <th>Organism</th>
-        <th>Powers</th>
-        <th>Status</th>
-    </tr>
-    <tr>
-        <td>Vegetative</td>
-        <td>Plants</td>
-        <td>Growth, nutrition, reproduction</td>
-        <td>No <a href="https://en.wikipedia.org/wiki/Sense" target="_blank">sensation</a>, no intellect. <b>Biochemical reactions</b>.</td>
-    </tr>
-    <tr>
-        <td>Sensitive</td>
-        <td>Animals</td>
-        <td>Vegetative powers + <a href="https://en.wikipedia.org/wiki/Sense" target="_blank">sensation</a> + appetite + locomotion</td>
-        <td>No intellect. <b>Neuropsychical reactions</b>.</td>
-    </tr>
-    <tr>
-        <td>Rational</td>
-        <td>Human beings (or free-will beings)</td>
-        <td>Sensitive powers + <em>intellect + will</em></td>
-        <td>Soul is <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761920595127" target="_blank">immaterial</a>, subsistent, capable of universal knowledge. <b>Spiritual reactions</b>.</td>
-    </tr>
-</tbody></table>
-
-<p>Only the <strong>rational <a href="https://en.wikipedia.org/wiki/Soul" target="_blank">soul</a></strong> has the power to <b>apprehend universal forms</b> and to engage in ethical reasoning and more sophisticated causes of behavior. Animals, though capable of <strong>perceptual discrimination and behavioral adaptation</strong>, do not ascend from perception to universality. They respond to stimuli through <strong>neuro-organic processing and instinctual pattern-recognition</strong>, not through intellectual abstraction.</p>
-<blockquote>Animals do not <em>know</em>, they <em>react</em>.</blockquote>
-
-<p>They do not possess meanings; they exhibit <strong>sign-driven reactions</strong>. Their perceptual patterns (shapeB, patternB) terminate in <strong>immanent biological orientation</strong>, not in the <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761920595127" target="_blank">immaterial</a> apprehension of universal <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761922112062" target="_blank">form</a>.</p>
-
-<h3 style="text-align:left" ;="">2.2 Sensation as a Precondition for Intellectual Knowledge</h3>
-<p>Human cognition begins with <a href="https://en.wikipedia.org/wiki/Sense" target="_blank">sensation</a>, because the rational <a href="https://en.wikipedia.org/wiki/Soul" target="_blank">soul</a> operates in an embodied subject. The phantasm—<em>the structured <a href="https://en.wikipedia.org/wiki/Sensory_nervous_system" target="_blank">sensory</a> imprint</em> retained in the neuro-<a href="https://en.wikipedia.org/wiki/Sensory_nervous_system" target="_blank">sensory</a> system—provides the <strong>material occasion</strong> for the intellect to operate. But <strong>the phantasm does not contain universal intelligibility</strong>. It presents only a <strong>particular</strong>, <strong>concrete</strong>, and <strong>situated</strong> <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761922112062" target="_blank">form</a>.</p>
-
-<p>The <strong>agent intellect</strong> (<em>intellectus agens</em>) abstracts from the phantasm a <strong><a href="https://link.springer.com/article/10.1007/s11406-013-9481-y" target="_blank">species intelligibilis</a></strong>, an <strong><a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761920595127" target="_blank">immaterial</a></strong> representation of the <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761922112062" target="_blank">form</a> of the object. This species is not a copy or internal image, but the <strong>formal principle</strong> by which the intellect becomes capable of thinking the object.</p>
-
-<h3 style="text-align:left" ;="">2.3 The <a href="https://link.springer.com/article/10.1007/s11406-013-9481-y" target="_blank">Species Intelligibilis</a> as Immaterial Form</h3>
-<ul>
-    <li><strong>Not physical</strong></li>
-    <li><strong>Not identical to neural patterns</strong></li>
-    <li><strong>Not a stored image</strong></li>
-    <li><strong>Not invented by the mind</strong></li>
-</ul>
-
-<p>Rather, it is the <strong><a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761922112062" target="_blank">form</a> of the object</strong> <em>in a mode proper to intellect</em>, freed from matter and individuating conditions.</p>
-<blockquote>The intellect does not <em>extract meaning</em> from neural patterns; it <strong>receives the universal <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761922112062" target="_blank">form</a> itself</strong>, which is already intelligible in act.</blockquote>
-
-<p>Yet this does not imply emanation or preexistence of forms in the intellect. The <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761922112062" target="_blank">form</a> is <strong>conceived</strong>, not <strong>emitted</strong>; <strong>known</strong>, not <strong>projected</strong>.</p>
-
-<h3 style="text-align:left" ;="">2.4 The Problem We Now Face</h3>
-<p>While Aquinas clearly explains <em>how</em> the intellect apprehends <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761920595127" target="_blank">immaterial</a> <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761922112062" target="_blank">form</a> from sensible encounters, he does not offer a <strong>systematic account of why</strong> the <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761922112062" target="_blank">form</a> of the object and the <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761922112062" target="_blank">form</a> understood by the intellect are <strong>structurally commensurable</strong>.</p>
-
-<blockquote>Why do forms as instantiated in material beings (Form A) correspond <strong><a href="https://en.wikipedia.org/wiki/Isomorphism" target="_blank">isomorphical</a>ly</strong> to forms as apprehended by intellect (Form B), without being identical?</blockquote>
-
-<p>This paper’s thesis is that <strong>Tegmark’s notion of the universe as a <a href="https://en.wikipedia.org/wiki/Structure_(mathematical_logic)" target="_blank">mathematical structure</a> provides the missing ontological bridge</strong>.</p>
-
-<h1 style="text-align:left" ;="">3. <a href="https://en.wikipedia.org/wiki/Isomorphism" target="_blank">Isomorphism</a> Without Identity: The Relation Between Form A and Form B</h1>
-<p>The Thomistic tradition maintains that <strong>cognition does not consist in the literal transfer of <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761922112062" target="_blank">form</a> from object to intellect</strong>, as if the mind were physically altered into the <a href="https://en.wikipedia.org/wiki/Substance_theory" target="_blank">substance</a> it knows. Rather, the intellect receives <strong>the <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761922112062" target="_blank">form</a> of the object <em>without</em> its matter</strong> (<em><a href="https://link.springer.com/article/10.1007/s11406-013-9481-y" target="_blank">species intelligibilis</a></em>), allowing the object to be known <em>as it is</em>, while the knower remains ontologically distinct. This raises the classical problem: <em>How can the object and the concept share a <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761922112062" target="_blank">form</a> while remaining numerically and metaphysically distinct?</em></p>
-
-<p><a href="https://en.wikipedia.org/wiki/Mathematical_universe_hypothesis" target="_blank">Max Tegmark’s hypothesis</a> that reality is fundamentally a <strong><a href="https://en.wikipedia.org/wiki/Structure_(mathematical_logic)" target="_blank">mathematical structure</a></strong> clarifies this relation without requiring modern physicalist assumptions. If the essences of things are <em>instantiated expressions of universal <a href="https://en.wikipedia.org/wiki/Structure_(mathematical_logic)" target="_blank">mathematical structure</a>s</em>—structured relational totalities that exist irrespective of physical substrate—then cognition need <em>not involve copying or imprinting</em>. Instead, the intellect <strong>re-cognizes</strong> (<em>re-legere</em>) a <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761922112062" target="_blank">form</a> whose structure is already <strong>intrinsically intelligible</strong>.</p>
-
-<p>
-We call this relation <strong><a href="https://en.wikipedia.org/wiki/Isomorphism" target="_blank">isomorphism</a></strong> rather than identity. Form A (the structure instantiated in the external object thanks to Matrix transduction) and Form B (the structure intentionally present in the intellect thanks to Matrix transduction) share the same relational pattern through the <strong>Matrix</strong> as a common transductor. This conveys that the <strong>Matrix</strong> mediates a one-to-one mapping of structures between external reality and the intellect. Although they do not share matter, location, or ontological mode, and the intellect does not possess the <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761922112062" target="_blank">form</a> as an instance within the physical world, the intellect possesses the <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761922112062" target="_blank">form</a> as a non-material participation in the same universal structure.
-</p>
+<body>
 
 
-<p>This resolves several longstanding philosophical tensions:</p>
-<ol>
-    <li><strong>Against naïve realism:</strong> The mind does not receive matter; <em>cognition is not a material assimilation</em>.</li>
-    <li><strong>Against conceptualism:</strong> The intelligible <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761922112062" target="_blank">form</a> is not created ex nihilo by the mind; it <em>corresponds objectively to real structures</em>.</li>
-    <li><strong>Against physicalist reduction:</strong> The <em>intelligible <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761922112062" target="_blank">form</a> is not reducible to neural activation</em>, although neural patterns condition sense experience.</li>
-    <li><strong>Against dualism:</strong> The <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761922112062" target="_blank">form</a> known and the <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761922112062" target="_blank">form</a> instantiated are not separate realities, but <em>distinct modes of grounding in the same universal <a href="https://en.wikipedia.org/wiki/Structure_(mathematical_logic)" target="_blank">mathematical structure</a></em>.</li>
-</ol>
-
-<p>Thus, the intellect does not produce knowledge by constructing symbolic representations ex nihilo, nor by passively receiving <a href="https://en.wikipedia.org/wiki/Sensory_nervous_system" target="_blank">sensory</a> impressions. Knowledge arises through <em>participation in the same mathematical <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761922112062" target="_blank">form</a> instantiated in the object</em>. The mind knows the <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761922112062" target="_blank">form</a> <em>as <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761922112062" target="_blank">form</a></em>, rather than as image or empirical trace. The structural correspondence is <strong>real</strong>, but <strong><u>non-identical</u></strong>; <strong>unified</strong>, but <strong>non-material</strong>; <strong>one in pattern</strong>, but <strong>diverse in mode of being</strong>.</p>
-
-<h1 style="text-align:left" ;="">4. Distinguishing Intelligible Apprehension from Organic Pattern-Tracking</h1>
-<p>
-The distinction between sensing and understanding is essential. While many living organisms are capable of mimicking responses to environmental stimulation, such responses do not constitute intelligible knowledge in the Thomistic sense. A clear differentiation must therefore be made between:</p>
-<ol>
-    <li><strong>Neuro-organic pattern-tracking</strong> found in animals and lower organisms, and</li>
-    <li><strong>Intelligible apprehension</strong> proper to rational beings endowed with intellect.</li>
-</ol>
-
-<p>Organisms <strong>without intellect</strong> operate through structured biological mechanisms: <a href="https://en.wikipedia.org/wiki/Sensory_nervous_system" target="_blank">sensory</a> receptors, neural pattern formation, associative memory, and instinctual behavioral programs. These mechanisms enable <strong>recognition of recurring stimuli</strong>, navigation of environments, and adaptation to threats. However, such recognition remains <strong>bound to the concrete</strong>. The organism does not apprehend the <em><a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761922112062" target="_blank">form</a></em> of the thing <em>as universal</em>, but only <strong>reacts</strong> to particular configurations of <a href="https://en.wikipedia.org/wiki/Sensory_nervous_system" target="_blank">sensory</a> input.</p>
-
-<p>The absence of intellectual abstraction means that these organisms <strong>do not generate <a href="https://link.springer.com/article/10.1007/s11406-013-9481-y" target="_blank">species intelligibiles</a></strong>. They do not extract essences; they do not operate with concepts; they do not know <em>a thing as a thing</em>. Their behavior is patterned and often adaptive, but it remains <strong>non-conceptual</strong>, <strong>non-reflective</strong>, and without <strong>intentional grasp of being</strong>.</p>
-
-<p><b><i>The rational <a href="https://en.wikipedia.org/wiki/Soul" target="_blank">soul</a> is not an emergent complexity of neural processes, nor an epiphenomenal byproduct of physical structures</i></b>. Rather, the emergent and epiphenomenal complexity of the human neuro-organic body disposes the individual to receive and be informed by a rational <a href="https://en.wikipedia.org/wiki/Soul" target="_blank">soul</a>. This organization differs essentially from that of non-rational animals: although animals possess <a href="https://en.wikipedia.org/wiki/Sense" target="_blank">sensation</a> and imagination, they lack the structural capacity for intelligible apprehension. The rational <a href="https://en.wikipedia.org/wiki/Soul" target="_blank">soul</a> is the principle of intelligible act, while the human body provides the medium of <a href="https://en.wikipedia.org/wiki/Sensory_nervous_system" target="_blank">sensory</a> reception and imaginative representation through which intellectual knowledge is occasioned—but never produced—by matter.</p>
-
-<p>This intellect is capable of:</p>
-<ul>
-    <li><strong>Abstracting universals</strong> from <a href="https://en.wikipedia.org/wiki/Sensory_nervous_system" target="_blank">sensory</a> experience.</li>
-    <li><strong>Knowing essences</strong> apart from material conditions.</li>
-    <li><strong>Reflective self-awareness</strong> (to know that one knows).</li>
-    <li><strong>Intentional orientation toward being as such</strong>.</li>
-</ul>
-
-<p>This capacity enables the formation of <strong>Form B</strong>, the internal <a href="https://link.springer.com/article/10.1007/s11406-013-9481-y" target="_blank">species intelligibilis</a>, which stands in <strong><a href="https://en.wikipedia.org/wiki/Isomorphism" target="_blank">isomorphic</a> relation</strong> to <strong>Form A</strong>, the <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761922112062" target="_blank">form</a> instantiated in the external object. The <a href="https://en.wikipedia.org/wiki/Isomorphism" target="_blank">isomorphism</a> is possible because both forms are grounded in the <strong>same universal Mathematical Structure</strong> (Matrix <a href="https://en.wikipedia.org/wiki/Substance_theory" target="_blank">substance</a>), though instantiated in different modes of being.</p>
-
-<table>
-    <tbody><tr>
-        <th>Type of Being</th>
-        <th>Cognitive Operation</th>
-        <th>Resulting Content</th>
-        <th>Mode of Form</th>
-    </tr>
-    <tr>
-        <td>Non-rational organism</td>
-        <td>Sensory and neural pattern-tracking</td>
-        <td>Particular, image-bound stimuli</td>
-        <td><em>No <a href="https://link.springer.com/article/10.1007/s11406-013-9481-y" target="_blank">species intelligibilis</a></em> formed</td>
-    </tr>
-    <tr>
-        <td>Rational being (with rational <a href="https://en.wikipedia.org/wiki/Soul" target="_blank">soul</a>)</td>
-        <td>Intellectual abstraction</td>
-        <td>Universal intelligible <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761922112062" target="_blank">form</a> (Form B)</td>
-        <td>Participation in the <a href="https://en.wikipedia.org/wiki/Structure_(mathematical_logic)" target="_blank">mathematical structure</a> as <em>intelligible</em></td>
-    </tr>
-</tbody></table>
-
-<p>This distinction preserves:</p>
-<ul>
-    <li>The <strong>uniqueness of rational cognition</strong>.</li>
-    <li>The <strong><a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761920595127" target="_blank">immateriality</a> of the intellect</strong>.</li>
-    <li>The <strong>integrity of <a href="https://en.wikipedia.org/wiki/Hylomorphism" target="_blank">hylomorphism</a></strong> (<a href="https://en.wikipedia.org/wiki/Soul" target="_blank">soul</a>-<a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761922112062" target="_blank">form</a> as animating principle).</li>
-    <li>The <strong>non-assimilation</strong> of intellectual powers to biological complexity alone.</li>
-</ul>
-
-<p>Knowledge in the strict sense is therefore <strong>exclusive to beings endowed with a rational <a href="https://en.wikipedia.org/wiki/Soul" target="_blank">soul</a></strong>; all other cognitive operations are pre-conceptual and materially determined.</p>
-
-<h1 style="text-align:left" ;="">5. The Mathematical Structure as Ground of Possible Knowledge: Reinterpreting Act and Potency</h1>
-<p>If we accept that forms in the external world (Form A) and intelligible forms in the intellect (Form B) are <strong><a href="https://en.wikipedia.org/wiki/Isomorphism" target="_blank">isomorphic</a></strong>, we must identify that in virtue of which such correspondence is metaphysically possible. Within the Thomistic framework, <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761922112062" target="_blank">form</a> is always the <em>principle of intelligibility</em>; but Aquinas situates the formal cause within the order of being, whereas Tegmark situates it within the order of <strong><a href="https://en.wikipedia.org/wiki/Structure_(mathematical_logic)" target="_blank">mathematical structure</a></strong>.</p>
-
-<p>We argue that these two accounts are not only compatible, but mutually clarifying.</p>
-
-<p>The <strong>universal Mathematical Structure</strong>—the total set of relational possibilities that define what can exist and how it may exist—establishes the <strong>conditions of intelligibility</strong> for all beings. It is not a <em>source</em> of being but the <strong>grammar</strong> of being: a non-empirical, non-physical, structural horizon within which all actualizations unfold. In Thomistic terms, it expresses the <strong>ratio formalis</strong> by which beings are capable of being known <em>as belonging to a determinate species</em>.</p>
-
-<ul>
-    <li><strong>Form A</strong> in the external world is <em>act</em> within matter, making a thing be what it is.</li>
-    <li><strong>Form B</strong> in the intellect is <em>act</em> within human consciousness, making the known thing be known as what it is.</li>
-</ul>
-
-<p>What connects them is <strong>not</strong>:</p>
-<ul>
-    <li>Representation</li>
-    <li>Simulation</li>
-    <li>Causal derivation from matter</li>
-    <li>Nor projection from mind</li>
-</ul>
-
-<p>But a <strong>shared participation</strong> in the <strong>same formal intelligibility</strong>, grounded in the Mathematical Structure.</p>
-
-<table>
-    <tbody><tr>
-        <th>Classical Thomism</th>
-        <th>Unified Interpretation in This Framework</th>
-    </tr>
-    <tr>
-        <td>Matter = potency, Form = act</td>
-        <td>Matter instantiates <em>one possible configuration</em> permitted by the Structure; Form actualizes it.</td>
-    </tr>
-    <tr>
-        <td>Intellect apprehends universal <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761922112062" target="_blank">form</a> immaterially</td>
-        <td>Because the universal <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761922112062" target="_blank">form</a> exists <strong>mathematically</strong>, independent of matter.</td>
-    </tr>
-    <tr>
-        <td>Knowledge is union of knower and known</td>
-        <td>The union is mediated by <strong><a href="https://en.wikipedia.org/wiki/Isomorphism" target="_blank">isomorphic</a> participation</strong> in the same structural pattern.</td>
-    </tr>
-</tbody></table>
-
-<p>In this view, the <strong>rational intellect does not create universals</strong>. It <strong>receives</strong> them in an <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761920595127" target="_blank">immaterial</a> mode because universals are already <strong>real</strong>, as structural possibilities grounded in the Mathematical Matrix. The intellect merely <strong>conforms</strong> to them.</p>
-
-<p>This resolves the classical problem:<br>
-<strong>How can the <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761920595127" target="_blank">immaterial</a> intellect know material forms without becoming material or generating content ex nihilo?</strong></p>
-
-<p>Answer:<br>
-Because <strong>both material <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761922112062" target="_blank">form</a> and intelligible <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761922112062" target="_blank">form</a> are distinct instantiations of the same structural intelligibility</strong>, expressed differently in matter and in mind.</p>
-
-<h1 style="text-align:left" ;="">6. The <a href="https://en.wikipedia.org/wiki/Isomorphism" target="_blank">Isomorphism</a> of Forms Across Ontological Levels</h1>
-<p>Having established the distinction between <strong>neuro-organic pattern-tracking</strong> in animals and <strong>intelligible apprehension</strong> in humans, we now examine the relation between <strong>external forms (Form A)</strong> and <strong>intellectually apprehended forms (Form B)</strong>. The key insight is that both are <strong><a href="https://en.wikipedia.org/wiki/Isomorphism" target="_blank">isomorphic</a></strong>, grounded in the <strong>same universal Mathematical Structure</strong>, though instantiated in different modes of being.</p>
-
-<h2 style="text-align:left" ;="">6.1. Form A: Objective Instantiation in the External World</h2>
-<p>Every material <a href="https://en.wikipedia.org/wiki/Substance_theory" target="_blank">substance</a> exhibits a specific <strong>structure, pattern, and configuration</strong>—its Aquinian <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761922112062" target="_blank">form</a>. This <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761922112062" target="_blank">form</a> determines the <strong>potentialities and actualities</strong> of the <a href="https://en.wikipedia.org/wiki/Substance_theory" target="_blank">substance</a>: its shape, behavior, and interactions. While these are perceptible through the senses, they exist <strong>independently of any particular observer</strong>. Form A is therefore <strong>objective</strong>: a determinate arrangement of matter in accordance with its substantial <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761922112062" target="_blank">form</a>, fully intelligible in principle to any rational intellect capable of abstraction.</p>
-
-<h2 style="text-align:left" ;="">6.2. Form B: <a href="https://link.springer.com/article/10.1007/s11406-013-9481-y" target="_blank">Intellectual Species</a></h2>
-<p>When a human intellect apprehends a <a href="https://en.wikipedia.org/wiki/Substance_theory" target="_blank">substance</a>, it does not receive the matter itself, nor a mere <a href="https://en.wikipedia.org/wiki/Sensory_nervous_system" target="_blank">sensory</a> image. Rather, <strong>the intellect</strong> receives a <em><a href="https://link.springer.com/article/10.1007/s11406-013-9481-y" target="_blank">species intelligibilis</a></em>, a purely <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761920595127" target="_blank">immaterial</a> representation of the <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761922112062" target="_blank">form</a>: <strong>Form B</strong>. This species is <strong><a href="https://en.wikipedia.org/wiki/Isomorphism" target="_blank">isomorphic</a></strong> to Form A, meaning:</p>
-<ul>
-    <li>It preserves the <strong>structural relations and essential characteristics</strong> of the external <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761922112062" target="_blank">form</a>.</li>
-    <li>It obeys <strong>the same formal rules</strong>, but its instantiation is <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761920595127" target="_blank">immaterial</a>.</li>
-    <li>It is independent of the particular material substrate that instantiates Form A in the world.</li>
-</ul>
-<p>The <a href="https://link.springer.com/article/10.1007/s11406-013-9481-y" target="_blank">species intelligibilis</a> is <strong>not produced by matter</strong>; the intellect does not create it ex nihilo. Instead, the rational <a href="https://en.wikipedia.org/wiki/Soul" target="_blank">soul</a> participates in the <strong>universal Mathematical Structure</strong> that underlies all possible forms (Matrix). Through this participation, intelligible forms can be apprehended <strong>as real and determinate</strong>, despite their <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761920595127" target="_blank">immaterial</a> mode of existence.</p>
-
-<h2 style="text-align:left" ;="">6.3. <a href="https://en.wikipedia.org/wiki/Isomorphism" target="_blank">Isomorphism</a> and Knowledge</h2>
-<p>The Isomorphism between Forms A and B allows knowledge to occur without dualist separation:</p>
-<ul>
-    <li><strong>Form A</strong> actualizes potentialities in matter;</li>
-    <li><strong>Form B</strong> actualizes potentialities in intellect;</li>
-    <li><strong>Both are expressions of the same structural intelligibility</strong>.</li>
-</ul>
-<p>This preserves the metaphysical unity of being:</p>
-<ol>
-    <li>Knowledge is not <strong>derived from matter</strong>, but is occasioned by it.</li>
-    <li>The intellect apprehends what is <strong>already formally real</strong> in the Mathematical Structure (Matrix).</li>
-    <li>The mind-body relation remains <strong><a href="https://en.wikipedia.org/wiki/Hylomorphism" target="_blank">hylomorphic</a></strong>, with matter providing the medium and the <a href="https://en.wikipedia.org/wiki/Soul" target="_blank">soul</a> providing the act of intelligibility.</li>
-</ol>
-
-<h2 style="text-align:left" ;="">6.4. Implications for Cognitive Philosophy</h2>
-<p>This framework reconciles classical Thomism with a structural, non-physicalist ontology of cognition:</p>
-<ul>
-    <li>Human knowledge is <strong>distinct from animal cognition</strong> because only the rational <a href="https://en.wikipedia.org/wiki/Soul" target="_blank">soul</a> can apprehend <a href="https://link.springer.com/article/10.1007/s11406-013-9481-y" target="_blank">species intelligibiles</a>.</li>
-    <li>Objective reality and intellectual apprehension are <strong>formally related</strong> by <a href="https://en.wikipedia.org/wiki/Isomorphism" target="_blank">isomorphism</a>.</li>
-    <li>The <strong>Mathematical Structure</strong> (Matrix) provides the <strong>universal “binary grammar”</strong> of forms, ensuring that material instantiations and intellectual apprehensions are formally <a href="https://en.wikipedia.org/wiki/Isomorphism" target="_blank">isomorphic</a>, thereby bridging matter and intellect without reducing one to the other.</li>
-</ul>
-
-<h1 style="text-align:left" ;="">7. The Occasioned Nature of Knowledge and the Role of the <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1762192555719" target="_blank">Neuropsyche</a></h1>
-<p>Having established the <a href="https://en.wikipedia.org/wiki/Isomorphism" target="_blank">isomorphism</a> between <strong>external forms (Form A)</strong> and <strong>intellectually apprehended species (Form B)</strong>, it remains to clarify the role of the <strong>human <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1762192555719" target="_blank">neuropsyche</a></strong> in the actualization of knowledge. The <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1762192555719" target="_blank">neuropsyche</a> is <strong>not a creator of intelligible forms</strong>; rather, it acts as the mediating apparatus between external <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761922112062" target="_blank">form</a> and the <a href="https://en.wikipedia.org/wiki/Soul" target="_blank">soul</a>, and vice versa.</p>
-
-<h2 style="text-align:left" ;="">7.1. The <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1762192555719" target="_blank">Neuropsyche</a> as Medium</h2>
-<p>The human neuro-organic system is epiphenomenally complex and structured to <strong>channel the operations of the rational <a href="https://en.wikipedia.org/wiki/Soul" target="_blank">soul</a></strong>:</p>
-<ul>
-    <li>The <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1762192555719" target="_blank">neuropsyche</a> receives <strong><a href="https://en.wikipedia.org/wiki/Sensory_nervous_system" target="_blank">sensory</a> signals</strong> from the external world, producing phantasms which the <strong>Matrix</strong> transduces, making them accessible to the intellect.</li>
-    <li>It expresses <strong>intellectual operations</strong> back into the body as imaginative images and emotions (holograms), and, when appropriate, as <strong>behavioral outputs</strong>.</li>
-</ul>
-<p>In this sense, the <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1762192555719" target="_blank">neuropsyche</a> is <strong>occasionally active</strong>, bridging the abstract apprehension of the <a href="https://en.wikipedia.org/wiki/Soul" target="_blank">soul</a> and the concrete operations of the body without <strong>generating meaning</strong> itself. The <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1762192555719" target="_blank">neuropsyche</a> does not know anything about <strong>meanings</strong>; only the <strong><a href="https://en.wikipedia.org/wiki/Soul" target="_blank">soul</a></strong> apprehends them.</p>
-
-<h2 style="text-align:left" ;="">7.2. Outward and Inward Expression</h2>
-<p>The <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1762192555719" target="_blank">neuropsyche</a> mediates in <strong>two directions</strong>:</p>
-<ol>
-    <li><strong>Outwardly:</strong> translating apprehended intelligible forms into action, speech, or other expressions that affect the external world. Alternatively, it can react automatically, independently of the <a href="https://en.wikipedia.org/wiki/Soul" target="_blank">soul</a>.</li>
-    <li><strong>Inwardly:</strong> providing the <a href="https://en.wikipedia.org/wiki/Soul" target="_blank">soul</a> with information from the external world via <a href="https://en.wikipedia.org/wiki/Sensory_nervous_system" target="_blank">sensory</a> signals or sending feedback from the body to the <a href="https://en.wikipedia.org/wiki/Soul" target="_blank">soul</a>, allowing it to refine its apprehension or trigger further intellectual activity.</li>
-</ol>
-<p>This two-way mediation ensures that <strong>knowledge remains grounded in reality</strong>, while preserving the <a href="https://en.wikipedia.org/wiki/Soul" target="_blank">soul</a>’s <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761920595127" target="_blank">immaterial</a> character.</p>
-
-<h2 style="text-align:left" ;="">7.3. <a href="https://en.wikipedia.org/wiki/John_B._Watson#Behaviorism" target="_blank">Reflex</a> vs. Intellectual Apprehension</h2>
-<p>It is important to distinguish human knowledge from <strong>animal cognition</strong>:</p>
-<ul>
-    <li>Animals operate exclusively through <strong>reflexes and neuro-organic pattern recognition</strong>.</li>
-    <li>Humans, endowed with a rational <a href="https://en.wikipedia.org/wiki/Soul" target="_blank">soul</a>, apprehend <strong><a href="https://link.springer.com/article/10.1007/s11406-013-9481-y" target="_blank">species intelligibiles</a></strong>: forms that are <a href="https://en.wikipedia.org/wiki/Isomorphism" target="_blank">isomorphic</a> to, but independent of, material instantiations.</li>
-</ul>
-<p>The <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1762192555719" target="_blank">neuropsyche</a> supports both levels of operation but only <strong>occasionally expresses intellect</strong>, never <strong>producing it</strong>.</p>
-
-<h2 style="text-align:left" ;="">7.4. Implications for Philosophy of Mind</h2>
-<p>This model resolves classical issues in epistemology and metaphysics:</p>
-<ul>
-    <li>It <strong>avoids dualism</strong>, as the <a href="https://en.wikipedia.org/wiki/Soul" target="_blank">soul</a> and body are formally integrated through <a href="https://en.wikipedia.org/wiki/Hylomorphism" target="_blank">hylomorphism</a>.</li>
-    <li>It <strong>avoids reductionism</strong>, since knowledge does not emerge from matter but is occasioned by it.</li>
-    <li>The <strong>Matrix (universal Mathematical Structure)</strong> underlies all forms, ensuring that intellectual apprehension is <strong>formally <a href="https://en.wikipedia.org/wiki/Isomorphism" target="_blank">isomorphic</a></strong> to external reality.</li>
-</ul>
-
-<h1 style="text-align:left" ;="">8. Synthesis: Human Knowledge, the Matrix, and the Epistemic Bridge</h1>
-<h2 style="text-align:left" ;="">8.1. The Epistemic Bridge</h2>
-<p>The human body, through its <strong>emergent and epiphenomenal complexity</strong>, acts as a <strong>bridge between the external world and the rational <a href="https://en.wikipedia.org/wiki/Soul" target="_blank">soul</a></strong>. Sensory signals from material substances are received by the neuro-organic system, which produces <strong>structured representations (holograms)</strong> in the <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761922112062" target="_blank">form</a> of imaginative images, emotions, and behavioral dispositions. These representations are necessary for the <a href="https://en.wikipedia.org/wiki/Soul" target="_blank">soul</a> to apprehend the <strong><a href="https://link.springer.com/article/10.1007/s11406-013-9481-y" target="_blank">species intelligibilis</a></strong>, but they <strong>never generate intellectual content</strong>; the rational <a href="https://en.wikipedia.org/wiki/Soul" target="_blank">soul</a> remains the <strong>principle of intelligible act</strong>.</p>
-<section>
-
-  <div style="margin-left:60px">The <a href="https://en.wikipedia.org/wiki/Soul" target="_blank">soul</a> does <strong>not</strong> interact with individual neurons or molecules. Instead, it engages with the informational content that these patterns instantiate:
-  <ul>
-    <li><strong>Structured meaning:</strong> The <a href="https://en.wikipedia.org/wiki/Soul" target="_blank">soul</a> apprehends the intelligible forms embedded in the neural hologram. For example, seeing a tree is not about the firing of neurons per se, but the intelligible structure of “treeness” that the hologram represents.</li>
-    <li><strong>Qualitative content (qualia):</strong> Emotions, images, or abstract concepts encoded in the hologram are perceived by the <a href="https://en.wikipedia.org/wiki/Soul" target="_blank">soul</a> in their intelligible or experiential <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761922112062" target="_blank">form</a>. Therefore, this enables the possibility of emulation and empathy.</li>
-    <li><strong>Potentiality:</strong> The hologram contains latent possibilities—future behaviors or thoughts—which the <a href="https://en.wikipedia.org/wiki/Soul" target="_blank">soul</a> can integrate into reasoning, imagination, or decision-making.</li>
-    <li><strong>Inward flow:</strong> The <a href="https://en.wikipedia.org/wiki/Soul" target="_blank">soul</a> perceives mathematical binary patterns <em>transduced by the Matrix</em>, not the physical substrate itself.</li>
-    <li><strong>Outward flow:</strong> The <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1762192555719" target="_blank">neuropsyche</a> receives material signals (neural activity) from the Matrix, rather than the raw mathematical binary patterns from the <a href="https://en.wikipedia.org/wiki/Soul" target="_blank">soul</a>.</li>
-  </ul>
-    <p>Note: Animals are incapable of performing <strong>“perceptions”</strong> in any way; they process <a href="https://en.wikipedia.org/wiki/Sensory_nervous_system" target="_blank">sensory</a> input and generate responses, but do not apprehend intelligible forms or abstract patterns because they do not possess a <strong>spiritual appetite</strong>.</p>
-
-
-  <p>✅ This distinction clearly separates:</p>
-  <ol>
-    <li><strong>The <a href="https://en.wikipedia.org/wiki/Soul" target="_blank">soul</a>’s perception:</strong> abstract, mathematical/informational</li>
-    <li><strong>The <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1762192555719" target="_blank">neuropsyche</a>’s mediation:</strong> material, physical signals</li>
-    <li><strong>The directionality of flow:</strong>  <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1762192555719" target="_blank">neuropsyche</a> → <a href="https://en.wikipedia.org/wiki/Soul" target="_blank">soul</a> (inward) → Matrix → <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1762192555719" target="_blank">neuropsyche</a> → body/behavior (outward)</li>
-  </ol>
+<div style="font-size:26px;font-weight:bold;margin-bottom:10px;">
+TACE-Aquinas Conceptual Ecosystem
 </div>
 
-</section>
+
+<div  name='menu1' style="display:flex;justify-content:flex-start;">
+
+    <div name='runtime' style="padding:10px;"><div style="color:navy;font-weight:bold">RUNTIME</div>
+            <input type="button" value="Run TACE" onclick="runtime()">
+    </div>
+    <div name='initialization' style="padding:10px;"><div style="color:navy;font-weight:bold">INITIALIZATION</div>
+            <input type="button" value="Resources" onclick="resources()"> <input type="button" value="Ontologies" onclick="ontologies();"> <input type="button" value="RAG" onclick="rag()"> <input type="button" value="Learning" onclick="learning()"> <!--<input type="button" value="Models" onclick="models()">--> <input type="button" value="System Status" onclick="status()">
+    </div>
+</div>
+
+
+<div name='menu2' id="resources_panel" class="panel">
+    <div style="color:navy;font-weight:bold">RESOURCES</div><br>
+                <input name='menu3' type="button" value="Constitutions" onclick="constitutions()"> <input name='menu3' type="button" value="Governance" onclick="governance()"> <input name='menu3' type="button" value="Architecture" onclick="architecture()"> <!--<input name='menu3' type="button" value="Ontologies" onclick="ontologies_()">--> <input name='menu3' type="button" value="Documentation" onclick="documentation()">  <input name='menu3' type="button" value="History" onclick="history()">
+</div>
+
+<div name='menu2' id="ontology_modules" class="panel">
+    <div style="color:navy;font-weight:bold">ONTOLOGY MODULES</div><br>
+
+        <input name='menu3' type="button" value="Aristotle_Aquinas" onclick="openModule('Aristotle_Aquinas')"> <input name='menu3' type="button" value="Maturana_Varela" onclick="openModule('Maturana_Varela')"> <input name='menu3' type="button" value="Mystici_Corporis_Christi" onclick="openModule('Mystici_Corporis_Christi')"> <input name='menu3' type="button" value="TACE" onclick="openModule('TACE')"> <input name='menu3' type="button" value="Tegmark" onclick="openModule('Tegmark')"> <br><br>
+        <input name='menu3' type="button" value="Export Module" style='color:navy' onclick="exportModule()">
+
+</div>
+
+<div name='menu2' id="rag_panel" class="panel">
+    <div style="color:navy;font-weight:bold">RAG </div><br>
+
+</div>
+
+<div name='menu2' id="learning_panel" class="panel">
+    <div style="color:navy;font-weight:bold">LEARNING</div><br>
+
+</div>
+<div name='menu2' id="models_panel" class="panel">
+    <div style="color:navy;font-weight:bold"></div><br>
+
+</div>
+<div name='menu2' id="status_panel" class="panel">
+    <div style="color:navy;font-weight:bold">SYSTEM SATATUS</div><br>
+
+</div>
+
+<div name='menu2' id="runtime_panel" class="panel">
+    <div style="color:navy;font-weight:bold">ASK TACE</div><br>
+
+<textarea id="ask_tace_question"
+          style="width:100%;min-height:90px"
+          placeholder="Enter your question"></textarea>
+<div style="margin-top:8px;">
+    <input type="button" value="Ask TACE" onclick="runAskTACE()">
+</div>
+
+
+
+<!-- AI Model Selector Section -->
+<div style="margin-top:40px; margin-bottom:12px;">
+    <div style="color:navy;font-weight:bold;margin-bottom:6px;">AI Models</div>
+
+    <!-- Row of Model Buttons with corresponding ID attributes -->
+    <div id="model_buttons_container" style="display:flex; flex-wrap:wrap;">
+        <input name='menu3' type="button" id="GPT-4o" class="model-btn active" value="GPT-4o" onclick="selectModel('GPT-4o', this)" style="margin-right:8px; margin-bottom:8px;">
+        <input name='menu3' type="button" id="Claude-3.5-Sonnet" class="model-btn" value="Claude-3.5-Sonnet" onclick="selectModel('Claude-3.5-Sonnet', this)" style="margin-right:8px; margin-bottom:8px;">
+        <input name='menu3' type="button" id="Gemini-1.5-Pro" class="model-btn" value="Gemini-1.5-Pro" onclick="selectModel('Gemini-1.5-Pro', this)" style="margin-right:8px; margin-bottom:8px;">
+        <input name='menu3' type="button" id="Llama-3" class="model-btn" value="Llama-3" onclick="selectModel('Llama-3', this)" style="margin-right:8px; margin-bottom:8px;">
+    </div>
+
+    <!-- Management Controls: [ADD] [Input Field] [DELETE] -->
+    <div style="margin-top:8px; display:flex; align-items:center;">
+        <input type="button" value="New Model" onclick="addModel()" style="padding: 4px 10px; cursor: pointer; border-radius: 4px; border: 1px solid #a0a0a0; background: #e0e0e0; font-size:12px; font-weight:bold; margin-right:6px;">
+        <input type="text" id="new_model_name" placeholder="New Model Name" style="padding:4px; border:1px solid #a0a0a0; border-radius:4px; font-size:13px; width:160px; margin-right:6px;">
+        <input type="button" value="Delete" onclick="deleteModel()" style="padding: 4px 10px; cursor: pointer; border-radius: 4px; border: 1px solid #a0a0a0; background: #e0e0e0; font-size:12px; font-weight:bold;">
+    </div>
+</div>
+
+<div style="margin-top:8px;">
+    <label>
+        <input type="checkbox" id="ask_tace_assist">
+        Request Assisted Explanation (Non-Canonical)
+    </label>
+</div>
+
+<div style="margin-top:8px;">
+    <label>
+        Rendering Mode:
+        <select id="ask_tace_rendering_mode">
+            <option value="technical">technical</option>
+            <option value="academic">academic</option>
+            <option value="educational">educational</option>
+            <option value="popular">popular</option>
+            <option value="child">child</option>
+        </select>
+    </label>
+</div>
+
+<hr>
+
+<div id="ask_tace_result" style="border:1px solid gray;padding:8px;min-height:50px;color:gray;" onclick="clearHint(this)">Waiting for result ...</div>
+<script>
+function clearHint(div){
+    if(div.innerText === "Type your text here..."){
+        div.innerText = "";
+        div.style.color = "black";
+    }
+}
+</script>
+<hr>
 
 </div>
 
 
-<h2 style="text-align:left" ;="">8.2. The Role of the Matrix</h2>
-<p>Underlying both the external forms and their apprehension is the <strong>universal Mathematical Structure, or Matrix</strong> (no consciousness; all forms and substances), which provides a <strong>binary or formal “grammar” of intelligibility</strong>. The Matrix ensures that:</p>
-<ul>
-    <li>Material instantiations of <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761922112062" target="_blank">form</a> (Form A) and intellectual apprehensions (Form B) are <strong><a href="https://en.wikipedia.org/wiki/Isomorphism" target="_blank">isomorphic</a></strong>.</li>
-    <li>Knowledge is <strong>grounded in reality</strong>, rather than being a subjective or arbitrary construction.</li>
-    <li>The operations of the intellect remain <strong>non-physical</strong>, even when expressed through neuro-organic holograms.</li>
-</ul>
+<!--<div name='menu2' id="repository_panel" class="panel">
+    <div style="color:navy;font-weight:bold">REPOSITORY BROWSER</div><br>
+        <input name='menu3' type="button" value="Export Module" onclick="exportModule()">
+</div>-->
 
-<section id="8-3-distinguishing-human-cognition">
-  <h2 style="text-align:left" ;="">8.3. Distinguishing Human Cognition</h2>
+<div id="hello_world" style='margin-top:20px'></div>
 
-  <p>
-    Human cognition is distinguished from other forms of biological or mechanical processing by the presence of a <strong>rational <a href="https://en.wikipedia.org/wiki/Soul" target="_blank">soul</a></strong>. Unlike animals, which process <a href="https://en.wikipedia.org/wiki/Sensory_nervous_system" target="_blank">sensory</a> input and generate behavioral responses, humans can apprehend <strong>intelligible forms</strong> and abstract patterns. Animals are incapable of performing true <strong>perceptions</strong> because they lack a spiritual appetite, whereas humans integrate intellect, body, and the Matrix to access both material and <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761920595127" target="_blank">immaterial</a> structures.
-  </p>
+<script>
 
-  <p>
-    The <strong>Matrix</strong> mediates between the substrate and the human <a href="https://en.wikipedia.org/wiki/Soul" target="_blank">soul</a>, providing both essential forms and contingent accidental information. Accidental information, such as spatial coordinates, color, or other contingent properties, may be preserved within the <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761922112062" target="_blank">form</a> of the Matrix rather than carried by the <a href="https://en.wikipedia.org/wiki/Substance_theory" target="_blank">substance</a> itself. While accidents can mislead perception if considered alone, the human intellect is capable of scanning, contextualizing, and correctly apprehending the underlying forms, minimizing errors in cognition.
-  </p>
+let currentConcept = null;
+let currentEdit = null;
+let selectedModel = 'GPT-4o'; // Store selected model
+const apiBase = window.location.protocol === "file:"
+    ? "http://127.0.0.1:8000"
+    : "";
 
-  <p>
-    <strong>Inward flow:</strong> The <a href="https://en.wikipedia.org/wiki/Soul" target="_blank">soul</a> apprehends mathematical and structural patterns transduced by the Matrix, not the physical substrate itself. <br>
-    <strong>Outward flow:</strong> The <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1762192555719" target="_blank">neuropsyche</a> receives material signals, whether originating from the <a href="https://en.wikipedia.org/wiki/Soul" target="_blank">soul</a>–Matrix or from the <a href="https://en.wikipedia.org/wiki/Sensory_nervous_system" target="_blank">sensory</a> system, and generates corresponding behaviors or responses.
-  </p>
+function apiPath(path){
+    return apiBase ? apiBase + path : path;
+}
 
-  <p>
-    Human cognition thus relies on the proper distinction between <strong><a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761922112062" target="_blank">form</a></strong> and <strong>accidents</strong>. Form confers unity, identity, and actuality to the substrate; without it, the entity disintegrates into mere potentiality. Accidents, including position, color, or other contingent properties, can vary without altering the <a href="https://en.wikipedia.org/wiki/Substance_theory" target="_blank">substance</a>’s identity. Errors may occur if the intellect attempts to identify substances solely via their accidents rather than their forms.
-  </p>
+function apiFetch(path, options){
+    return fetch(apiPath(path), options);
+}
 
-  <p>
-    Because the Matrix preserves both essential forms and contingent accidental information within its <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761920595127" target="_blank">immaterial</a> structure, and because accidental patterns can sometimes mislead perception, the Matrix can aptly be compared to <strong><a href="https://en.wikipedia.org/wiki/Maya_(religion)" target="_blank">Maya</a></strong>. The human intellect, however, through careful scanning and contextualization, is able to perceive the true forms, distinguishing essence from appearance.
-  </p>
+async function openResourceDocument(path, title){
+    const response = await apiFetch("/resources/document/" + encodeURIComponent(path));
+    const payload = await response.json();
 
-  <p>
-    The Matrix also functions as a <strong>constitutional principle</strong> of the system: it transduces material signal patterns of a quantic nature into corresponding <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761920595127" target="_blank">immaterial</a> <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761922112062" target="_blank">form</a> patterns of a mathematical nature within the class of <strong>structural forms</strong>. This principle ensures that human cognition is grounded in both material reality and <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761920595127" target="_blank">immaterial</a> intelligibility, allowing humans to apprehend structures that systematically correspond to external reality, provided that processing errors are not committed.
-  </p>
+    if (!response.ok){
+        document.getElementById("hello_world").innerHTML =
+            "<div style='color:red'>" + escapeHtml(payload.detail || response.statusText) + "</div>";
+        return;
+    }
 
-  <p>
-    In summary, human cognition is unique in its ability to integrate <a href="https://en.wikipedia.org/wiki/Soul" target="_blank">soul</a>, intellect, and Matrix-mediated forms, enabling the apprehension of both essential structures and contextual accidental information. This provides a rigorous, philosophically robust account of knowledge, intelligibility, and the interplay between material and <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761920595127" target="_blank">immaterial</a> dimensions.
-  </p>
-</section>
+    let html = "";
+    html += "<div style='color:navy;font-weight:bold'>" + escapeHtml(payload.title || title) + "</div><br>";
+    html += "<pre class='ontology-text' style='margin:0;white-space:pre-wrap'>" + escapeHtml(payload.content || "") + "</pre>";
+    document.getElementById("hello_world").innerHTML = html;
+}
 
-<h2 style="text-align:left" ;="">8.4. The Matrix and its Universal Language</h2>
-<p>The Matrix transduces <b>material signal patterns</b> of a quantic nature into their corresponding <b><a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761920595127" target="_blank">immaterial</a> <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761922112062" target="_blank">form</a> patterns</b> of a mathematical nature within the class of <b>structural forms</b>. This statement is not derived from other assertions; it is assumed as a <strong>constitutional principle</strong> given by the underlying Mathematical Structure or Tegmark's Universe Hypothesis, serving as a <b>foundational law governing the operation of the system</b>. It is based on the <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1763139803745" target="_blank">Teological Isomorphism Principle</a>.</p>
-    <section>
-The Matrix communicates intelligible content to the <a href="https://en.wikipedia.org/wiki/Soul" target="_blank">soul</a> using a <strong>universal mathematical language</strong> that transcends any particular physical substrate. While binary (0 and 1) or quantic (superposed 0&1) signals may encode information in neurons or quantum states, these are only implementation details. The true language of the Matrix consists of a <a href='https://en.wikipedia.org/wiki/Bijection' target='_blank'>bijective matterial-immaterial mapping</a>, that is, 'patterns of signals (unitelligible forms)-patterns of relations (intelligible forms)' between the environment (the highest <a href='https://en.wikipedia.org/wiki/Entropy' target='_blank'>entropy</a> or uncertainty) and intellect (lower <a href='https://en.wikipedia.org/wiki/Entropy' target='_blank'>entropy</a> or uncertainty).<br><br>
+function renderResourceButtons(title, items){
+    let html = "";
 
-        Patterns of Signals, originating as raw material behavior from the environment, first undergo a primary reduction within the human sensory–neural substrate, especially in the <a href='https://en.wikipedia.org/wiki/Thalamus' target='_blank'>thalamus<a> and related pathways. This reduction filters noise, extracts basic structural features, and formats the incoming physical signals into first-order neuropsychic patterns—organized yet still unintelligible configurations of material form.<br><br>
+    html += "<div style='color:navy;font-weight:bold'>";
+    html += escapeHtml(title);
+    html += "</div><br>";
 
-        These reduced patterns are then conveyed to the transduction-map structure, where their formal organization becomes intellectually graspable. At this stage, the structure of the material pattern is made available to be converted into an intelligible form apprehended by the intellect. The entire processing chain enables the soul to grasp the intelligible content of material patterns without interacting directly with the material substrate.<br><br>
+    for(const item of items){
+        html +=
+            "<input " +
+            "type='button' " +
+            "value='" + escapeHtml(item.label) + "' " +
+            "style='margin-right:4px;margin-bottom:4px;' " +
+            "onclick=\"openResourceDocument('" + item.path.replaceAll("'", "\\'") + "','" + item.label.replaceAll("'", "\\'") + "')\"> ";
+    }
 
-            <b>Forward Processing (Perception → Intellect)</b><br>
+    document.getElementById("hello_world").innerHTML = html;
+}
 
-            <div style='padding-left:40px;'><b>Pipeline:</b><br>
-            raw material behavior → thalamic first reduction → bijective mapping (quantum signals “+1, 0, –1” ↭ potential intelligible signs) → intellectual reception<
-            </div><br>
+async function loadResourceFolder(folder, title){
+    const response = await apiFetch("/resources/folder/" + encodeURIComponent(folder));
+    const payload = await response.json();
 
-           <b>Reverse Processing (Intellect → Action)</b><br>
+    if (!response.ok){
+        document.getElementById("hello_world").innerHTML =
+            "<div style='color:red'>" + escapeHtml(payload.detail || response.statusText) + "</div>";
+        return;
+    }
 
-            <div style='padding-left:40px;'><b>Pipeline:</b><br>
-            intellectual intention → encoding into potential intelligible signs ↭ quantum signals “+1, 0, –1” → neural patterns (e.g., <a href='https://en.wikipedia.org/wiki/Thalamus' target='_blank'>thalamus<a> and motor pathways) → material behavior
-            </div><br>
+    renderResourceButtons(title, payload.items || []);
+}
 
-            <div style='text-align:center;'><img style='width:80%' src='https://diaspora.psyco.fr/uploads/images/162f227e642badd1d0b5.webp'></div>
+async function constitutions(){ return loadResourceFolder("constitution", "Constitutions"); }
 
+async function architecture(){ return loadResourceFolder("architecture", "Architecture"); }
 
+async function governance(){ return loadResourceFolder("governance", "Governance"); }
 
+async function ontologies_(){
 
+    ontologies();
 
+}
 
-</section>
+async function documentation(){ return loadResourceFolder("specifications", "Documentation"); }
 
-<p>
-The Matrix does not possess consciousness. It works as a
-<strong>non‑intentional informational medium</strong> that
-automatically <em>transduces</em> quantic informational signals into
-structural forms, and vice versa, without any act of awareness or will.
-It can be described as an <strong><a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761920595127" target="_blank">immaterial</a> informational <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1762188690486" target="_blank">field</a></strong> (Akashic-like) that contains and preserves patterns, relations, and intelligible structures without subjective experience.
-</p><p>
-The <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761922112062" target="_blank">form</a> of the Matrix is <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761920595127" target="_blank">immaterial</a>, which implies that it is not constrained by physical extension; matter does not encounter any spatial barrier in interacting with it. From this perspective, in the Matrix, a being exists insofar as it possesses <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761922112062" target="_blank">form</a>. Form confers unity, identity, and actuality to the substrate; without it, the substrate cannot maintain coherence, and the entity disintegrates into mere potentiality because the material substrate alone lacks the structuring principle necessary to instantiate a <a href="https://en.wikipedia.org/wiki/Substance_theory" target="_blank">substance</a>.
-<br><br>
+async function history(){ return loadResourceFolder("session_footprints", "History"); }
 
-One can change the color of a <a href="https://en.wikipedia.org/wiki/Substance_theory" target="_blank">substance</a> by modifying an <strong>accident</strong> of a <a href="https://en.wikipedia.org/wiki/Substance_theory" target="_blank">substance</a>, for example, through chemical means, without altering its essential <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761922112062" target="_blank">form</a> or identity. Accidents are properties that do not affect the <a href="https://en.wikipedia.org/wiki/Substance_theory" target="_blank">substance</a>'s essential <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761922112062" target="_blank">form</a> or identity; they are contingent features, such as color, shape, or temperature, which can vary without altering what the <a href="https://en.wikipedia.org/wiki/Substance_theory" target="_blank">substance</a> fundamentally is.
-</p>
-<p>
-Because the Matrix provides contingent accidental information, existing within the <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761920595127" target="_blank">immateriality</a> of its own <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761922112062" target="_blank">form</a>, perception can be misled if considered alone, so it can aptly be compared to <strong><a href="https://en.wikipedia.org/wiki/Maya_(religion)" target="_blank">Maya</a></strong>. The Matrix mediates between the substrate and the <a href="https://en.wikipedia.org/wiki/Soul" target="_blank">soul</a>, providing both real and contingent patterns that must be correctly <strong>perceived</strong>, sufficiently scanned, and contextualized in order to apprehend the underlying <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761922112062" target="_blank">form</a>. This ensures that the <a href="https://en.wikipedia.org/wiki/Soul" target="_blank">soul</a> engages with the intelligible structure of the <a href="https://en.wikipedia.org/wiki/Substance_theory" target="_blank">substance</a>, rather than being misled by accidental or contingent data.
-</p>
+function hideAll(){
 
-<h2 style="text-align:left" ;="">8.5. Implications</h2>
-<p>This synthesis offers a metaphysically coherent, non-reductionist account of cognition:</p>
-<ol>
-    <li>It <strong>avoids dualism</strong>, preserving <a href="https://en.wikipedia.org/wiki/Hylomorphism" target="_blank">hylomorphic</a> unity: body and <a href="https://en.wikipedia.org/wiki/Soul" target="_blank">soul</a> act as <strong><a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761922112062" target="_blank">form</a> and matter</strong>.</li>
-    <li>It <strong>avoids physicalism</strong>, recognizing that intellectual apprehension is <strong>not a product of neural complexity</strong>.</li>
-    <li>It provides a formal basis for knowledge, grounded in the universal Matrix, ensuring that the structures apprehended by the intellect, if processing errors are not committed, correspond systematically to external reality.</li>
-</ol>
+    document.querySelectorAll(".panel").forEach(
+        p => p.style.display = "none"
+    );
 
-<h1 style="text-align:left" ;="">Conclusion</h1>
-<p>The synthesis of <strong>Thomistic metaphysics</strong> with a <strong>mathematical account of reality</strong> provides a coherent explanation of human cognition that avoids both dualist separation and physicalist reduction. Key insights include:</p>
-<ol>
-    <li><strong>Distinctive disposition of the human body:</strong> Unlike non-rational animals, the human neuro-organic system is uniquely structured to integrate a rational <a href="https://en.wikipedia.org/wiki/Soul" target="_blank">soul</a>, mediating between the world and intellectual apprehension.</li>
-    <li><strong>Epiphenomenal mediation:</strong> The body and <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1762192555719" target="_blank">neuropsyche</a> provide the necessary substrate for intellectual expression—through imaginative images, emotions, and behavioral outputs—without producing intelligible content.</li>
-    <li><strong><a href="https://en.wikipedia.org/wiki/Isomorphism" target="_blank">Isomorphism</a> of forms:</strong> External forms and <a href="https://link.springer.com/article/10.1007/s11406-013-9481-y" target="_blank">Intellectual Species</a> are formally <a href="https://en.wikipedia.org/wiki/Isomorphism" target="_blank">isomorphic</a>, ensuring that knowledge corresponds systematically to reality.</li>
-    <li><strong>Role of the Matrix:</strong> The universal Mathematical Structure provides the formal “grammar” underlying intelligibility, allowing the intellect to apprehend objective forms without dependence on matter.</li>
-</ol>
-<p>This framework describes that <strong>human knowledge is both grounded in material reality and yet irreducibly <a href="https://diaspora.psyco.fr/tags/trondiasporapsycofr_1761920595127" target="_blank">immaterial</a></strong>, showing that intellect, body, and the universal structure of forms work together in a coherent ontological system. By situating cognition in the interplay of <strong>Matrix, matter, and rational <a href="https://en.wikipedia.org/wiki/Soul" target="_blank">soul</a></strong>, this model provides a rigorous, philosophically robust account of knowledge and intelligibility.</p>
+    document.getElementById("hello_world").innerHTML = "";
+
+}
 
 
-<script src="./js/static.js" type="text/javascript"></script>
+async function resources(){
 
-</body></html>
+    hideAll();
+
+    document.getElementById("resources_panel").style.display="block";
+
+    document.getElementById("hello_world").innerHTML = "";
+
+}
+
+
+function ontologies(){
+
+    hideAll();
+
+    document.getElementById("ontology_modules").style.display="block";
+
+}
+
+
+function rag(){
+
+    hideAll();
+
+    document.getElementById("rag_panel").style.display="block";
+
+}
+
+
+function learning(){
+
+    hideAll();
+
+    document.getElementById("learning_panel").style.display="block";
+
+}
+
+
+function models(){
+
+    hideAll();
+
+    document.getElementById("models_panel").style.display="block";
+
+}
+
+
+function status(){
+
+    hideAll();
+
+    document.getElementById("status_panel").style.display="block";
+
+}
+
+
+function runtime(){
+
+    hideAll();
+
+    document.getElementById("runtime_panel").style.display="block";
+
+}
+
+function escapeHtml(value){
+    return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#39;");
+}
+
+function renderList(items){
+    if (!items || !items.length){
+        return "<div style='margin-left:15px'>(none)</div>";
+    }
+
+    let html = "<ul style='margin-top:4px'>";
+    for (const item of items){
+        const content = typeof item === "string"
+            ? item
+            : JSON.stringify(item, null, 2);
+        html += "<li><pre style='margin:0;white-space:pre-wrap'>" +
+                escapeHtml(content) +
+                "</pre></li>";
+    }
+    html += "</ul>";
+    return html;
+}
+
+function renderAskResult(data){
+    let html = "";
+
+    html += "<div style='color:navy;font-weight:bold'>Status</div>";
+    html += "<div style='margin-left:15px'>" + escapeHtml(data.status || "") + "</div>";
+
+    html += "<div style='color:navy;font-weight:bold;margin-top:10px'>Trace ID</div>";
+    html += "<div style='margin-left:15px'>" + escapeHtml(data.trace_id || "") + "</div>";
+
+    html += "<div style='color:navy;font-weight:bold;margin-top:10px'>Canonical Answer</div>";
+    html += "<div class='ontology-text' style='margin-left:15px'>" +
+            escapeHtml(data.answer || "") +
+            "</div>";
+
+    html += "<div style='color:navy;font-weight:bold;margin-top:10px'>Optional Assisted Explanation</div>";
+    html += "<div class='ontology-text' style='margin-left:15px'>" +
+            escapeHtml(data.assisted_explanation || "(none)") +
+            "</div>";
+
+    html += "<div style='color:navy;font-weight:bold;margin-top:10px'>Justification</div>";
+    html += renderList(data.justification || []);
+
+    html += "<div style='color:navy;font-weight:bold;margin-top:10px'>Provenance</div>";
+    html += renderList(data.provenance || []);
+
+    return html;
+}
+
+async function runAskTACE(){
+
+    const question = document.getElementById("ask_tace_question").value.trim();
+    const assist = document.getElementById("ask_tace_assist").checked;
+    const rendering_mode = document.getElementById("ask_tace_rendering_mode").value;
+    const resultBox = document.getElementById("ask_tace_result");
+
+    if (!question){
+        alert("Question is required.");
+        return;
+    }
+
+    resultBox.innerHTML = "Processing...";
+
+    const response = await apiFetch("/ask", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            question,
+            assist,
+            rendering_mode
+        })
+    });
+
+    let payload = {};
+    try {
+        payload = await response.json();
+    } catch (_) {
+    }
+
+    if (!response.ok){
+        const detail = payload.detail || response.statusText;
+        resultBox.innerHTML = "<span style='color:red'>Error: " +
+                              escapeHtml(detail) +
+                              "</span>";
+        return;
+    }
+
+    resultBox.innerHTML = renderAskResult(payload);
+}
+
+
+function repository(){
+
+    hideAll();
+
+    document.getElementById("repository_panel").style.display="block";
+
+}
+
+
+function browser(){
+
+    ontologies();
+
+}
+
+
+
+async function openModule(module){
+
+    const r = await apiFetch("/ontology/module/" + encodeURIComponent(module));
+
+    const concepts = await r.json();
+
+    let html = "";
+
+    html += "<div style='color:navy;font-weight:bold'>";
+    html += module;
+    html += "</div><br>";
+
+    for(const c of concepts){
+
+        html +=
+            "<input " +
+            "type='button' " +
+            "value='" + c + "' " +
+            "style='margin-right:4px;margin-bottom:4px;' " +
+            "onclick=\"openConcept('" + module + "','" + c + "')\"> ";
+
+    }
+
+    document.getElementById("hello_world").innerHTML = html;
+
+}
+
+
+
+
+async function openConcept(module, concept){
+
+    const r = await apiFetch(
+        "/ontology/concept/" +
+        encodeURIComponent(module) +
+        "/" +
+        encodeURIComponent(concept)
+    );
+
+    const c = await r.json();
+
+    currentConcept = {
+        module,
+        concept,
+        data: c,
+    };
+
+    renderConcept();
+}
+
+function renderConcept(){
+
+    const module = currentConcept.module;
+    const concept = currentConcept.concept;
+    const c = currentConcept.data;
+
+    let html = "";
+
+    html += "<div style='color:navy;font-weight:bold'>";
+    html += c.concept_name;
+    html += "</div><br>";
+
+    const fields = [
+        ["Definition","definition"],
+        ["Assumptions","assumptions"],
+        ["Scope","scope"],
+        ["Historical Development","historical_development"],
+        ["TACE Transformation","tace_transformation"],
+        ["References","references_text"],
+        ["Status","status"]
+    ];
+
+    const editableFields = new Set([
+        "definition",
+        "assumptions",
+        "scope",
+        "historical_development",
+        "tace_transformation",
+        "references_text"
+    ]);
+
+    for(const f of fields){
+
+        html += "<div style='color:navy;font-weight:bold;margin-top:10px'>";
+        html += f[0];
+        html += "</div>";
+
+        const isLongTextField = editableFields.has(f[1]);
+
+        html += isLongTextField
+            ? "<div class='ontology-text' style='margin-left:15px'>"
+            : "<div style='margin-left:15px'>";
+
+        if (currentEdit && currentEdit.field === f[1]){
+            html += "<textarea id='edit_field_value' style='width:100%;min-height:120px'>" +
+                    (c[f[1]] || "") +
+                    "</textarea> ";
+            html += "<input type='button' value='Save' onclick='saveEdit()'> ";
+            html += "<input type='button' value='Cancel' onclick='cancelEdit()'>";
+        } else {
+            html += (c[f[1]] || "");
+
+            if (editableFields.has(f[1])){
+                html += " <input type='button' value='Edit' onclick=\"editField('" +
+                        module + "','" +
+                        concept + "','" +
+                        f[1] + "')\"> ";
+            }
+        }
+
+        html += "</div>";
+
+    }
+
+    document.getElementById("hello_world").innerHTML = html;
+}
+
+function editField(module,concept,field){
+
+    if (currentEdit && currentEdit.field !== field){
+        alert('Finish editing the current field before editing another field.');
+        return;
+    }
+
+    currentEdit = {
+        module,
+        concept,
+        field,
+    };
+
+    renderConcept();
+}
+
+function cancelEdit(){
+    currentEdit = null;
+    renderConcept();
+}
+
+async function saveEdit(){
+    if (!currentEdit){
+        return;
+    }
+
+    const value = document.getElementById('edit_field_value').value;
+
+    const payload = {
+        module: currentEdit.module,
+        concept: currentEdit.concept,
+        field: currentEdit.field,
+        value,
+    };
+
+    const r = await apiFetch('/ontology/update', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+    });
+
+    if (!r.ok){
+        const error = await r.json();
+        alert('Update failed: ' + (error.detail || r.statusText));
+        return;
+    }
+
+    const c = await r.json();
+
+    currentConcept.data = c;
+    currentEdit = null;
+    renderConcept();
+}
+
+async function exportModule(){
+
+    const modulesResponse = await apiFetch('/ontology/modules');
+
+    if (!modulesResponse.ok){
+        alert('Could not load modules.');
+        return;
+    }
+
+    const modules = await modulesResponse.json();
+
+    if (!modules.length){
+        alert('No ontology modules available.');
+        return;
+    }
+
+    const selected = prompt(
+        'Select ontology module to export:\n\n' + modules.join('\n'),
+        modules[0]
+    );
+
+    if (!selected){
+        return;
+    }
+
+    const module = selected.trim();
+
+    if (!module){
+        return;
+    }
+
+    const response = await apiFetch('/ontology/export', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ module })
+    });
+
+    if (!response.ok){
+        let detail = response.statusText;
+        try {
+            const err = await response.json();
+            detail = err.detail || detail;
+        } catch (_) {
+        }
+        alert('Export failed: ' + detail);
+        return;
+    }
+
+    const blob = await response.blob();
+    const disposition = response.headers.get('Content-Disposition') || '';
+    const match = disposition.match(/filename="?([^";]+)"?/i);
+    const filename = match ? match[1] : (module + '.tace');
+
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+
+    alert('Export generated: ' + filename);
+}
+
+// Function to handle single selection of AI Model
+function selectModel(modelName, buttonEl) {
+    selectedModel = modelName;
+    document.querySelectorAll('.model-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    buttonEl.classList.add('active');
+}
+
+// Function to add a new AI Model dynamically
+function addModel() {
+    const input = document.getElementById("new_model_name");
+    const modelName = input.value.trim();
+    if (!modelName) {
+        alert("Please enter a model name.");
+        return;
+    }
+
+    // Check if model already exists (case-insensitive)
+    let exists = false;
+    document.querySelectorAll(".model-btn").forEach(btn => {
+        if (btn.value.toLowerCase() === modelName.toLowerCase()) {
+            exists = true;
+        }
+    });
+
+    if (exists) {
+        alert("This model already exists.");
+        return;
+    }
+
+    const container = document.getElementById("model_buttons_container");
+    const newBtn = document.createElement("input");
+    newBtn.type = "button";
+    newBtn.className = "model-btn";
+    newBtn.value = modelName;
+    newBtn.id = modelName; // Set the button ID to the exact model name value
+    newBtn.style.marginRight = "8px";
+    newBtn.style.marginBottom = "8px";
+    newBtn.onclick = function() {
+        selectModel(modelName, this);
+    };
+
+    container.appendChild(newBtn);
+    selectModel(modelName, newBtn); // Auto-select the newly added model
+    input.value = ""; // Clear text field
+}
+
+// Function to delete the currently selected AI Model
+function deleteModel() {
+    const container = document.getElementById("model_buttons_container");
+    const activeBtn = container.querySelector(".model-btn.active");
+    if (!activeBtn) {
+        alert("No model is currently selected to delete.");
+        return;
+    }
+
+    activeBtn.remove();
+
+    // Select another model if any remain
+    const remainingBtns = container.querySelectorAll(".model-btn");
+    if (remainingBtns.length > 0) {
+        remainingBtns[0].click();
+    } else {
+        selectedModel = "";
+    }
+}
+</script>
+
+
+</body>
+
+</html>

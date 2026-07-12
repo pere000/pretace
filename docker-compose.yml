@@ -1,0 +1,11 @@
+services:
+  tace:
+    build: .
+    container_name: pretace
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    environment:
+      OLLAMA_BASE_URL: ${OLLAMA_BASE_URL:-http://host.containers.internal:11434}
+    restart: unless-stopped
