@@ -1,21 +1,31 @@
-Go to repo root
-cd /media/external_drive/llm/pretace
+# 1. Make sure you're on main
+git switch main
 
-Check if you have local changes
-git status -sb
+# 2. Make main track the PRETACE repository (origin), not the old TACE repository
+git branch --set-upstream-to=origin/main main
 
-Save your work if needed (choose one)
-git add -A && git commit -m "WIP before update"
-or
-git stash push -u -m "wip-before-update"
+# 3. Remove the old remote (optional, but recommended)
+git remote remove tace-old
 
-Download latest remote info
-git fetch --all --prune
+# 4. Ignore temporary FUSE files forever
+echo ".fuse_hidden*" >> .gitignore
 
-Update your current branch from remote
-git pull --rebase origin merge-to-main
+# 5. Remove any FUSE temporary files from Git
+git rm --cached .fuse_hidden*
 
-If you stashed in step 3, restore it
-git stash pop
+# 6. Remove them from disk as well (optional)
+rm -f .fuse_hidden*
+
+# 7. Commit these cleanup changes
+git add .gitignore
+git commit -m "Configure main for pretace and ignore FUSE temporary files"
+
+# 8. Push to PRETACE
+git push
+
+# 9. Verify everything
+git remote -v
+git branch -vv
 
 
+git switch main && git branch --set-upstream-to=origin/main main && git remote remove tace-old && echo ".fuse_hidden*" >> .gitignore && git rm --cached .fuse_hidden* && rm -f .fuse_hidden* && git add .gitignore && git commit -m "Configure main for pretace and ignore FUSE temporary files" && git push
