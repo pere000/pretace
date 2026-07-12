@@ -87,3 +87,4 @@ build/
 !data/tace_session.db
 !new_tace_knowledge.db
 .aider*
+.fuse_hidden*
