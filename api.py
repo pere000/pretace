@@ -1,15 +1,19 @@
 #!/usr/bin/env python3
 
 from fastapi import FastAPI, HTTPException
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 from fastapi.responses import FileResponse, StreamingResponse
 import sqlite3
+from pathlib import Path
 import subprocess
 import time
 import csv
 import io
 import zipfile
 from datetime import datetime, timezone
+from new_query_engine import QueryEngine
+from new_universe_universe import Universe
 
 ALLOWED_CONCEPT_FIELDS = {
     "definition",
@@ -30,12 +34,29 @@ class OntologyUpdateRequest(BaseModel):
 class OntologyExportRequest(BaseModel):
     module: str
 
+
+class AskTACERequest(BaseModel):
+    question: str
+    assist: bool = False
+    rendering_mode: str = "technical"
+
+
 app = FastAPI(
     title="TACE",
     description="TACE-Aquinas Conceptual Ecosystem",
     version="0.1"
 )
 
+_ask_tace_query_engine = QueryEngine()
+_ask_tace_universe = Universe()
+_docs_root = Path("docs").resolve()
+
+# Expose the trash directory. see also lin 4 from ... StaticFiles
+app.mount(
+    "/trash",
+    StaticFiles(directory="trash"),
+    name="trash",
+)
 
 @app.get("/")
 def root():
@@ -66,7 +87,241 @@ def about():
     }
 
 
+@app.get("/resources/catalog")
+def resources_catalog():
+    return {
+        "title": "Resources",
+        "groups": [
+            {
+                "id": "constitutions",
+                "name": "Constitutions",
+                "items": [
+                    {
+                        "id": "philosophical_constitution",
+                        "label": "Philosophical Constitution",
+                        "viewer": "document",
+                        "path": "constitution/TACE_PHILOSOPHICAL_CONSTITUTION.md",
+                    },
+                    {
+                        "id": "semantic_constitution",
+                        "label": "Semantic Constitution",
+                        "viewer": "document",
+                        "path": "constitution/TACE_SEMANTIC_CONSTITUTION.md",
+                    },
+                    {
+                        "id": "software_constitution",
+                        "label": "Software Constitution",
+                        "viewer": "document",
+                        "path": "constitution/TACE_SOFTWARE_CONSTITUTION.md",
+                    },
+                ],
+            },
+            {
+                "id": "architecture",
+                "name": "Architecture",
+                "items": [
+                    {
+                        "id": "adr_ledger",
+                        "label": "Architecture Decision Records",
+                        "viewer": "adr_ledger",
+                    },
+                    {
+                        "id": "roadmap",
+                        "label": "Roadmap",
+                        "viewer": "document",
+                        "path": "architecture/ROADMAP.md",
+                    },
+                ],
+            },
+            {
+                "id": "governance",
+                "name": "Governance",
+                "items": [
+                    {
+                        "id": "governance_document",
+                        "label": "Governance Manual",
+                        "viewer": "document",
+                        "path": "governance/GOVERNANCE.md",
+                    },
+                    {
+                        "id": "development_mode",
+                        "label": "Development Mode",
+                        "viewer": "document",
+                        "path": "developer/DEVELOPMENT_MODE.md",
+                    },
+                ],
+            },
+            {
+                "id": "ontology",
+                "name": "Ontology",
+                "items": [
+                    {
+                        "id": "ontology_browser",
+                        "label": "Ontology Browser",
+                        "viewer": "ontology_browser",
+                    },
+                    {
+                        "id": "ontology_modules",
+                        "label": "Ontology Modules",
+                        "viewer": "ontology_browser",
+                    },
+                    {
+                        "id": "ontology_concepts",
+                        "label": "Concepts",
+                        "viewer": "ontology_browser",
+                    },
+                    {
+                        "id": "ontology_relations",
+                        "label": "Relations",
+                        "viewer": "document",
+                        "path": "architecture/ADR_002_Resolved_Concept",
+                    },
+                    {
+                        "id": "ontology_rules",
+                        "label": "Rules",
+                        "viewer": "note",
+                        "message": "Not yet available.",
+                    },
+                ],
+            },
+            {
+                "id": "documentation",
+                "name": "Documentation",
+                "items": [
+                    {
+                        "id": "documentation_index",
+                        "label": "Documentation Index",
+                        "viewer": "document",
+                        "path": "INDEX.md",
+                    },
+                    {
+                        "id": "book",
+                        "label": "The Book",
+                        "viewer": "note",
+                        "message": "The Book folder is currently empty.",
+                    },
+                    {
+                        "id": "developer_documentation",
+                        "label": "Developer Documentation",
+                        "viewer": "document",
+                        "path": "developer/DEVELOPMENT_MODE.md",
+                    },
+                ],
+            },
+            {
+                "id": "history",
+                "name": "History",
+                "items": [
+                    {
+                        "id": "session_footprints",
+                        "label": "Session Footprints",
+                        "viewer": "session_footprints",
+                    },
+                    {
+                        "id": "repository_statistics",
+                        "label": "Repository Statistics (optional)",
+                        "viewer": "note",
+                        "message": "",
+                    },
+                ],
+            },
+        ],
+    }
 
+
+def _safe_docs_path(relative_path: str) -> Path:
+    candidate = (_docs_root / relative_path).resolve()
+    if not str(candidate).startswith(str(_docs_root)):
+        raise HTTPException(status_code=400, detail="Invalid documentation path")
+    if not candidate.exists() or not candidate.is_file():
+        raise HTTPException(status_code=404, detail="Documentation file not found")
+    return candidate
+
+
+def _document_title_for_path(relative_path: str) -> str:
+    titles = {
+        "INDEX.md": "Documentation Index",
+        "constitution/TACE_PHILOSOPHICAL_CONSTITUTION.md": "Philosophical Constitution",
+        "constitution/TACE_SEMANTIC_CONSTITUTION.md": "Semantic Constitution",
+        "constitution/TACE_SOFTWARE_CONSTITUTION.md": "Software Constitution",
+        "governance/GOVERNANCE.md": "Governance Manual",
+        "developer/DEVELOPMENT_MODE.md": "Development Mode",
+        "architecture/ROADMAP.md": "Roadmap",
+    }
+
+    return titles.get(relative_path, Path(relative_path).stem.replace("_", " ").title())
+
+
+@app.get("/resources/document/{doc_path:path}")
+def resources_document(doc_path: str):
+    path = _safe_docs_path(doc_path)
+    try:
+        content = path.read_text(encoding="utf-8")
+    except UnicodeDecodeError:
+        raise HTTPException(status_code=400, detail="Unsupported document encoding")
+
+    return {
+        "path": str(path.relative_to(_docs_root)),
+        "title": _document_title_for_path(str(path.relative_to(_docs_root))),
+        "content": content,
+    }
+
+
+@app.get("/resources/adr-ledger")
+def resources_adr_ledger():
+    items = []
+    for path in sorted((_docs_root / "architecture").glob("ADR_*")):
+        if path.is_file():
+            stem = path.name.replace("ADR_", "ADR ", 1).replace("_", " ")
+            items.append(
+                {
+                    "label": stem,
+                    "path": f"architecture/{path.name}",
+                }
+            )
+
+    return {"items": items}
+
+
+@app.get("/resources/session-footprints")
+def resources_session_footprints():
+    items = []
+    for path in sorted((_docs_root / "session_footprints").glob("*")):
+        if path.is_file():
+            label = path.stem.replace("SESSION_FOOTPRINT_", "Session Footprint ").replace("_", " ")
+            items.append(
+                {
+                    "label": label,
+                    "path": f"session_footprints/{path.name}",
+                }
+            )
+
+    return {"items": items}
+
+
+
+
+
+
+
+@app.get("/resources/folder/{folder}")
+def resources_folder(folder: str):
+
+    directory = _docs_root / folder
+
+    if not directory.exists():
+        return {"items": []}
+
+    items = []
+
+    for path in sorted(directory.glob("*")):
+        if path.is_file():
+            items.append({
+                "label": path.stem.replace("_", " "),
+                "path": f"{folder}/{path.name}"
+            })
+
+    return {"items": items}
 
 
 @app.post("/run")
@@ -89,6 +344,24 @@ def run():
     return {
         "stdout": output
     }
+
+
+@app.post("/ask")
+def ask_tace(payload: AskTACERequest):
+
+    question = payload.question.strip()
+    if not question:
+        raise HTTPException(status_code=400, detail="Question is required")
+
+    if payload.assist:
+        question = f"assist: {question}"
+
+    return _ask_tace_query_engine.ask(
+        _ask_tace_universe,
+        question,
+        assist=payload.assist,
+        rendering_mode=payload.rendering_mode,
+    )
 
 
 @app.get("/ontology/modules")

@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
 
+import json
+import os
+from pathlib import Path
+
 import requests
 
 
@@ -9,15 +13,27 @@ class OllamaClient:
 
         self,
 
-        model="qwen3:latest",
+        model=None,
 
-        host="http://localhost:11434",
+        host=None,
 
     ):
 
-        self.model = model
+        config = self._load_runtime_config()
 
-        self.url = host + "/api/generate"
+        configured_model = (
+            config.get("models", {}).get("local_ai")
+            or "qwen3:latest"
+        )
+        configured_host = (
+            config.get("ollama", {}).get("base_url")
+            or "http://host.containers.internal:11434"
+        )
+
+        self.model = model or os.getenv("OLLAMA_MODEL", configured_model)
+
+        base_url = host or os.getenv("OLLAMA_BASE_URL", configured_host)
+        self.url = base_url.rstrip("/") + "/api/generate"
 
     def ask(self, prompt):
 
@@ -51,6 +67,16 @@ class OllamaClient:
         return data["response"]
 
         return response.json()["response"]
+
+    def _load_runtime_config(self):
+
+        runtime_path = Path(__file__).resolve().parent / "new_tace_runtime.json"
+
+        if not runtime_path.exists():
+            return {}
+
+        with runtime_path.open("r", encoding="utf-8") as f:
+            return json.load(f)
 
 
 if __name__ == "__main__":

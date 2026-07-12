@@ -1,0 +1,269 @@
+# ADR-003 — Interactive TACE Query Pipeline
+
+**Status**
+
+Proposed
+
+**Date**
+
+2026-07-03
+
+---
+
+# Context
+
+TACE now has canonical Philosophical, Semantic, and Software Constitutions, plus accepted ADR-001 (Ontology Inheritance Resolver) and ADR-002 (Resolved Concept). The repository already exposes interactive query surfaces (for example, "Ask TACE") and layered query components, but a single canonical architecture for user question-to-answer flow is not yet formally defined.
+
+This ADR defines that canonical interactive query pipeline.
+
+---
+
+# Decision
+
+## 1. Purpose and Scope
+
+ADR-003 SHALL define the canonical architecture by which a user asks a question and receives an answer from TACE.
+
+It SHALL govern:
+
+- interactive question handling;
+- ontology-authoritative answer generation;
+- resolved semantic participation (ADR-001/ADR-002);
+- controlled AI assistance;
+- provenance, justification, and undetermined/error outputs.
+
+It SHALL NOT redefine ontology, metaphysics, or semantic first principles established by higher constitutional authorities.
+
+## 2. User Interaction Model ("Ask TACE")
+
+The interactive user model SHALL be:
+
+**User Question** -> **Ask TACE Pipeline** -> **Structured TACE Answer**
+
+Each response SHALL declare answer status and source class:
+
+- `canonical`: answer derived from accepted ontology and constitutionally valid semantic processing;
+- `assisted`: canonical core plus explicitly bounded AI-assisted explanatory layer;
+- `undetermined`: accepted ontology does not determine an answer;
+- `error`: operational failure prevented valid processing.
+
+## 3. Canonical Query Pipeline (Question to Final Answer)
+
+The canonical pipeline SHALL be:
+
+1. Query Intake and Normalization  
+2. Constitutional and Ontology Authority Gate  
+3. Canonical Retrieval (Explicit Ontology)  
+4. Semantic Resolution (ADR-001 + ADR-002, when required)  
+5. Semantic Validation and Boundary Enforcement  
+6. Knowledge Realizer (canonical expansion package construction)  
+7. Canonical Expansion Verification  
+8. Controlled AI Assistance (rendering-only, optional)  
+9. Final Response Packaging (answer + provenance + justification + status)
+
+## 4. Responsibilities of Each Processing Stage
+
+### 4.1 Query Intake and Normalization
+
+- accept user question;
+- normalize lexical form without changing semantic intent;
+- create query trace identifier for audit/provenance continuity.
+
+### 4.2 Constitutional and Ontology Authority Gate
+
+- enforce constitutional hierarchy before semantic execution;
+- establish that accepted ontology is authoritative for definitions, constraints, and relations;
+- reject forbidden processing paths that would bypass canonical boundaries.
+
+### 4.3 Canonical Retrieval (Explicit Ontology)
+
+- retrieve explicit ontology records relevant to the question;
+- preserve module, concept, and relation provenance;
+- produce explicit semantic candidate set.
+
+### 4.4 Semantic Resolution (ADR-001 + ADR-002)
+
+- when the query requires inherited semantic state, invoke `OntologyInheritanceResolver` (ADR-001);
+- produce `Resolved Concept` artifacts conforming to ADR-002;
+- preserve resolution policy, inheritance graph, conflict report, and canonical signature.
+
+### 4.5 Semantic Validation and Boundary Enforcement
+
+- enforce semantic constitution constraints;
+- reject outputs that collapse canonical distinctions or violate disjointness/boundary rules;
+- classify unresolved canonical insufficiency as `undetermined`, not speculative ontology.
+
+### 4.6 Knowledge Realizer
+
+The Knowledge Realizer SHALL produce an immutable Canonical Expansion Package from canonical semantic state.
+
+It SHALL:
+
+- construct the primary canonical answer;
+- recursively retrieve canonical definitions for referenced ontology concepts until max recursion depth or no further references;
+- avoid recursion cycles;
+- include canonical definitions of referenced ontology relations;
+- include provenance and constitutional status for each retrieved element;
+- return the structured object:
+  - `CanonicalAnswer`
+  - `CanonicalDefinitions[]`
+  - `CanonicalRelations[]`
+  - `CanonicalProvenance[]`
+  - `CanonicalJustification[]`
+  - `ConstitutionalStatus`
+  - `ExpansionDepth`
+  - `RetrievedConcepts`
+
+### 4.7 Canonical Expansion Verification
+
+Before AI Assistance begins, the pipeline SHALL verify that:
+
+- every referenced concept has provenance;
+- every definition originates from accepted ontology;
+- no unresolved concepts remain.
+
+If verification fails, AI Assistance SHALL NOT execute.
+
+### 4.8 Controlled AI Assistance
+
+AI models MAY assist only after canonical pipeline stages are completed and only in constitutionally bounded roles:
+
+- linguistic reformulation;
+- pedagogical explanation;
+- contextual elaboration explicitly marked as non-canonical.
+
+AI assistance SHALL NOT:
+
+- bypass or short-circuit any preceding canonical pipeline stage;
+- redefine ontology;
+- override resolved canonical outputs;
+- define ontology concepts not present in the canonical expansion package;
+- infer meanings from concept names;
+- synthesize new ontology;
+- interpolate missing doctrine;
+- invent causal relations;
+- invent metaphysical explanations;
+- suppress `undetermined` results with fabricated certainty.
+
+The AI SHALL receive only:
+
+- the immutable Canonical Expansion Package;
+- a rendering mode (`technical | academic | educational | popular | child`).
+
+The AI SHALL only reorganize and restate supplied canonical information for the requested audience.
+
+### 4.9 Final Response Packaging
+
+Each final response SHALL include:
+
+- answer text;
+- status (`canonical` | `assisted` | `undetermined` | `error`);
+- source decomposition (explicit ontology, resolved concept, reasoned derivation, assisted layer);
+- semantic justification summary;
+- provenance references.
+
+## 5. When the Ontology Is Authoritative
+
+The accepted ontology SHALL be authoritative whenever the query concerns TACE conceptual definitions, constraints, identity, classification, and canonical relations.
+
+When conflict exists between ontology-authoritative output and model-generated output, ontology SHALL take absolute precedence.
+
+## 6. When AI Models May Assist
+
+AI models MAY assist only when:
+
+- canonical retrieval and semantic resolution are insufficient for expressive presentation; or
+- external-context explanation is requested beyond canonical definition.
+
+All AI-assisted content SHALL be clearly labeled and SHALL remain subordinate to canonical ontology and constitutional constraints.
+
+## 7. Participation of Resolved Concepts (ADR-002)
+
+Resolved Concepts SHALL participate when inherited semantics are required by the question context.
+
+The pipeline SHALL preserve ADR-002 structure, including:
+
+- semantic identity;
+- explicit vs inherited boundaries;
+- justification/provenance;
+- resolution policy and conflict report;
+- canonical signature.
+
+## 8. Knowledge Realizer and Final Answer Production
+
+The Knowledge Realizer SHALL be the canonical package-construction stage.
+
+It SHALL:
+
+- consume explicit and/or resolved canonical semantic artifacts;
+- build the immutable Canonical Expansion Package;
+- preserve traceability from every answer claim to canonical sources.
+
+## 9. Provenance and Justification Requirements
+
+The pipeline SHALL provide auditable provenance and justification for every canonical claim in the final answer.
+
+At minimum, provenance SHALL identify:
+
+- originating ontology concept/relation;
+- inherited path (if resolved);
+- resolution policy basis;
+- reasoning rule basis (if derived).
+
+## 10. Error Handling and Undetermined Answers
+
+If accepted ontology and valid semantic resolution do not determine an answer, the system SHALL return `undetermined` and explicitly state that the matter is undetermined within TACE.
+
+Operational failures (storage/query/resolution/runtime errors) SHALL return `error` with explicit failure classification, and SHALL NOT emit speculative fallback as canonical output.
+
+If AI assistance encounters a concept without canonical definition in the immutable package, it SHALL output exactly: `No canonical definition is available for "<concept>".`
+
+## 11. Relationship with the Three Constitutions
+
+- **Philosophical Constitution:** defines ontological truth commitments that this pipeline must never redefine.
+- **Semantic Constitution:** governs semantic behavior, explicit/resolved distinction, provenance, and undetermined-response discipline.
+- **Software Constitution:** governs implementation layering, compliance enforcement, verification gates, and constitutional subordination.
+
+ADR-003 is subordinate to all three constitutions and to accepted ontology.
+
+## 12. Architectural Consequences
+
+Positive:
+
+- establishes a single canonical "Ask TACE" interaction contract;
+- aligns interactive flow with constitutional hierarchy and ADR-001/ADR-002;
+- improves explainability, auditability, and provenance integrity.
+
+Tradeoffs:
+
+- introduces stricter staging and validation overhead;
+- requires explicit status/source packaging in response contracts;
+- reduces latitude for unconstrained generative answering.
+
+---
+
+# Rationale
+
+This ADR unifies existing interactive-query practices under one constitutionally aligned architecture, preventing ambiguity between canonical answers and AI-assisted discourse while preserving the central principle that ontology remains authoritative.
+
+---
+
+# Consequences
+
+Positive:
+
+- canonical governance of user-facing query behavior;
+- clear boundary between ontology-authoritative outputs and AI assistance;
+- direct architectural continuity with ADR-001 and ADR-002.
+
+Negative:
+
+- additional orchestration complexity in query handlers;
+- stricter provenance and status obligations for all answer-producing components.
+
+---
+
+# Relationship to Existing ADRs
+
+- Depends on **ADR-001** for inheritance-resolution placement and query-layer responsibility.
+- Depends on **ADR-002** for the structure and semantics of resolved artifacts used in answer construction.

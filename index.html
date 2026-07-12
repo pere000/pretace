@@ -24,10 +24,28 @@ body{
 
     padding:10px;
 
+}
 
+.ontology-text{
+    white-space:pre-wrap;
+    word-break:break-word;
+}
 
+.model-btn {
+    background: #e0e0e0;
+    border: 1px solid #a0a0a0;
+    padding: 6px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+}
 
-
+.model-btn.active {
+    background: navy;
+    color: white;
+    border-color: navy;
+    font-weight: bold;
 }
 
 </style>
@@ -42,192 +60,222 @@ TACE-Aquinas Conceptual Ecosystem
 </div>
 
 
-<div style="display:flex;justify-content:flex-start;">
+<div  name='menu1' style="display:flex;justify-content:flex-start;">
 
-    <div style="padding:10px;">
+    <div name='runtime' style="padding:10px;"><div style="color:navy;font-weight:bold">RUNTIME</div>
+            <input type="button" value="Run TACE" onclick="runtime()">
+    </div>
+    <div name='initialization' style="padding:10px;"><div style="color:navy;font-weight:bold">INITIALIZATION</div>
+            <input type="button" value="Resources" onclick="resources()"> <input type="button" value="Ontologies" onclick="ontologies();"> <input type="button" value="RAG" onclick="rag()"> <input type="button" value="Learning" onclick="learning()"> <!--<input type="button" value="Models" onclick="models()">--> <input type="button" value="System Status" onclick="status()">
+    </div>
+</div>
 
-        <div style="color:navy;font-weight:bold">
-            INITIALIZATION
-        </div>
 
-        <input type="button" value="Resources" onclick="resources()">
+<div name='menu2' id="resources_panel" class="panel">
+    <div style="color:navy;font-weight:bold">RESOURCES</div><br>
+                <input name='menu3' type="button" value="Constitutions" onclick="constitutions()"> <input name='menu3' type="button" value="Governance" onclick="governance()"> <input name='menu3' type="button" value="Architecture" onclick="architecture()"> <!--<input name='menu3' type="button" value="Ontologies" onclick="ontologies_()">--> <input name='menu3' type="button" value="Documentation" onclick="documentation()">  <input name='menu3' type="button" value="History" onclick="history()">
+</div>
 
-        <input type="button" value="Ontologies" onclick="ontologies()">
+<div name='menu2' id="ontology_modules" class="panel">
+    <div style="color:navy;font-weight:bold">ONTOLOGY MODULES</div><br>
 
-        <input type="button" value="RAG" onclick="rag()">
+        <input name='menu3' type="button" value="Aristotle_Aquinas" onclick="openModule('Aristotle_Aquinas')"> <input name='menu3' type="button" value="Maturana_Varela" onclick="openModule('Maturana_Varela')"> <input name='menu3' type="button" value="Mystici_Corporis_Christi" onclick="openModule('Mystici_Corporis_Christi')"> <input name='menu3' type="button" value="TACE" onclick="openModule('TACE')"> <input name='menu3' type="button" value="Tegmark" onclick="openModule('Tegmark')"> <br><br>
+        <input name='menu3' type="button" value="Export Module" style='color:navy' onclick="exportModule()">
 
-        <input type="button" value="Learning" onclick="learning()">
+</div>
 
-        <input type="button" value="Models" onclick="models()">
+<div name='menu2' id="rag_panel" class="panel">
+    <div style="color:navy;font-weight:bold">RAG </div><br>
 
-        <input type="button" value="System Status" onclick="status()">
+</div>
 
+<div name='menu2' id="learning_panel" class="panel">
+    <div style="color:navy;font-weight:bold">LEARNING</div><br>
+
+</div>
+<div name='menu2' id="models_panel" class="panel">
+    <div style="color:navy;font-weight:bold"></div><br>
+
+</div>
+<div name='menu2' id="status_panel" class="panel">
+    <div style="color:navy;font-weight:bold">SYSTEM SATATUS</div><br>
+
+</div>
+
+<div name='menu2' id="runtime_panel" class="panel">
+    <div style="color:navy;font-weight:bold">ASK TACE</div><br>
+
+<textarea id="ask_tace_question"
+          style="width:100%;min-height:90px"
+          placeholder="Enter your question"></textarea>
+<div style="margin-top:8px;">
+    <input type="button" value="Ask TACE" onclick="runAskTACE()">
+</div>
+
+
+
+<!-- AI Model Selector Section -->
+<div style="margin-top:40px; margin-bottom:12px;">
+    <div style="color:navy;font-weight:bold;margin-bottom:6px;">AI Models</div>
+
+    <!-- Row of Model Buttons with corresponding ID attributes -->
+    <div id="model_buttons_container" style="display:flex; flex-wrap:wrap;">
+        <input name='menu3' type="button" id="GPT-4o" class="model-btn active" value="GPT-4o" onclick="selectModel('GPT-4o', this)" style="margin-right:8px; margin-bottom:8px;">
+        <input name='menu3' type="button" id="Claude-3.5-Sonnet" class="model-btn" value="Claude-3.5-Sonnet" onclick="selectModel('Claude-3.5-Sonnet', this)" style="margin-right:8px; margin-bottom:8px;">
+        <input name='menu3' type="button" id="Gemini-1.5-Pro" class="model-btn" value="Gemini-1.5-Pro" onclick="selectModel('Gemini-1.5-Pro', this)" style="margin-right:8px; margin-bottom:8px;">
+        <input name='menu3' type="button" id="Llama-3" class="model-btn" value="Llama-3" onclick="selectModel('Llama-3', this)" style="margin-right:8px; margin-bottom:8px;">
     </div>
 
-
-    <div style="padding:10px;">
-
-        <div style="color:navy;font-weight:bold">
-            RUNTIME
-        </div>
-
-        <input type="button"
-               value="Run TACE"
-               onclick="runtime()">
-
+    <!-- Management Controls: [ADD] [Input Field] [DELETE] -->
+    <div style="margin-top:8px; display:flex; align-items:center;">
+        <input type="button" value="New Model" onclick="addModel()" style="padding: 4px 10px; cursor: pointer; border-radius: 4px; border: 1px solid #a0a0a0; background: #e0e0e0; font-size:12px; font-weight:bold; margin-right:6px;">
+        <input type="text" id="new_model_name" placeholder="New Model Name" style="padding:4px; border:1px solid #a0a0a0; border-radius:4px; font-size:13px; width:160px; margin-right:6px;">
+        <input type="button" value="Delete" onclick="deleteModel()" style="padding: 4px 10px; cursor: pointer; border-radius: 4px; border: 1px solid #a0a0a0; background: #e0e0e0; font-size:12px; font-weight:bold;">
     </div>
+</div>
 
+<div style="margin-top:8px;">
+    <label>
+        <input type="checkbox" id="ask_tace_assist">
+        Request Assisted Explanation (Non-Canonical)
+    </label>
+</div>
 
-    <div style="padding:10px;">
+<div style="margin-top:8px;">
+    <label>
+        Rendering Mode:
+        <select id="ask_tace_rendering_mode">
+            <option value="technical">technical</option>
+            <option value="academic">academic</option>
+            <option value="educational">educational</option>
+            <option value="popular">popular</option>
+            <option value="child">child</option>
+        </select>
+    </label>
+</div>
 
-        <div style="color:navy;font-weight:bold">
-            TOOLS
-        </div>
+<hr>
 
-        <input type="button"
-               value="Repository Browser"
-               onclick="repository()">
-
-        <input type="button"
-               value="Ontology Browser"
-               onclick="browser()">
-
-    </div>
+<div id="ask_tace_result" style="border:1px solid gray;padding:8px;min-height:50px;color:gray;" onclick="clearHint(this)">Waiting for result ...</div>
+<script>
+function clearHint(div){
+    if(div.innerText === "Type your text here..."){
+        div.innerText = "";
+        div.style.color = "black";
+    }
+}
+</script>
+<hr>
 
 </div>
 
 
-<!-- ====================================================== -->
+<!--<div name='menu2' id="repository_panel" class="panel">
+    <div style="color:navy;font-weight:bold">REPOSITORY BROWSER</div><br>
+        <input name='menu3' type="button" value="Export Module" onclick="exportModule()">
+</div>-->
 
-<div id="resources_panel" class="panel">
-
-Resources
-
-</div>
-
-
-<div id="ontology_modules" class="panel">
-
-    <div style="color:navy;font-weight:bold">
-
-        ONTOLOGY MODULES
-
-    </div>
-
-    <br>
-
-    <input
-        type="button"
-        value="Aristotle_Aquinas"
-        onclick="openModule('Aristotle_Aquinas')">
-
-    <input
-        type="button"
-        value="Maturana_Varela"
-        onclick="openModule('Maturana_Varela')">
-
-    <input
-        type="button"
-        value="Mystici_Corporis_Christi"
-        onclick="openModule('Mystici_Corporis_Christi')">
-
-    <input
-        type="button"
-        value="TACE"
-        onclick="openModule('TACE')">
-
-    <input
-        type="button"
-        value="Tegmark"
-        onclick="openModule('Tegmark')">
-
-    <hr>
-
-    <div id="ontology_detail">
-
-        Select a module.
-
-    </div>
-
-</div>
-
-
-<div id="rag_panel" class="panel">
-
-RAG
-
-</div>
-
-
-<div id="learning_panel" class="panel">
-
-Learning
-
-</div>
-
-
-<div id="models_panel" class="panel">
-
-Models
-
-</div>
-
-
-<div id="status_panel" class="panel">
-
-System Status
-
-</div>
-
-
-<div id="runtime_panel" class="panel">
-
-Run TACE
-
-</div>
-
-
-<div id="repository_panel" class="panel">
-
-Repository Browser
-
-<br><br>
-
-<input type="button"
-       value="Export Module"
-       onclick="exportModule()">
-
-</div>
-
-
-<div id="browser_panel" class="panel">
-
-Ontology Browser
-
-</div>
-
+<div id="hello_world" style='margin-top:20px'></div>
 
 <script>
 
 let currentConcept = null;
 let currentEdit = null;
+let selectedModel = 'GPT-4o'; // Store selected model
+const apiBase = window.location.protocol === "file:"
+    ? "http://127.0.0.1:8000"
+    : "";
+
+function apiPath(path){
+    return apiBase ? apiBase + path : path;
+}
+
+function apiFetch(path, options){
+    return fetch(apiPath(path), options);
+}
+
+async function openResourceDocument(path, title){
+    const response = await apiFetch("/resources/document/" + encodeURIComponent(path));
+    const payload = await response.json();
+
+    if (!response.ok){
+        document.getElementById("hello_world").innerHTML =
+            "<div style='color:red'>" + escapeHtml(payload.detail || response.statusText) + "</div>";
+        return;
+    }
+
+    let html = "";
+    html += "<div style='color:navy;font-weight:bold'>" + escapeHtml(payload.title || title) + "</div><br>";
+    html += "<pre class='ontology-text' style='margin:0;white-space:pre-wrap'>" + escapeHtml(payload.content || "") + "</pre>";
+    document.getElementById("hello_world").innerHTML = html;
+}
+
+function renderResourceButtons(title, items){
+    let html = "";
+
+    html += "<div style='color:navy;font-weight:bold'>";
+    html += escapeHtml(title);
+    html += "</div><br>";
+
+    for(const item of items){
+        html +=
+            "<input " +
+            "type='button' " +
+            "value='" + escapeHtml(item.label) + "' " +
+            "style='margin-right:4px;margin-bottom:4px;' " +
+            "onclick=\"openResourceDocument('" + item.path.replaceAll("'", "\\'") + "','" + item.label.replaceAll("'", "\\'") + "')\"> ";
+    }
+
+    document.getElementById("hello_world").innerHTML = html;
+}
+
+async function loadResourceFolder(folder, title){
+    const response = await apiFetch("/resources/folder/" + encodeURIComponent(folder));
+    const payload = await response.json();
+
+    if (!response.ok){
+        document.getElementById("hello_world").innerHTML =
+            "<div style='color:red'>" + escapeHtml(payload.detail || response.statusText) + "</div>";
+        return;
+    }
+
+    renderResourceButtons(title, payload.items || []);
+}
+
+async function constitutions(){ return loadResourceFolder("constitution", "Constitutions"); }
+
+async function architecture(){ return loadResourceFolder("architecture", "Architecture"); }
+
+async function governance(){ return loadResourceFolder("governance", "Governance"); }
+
+async function ontologies_(){
+
+    ontologies();
+
+}
+
+async function documentation(){ return loadResourceFolder("specifications", "Documentation"); }
+
+async function history(){ return loadResourceFolder("session_footprints", "History"); }
 
 function hideAll(){
 
     document.querySelectorAll(".panel").forEach(
-
         p => p.style.display = "none"
-
     );
+
+    document.getElementById("hello_world").innerHTML = "";
 
 }
 
 
-function resources(){
+async function resources(){
 
     hideAll();
 
     document.getElementById("resources_panel").style.display="block";
+
+    document.getElementById("hello_world").innerHTML = "";
 
 }
 
@@ -285,6 +333,104 @@ function runtime(){
 
 }
 
+function escapeHtml(value){
+    return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#39;");
+}
+
+function renderList(items){
+    if (!items || !items.length){
+        return "<div style='margin-left:15px'>(none)</div>";
+    }
+
+    let html = "<ul style='margin-top:4px'>";
+    for (const item of items){
+        const content = typeof item === "string"
+            ? item
+            : JSON.stringify(item, null, 2);
+        html += "<li><pre style='margin:0;white-space:pre-wrap'>" +
+                escapeHtml(content) +
+                "</pre></li>";
+    }
+    html += "</ul>";
+    return html;
+}
+
+function renderAskResult(data){
+    let html = "";
+
+    html += "<div style='color:navy;font-weight:bold'>Status</div>";
+    html += "<div style='margin-left:15px'>" + escapeHtml(data.status || "") + "</div>";
+
+    html += "<div style='color:navy;font-weight:bold;margin-top:10px'>Trace ID</div>";
+    html += "<div style='margin-left:15px'>" + escapeHtml(data.trace_id || "") + "</div>";
+
+    html += "<div style='color:navy;font-weight:bold;margin-top:10px'>Canonical Answer</div>";
+    html += "<div class='ontology-text' style='margin-left:15px'>" +
+            escapeHtml(data.answer || "") +
+            "</div>";
+
+    html += "<div style='color:navy;font-weight:bold;margin-top:10px'>Optional Assisted Explanation</div>";
+    html += "<div class='ontology-text' style='margin-left:15px'>" +
+            escapeHtml(data.assisted_explanation || "(none)") +
+            "</div>";
+
+    html += "<div style='color:navy;font-weight:bold;margin-top:10px'>Justification</div>";
+    html += renderList(data.justification || []);
+
+    html += "<div style='color:navy;font-weight:bold;margin-top:10px'>Provenance</div>";
+    html += renderList(data.provenance || []);
+
+    return html;
+}
+
+async function runAskTACE(){
+
+    const question = document.getElementById("ask_tace_question").value.trim();
+    const assist = document.getElementById("ask_tace_assist").checked;
+    const rendering_mode = document.getElementById("ask_tace_rendering_mode").value;
+    const resultBox = document.getElementById("ask_tace_result");
+
+    if (!question){
+        alert("Question is required.");
+        return;
+    }
+
+    resultBox.innerHTML = "Processing...";
+
+    const response = await apiFetch("/ask", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            question,
+            assist,
+            rendering_mode
+        })
+    });
+
+    let payload = {};
+    try {
+        payload = await response.json();
+    } catch (_) {
+    }
+
+    if (!response.ok){
+        const detail = payload.detail || response.statusText;
+        resultBox.innerHTML = "<span style='color:red'>Error: " +
+                              escapeHtml(detail) +
+                              "</span>";
+        return;
+    }
+
+    resultBox.innerHTML = renderAskResult(payload);
+}
+
 
 function repository(){
 
@@ -297,9 +443,7 @@ function repository(){
 
 function browser(){
 
-    hideAll();
-
-    document.getElementById("browser_panel").style.display="block";
+    ontologies();
 
 }
 
@@ -307,7 +451,7 @@ function browser(){
 
 async function openModule(module){
 
-    const r = await fetch("/ontology/module/" + encodeURIComponent(module));
+    const r = await apiFetch("/ontology/module/" + encodeURIComponent(module));
 
     const concepts = await r.json();
 
@@ -328,7 +472,7 @@ async function openModule(module){
 
     }
 
-    document.getElementById("ontology_detail").innerHTML = html;
+    document.getElementById("hello_world").innerHTML = html;
 
 }
 
@@ -337,7 +481,7 @@ async function openModule(module){
 
 async function openConcept(module, concept){
 
-    const r = await fetch(
+    const r = await apiFetch(
         "/ontology/concept/" +
         encodeURIComponent(module) +
         "/" +
@@ -392,7 +536,11 @@ function renderConcept(){
         html += f[0];
         html += "</div>";
 
-        html += "<div style='margin-left:15px'>";
+        const isLongTextField = editableFields.has(f[1]);
+
+        html += isLongTextField
+            ? "<div class='ontology-text' style='margin-left:15px'>"
+            : "<div style='margin-left:15px'>";
 
         if (currentEdit && currentEdit.field === f[1]){
             html += "<textarea id='edit_field_value' style='width:100%;min-height:120px'>" +
@@ -415,7 +563,7 @@ function renderConcept(){
 
     }
 
-    document.getElementById("ontology_detail").innerHTML = html;
+    document.getElementById("hello_world").innerHTML = html;
 }
 
 function editField(module,concept,field){
@@ -453,7 +601,7 @@ async function saveEdit(){
         value,
     };
 
-    const r = await fetch('/ontology/update', {
+    const r = await apiFetch('/ontology/update', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -476,7 +624,7 @@ async function saveEdit(){
 
 async function exportModule(){
 
-    const modulesResponse = await fetch('/ontology/modules');
+    const modulesResponse = await apiFetch('/ontology/modules');
 
     if (!modulesResponse.ok){
         alert('Could not load modules.');
@@ -505,7 +653,7 @@ async function exportModule(){
         return;
     }
 
-    const response = await fetch('/ontology/export', {
+    const response = await apiFetch('/ontology/export', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -539,6 +687,74 @@ async function exportModule(){
     URL.revokeObjectURL(url);
 
     alert('Export generated: ' + filename);
+}
+
+// Function to handle single selection of AI Model
+function selectModel(modelName, buttonEl) {
+    selectedModel = modelName;
+    document.querySelectorAll('.model-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    buttonEl.classList.add('active');
+}
+
+// Function to add a new AI Model dynamically
+function addModel() {
+    const input = document.getElementById("new_model_name");
+    const modelName = input.value.trim();
+    if (!modelName) {
+        alert("Please enter a model name.");
+        return;
+    }
+
+    // Check if model already exists (case-insensitive)
+    let exists = false;
+    document.querySelectorAll(".model-btn").forEach(btn => {
+        if (btn.value.toLowerCase() === modelName.toLowerCase()) {
+            exists = true;
+        }
+    });
+
+    if (exists) {
+        alert("This model already exists.");
+        return;
+    }
+
+    const container = document.getElementById("model_buttons_container");
+    const newBtn = document.createElement("input");
+    newBtn.type = "button";
+    newBtn.className = "model-btn";
+    newBtn.value = modelName;
+    newBtn.id = modelName; // Set the button ID to the exact model name value
+    newBtn.style.marginRight = "8px";
+    newBtn.style.marginBottom = "8px";
+    newBtn.onclick = function() {
+        selectModel(modelName, this);
+    };
+
+    container.appendChild(newBtn);
+    selectModel(modelName, newBtn); // Auto-select the newly added model
+    input.value = ""; // Clear text field
+}
+
+// Function to delete the currently selected AI Model
+function deleteModel() {
+    const container = document.getElementById("model_buttons_container");
+    const activeBtn = container.querySelector(".model-btn.active");
+    if (!activeBtn) {
+        alert("No model is currently selected to delete.");
+        return;
+    }
+
+    activeBtn.remove();
+
+    // Select another model if any remain
+    const remainingBtns = container.querySelectorAll(".model-btn");
+    if (remainingBtns.length > 0) {
+        remainingBtns[0].click();
+    } else {
+        selectedModel = "";
+    }
 }
 </script>
 

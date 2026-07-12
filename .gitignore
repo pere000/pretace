@@ -22,6 +22,7 @@ venv/
 *.swp
 *.swo
 .kate-swp
+*.kate-swp
 *.tmp
 
 #########################################################
@@ -68,6 +69,7 @@ trash/
 #########################################################
 
 .vscode/settings.json
+.continue/
 
 #########################################################
 # Build artifacts
@@ -84,3 +86,4 @@ build/
 !data/tace_knowledge.db
 !data/tace_session.db
 !new_tace_knowledge.db
+.aider*

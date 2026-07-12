@@ -32,6 +32,9 @@ class TACESession:
 
         mode="tace",
 
+        canonical_package=None,
+        rendering_mode="technical",
+
     ):
 
         prompt = self.builder.build(
@@ -41,6 +44,9 @@ class TACESession:
             question,
 
             mode,
+
+            canonical_package=canonical_package,
+            rendering_mode=rendering_mode,
 
         )
 

@@ -1,0 +1,401 @@
+# ADR-004 — Canonical Reasoning Engine
+
+**Status**
+
+Proposed
+
+**Date**
+
+2026-07-03
+
+**Supersedes**
+
+None
+
+**Depends on**
+
+- TACE Philosophical Constitution
+- TACE Semantic Constitution
+- TACE Software Constitution
+- ADR-001 — Ontology Inheritance Resolver
+- ADR-002 — Resolved Concept
+- ADR-003 — Interactive TACE Query Pipeline
+
+---
+
+# 1. Context
+
+ADR-003 defines a deterministic interactive pipeline for canonical retrieval, canonical expansion, canonical verification, and controlled rendering. It is reliable for explicit ontology answers but does not yet canonically define logical derivation of conclusions implied by accepted ontology.
+
+TACE therefore requires a constitutionally governed reasoning architecture that is deterministic, auditable, provenance-complete, and ontology-authoritative.
+
+---
+
+# 2. Decision
+
+TACE SHALL introduce a canonical reasoning stage governed by this ADR.
+
+The Canonical Reasoning Engine SHALL:
+
+- reason exclusively over canonical facts and accepted canonical rules;
+- produce deterministic, strategy-independent canonical results;
+- emit machine-readable proof chains and full provenance;
+- preserve strict separation from AI rendering.
+
+The reasoning stage SHALL NOT:
+
+- mutate ontology;
+- infer canon through statistical or generative methods;
+- synthesize doctrine not present in governed canonical artifacts;
+- use external AI systems for reasoning.
+
+The architectural purpose of this stage SHALL be to convert canonical semantic input into constitutionally valid derived knowledge without weakening ontology authority.
+
+---
+
+# 3. Five-Layer Architectural Model
+
+TACE SHALL adopt the following architectural layers:
+
+```text
+Ontology Layer
+    │
+    ▼
+Fact Layer
+    │
+    ▼
+Reasoning Layer
+    │
+    ▼
+Knowledge Layer
+    │
+    ▼
+Presentation Layer
+```
+
+## 3.1 Ontology Layer
+
+- canonical concepts
+- canonical relations
+- canonical reasoning rules (governed artifacts)
+
+## 3.2 Fact Layer
+
+- Canonical Fact Extractor
+- normalized canonical facts
+
+## 3.3 Reasoning Layer
+
+- immutable ReasoningContext
+- Canonical Reasoning Engine
+- Proof Builder
+- Consistency Verification
+- compiled executable rule representation (runtime form of canonical rules)
+
+## 3.4 Knowledge Layer
+
+- Derived Knowledge Package
+- Knowledge Realizer (post-reasoning only)
+
+## 3.5 Presentation Layer
+
+- Controlled AI Renderer (optional, never reasoning)
+
+## 3.6 Layer Invariants
+
+The following invariants SHALL hold across all layers:
+
+- authority SHALL flow from higher canonical artifacts to lower execution layers;
+- lower layers SHALL NOT redefine or mutate higher-layer canonical meaning;
+- provenance and constitutional status SHALL remain traceable across layer transitions;
+- deterministic canonical outputs SHALL be independent of storage or execution technology.
+
+---
+
+# 4. ADR-003 / ADR-004 Responsibility Split (Definitive)
+
+## 4.1 ADR-003 Owns
+
+- query intake and normalization;
+- canonical retrieval;
+- canonical expansion package construction;
+- pre-reasoning package verification for canonical completeness;
+- knowledge realization from post-reasoning outputs;
+- controlled AI rendering orchestration;
+- final response packaging.
+
+## 4.2 ADR-004 Owns
+
+- canonical fact extraction from canonical expansion package;
+- immutable ReasoningContext construction;
+- deterministic derivation execution;
+- proof-chain generation;
+- consistency/conflict analysis for reasoning outputs;
+- post-reasoning verification of derived results.
+
+No overlap SHALL be permitted between these ownership boundaries.
+
+---
+
+# 5. Architectural Position in Pipeline
+
+```text
+ADR-003 Canonical Expansion Package
+        │
+        ▼
+Canonical Fact Extractor (ADR-004, mandatory)
+        │
+        ▼
+ReasoningContext (ADR-004, immutable)
+        │
+        ▼
+Canonical Reasoning Engine (ADR-004)
+        │
+        ▼
+Derived Knowledge Package
+        │
+        ▼
+ADR-003 Knowledge Realizer (post-reasoning)
+        │
+        ▼
+ADR-003 Controlled AI Renderer (optional)
+```
+
+---
+
+# 6. Mandatory Canonical Fact Extractor
+
+The Canonical Fact Extractor SHALL be a mandatory component between canonical expansion and reasoning.
+
+It SHALL:
+
+- transform canonical package artifacts into normalized logical facts;
+- preserve source provenance for each produced fact;
+- preserve constitutional status metadata;
+- avoid semantic mutation during normalization.
+
+It SHALL NOT:
+
+- perform inference;
+- alter canonical meaning;
+- introduce non-canonical facts.
+
+The extractor contract SHALL remain implementation-independent and valid across relational, graph, logic, or distributed storage technologies.
+
+---
+
+# 7. Immutable ReasoningContext
+
+Every reasoning session SHALL operate on an immutable `ReasoningContext`.
+
+Minimum required fields:
+
+- `context_id`
+- `timestamp`
+- `ontology_snapshot_signature`
+- `rule_set_signature`
+- `canonical_facts`
+- `goal`
+- `constraints`
+- `session_assertions` (optional, non-canonical)
+- `reasoning_mode`
+
+The ReasoningContext SHALL NOT be modified after construction.
+
+The ReasoningContext SHALL be the sole authority for session-bound reasoning state.
+
+---
+
+# 8. Canonical Rules and Runtime Rule Representation
+
+Canonical reasoning rules SHALL be governed ontology artifacts in the Ontology Layer.
+
+Each canonical rule SHALL include:
+
+- identifier;
+- semantic version;
+- premises;
+- conclusion;
+- provenance;
+- constitutional approval status;
+- lifecycle status;
+- deterministic precedence rank.
+
+Compiled executable rule representations SHALL belong to the Reasoning Layer and SHALL be traceable to canonical rule identifiers and versions.
+
+No compiled rule representation SHALL supersede canonical rule governance.
+
+---
+
+# 9. Inference Strategy Neutrality and Determinism
+
+ADR-004 SHALL remain implementation-neutral regarding inference algorithms.
+
+Forward chaining, backward chaining, or hybrid execution MAY be used, provided outputs remain deterministic and strategy-independent for equivalent inputs, rule-set signatures, and constraints.
+
+Determinism SHALL be enforced through:
+
+- canonical rule ordering;
+- deterministic fact ordering;
+- deterministic tie-breaking;
+- stable serialization of reasoning outputs and signatures.
+
+This ADR SHALL define invariants and contracts, not specific reasoning algorithms.
+
+---
+
+# 10. Canonical Fact and Result Categories
+
+Reasoning SHALL distinguish:
+
+1. **Asserted Facts** — canonical ontology assertions.
+2. **Derived Facts** — produced by reasoning rules in-session.
+3. **Session Assertions** — temporary, non-canonical contextual assertions.
+
+Derived facts SHALL remain distinct from asserted canonical ontology and SHALL NOT be written back to ontology automatically.
+
+---
+
+# 11. Proof and Provenance Requirements
+
+Every derived fact SHALL include:
+
+- premises;
+- applied rule id/version;
+- intermediate derivation path;
+- canonical provenance links;
+- constitutional status.
+
+No derived fact MAY exist without a proof chain.
+
+Proof chains SHALL be machine-readable and reproducible.
+
+---
+
+# 12. Consistency, Contradictions, and Cycles
+
+The Reasoning Layer SHALL produce a `ConsistencyReport` containing:
+
+- contradictions;
+- rule conflicts;
+- blocked derivations;
+- cycle detections;
+- unresolved constraint violations.
+
+Reasoning execution SHALL include explicit cycle handling and guaranteed termination controls (e.g., duplicate suppression and bounded iteration/depth safeguards).
+
+Reasoning execution SHALL satisfy a termination contract that is finite, auditable, and deterministic for equivalent inputs.
+
+---
+
+# 13. Constitutional Verification Gates
+
+## 13.1 Pre-Reasoning Gate (ADR-003 + ADR-004 boundary)
+
+Before reasoning execution:
+
+- canonical package validity SHALL be confirmed (ADR-003);
+- extracted canonical facts and rule signatures SHALL be validated (ADR-004).
+
+## 13.2 Post-Reasoning Gate (ADR-004)
+
+Before downstream realization:
+
+- all derived facts SHALL have proofs and provenance;
+- ontology immutability SHALL be confirmed;
+- constitutional constraints SHALL be confirmed.
+
+Failure of verification SHALL block downstream AI rendering.
+
+Verification gates SHALL be architecture-level obligations independent of implementation technology.
+
+---
+
+# 14. Failure Semantics
+
+Reasoning outcomes SHALL map to:
+
+- `canonical` — valid result with complete proof/provenance;
+- `undetermined` — no valid canonical derivation resolves the goal;
+- `error` — operational/verification failure.
+
+On `error`, no speculative canonical output SHALL be emitted.
+
+---
+
+# 15. Constitutional Constraints
+
+This ADR remains subordinate to all three constitutions.
+
+The ontology SHALL remain immutable during every reasoning session.
+
+AI SHALL never perform reasoning; AI is presentation-only and receives already-governed outputs.
+
+---
+
+# 16. Relationship to Existing ADRs
+
+- **ADR-001:** resolver/repository separation remains intact; reasoning consumes semantic outputs without collapsing boundaries.
+- **ADR-002:** reasoning MAY consume Resolved Concepts as canonical semantic artifacts when requested by query mode.
+- **ADR-003:** this ADR defines the reasoning architecture invoked by ADR-003 pipeline orchestration.
+
+---
+
+# 17. Consequences
+
+Positive:
+
+- constitutionally governed logical derivation;
+- explicit proof and provenance transparency;
+- deterministic, auditable reasoning behavior;
+- strict separation between reasoning and rendering.
+
+Trade-offs:
+
+- increased implementation and governance complexity;
+- higher verification burden;
+- additional runtime overhead for large reasoning workloads.
+
+---
+
+# 18. Acceptance Criteria
+
+ADR-004 implementation SHALL be accepted only if:
+
+1. canonical fact extraction is implemented as a mandatory explicit stage;
+2. every reasoning run uses an immutable ReasoningContext with required signatures;
+3. deterministic replay produces identical canonical outputs;
+4. every derived fact includes complete proof/provenance;
+5. ontology is never mutated by reasoning execution;
+6. terminal and web interfaces consume the same canonical reasoning path under ADR-003 orchestration.
+7. ADR-003 / ADR-004 ownership boundaries are preserved with no overlap;
+8. all contracts remain valid independent of concrete storage, reasoning, or execution technology.
+
+---
+
+# 19. Future Extensions
+
+Deferred to future ADRs:
+
+- probabilistic/fuzzy reasoning;
+- theorem proving extensions;
+- temporal reasoning;
+- distributed reasoning;
+- ontology-version comparative reasoning.
+
+Any extension SHALL preserve the five-layer architecture and constitutional authority hierarchy.
+
+### Rationale
+
+The Canonical Reasoning Engine is intentionally restricted to deterministic, explainable logical deduction over immutable canonical ontology artifacts.
+
+The deferred paradigms above are excluded from ADR-004 because they introduce one or more of the following:
+
+- uncertainty or probabilistic outcomes;
+- approximate or graded truth;
+- hypothesis generation beyond logical entailment;
+- heuristic or analogy-driven inference;
+- statistical or machine-learning inference;
+- ontology mutation or ontology-evolution behavior during reasoning execution.
+
+These paradigms are not rejected by TACE. They are deferred so each may be introduced through independent constitutional governance without weakening separation between ontology authority, deterministic canonical reasoning, knowledge realization, and AI-assisted presentation.

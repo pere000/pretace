@@ -114,7 +114,9 @@ def main():
 
         elif option == "3":
 
-            question = input("\nQuestion: ")
+            question = input(
+                "\nQuestion (prefix with 'assist:' or 'assist:<mode>:' for optional AI rendering): "
+            )
 
             answer = query.ask(
 
@@ -128,17 +130,28 @@ def main():
 
             if isinstance(answer, dict):
 
-                print(f'[{answer["source"]}]\n')
+                print(f'[{answer["source"]}]')
+                print(f'Status: {answer.get("status", "unknown")}')
+                print(f'Trace: {answer.get("trace_id", "-")}\n')
 
                 print(answer["answer"])
 
-                note = answer.get("note")
+                assisted = answer.get("assisted_explanation")
+                if assisted:
+                    print("\nAssisted Explanation (Non-Canonical):")
+                    print(assisted)
 
-                if note:
+                justification = answer.get("justification") or []
+                if justification:
+                    print("\nJustification:")
+                    for item in justification:
+                        print(f"- {item}")
 
-                    print("\nNote:")
-
-                    print(note)
+                provenance = answer.get("provenance") or []
+                if provenance:
+                    print("\nProvenance:")
+                    for item in provenance:
+                        print(f"- {item}")
 
             else:
 

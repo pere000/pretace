@@ -3,3 +3,4 @@ uvicorn[standard]
 hunspell
 nltk
 numpy
+requests

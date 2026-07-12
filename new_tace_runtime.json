@@ -14,6 +14,12 @@
         "local_ai": "qwen-3-8b-instruct",
         "embedding": "nomic-embed-text"
     },
+    "ollama": {
+        "base_url": "http://host.containers.internal:11434"
+    },
+    "ask_tace": {
+        "expansion_max_depth": 2
+    },
     "rag": {
         "feed_folders": [
             "/media/external_drive/knowledge"

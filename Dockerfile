@@ -39,6 +39,8 @@ COPY . .
 # Expose FastAPI port
 # ------------------------------------------------------------
 
+ENV OLLAMA_BASE_URL=http://host.containers.internal:11434
+
 EXPOSE 8000
 
 # ------------------------------------------------------------
