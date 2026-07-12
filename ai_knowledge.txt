@@ -1,0 +1,75 @@
+TACE (Tegmark-Aquinas Conceptual Ecosystem)
+
+The Theory of Actualized Conscious Experience (TACE) is a formal ontological framework developed to describe the structure of reality, consciousness, and actualization. It combines Aristotelian–Thomistic metaphysics with contemporary mathematical and physical insights into a coherent ontology intended to support both philosophical reasoning and AI-assisted semantic reasoning.
+
+TACE distinguishes between the Physical Realm, in which material substances exist under space-time locality, and the Realm of Forms, in which intelligible Forms are present as the objects of acts of consciousness. These realms are not independent realities but complementary ontological modes of one created order.
+
+The Creator is the necessary source of all being and the ground of every actualization. Creation unfolds according to a lawful formal order called the Matrix, which determines the admissible possibilities through which created reality may become actual. The Matrix is not conscious, intentional, or causal in itself; it is the universal formal order governing lawful actualization.
+
+Within the Physical Realm, Q-Form represents structured ontological potentiality. It does not determine a single future but the space of admissible actualizations available to created substances. Actualization selects one possibility while preserving the lawful order established by the Matrix.
+
+The Silver Bridge is the universal onto-epistemological principle that mediates every lawful transition between the Physical Realm and the Realm of Forms. In conscious beings, it enables intentional knowledge by allowing physical neuropsychic processes and intelligible Forms to correspond without reducing one to the other. It also governs the embodiment of intentional acts into physical realization.
+
+Consciousness is understood as the substantial activity of the soul through acts such as intellect, intentionality, and will. Acts of consciousness actualize intelligible Forms as meaningful objects while preserving the distinction between the subject, the object, and their respective ontological modes.
+
+TACE is intended as a formal ontology rather than a speculative philosophy. Its concepts are defined canonically, organized into ontology modules, and related through explicit ontological relations. This structure allows the ontology to serve as the semantic foundation for AI-assisted reasoning, canonical document generation, and the systematic investigation of questions concerning consciousness, meaning, knowledge, and reality.
+
+CONCEPTS
+Accident|A non-essential determination inhering in a substance and capable of change without altering the substance's essential nature.
+Act|The principle of actuality whereby a being is fully or partially realized rather than merely possible.
+Angels|Immaterial intellective agents endowed with intellect, will and intentional causality.
+Beauty|The transcendental perfection of being apprehended as harmonious, proportionate, and intelligibly radiant.
+Being|That which is or exists, whether actually or potentially, and which possesses intelligible reality.
+Creator|Personal source of all reality whose knowledge, will, and power ground the existence of Creation.
+Efficient_Cause|The agent, source, or operative principle through which a change, action, or effect is produced.
+Essence|That by which a being is what it is; the intelligible nature or quiddity determining the identity of a thing.
+Existence|The actuality whereby a being is rather than merely can be.
+Final_Cause|The end, purpose, or goal toward which a being, process, or action is directed.
+Form|The actuality of a thing, its principle of determination, what makes a thing the kind of thing it is.
+Formal_Cause|The determining principle by which a being is what it is.
+Forms|Forms can be subsistent or structural.
+Good|That which is desirable insofar as it perfects a being according to its nature.
+Intellect|The cognitive power by which universal meanings and intelligible forms are apprehended.
+Intelligence|Power by which intelligible truth is apprehended.
+Material_Cause|The receptive principle from which a corporeal substance is constituted.
+Matter|The receptive principle of corporeal beings which, together with form, constitutes material substances.
+Nature|The essence of a being considered as the intrinsic principle of its operations and tendencies.
+Participation|The reception by a finite being of a perfection that exists more fully in another or ultimately in the Creator.
+Person|An individual subsistent being possessing a rational nature.
+Potency|The principle of possibility whereby a being can become or receive a determination not yet actualized.
+Prime_Matter|The pure potential principle underlying corporeal substances and receiving substantial form for the constitution of material beings.
+Primordial_Potency|The domain of possibilities grounded in the Creator whose fullness exceeds created intelligibility.
+Souls|Subsistent forms capable of intellect and will.
+Subsistent Forms|Immaterial entities endowed with consciousness and independent existence.
+Substance|A being that exists in itself rather than in another and serves as the ontological subject of properties, accidents, and actions.
+Thomas_Aquinas|Philosopher, theologian, and thinker from whom Thomism derives.
+Thomism|Philosophical and theological school derived from Thomas Aquinas.
+Truth|The conformity of intellect with reality and a transcendental perfection convertible with being.
+Unmoved_Mover|Necessary first principle whose actuality is uncaused and from which all dependent realities ultimately derive.
+Will|The rational appetite through which a being is inclined toward apprehended goods and chosen ends.
+Autopoiesis|Capacity of a system to preserve its organizational closure and identity.
+Neuropsyche|Domain constraining and stabilizing experiential instantiation.
+Signal|Structured cause of change informative relative to a decoding model.
+Actual Qualia|The consciously experienced contents generated through acts of consciousness as a consequence of Interpretation under the influence of Intentionality.
+Coherence|Well-defined phase relationships enabling interference.
+Consciousness|Fundamental actuality of awareness deriving from the image of the Creator.
+Entanglement|Particles linked such that their states correlate across distance.
+Experienced Reality|The experienced world constituted through Actual Qualia generated by acts of consciousness.
+Intentional Form|A Form as intentionally apprehended by an act of consciousness. An Intentional Form exists only as the formal object of an act of consciousness; it is neither a substance nor an independently existing entity, but a Form apprehended as meaning by consciousness.0
+Intentionality|The orientation of acts of consciousness toward beings, meanings, states of affairs, or possible courses of action, guiding the generation and organization of Meaning.
+Interactions|Physical interactions determined according to vectorial, scalar, fermionic and epistemological constraints.
+Interpretation|The conscious organization and understanding of Meaning under the influence of Intentionality.
+Materiality|Continuous spectrum of interaction intensity among Q-substances.
+Matrix|The repository of Prime Potency possibilities that admit actualization and isomorphic representation.
+Meaning|The significance generated from relations established and maintained by acts of consciousness between a conscious being and other beings.
+Noumenon|Domain of Prime Potency possibilities that are ontologically prior to the Matrix and independent of the possibility of isomorphic representation in consciousness.
+Prime_Potency|The first ontological differentiation of possibilities manifested from Primordial Potency, constituting the immediate source of both Noumenon and Matrix.
+Q-Form|Mathematical structure encoding possibilities for material instantiation.
+Q-Substances|Material entities actualized from Matrix-admissible Q-Form possibilities and instantiated within the Q-Universal Quantum Field.
+Q-Universal Quantum Field|Continuous pervasive field arising from Matrix-admissible Q-Form possibilities and serving as the substrate in which Q-substances are instantiated.
+Silver Bridge|The epistemological–ontological operation through which acts of consciousness establish and maintain bidirectional isomorphic relations between Matrix-admissible signified meanings and signifying quantum soma patterns, generating interpretation, intentionality, actual Qualia, and experienced reality.
+Soulpsyche|The ontological mediating structure linking acts of consciousness and quantum soma, enabling the establishment of isomorphic relations between Matrix-admissible signified meanings and signifying quantum soma patterns.
+Structural Forms|Coherent intelligible structures grounded as pure possibilities in the Matrix.
+Superposition|Quantum systems can exist in superposition.
+TACE|Tegmark-Aquinas Conceptual Ecosystem bridging mathematical determinacy and conscious phenomenology.
+
