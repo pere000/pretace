@@ -1,0 +1,11 @@
+#!/bin/bash
+
+git switch main
+git branch --set-upstream-to=origin/main main
+git remote remove tace-old
+echo ".fuse_hidden*" >> .gitignore
+git rm --cached .fuse_hidden* 2>/dev/null
+rm -f .fuse_hidden*
+git add -A
+git commit -m "Configure main for pretace and update project files"
+git push
