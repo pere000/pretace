@@ -64,7 +64,7 @@ Thus, the principal difference between Copenhagen and TACE is not mathematical b
 
 That single sentence captures the essential distinction. Once an AI has that principle, together with the definitions of **Matrix**, **Q-Form**, **Silver Bridge**, and **Actualization**, different AI systems should converge on very similar answers because they will all be reasoning from the same ontological commitments rather than relying on their own default understanding of the Copenhagen interpretation.
 ............................................
-The Theory of Actualized Conscious Experience (TACE) is a formal ontological framework developed to describe the structure of reality, consciousness, and actualization. It combines Aristotelian–Thomistic metaphysics with contemporary mathematical and physical insights into a coherent ontology intended to support both philosophical reasoning and AI-assisted semantic reasoning.
+The Tegmark-Aquinas Conceptual Ecosystem (TACE) is a formal ontological framework developed to describe the structure of reality, consciousness, and actualization. It combines Aristotelian–Thomistic metaphysics with contemporary mathematical and physical insights into a coherent ontology intended to support both philosophical reasoning and AI-assisted semantic reasoning.
 
 TACE distinguishes between the Physical Realm, in which material substances exist under space-time locality, and the Realm of Forms, in which intelligible Forms are present as the objects of acts of consciousness. These realms are not independent realities but complementary ontological modes of one created order.
 
