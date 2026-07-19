@@ -15,7 +15,6 @@ class AuthorityResult:
 
     classification: str
     authority: str
-    repository: str
     canonical: bool = True
 
     def __str__(self):
@@ -23,6 +22,5 @@ class AuthorityResult:
             f"AuthorityResult("
             f"classification='{self.classification}', "
             f"authority='{self.authority}', "
-            f"repository='{self.repository}', "
             f"canonical={self.canonical})"
         )

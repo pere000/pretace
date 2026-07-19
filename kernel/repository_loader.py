@@ -11,14 +11,14 @@ class RepositoryLoader:
     """Loads authoritative data from supported repository types."""
 
     def load(self, authority_result, concept_name: str):
-        repository = authority_result.repository
+        repository = repository_descriptor.path
 
         if repository.endswith(".db"):
             conn = sqlite3.connect(repository)
             conn.row_factory = sqlite3.Row
             cur = conn.cursor()
             cur.execute(
-                "SELECT * FROM concept_records WHERE concept_name = ?",
+                f"SELECT * FROM {repository_descriptor.resource} WHERE concept_name = ?",
                 (concept_name,),
             )
             row = cur.fetchone()

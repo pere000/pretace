@@ -12,33 +12,28 @@ class AuthorityGate:
     MAP = {
 
         "ONTOLOGY": AuthorityResult(
-            "ONTOLOGY",
-            "Canonical Ontology",
-            "new_tace_knowledge.db"
+            classification="ONTOLOGY",
+            authority="Canonical Ontology",
         ),
 
         "ADR": AuthorityResult(
-            "ADR",
-            "Architecture Decision Records",
-            "docs/adr/"
+            classification="ADR",
+            authority="Architecture Decision Records",
         ),
 
         "SEMANTIC_CONSTITUTION": AuthorityResult(
-            "SEMANTIC_CONSTITUTION",
-            "Semantic Constitution",
-            "docs/constitutions/"
+            classification="SEMANTIC_CONSTITUTION",
+            authority="Semantic Constitution",
         ),
 
         "SOFTWARE_CONSTITUTION": AuthorityResult(
-            "SOFTWARE_CONSTITUTION",
-            "Software Constitution",
-            "docs/constitutions/"
+            classification="SOFTWARE_CONSTITUTION",
+            authority="Software Constitution",
         ),
 
         "SESSION_FOOTPRINT": AuthorityResult(
-            "SESSION_FOOTPRINT",
-            "Session Footprints",
-            "docs/session_footprints/"
+            classification="SESSION_FOOTPRINT",
+            authority="Session Footprints",
         ),
     }
 
@@ -47,9 +42,8 @@ class AuthorityGate:
         return self.MAP.get(
             classification,
             AuthorityResult(
-                classification,
-                "Unknown Authority",
-                "",
+                classification=classification,
+                authority="Unknown Authority",
                 canonical=False,
             ),
         )

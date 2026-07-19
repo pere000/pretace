@@ -1,6 +1,7 @@
 from kernel.query_classifier import QueryClassifier
 from kernel.authority_gate import AuthorityGate
 from kernel.repository_loader import RepositoryLoader
+from kernel.repository_resolver import RepositoryResolver
 
 query = "What is Matrix?"
 
@@ -13,6 +14,7 @@ gate = AuthorityGate()
 result = gate.resolve(classification)
 
 # Step 3: Load the canonical concept
+resolver = RepositoryResolver()
 loader = RepositoryLoader()
 concept = loader.load(result, "Matrix")
 
