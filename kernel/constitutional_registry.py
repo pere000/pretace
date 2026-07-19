@@ -12,6 +12,7 @@ It is the immutable constitutional foundation of the reasoning engine.
 
 from dataclasses import dataclass
 from typing import FrozenSet, Mapping, Tuple
+from types import MappingProxyType
 
 
 @dataclass(frozen=True)
@@ -73,7 +74,7 @@ REGISTRY = ConstitutionalRegistry(
 
     }),
 
-    constitutional_dependencies={
+    constitutional_dependencies=MappingProxyType({
 
         #
         # Primitive concepts
@@ -136,6 +137,6 @@ REGISTRY = ConstitutionalRegistry(
             "Freedom",
         ),
 
-    },
+    }),
 
 )

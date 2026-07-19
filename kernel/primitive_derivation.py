@@ -9,7 +9,6 @@ It performs no AI inference, no database access,
 and never modifies the ontology.
 """
 
-from kernel.concept_record import ConceptRecord
 from kernel.derivation_node import DerivationNode
 from kernel.constitutional_registry import REGISTRY
 
@@ -18,12 +17,6 @@ class PrimitiveDerivation:
     """
     Primitive Derivation Engine.
 
-    Input:
-        ConceptRecord
-
-    Output:
-        DerivationNode
-
     The returned tree represents the constitutional
     derivation of the concept.
 
@@ -31,25 +24,15 @@ class PrimitiveDerivation:
     Constitutional Validator.
     """
 
-    def derive(self, concept: ConceptRecord) -> DerivationNode:
+    def derive(self, concept_name: str) -> DerivationNode:
         """
         Entry point.
         """
-
-        return self._derive(concept.concept_name)
-
-    # -------------------------------------------------------------
+        return self._derive(concept_name)
 
     def _derive(self, concept_name: str) -> DerivationNode:
         """
         Recursive constitutional derivation.
-
-        Current version:
-            • Primitive concepts become leaves.
-            • Non-primitive concepts become unresolved nodes.
-
-        Future versions will recursively derive
-        constitutional dependencies from ontology relations.
         """
 
         if REGISTRY.is_primitive_concept(concept_name):
@@ -60,9 +43,26 @@ class PrimitiveDerivation:
                 children=(),
             )
 
+        dependencies = REGISTRY.dependencies(concept_name)
+
+        if not dependencies:
+            return DerivationNode(
+                concept=concept_name,
+                primitive=False,
+                resolved=False,
+                children=(),
+            )
+
+        children = tuple(
+            self._derive(dep)
+            for dep in dependencies
+        )
+
+        resolved = all(child.resolved for child in children)
+
         return DerivationNode(
             concept=concept_name,
             primitive=False,
-            resolved=False,
-            children=(),
+            resolved=resolved,
+            children=children,
         )

@@ -1,16 +1,41 @@
-from kernel.kernel import Kernel
+from kernel.primitive_derivation import PrimitiveDerivation
+from kernel.constitutional_validation import ConstitutionalValidation
+from kernel.constitutional_explanation import ConstitutionalExplanation
 
-kernel = Kernel()
+pd = PrimitiveDerivation()
+cv = ConstitutionalValidation()
+ce = ConstitutionalExplanation()
 
-query = "What is Matrix?"
-concept = kernel.resolve("Matrix")
+concepts = [
+    "Being",
+    "Intelligence",
+    "Operativity",
+    "Selectivity",
+    "Matrix",
+    "Form",
+    "Q-Form",
+    "Substance",
+]
 
-print("=" * 60)
-print("Query :", query)
-print("=" * 60)
+for concept in concepts:
 
-if concept:
-    print("Concept Name :", concept.concept_name)
-    print("Definition   :", concept.definition)
-else:
-    print("Concept not found.")
+    print("=" * 70)
+    print(concept)
+
+    tree = pd.derive(concept)
+
+    result = cv.validate(tree)
+
+    print("VALID:", result.valid)
+
+    if result.violations:
+        print("Violations:")
+        for v in result.violations:
+            print("  -", v)
+
+    print()
+    print(ce.explain(tree))
+    print()
+
+print("=" * 70)
+print("All tests finished.")
