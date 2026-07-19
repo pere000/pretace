@@ -29,6 +29,7 @@ Author:
 from dataclasses import dataclass, field
 from enum import Enum
 from typing import Any, Dict, List, Optional
+from u_new_constitution_registry import ConstitutionRegistry
 
 
 # ------------------------------------------------------------
@@ -83,17 +84,9 @@ class AuthorityGate:
     Ontology is accepted only after constitutional validation.
     """
 
-    def __init__(self):
+    def __init__(self, registry):
 
-        self.geometry = None
-
-        self.primitive_principles = {}
-
-        self.primitive_axioms = {}
-
-        self.foundational_theorems = {}
-
-        self.accepted_ontology = {}
+        self.registry = registry
 
     # --------------------------------------------------------
 
@@ -276,7 +269,8 @@ class AuthorityGate:
 
 if __name__ == "__main__":
 
-    gate = AuthorityGate()
+    registry = ConstitutionRegistry()
+    gate = AuthorityGate(registry)
 
     result = gate.validate(
 
