@@ -1,16 +1,17 @@
 """
 ADR-009
+
 Constitutional Registry
 
 The Constitutional Registry defines the immutable constitutional
 elements from which every canonical TACE concept must ultimately derive.
 
-This module is the constitutional foundation of the reasoning engine.
-It contains no AI, no repository access, and no inference.
+This module contains no AI, no repository access, and no inference.
+It is the immutable constitutional foundation of the reasoning engine.
 """
 
 from dataclasses import dataclass
-from typing import FrozenSet
+from typing import FrozenSet, Mapping, Tuple
 
 
 @dataclass(frozen=True)
@@ -23,6 +24,8 @@ class ConstitutionalRegistry:
     primitive_relations: FrozenSet[str]
     primitive_axioms: FrozenSet[str]
 
+    constitutional_dependencies: Mapping[str, Tuple[str, ...]]
+
     def is_primitive_concept(self, name: str) -> bool:
         return name in self.primitive_concepts
 
@@ -32,22 +35,22 @@ class ConstitutionalRegistry:
     def is_primitive_axiom(self, name: str) -> bool:
         return name in self.primitive_axioms
 
+    def dependencies(self, concept: str) -> Tuple[str, ...]:
+        return self.constitutional_dependencies.get(concept, ())
+
 
 REGISTRY = ConstitutionalRegistry(
 
     primitive_concepts=frozenset({
 
         "God",
-        "Matrix",
-        "Q-Form",
-        "Form",
-        "Substance",
-        "Silver Bridge",
+
+        "Being",
+        "Intelligence",
+        "Operativity",
+        "Selectivity",
+        "Freedom",
         "Consciousness",
-        "Actualization",
-        "Potentiality",
-        "Truth",
-        "Goodness",
 
     }),
 
@@ -69,5 +72,70 @@ REGISTRY = ConstitutionalRegistry(
         "A-003",
 
     }),
+
+    constitutional_dependencies={
+
+        #
+        # Primitive concepts
+        #
+
+        "God": (),
+
+        "Being": (),
+        "Intelligence": (),
+        "Operativity": (),
+        "Selectivity": (),
+        "Freedom": (),
+        "Consciousness": (),
+
+        #
+        # Canonical concepts
+        #
+
+        "Matrix": (
+            "Being",
+            "Intelligence",
+            "Operativity",
+            "Selectivity",
+        ),
+
+        "Q-Form": (
+            "Matrix",
+        ),
+
+        "Form": (
+            "Matrix",
+        ),
+
+        "Substance": (
+            "Form",
+            "Q-Form",
+        ),
+
+        "Silver Bridge": (
+            "Matrix",
+            "Consciousness",
+        ),
+
+        "Potentiality": (
+            "Matrix",
+        ),
+
+        "Actualization": (
+            "Potentiality",
+            "Operativity",
+        ),
+
+        "Truth": (
+            "Being",
+            "Intelligence",
+        ),
+
+        "Goodness": (
+            "Being",
+            "Freedom",
+        ),
+
+    },
 
 )
