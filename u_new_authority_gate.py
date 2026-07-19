@@ -270,6 +270,24 @@ class AuthorityGate:
 if __name__ == "__main__":
 
     registry = ConstitutionRegistry()
+
+    registry.register_principle(
+        "P001",
+        "Identity",
+        "Every being is identical to itself."
+    )
+
+    registry.register_axiom(
+        "A001",
+        "NonContradiction",
+        "Nothing can both be and not be in the same respect."
+    )
+
+    registry.register_theorem(
+        "T001",
+        "RealityIsKnowable",
+        "Reality is intelligible because being possesses intelligible structure."
+    )
     gate = AuthorityGate(registry)
 
     result = gate.validate(

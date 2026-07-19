@@ -82,7 +82,7 @@ class ConstitutionRegistry:
     They never own constitutional knowledge.
     """
 
-    VERSION = "0.1"
+    VERSION = "0.2"
 
     def __init__(self):
 
@@ -94,6 +94,98 @@ class ConstitutionRegistry:
                  obj: ConstitutionalObject):
 
         self.objects[obj.name.lower()] = obj
+
+
+    # --------------------------------------------------------
+
+    def register_principle(self,
+                           uid: str,
+                           name: str,
+                           definition: str):
+
+        self.register(
+            ConstitutionalObject(
+                uid=uid,
+                name=name,
+                category=ConstitutionCategory.PRINCIPLE,
+                definition=definition
+            )
+        )
+
+    # --------------------------------------------------------
+
+    def register_axiom(self,
+                       uid: str,
+                       name: str,
+                       definition: str):
+
+        self.register(
+            ConstitutionalObject(
+                uid=uid,
+                name=name,
+                category=ConstitutionCategory.AXIOM,
+                definition=definition
+            )
+        )
+
+    # --------------------------------------------------------
+
+    def register_theorem(self,
+                         uid: str,
+                         name: str,
+                         definition: str):
+
+        self.register(
+            ConstitutionalObject(
+                uid=uid,
+                name=name,
+                category=ConstitutionCategory.THEOREM,
+                definition=definition
+            )
+        )
+
+    # --------------------------------------------------------
+
+    def register_definition(self,
+                            uid: str,
+                            name: str,
+                            definition: str):
+
+        self.register(
+            ConstitutionalObject(
+                uid=uid,
+                name=name,
+                category=ConstitutionCategory.DEFINITION,
+                definition=definition
+            )
+        )
+
+    # --------------------------------------------------------
+
+    def register_concept(self,
+                         uid: str,
+                         name: str,
+                         definition: str):
+
+        self.register(
+            ConstitutionalObject(
+                uid=uid,
+                name=name,
+                category=ConstitutionCategory.CONCEPT,
+                definition=definition
+            )
+        )
+
+    # --------------------------------------------------------
+
+    def by_category(self,
+                    category: ConstitutionCategory):
+
+        return [
+            obj
+            for obj in self.objects.values()
+            if obj.category == category
+        ]
 
     # --------------------------------------------------------
 
