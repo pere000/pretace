@@ -10,7 +10,7 @@ import sqlite3
 class RepositoryLoader:
     """Loads authoritative data from supported repository types."""
 
-    def load(self, authority_result, concept_name: str):
+    def load(self, repository_descriptor, concept_name: str):
         repository = repository_descriptor.path
 
         if repository.endswith(".db"):
