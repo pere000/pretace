@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+from kernel.config import ONTOLOGY_DB
 """
 Knowledge Realizer
 
@@ -18,7 +19,7 @@ from collections import deque
 
 class KnowledgeRealizer:
 
-    def __init__(self, db_path="tace_knowledge.db"):
+    def __init__(self, db_path=str(ONTOLOGY_DB)):
 
         self.db_path = Path(db_path)
         self.max_depth = self._load_max_depth()

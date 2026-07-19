@@ -1,11 +1,12 @@
 import sqlite3
 
 
+from kernel.config import ONTOLOGY_DB
 class ConceptRepository:
 
     def __init__(
         self,
-        db_path="data/tace_knowledge.db"
+        db_path=str(ONTOLOGY_DB)
     ):
         self.db_path = db_path
 

@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+from kernel.config import ONTOLOGY_DB
 """
 Ontology Query
 
@@ -15,7 +16,7 @@ class OntologyQuery:
 
     def __init__(self):
 
-        self.db_path = Path(__file__).resolve().parent / "tace_knowledge.db"
+        self.db_path = Path(__file__).resolve().parent / str(ONTOLOGY_DB)
 
     def lookup(self, question):
 

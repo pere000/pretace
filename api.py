@@ -15,6 +15,7 @@ from datetime import datetime, timezone
 from new_query_engine import QueryEngine
 from new_universe_universe import Universe
 
+from kernel.config import ONTOLOGY_DB
 ALLOWED_CONCEPT_FIELDS = {
     "definition",
     "assumptions",
@@ -367,7 +368,7 @@ def ask_tace(payload: AskTACERequest):
 @app.get("/ontology/modules")
 def ontology_modules():
 
-    conn = sqlite3.connect("tace_knowledge.db")
+    conn = sqlite3.connect(str(ONTOLOGY_DB))
 
     cur = conn.cursor()
 
@@ -388,7 +389,7 @@ def ontology_modules():
 @app.get("/ontology/module/{module}")
 def ontology_module(module: str):
 
-    conn = sqlite3.connect("tace_knowledge.db")
+    conn = sqlite3.connect(str(ONTOLOGY_DB))
 
     cur = conn.cursor()
 
@@ -410,7 +411,7 @@ def ontology_module(module: str):
 @app.get("/ontology/concept/{module}/{concept}")
 def ontology_concept(module: str, concept: str):
 
-    conn = sqlite3.connect("tace_knowledge.db")
+    conn = sqlite3.connect(str(ONTOLOGY_DB))
 
     conn.row_factory = sqlite3.Row
 
@@ -439,7 +440,7 @@ def ontology_update(payload: OntologyUpdateRequest):
     if payload.field not in ALLOWED_CONCEPT_FIELDS:
         raise HTTPException(status_code=400, detail="Field not allowed")
 
-    conn = sqlite3.connect("tace_knowledge.db")
+    conn = sqlite3.connect(str(ONTOLOGY_DB))
     conn.row_factory = sqlite3.Row
     cur = conn.cursor()
 
@@ -582,7 +583,7 @@ This package transports one TACE ontology module in a portable format.
 
 
 def _build_tace_package(module_name):
-    conn = sqlite3.connect("tace_knowledge.db")
+    conn = sqlite3.connect(str(ONTOLOGY_DB))
 
     cur = conn.cursor()
     cur.execute(

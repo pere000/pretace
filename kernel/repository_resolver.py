@@ -1,13 +1,14 @@
 from kernel.repository_descriptor import RepositoryDescriptor
 
 
+from kernel.config import ONTOLOGY_DB
 class RepositoryResolver:
 
     MAP = {
         "Canonical Ontology": RepositoryDescriptor(
             name="Canonical Ontology",
             repository_type="sqlite",
-            path="new_tace_knowledge.db",
+            path=str(ONTOLOGY_DB),
             resource="concept_records",
         ),
     }

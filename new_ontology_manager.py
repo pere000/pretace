@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+from kernel.config import ONTOLOGY_DB
 """
 TACE Ontology Manager
 
@@ -13,7 +14,7 @@ from pathlib import Path
 import sqlite3
 
 
-DB_PATH = Path("new_tace_knowledge.db")
+DB_PATH = str(ONTOLOGY_DB)
 
 
 class OntologyManager:
