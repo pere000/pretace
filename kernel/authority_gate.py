@@ -10,10 +10,11 @@ from kernel.authority_result import AuthorityResult
 class AuthorityGate:
 
     MAP = {
+
         "ONTOLOGY": AuthorityResult(
             "ONTOLOGY",
             "Canonical Ontology",
-            "data/tace_knowledge.db"
+            "new_tace_knowledge.db"
         ),
 
         "ADR": AuthorityResult(
