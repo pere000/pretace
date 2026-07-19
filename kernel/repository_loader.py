@@ -1,54 +1,28 @@
 """
-AuthorityGate
+RepositoryLoader
 
-Maps a classified query to its governing authority.
+Loads canonical resources from the repository selected by AuthorityGate.
 """
 
-from kernel.authority_result import AuthorityResult
+import sqlite3
 
 
-class AuthorityGate:
+class RepositoryLoader:
+    """Loads authoritative data from supported repository types."""
 
-    MAP = {
-        "ONTOLOGY": AuthorityResult(
-            "ONTOLOGY",
-            "Canonical Ontology",
-            "data/tace_knowledge.db"
-        ),
+    def load(self, authority_result, concept_name: str):
+        repository = authority_result.repository
 
-        "ADR": AuthorityResult(
-            "ADR",
-            "Architecture Decision Records",
-            "docs/adr/"
-        ),
+        if repository.endswith(".db"):
+            conn = sqlite3.connect(repository)
+            conn.row_factory = sqlite3.Row
+            cur = conn.cursor()
+            cur.execute(
+                "SELECT * FROM concept_records WHERE concept_name = ?",
+                (concept_name,),
+            )
+            row = cur.fetchone()
+            conn.close()
+            return row
 
-        "SEMANTIC_CONSTITUTION": AuthorityResult(
-            "SEMANTIC_CONSTITUTION",
-            "Semantic Constitution",
-            "docs/constitutions/"
-        ),
-
-        "SOFTWARE_CONSTITUTION": AuthorityResult(
-            "SOFTWARE_CONSTITUTION",
-            "Software Constitution",
-            "docs/constitutions/"
-        ),
-
-        "SESSION_FOOTPRINT": AuthorityResult(
-            "SESSION_FOOTPRINT",
-            "Session Footprints",
-            "docs/session_footprints/"
-        ),
-    }
-
-    def resolve(self, classification: str) -> AuthorityResult:
-
-        return self.MAP.get(
-            classification,
-            AuthorityResult(
-                classification,
-                "Unknown Authority",
-                "",
-                canonical=False,
-            ),
-        )
+        raise RuntimeError(f"Unsupported repository: {repository}")
