@@ -36,6 +36,8 @@ from new_adapter_session import TACESession
 from new_knowledge_realizer import KnowledgeRealizer
 from new_ontology_inheritance_resolver import OntologyInheritanceResolver
 from new_ontology_query import OntologyQuery
+from kernel.primitive_derivation import PrimitiveDerivation
+from kernel.constitutional_validation import ConstitutionalValidation
 
 
 class QueryEngine:
@@ -54,6 +56,8 @@ class QueryEngine:
         self.resolver = OntologyInheritanceResolver()
         self.realizer = KnowledgeRealizer()
         self.ai = TACESession()
+        self.deriver = PrimitiveDerivation()
+        self.validator = ConstitutionalValidation()
 
     def ask(
         self,
@@ -86,8 +90,20 @@ class QueryEngine:
             self._authority_gate(normalized)
 
             explicit = self._explicit_ontology_retrieval(normalized)
-            resolved = self._semantic_resolution(universe, explicit)
-            relational = self._relational_lookup(universe, normalized)
+
+            resolved = self._semantic_resolution(
+                universe,
+                explicit,
+            )
+
+            constitutional_tree = self._constitutional_validation(
+                resolved
+            )
+
+            relational = self._relational_lookup(
+                universe,
+                normalized,
+            )
 
             canonical = self._knowledge_realization(
                 normalized,
@@ -217,7 +233,28 @@ class QueryEngine:
             return None
         return self.resolver.resolve(explicit, universe)
 
+
+    def _constitutional_validation(self, resolved):
+
+        if resolved is None:
+            return
+
+        tree = self.deriver.derive(
+            resolved["semantic_identity"]
+        )
+
+        validation = self.validator.validate(tree)
+
+        if not validation.valid:
+            raise ValueError(
+                "Constitutional validation failed:\n"
+                + "\n".join(validation.violations)
+            )
+
+        return tree
+
     def _semantic_validation(self, canonical):
+
         status = canonical["ConstitutionalStatus"]
         if status not in {"canonical", "undetermined"}:
             raise ValueError("Invalid canonical status emitted.")

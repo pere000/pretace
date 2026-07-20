@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from kernel.config import ONTOLOGY_DB
+
 """
 Knowledge Realizer
 
@@ -8,6 +8,8 @@ Builds canonical answer packages for ADR-003 assistance rendering.
 """
 
 from __future__ import annotations
+
+from kernel.config import ONTOLOGY_DB
 
 import json
 import os
