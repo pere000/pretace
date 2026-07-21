@@ -1,0 +1,4 @@
+mdsync notion \
+  --token "$NOTION_TOKEN" \
+  --parent "https://app.notion.com/p/Documentation-3a0dd825e38581ed8c2ec1c7ba0272e5" \
+  docs/

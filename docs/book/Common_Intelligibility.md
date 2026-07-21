@@ -29,10 +29,61 @@ framework.
 
 ------------------------------------------------------------------------
 
+## Constitutional Compatibility
+
+Constitutional Compatibility is the **formal evaluation performed by the
+Constitutional Reasoner** to determine whether an imported
+constitutional module, domain module, concept, proposition, relation, or
+inference structure may participate in the currently active
+constitutional framework.
+
+Compatibility is evaluated according to the constitutional primitives,
+archetypes, principles, axioms, inference rules, and admissibility
+criteria defined by the active constitutional ontology.
+
+------------------------------------------------------------------------
+
+## Constitutional Principle of Archetypal Sufficiency
+
+<div class="definition">
+
+Every ontologically admissible entity, property, relation, or process
+must be constitutionally expressible in terms of the Archetype Triad:
+
+- Being
+- Subsisting Consciousness
+- Structural Form
+
+No candidate concept that cannot be reduced to, or consistently derived
+from, these constitutional archetypes may be admitted into the
+constitutional framework.
+
+</div>
+
+------------------------------------------------------------------------
+
+## Native Constitutional Modules
+
+The Constitutional Reasoner is ontology-independent and can operate over
+any constitutionally structured ontology.
+
+Consequently, the native constitutional modules (**Thomas_Aquinas**,
+**TACE**, **Maturana_Varela**, and **Mystici_Corporis_Christi**) are not
+strict runtime dependencies. Alternative constitutional modules may
+therefore be imported and evaluated.
+
+However, the present implementation has been designed, developed, and
+validated using the native constitutional modules. Although alternative
+constitutional frameworks may be loaded, the current application does
+not guarantee correct operation unless the certified native
+constitutional framework is employed.
+
+------------------------------------------------------------------------
+
 ## Constitutional AI Integration
 
-External knowledge may be incorporated as retrieval sources within the
-TACE semantic framework. Retrieval serves only to identify candidate
+**External knowledge may be incorporated as retrieval sources within the
+TACE semantic framework**. Retrieval serves only to identify candidate
 concepts, propositions, symbolic structures, and semantic relations.
 Retrieval never modifies the ontology.
 
@@ -65,61 +116,10 @@ derivable from them.
 
 ------------------------------------------------------------------------
 
-## Constitutional Principle of Archetypal Sufficiency
-
-<div class="definition">
-
-Every ontologically admissible entity, property, relation, or process
-must be constitutionally expressible in terms of the Archetype Triad:
-
-- Being
-- Subsisting Consciousness
-- Structural Form
-
-No candidate concept that cannot be reduced to, or consistently derived
-from, these constitutional archetypes may be admitted into the
-constitutional framework.
-
-</div>
-
-------------------------------------------------------------------------
-
-## Constitutional Compatibility
-
-Constitutional Compatibility is the formal evaluation performed by the
-Constitutional Reasoner to determine whether an imported constitutional
-module, domain module, concept, proposition, relation, or inference
-structure may participate in the currently active constitutional
-framework.
-
-Compatibility is evaluated according to the constitutional primitives,
-archetypes, principles, axioms, inference rules, and admissibility
-criteria defined by the active constitutional ontology.
-
-------------------------------------------------------------------------
-
-## Native Constitutional Modules
-
-The Constitutional Reasoner is ontology-independent and can operate over
-any constitutionally structured ontology.
-
-Consequently, the native constitutional modules (**Thomas_Aquinas**,
-**TACE**, **Maturana_Varela**, and **Mystici_Corporis_Christi**) are not
-strict runtime dependencies. Alternative constitutional modules may
-therefore be imported and evaluated.
-
-However, the present implementation has been designed, developed, and
-validated using the native constitutional modules. Although alternative
-constitutional frameworks may be loaded, the current application does
-not guarantee correct operation unless the certified native
-constitutional framework is employed.
-
-------------------------------------------------------------------------
-
 ## Module Admission
 
-When a module is imported, TACE performs constitutional compatibility
-evaluation before the module becomes active.
+**When a module is imported, TACE performs constitutional compatibility
+evaluation before the module becomes active.**
 
 For constitutional modules, the evaluation determines whether their
 primitives, principles, archetypes, axioms, and inference structures are
