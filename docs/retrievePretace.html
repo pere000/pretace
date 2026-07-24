@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<div id="answer"></div>
+
+<script>
+fetch("http://localhost:8000/ontology/concept/TACE/Matrix")
+  .then(response => response.json())
+  .then(data => {
+      document.getElementById("answer").textContent = data.definition;
+  })
+  .catch(err => console.error(err));
+</script>
+
+</body>
+</html>

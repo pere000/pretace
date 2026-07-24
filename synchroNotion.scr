@@ -1,4 +1,8 @@
+#!/bin/bash
+
+source ~/.bashrc
+
 mdsync notion \
   --token "$NOTION_TOKEN" \
-  --parent "https://app.notion.com/p/Documentation-3a0dd825e38581ed8c2ec1c7ba0272e5" \
+  --parent "https://app.notion.com/p/Documentation-3a4dd825e3858026a2c3eee258749d2e" \
   docs/

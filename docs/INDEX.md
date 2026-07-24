@@ -1,7 +1,20 @@
-# TACE Documentation Index
-
-TACE documentation is organized by **responsibility** rather than chronology.  
-Each documentation area has a specific role in project governance, architecture, implementation, and historical traceability.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TACE Documentation</title>
+    
+<style>    
+ 
+ 
+ 
+</style>    
+    
+</head>
+<h3> TACE Documentation Index</h3>
+<div class='paragraph1'>
+TACE documentation is organized by **responsibility** rather than chronology.  <br>
+Each documentation area has a specific role in project governance, architecture, implementation, and historical traceability.</div>
 
 ---
 
@@ -90,3 +103,5 @@ Each documentation area has a specific role in project governance, architecture,
 
 Each documentation area has a distinct responsibility and should avoid duplicating the purpose of any other area.  
 This index is the entry point and table of contents for the complete TACE documentation set.
+</body>
+</html>

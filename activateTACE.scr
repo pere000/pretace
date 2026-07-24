@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# Must be sourced
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+    echo "Use:"
+    echo "    source activateTACE.scr"
+    exit 1
+fi
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd "$SCRIPT_DIR"
+
+# Load project environment
+if [ -f "$HOME/.profile" ]; then
+    source "$HOME/.profile"
+fi
+
+# Activate Python
+source .venv/bin/activate
+
+echo
+echo "TACE shell activated."
+echo "Python : $(which python)"
+echo "Pip    : $(which pip)"
+echo "mdsync : $(which mdsync)"
+echo

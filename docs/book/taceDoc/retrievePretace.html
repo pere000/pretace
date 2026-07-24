@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>PRETACE Test</title>
+<style>
+.concept {
+    color: blue;
+    cursor: pointer;
+    text-decoration: underline;
+}
+</style>
+</head>
+
+<body>
+
+<p>
+This is <span class="concept" onclick="showConcept('Matrix','div1')">Matrix</span>.
+</p>
+
+<div id="div1"></div>
+
+<script>
+const PRETACE_SERVER = "http://localhost:8000";
+const API_BASE = PRETACE_SERVER + "/ontology/concept/TACE/";
+function showConcept(concept, targetId)
+{
+    const target = document.getElementById(targetId);
+
+    target.innerHTML = "Loading...";
+
+    fetch(API_BASE + encodeURIComponent(concept))
+        .then(response => {
+            if (!response.ok)
+                throw new Error("HTTP " + response.status);
+
+            return response.json();
+        })
+        .then(data => {
+            target.innerHTML =
+
+                "<p>" + data.definition + "</p>";
+        })
+        .catch(error => {
+            target.innerHTML =
+                "<b>ERROR:</b><br>" + error;
+        });
+}
+</script>
+
+</body>
+</html>
