@@ -1,0 +1,9 @@
+[package]
+name = "tace_launcher"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+tiny_http = "0.12"
+webbrowser = "1.0"
+mime_guess = "2.0"
