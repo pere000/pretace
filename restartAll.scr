@@ -2,11 +2,29 @@
 
 # ==========================================================
 # TACE Environment Restore
+#
+# USE:
+#     source restartAll.scr
+#
+# or
+#
+#     . ./restartAll.scr
+#
 # ==========================================================
+
+# Prevent accidental execution
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+    echo
+    echo "Run this script with:"
+    echo
+    echo "    source restartAll.scr"
+    echo
+    exit 1
+fi
 
 set -o pipefail
 
-SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$SCRIPT_DIR"
 
 echo "========================================="
@@ -14,35 +32,32 @@ echo " Restoring TACE Development Environment"
 echo "========================================="
 
 #
-# 1. Activate Python virtual environment
+# 1. Load environment variables
 #
+
+if [ -f "$HOME/.profile" ]; then
+    source "$HOME/.profile"
+fi
+
+#
+# 2. Activate Python virtual environment
+#
+
 if [ -f ".venv/bin/activate" ]; then
     source .venv/bin/activate
     echo "✓ Python virtual environment activated."
 else
     echo "✗ ERROR: .venv not found."
-    echo
-    echo "Create it with:"
-    echo "    python3 -m venv .venv"
-    exit 1
-fi
-
-#
-# 2. Load environment variables
-#
-if [ -f "$HOME/.bashrc" ]; then
-    source "$HOME/.bashrc"
+    return 1
 fi
 
 #
 # 3. Verify NOTION_TOKEN
 #
+
 if [ -z "${NOTION_TOKEN:-}" ]; then
     echo "✗ ERROR: NOTION_TOKEN is not defined."
-    echo
-    echo "Add to ~/.bashrc:"
-    echo 'export NOTION_TOKEN="ntn_XXXXXXXXXXXX"'
-    exit 1
+    return 1
 fi
 
 echo "✓ NOTION_TOKEN loaded."
@@ -50,6 +65,7 @@ echo "✓ NOTION_TOKEN loaded."
 #
 # 4. Verify mdsync
 #
+
 if ! command -v mdsync >/dev/null 2>&1; then
     echo "Installing mdsync..."
     pip install mdsync
@@ -57,17 +73,18 @@ fi
 
 if ! command -v mdsync >/dev/null 2>&1; then
     echo "✗ ERROR: mdsync installation failed."
-    exit 1
+    return 1
 fi
 
 echo "✓ $(mdsync --version)"
 
 #
-# 5. Verify Docker/Podman
+# 5. Verify Docker / Podman
 #
+
 if ! command -v docker >/dev/null 2>&1; then
-    echo "✗ ERROR: Docker/Podman command not found."
-    exit 1
+    echo "✗ ERROR: docker command not found."
+    return 1
 fi
 
 echo "✓ Docker/Podman installed."
@@ -75,9 +92,10 @@ echo "✓ Docker/Podman installed."
 #
 # 6. Verify container engine
 #
+
 if ! docker info >/dev/null 2>&1; then
     echo "✗ ERROR: Container engine is not running."
-    exit 1
+    return 1
 fi
 
 echo "✓ Container engine running."
@@ -85,6 +103,7 @@ echo "✓ Container engine running."
 #
 # 7. Verify Ollama
 #
+
 if curl -fs http://localhost:11434/api/tags >/dev/null; then
     echo "✓ Ollama running."
 else
@@ -92,20 +111,22 @@ else
     echo
     echo "Start it with:"
     echo "    ollama serve"
-    exit 1
+    return 1
 fi
 
 #
 # 8. Verify pretace container
 #
-if docker ps --format '{{.Names}}' | grep -qx "pretace"; then
+
+if docker ps --format '{{.Names}}' | grep -qx pretace; then
 
     echo "✓ pretace container already running."
 
-elif docker ps -a --format '{{.Names}}' | grep -qx "pretace"; then
+elif docker ps -a --format '{{.Names}}' | grep -qx pretace; then
 
-    echo "Starting existing pretace container..."
+    echo "Starting pretace container..."
     docker start pretace >/dev/null
+
     echo "✓ pretace container started."
 
 else
@@ -119,7 +140,7 @@ else
         --add-host=host.docker.internal:host-gateway \
         -e OLLAMA_BASE_URL=http://host.docker.internal:11434 \
         -v "$PWD:/app" \
-        pretace-tace:latest
+        pretace-tace:latest >/dev/null
 
     echo "✓ pretace container created."
 
@@ -128,15 +149,27 @@ fi
 #
 # 9. Verify API
 #
+
 sleep 2
 
 if curl -fs http://localhost:8000/ui >/dev/null; then
     echo "✓ TACE server responding."
 else
-    echo "⚠ TACE container is running but the web interface is not responding yet."
+    echo "⚠ TACE server not responding yet."
 fi
 
 echo
 echo "========================================="
 echo " TACE environment is ready."
 echo "========================================="
+echo
+
+echo "Python : $(which python)"
+echo "Pip    : $(which pip)"
+echo "mdsync : $(which mdsync)"
+
+if [ -n "${VIRTUAL_ENV:-}" ]; then
+    echo
+    echo "✓ Virtual environment:"
+    echo "  $VIRTUAL_ENV"
+fi
