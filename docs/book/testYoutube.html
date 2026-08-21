@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Audio Player</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        padding: 40px;
+    }
+
+    /* Keep the video in the DOM, but don't display it */
+    #video {
+        position: fixed;
+        width: 1px;
+        height: 1px;
+        left: -10px;
+        top: -10px;
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    button {
+        font-size: 20px;
+        padding: 10px 20px;
+        margin: 5px;
+    }
+</style>
+</head>
+
+<body>
+
+<h2>Neil Young — Heart of Gold</h2>
+
+<button onclick="playAudio()">▶ Play</button>
+<button onclick="pauseAudio()">⏸ Pause</button>
+
+<br><br>
+
+<label>
+    Volume
+    <input
+        type="range"
+        min="0"
+        max="1"
+        step="0.01"
+        value="1"
+        oninput="setVolume(this.value)"
+    >
+</label>
+
+<video id="video" preload="auto">
+    <source
+        src="https://dn801205.us.archive.org/0/items/Neil_Young_Heart_Of_Gold/Neil_Young_Heart_Of_Gold.mp4"
+        type="video/mp4">
+</video>
+
+<script>
+const video = document.getElementById("video");
+
+function playAudio() {
+    video.play();
+}
+
+function pauseAudio() {
+    video.pause();
+}
+
+function setVolume(value) {
+    video.volume = value;
+}
+</script>
+
+</body>
+</html>

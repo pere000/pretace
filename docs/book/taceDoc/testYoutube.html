@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>YouTube Audio</title>
+
+<style>
+    body {
+        font-family: sans-serif;
+        padding: 30px;
+    }
+
+    #youtube {
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        left: -1000px;
+        top: -1000px;
+    }
+
+    button {
+        font-size: 20px;
+        padding: 10px 20px;
+        margin-right: 10px;
+    }
+</style>
+</head>
+
+<body>
+
+<button id="play">▶ Play</button>
+<button id="pause">⏸ Pause</button>
+
+<div id="youtube"></div>
+
+<script>
+let player;
+
+const script = document.createElement("script");
+script.src = "https://www.youtube.com/iframe_api";
+document.head.appendChild(script);
+
+function onYouTubeIframeAPIReady() {
+
+    player = new YT.Player("youtube", {
+        videoId: "R6YgU3VjaaQ",
+
+        width: 200,
+        height: 200,
+
+        playerVars: {
+            controls: 0,
+            playsinline: 1,
+            rel: 0
+        },
+
+        events: {
+            onReady: function () {
+                console.log("READY");
+            },
+
+            onError: function (e) {
+                console.log("YOUTUBE ERROR:", e.data);
+            }
+        }
+    });
+}
+
+document.getElementById("play").onclick = function () {
+    player.playVideo();
+};
+
+document.getElementById("pause").onclick = function () {
+    player.pauseVideo();
+};
+</script>
+
+</body>
+</html>

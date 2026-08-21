@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Audio Player</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: left;
+        padding: 40px;
+    }
+
+    /* Keep the video in the DOM, but don't display it */
+    #video {
+        position: fixed;
+        width: 1px;
+        height: 1px;
+        left: -10px;
+        top: -10px;
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    button {
+        font-size: 16px;
+        padding: 2px 4px;
+        margin: 2px;
+    }
+</style>
+</head>
+
+<body>
+<div id='' style='text-align:center;font-size:26px;'>
+	<a href='https://diaspora.psyco.fr/stream' target='_blank'><img style="width:100%;" src="https://diaspora.psyco.fr/camo/931bb8bf3b93a116246fff22026e9368dd566575/68747470733a2f2f64696173706f72612d707379636f2e73332e65752d776573742d332e616d617a6f6e6177732e636f6d2f75706c6f6164732f696d616765732f62313736346139643439373064626535393331302e77656270" alt=""></a>
+	✅ <a style='text-decoration:none;font-weight:bold;' href='https://diaspora.psyco.fr/tags/trondiasporapsycofr_1764285169806' target='_blank'>Forever Tag</a><span style='padding-right:40px;'>&nbsp</span> 📂 <a style='text-decoration:none;font-weight:bold;' href='https://diaspora.psyco.fr/tags/trondiasporapsycofr_1764285169800'>Main Folder</a><span style='padding-right:40px;'>&nbsp</span> 📂 <a style='text-decoration:none;font-weight:bold;' href='https://diaspora.psyco.fr/tags/catholics'>Group Folder</a>
+</div>
+<h2><a href='https://www.letras.com/neil-young/88811/' target='_blank'>Heart of Gold</a></h2>
+
+<button onclick="playAudio()">▶ Play</button>
+<button onclick="pauseAudio()">⏸ Pause</button>
+
+<br>
+
+<label>
+    <input
+        type="range"
+        min="0"
+        max="1"
+        step="0.01"
+        value="1"
+        oninput="setVolume(this.value)"
+    >
+</label><br><br><br>
+<div>Neil Young<br><br>
+I wanna live, I wanna give<br>
+I've been a miner for a heart of gold<br>
+It's these expressions I never give<br><br>
+
+That keep me searching for a heart of gold<br>
+And I'm getting old<br>
+Keep me searching for a heart of gold<br>
+And I'm getting old<br><br>
+
+I've been to Hollywood, I've been to Redwood<br>
+I've crossed the ocean for a heart of gold<br>
+I've been in my mind, it's such a fine line<br><br>
+
+That keeps me searching for a heart of gold<br>
+And I'm getting old<br>
+Keeps me searching for a heart of gold<br>
+And I'm getting old<br><br>
+
+Keep me searching for a heart of gold<br>
+You keep me searching and I'm growing old<br><br>
+
+<div style='font-size:14px;'><i><b>You can save the page on your Desktop.</b></i></div>
+</div>
+<video id="video" preload="auto">
+    <source
+        src="https://dn801205.us.archive.org/0/items/Neil_Young_Heart_Of_Gold/Neil_Young_Heart_Of_Gold.mp4"
+        type="video/mp4">
+</video>
+
+<script>
+const video = document.getElementById("video");
+
+function playAudio() {
+    video.play();
+}
+
+function pauseAudio() {
+    video.pause();
+}
+
+function setVolume(value) {
+    video.volume = value;
+}
+</script>
+
+</body>
+</html>

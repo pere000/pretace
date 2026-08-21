@@ -1,0 +1,2835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>IndexedDB Audio / CSV / Radio Player</title>
+
+<style>
+    body {
+        margin: 0;
+        padding: 20px;
+        background: #eeeeee;
+        font-family: Arial, sans-serif;
+        color: #222;
+    }
+
+    .container {
+        max-width: 950px;
+        margin: auto;
+        padding: 20px;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 2px 12px rgba(0,0,0,.15);
+    }
+
+    h1 {
+        margin-top: 0;
+    }
+
+    label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .field {
+        margin-bottom: 15px;
+    }
+
+    input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #999;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+
+    .buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 18px 0;
+    }
+
+    button {
+        padding: 10px 16px;
+        border: 1px solid #888;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 15px;
+        background: #eee;
+    }
+
+    button:hover {
+        background: #ddd;
+    }
+
+    .primary {
+        background: #1976d2;
+        color: white;
+        border-color: #125ca5;
+    }
+
+    .primary:hover {
+        background: #125ca5;
+    }
+
+    .danger {
+        background: #d32f2f;
+        color: white;
+        border-color: #a82020;
+    }
+
+    .pause-box {
+        background: #fff3cd;
+        border: 1px solid #ffe08a;
+        padding: 12px;
+        border-radius: 5px;
+        margin: 10px 0;
+    }
+
+    .pause-box label {
+        display: inline;
+    }
+
+    audio {
+        width: 100%;
+        margin-top: 15px;
+    }
+
+    #nowPlaying {
+        margin-top: 15px;
+        padding: 15px;
+        background: #e9ecef;
+        border-radius: 5px;
+    }
+
+    #message {
+        margin-top: 15px;
+        padding: 12px;
+        border-radius: 5px;
+        background: #e7f3fe;
+        border: 1px solid #b8daff;
+        white-space: pre-wrap;
+    }
+
+    #debug {
+        margin-top: 20px;
+        padding: 15px;
+        background: #111;
+        color: #00ff66;
+        font-family: monospace;
+        font-size: 13px;
+        line-height: 1.5;
+        white-space: pre-wrap;
+        border-radius: 5px;
+    }
+
+    .help {
+        margin-top: 15px;
+        color: #666;
+        font-size: 13px;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>IndexedDB Audio / CSV / Radio Player DESKTOP</h1>
+
+<div class="field">
+    <label for="author">Author</label>
+    <input id="author" type="text">
+</div>
+
+<div class="field">
+    <label for="title">Title</label>
+    <input id="title" type="text">
+</div>
+
+<div class="field">
+    <label for="urlFileName">Url / File</label>
+    <input
+        id="urlFileName"
+        type="text"
+        placeholder="http://blueswave.radio:8050/flac-md"
+    >
+</div>
+
+<div class="buttons">
+
+    <button id="loadBtn" class="primary">
+        LOAD
+    </button>
+
+    <button id="playBtn" class="primary">
+        PLAY
+    </button>
+
+    <button id="stopBtn">
+        STOP
+    </button>
+
+    <button id="saveBtn">
+        SAVE
+    </button>
+
+    <button id="exportBtn">
+        EXPORT CSV
+    </button>
+
+    <button id="deleteDbBtn" class="danger">
+        DELETE DB
+    </button>
+
+</div>
+
+<div class="pause-box">
+    <label>
+        <input id="pauseCheckbox" type="checkbox">
+        PAUSE
+    </label>
+</div>
+
+<audio id="audio" controls preload="none"></audio>
+
+<div id="nowPlaying">
+    <strong>Now Playing</strong>
+    <span id="nowPlayingText">Nothing</span>
+</div>
+
+<div id="message">
+    Initializing...
+</div>
+
+<div id="debug"></div>
+
+<div class="help">
+    CSV format:
+    Author|Title|urlFileName
+</div>
+
+</div>
+
+
+<script>
+"use strict";
+
+
+/* ============================================================
+   DATABASE
+   ============================================================ */
+
+const DB_NAME = "IndexedDBAudioRadioPlayer";
+const DB_VERSION = 1;
+const STORE_NAME = "songs";
+
+let db = null;
+
+
+/* ============================================================
+   AUDIO TYPES
+   ============================================================ */
+
+const AUDIO_EXTENSIONS = [
+    ".mp3",
+    ".wav",
+    ".ogg",
+    ".oga",
+    ".m4a",
+    ".aac",
+    ".flac",
+    ".webm"
+];
+
+
+/* ============================================================
+   DOM
+   ============================================================ */
+
+const authorInput =
+    document.getElementById("author");
+
+const titleInput =
+    document.getElementById("title");
+
+const urlInput =
+    document.getElementById("urlFileName");
+
+const loadBtn =
+    document.getElementById("loadBtn");
+
+const playBtn =
+    document.getElementById("playBtn");
+
+const stopBtn =
+    document.getElementById("stopBtn");
+
+const saveBtn =
+    document.getElementById("saveBtn");
+
+const exportBtn =
+    document.getElementById("exportBtn");
+
+const deleteDbBtn =
+    document.getElementById("deleteDbBtn");
+
+const pauseCheckbox =
+    document.getElementById("pauseCheckbox");
+
+const audio =
+    document.getElementById("audio");
+
+const messageBox =
+    document.getElementById("message");
+
+const nowPlayingText =
+    document.getElementById("nowPlayingText");
+
+const debugBox =
+    document.getElementById("debug");
+
+
+/* ============================================================
+   APPLICATION STATE
+   ============================================================ */
+
+const state = {
+
+    sourceType: null,
+    /*
+        null
+        db
+        csv
+        single
+        stream
+    */
+
+    currentSeries: [],
+
+    currentIndex: null,
+
+    currentUrlFileName: "",
+
+    previousUrlFileName: "",
+
+    playing: false,
+
+    paused: false,
+
+    objectUrl: null,
+
+    loadedExternalFile: null,
+
+    localFiles: new Map(),
+
+    localDirectoryHandle: null,
+
+    localCSV: false
+};
+
+
+/* ============================================================
+   MESSAGE
+   ============================================================ */
+
+function message(text, type = "info") {
+
+    messageBox.textContent = text;
+
+    if (type === "error") {
+
+        messageBox.style.background = "#f8d7da";
+        messageBox.style.borderColor = "#f5c6cb";
+
+    } else if (type === "success") {
+
+        messageBox.style.background = "#d4edda";
+        messageBox.style.borderColor = "#c3e6cb";
+
+    } else {
+
+        messageBox.style.background = "#e7f3fe";
+        messageBox.style.borderColor = "#b8daff";
+    }
+}
+
+
+/* ============================================================
+   DEBUG
+   ============================================================ */
+
+function updateDebug() {
+
+    const record =
+        state.currentIndex !== null &&
+        state.currentSeries[state.currentIndex]
+            ? state.currentSeries[state.currentIndex]
+            : null;
+
+    debugBox.textContent =
+`DEBUG
+
+page protocol:       ${location.protocol}
+
+sourceType:          ${state.sourceType ?? "null"}
+
+currentIndex:        ${state.currentIndex ?? "null"}
+seriesLength:        ${state.currentSeries.length}
+
+currentUrlFileName:  ${state.currentUrlFileName || "(empty)"}
+previousUrlFileName: ${state.previousUrlFileName || "(empty)"}
+
+playing:             ${state.playing}
+paused:              ${state.paused}
+
+audio.src:
+${audio.src || "(empty)"}
+
+current record:
+${record ? JSON.stringify(record, null, 2) : "null"}
+`;
+}
+
+
+/* ============================================================
+   NOW PLAYING
+   ============================================================ */
+
+function updateNowPlaying(record) {
+
+    if (!record) {
+
+        nowPlayingText.textContent =
+            "Nothing";
+
+        return;
+    }
+
+    nowPlayingText.textContent =
+        `${record.author} — ${record.title} — ${record.urlFileName}`;
+}
+
+
+/* ============================================================
+   OPEN DATABASE
+   ============================================================ */
+
+function openDatabase() {
+
+    return new Promise((resolve, reject) => {
+
+        const request =
+            indexedDB.open(
+                DB_NAME,
+                DB_VERSION
+            );
+
+        request.onupgradeneeded = function(event) {
+
+            const database =
+                event.target.result;
+
+            if (
+                !database.objectStoreNames.contains(
+                    STORE_NAME
+                )
+            ) {
+
+                const store =
+                    database.createObjectStore(
+                        STORE_NAME,
+                        {
+                            keyPath: "id",
+                            autoIncrement: true
+                        }
+                    );
+
+                store.createIndex(
+                    "urlFileName",
+                    "urlFileName",
+                    { unique: false }
+                );
+            }
+        };
+
+        request.onsuccess = function() {
+
+            db = request.result;
+
+            db.onversionchange = function() {
+                db.close();
+            };
+
+            resolve(db);
+        };
+
+        request.onerror = function() {
+            reject(request.error);
+        };
+    });
+}
+
+
+/* ============================================================
+   GET DB
+   ============================================================ */
+
+function getAllRecords() {
+
+    return new Promise((resolve, reject) => {
+
+        const transaction =
+            db.transaction(
+                STORE_NAME,
+                "readonly"
+            );
+
+        const store =
+            transaction.objectStore(
+                STORE_NAME
+            );
+
+        const request =
+            store.getAll();
+
+        request.onsuccess = function() {
+            resolve(request.result || []);
+        };
+
+        request.onerror = function() {
+            reject(request.error);
+        };
+    });
+}
+
+
+/* ============================================================
+   ADD DB RECORD
+   ============================================================ */
+
+function addRecord(record) {
+
+    return new Promise((resolve, reject) => {
+
+        const transaction =
+            db.transaction(
+                STORE_NAME,
+                "readwrite"
+            );
+
+        const store =
+            transaction.objectStore(
+                STORE_NAME
+            );
+
+        const request =
+            store.add({
+                author: record.author,
+                title: record.title,
+                urlFileName: record.urlFileName
+            });
+
+        request.onsuccess = function() {
+            resolve(request.result);
+        };
+
+        request.onerror = function() {
+            reject(request.error);
+        };
+    });
+}
+
+
+/* ============================================================
+   CHECK DUPLICATE
+   ============================================================ */
+
+async function recordExists(record) {
+
+    const records =
+        await getAllRecords();
+
+    return records.some(
+        item =>
+            item.author === record.author &&
+            item.title === record.title &&
+            item.urlFileName === record.urlFileName
+    );
+}
+
+
+/* ============================================================
+   VALIDATION
+   ============================================================ */
+
+function validateRecord(record) {
+
+    if (!record.author.trim()) {
+        throw new Error("Author is required.");
+    }
+
+    if (!record.title.trim()) {
+        throw new Error("Title is required.");
+    }
+
+    if (!record.urlFileName.trim()) {
+        throw new Error("Url/file is required.");
+    }
+
+    if (
+        record.author.includes("|") ||
+        record.title.includes("|") ||
+        record.urlFileName.includes("|")
+    ) {
+        throw new Error(
+            "The | character cannot be used in fields."
+        );
+    }
+}
+
+
+/* ============================================================
+   USER RECORD
+   ============================================================ */
+
+function getUserRecord() {
+
+    const record = {
+
+        author:
+            authorInput.value.trim(),
+
+        title:
+            titleInput.value.trim(),
+
+        urlFileName:
+            urlInput.value.trim()
+    };
+
+    validateRecord(record);
+
+    return record;
+}
+
+
+/* ============================================================
+   URL HELPERS
+   ============================================================ */
+
+function isHttpUrl(value) {
+
+    return /^https?:\/\//i.test(value);
+}
+
+
+function isCSVName(value) {
+
+    return value
+        .split("?")[0]
+        .split("#")[0]
+        .toLowerCase()
+        .endsWith(".csv");
+}
+
+
+function isAudioName(value) {
+
+    const lower =
+        value
+            .split("?")[0]
+            .split("#")[0]
+            .toLowerCase();
+
+    return AUDIO_EXTENSIONS.some(
+        extension =>
+            lower.endsWith(extension)
+    );
+}
+
+
+/*
+    IMPORTANT:
+
+    A URL which is HTTP/HTTPS but is not obviously a CSV
+    or normal audio filename is treated as a LIVE STREAM.
+
+    This handles:
+
+        http://blueswave.radio:8050/flac-md
+*/
+
+function isLiveStreamURL(value) {
+
+    return (
+        isHttpUrl(value) &&
+        !isCSVName(value) &&
+        !isAudioName(value)
+    );
+}
+
+
+/* ============================================================
+   OBJECT URL
+   ============================================================ */
+
+function revokeObjectURL() {
+
+    if (state.objectUrl) {
+
+        URL.revokeObjectURL(
+            state.objectUrl
+        );
+
+        state.objectUrl = null;
+    }
+}
+
+
+/* ============================================================
+   CSV PARSER
+   ============================================================ */
+
+function parseCSV(text) {
+
+    const lines =
+        text
+            .replace(/^\uFEFF/, "")
+            .split(/\r?\n/);
+
+    const records = [];
+
+    for (
+        let i = 0;
+        i < lines.length;
+        i++
+    ) {
+
+        const line =
+            lines[i].trim();
+
+        if (!line) {
+            continue;
+        }
+
+        /*
+            Optional header.
+        */
+
+        if (
+            i === 0 &&
+            /^author\s*\|\s*title\s*\|\s*urlfilename$/i
+                .test(line)
+        ) {
+            continue;
+        }
+
+        const parts =
+            line.split("|");
+
+        if (parts.length !== 3) {
+
+            throw new Error(
+                `Invalid CSV line ${i + 1}. ` +
+                `Expected Author|Title|urlFileName`
+            );
+        }
+
+        const record = {
+
+            author:
+                parts[0].trim(),
+
+            title:
+                parts[1].trim(),
+
+            urlFileName:
+                parts[2].trim()
+        };
+
+        validateRecord(record);
+
+        records.push(record);
+    }
+
+    if (!records.length) {
+
+        throw new Error(
+            "CSV contains no records."
+        );
+    }
+
+    return records;
+}
+
+
+/* ============================================================
+   CSV EXPORT
+   ============================================================ */
+
+function recordsToCSV(records) {
+
+    const lines = [
+        "Author|Title|urlFileName"
+    ];
+
+    for (const record of records) {
+
+        lines.push(
+            `${record.author}|${record.title}|${record.urlFileName}`
+        );
+    }
+
+    return lines.join("\n");
+}
+
+
+/* ============================================================
+   LOCAL FILE MAP
+   ============================================================ */
+
+function clearLocalFiles() {
+
+    state.localFiles.clear();
+}
+
+
+function addLocalFile(file) {
+
+    state.localFiles.set(
+        file.name,
+        file
+    );
+
+    if (file.webkitRelativePath) {
+
+        state.localFiles.set(
+            file.webkitRelativePath,
+            file
+        );
+
+        const parts =
+            file.webkitRelativePath
+                .split("/");
+
+        if (parts.length > 1) {
+
+            state.localFiles.set(
+                parts.slice(1).join("/"),
+                file
+            );
+        }
+    }
+}
+
+
+function findLocalFile(name) {
+
+    if (state.localFiles.has(name)) {
+        return state.localFiles.get(name);
+    }
+
+    const normalized =
+        name.replace(/^\.?\//, "");
+
+    if (state.localFiles.has(normalized)) {
+        return state.localFiles.get(normalized);
+    }
+
+    const basename =
+        normalized.split("/").pop();
+
+    if (state.localFiles.has(basename)) {
+        return state.localFiles.get(basename);
+    }
+
+    return null;
+}
+
+
+/* ============================================================
+   SELECT LOCAL FILE
+   ============================================================ */
+
+function selectLocalFile() {
+
+    return new Promise((resolve, reject) => {
+
+        const input =
+            document.createElement("input");
+
+        input.type = "file";
+
+        input.accept =
+            ".csv,.mp3,.wav,.ogg,.oga,.m4a,.aac,.flac,.webm,audio/*";
+
+        input.onchange = function() {
+
+            if (
+                !input.files ||
+                !input.files.length
+            ) {
+                resolve(null);
+                return;
+            }
+
+            resolve(
+                input.files[0]
+            );
+        };
+
+        input.onerror = function() {
+            reject(
+                new Error(
+                    "Could not open file picker."
+                )
+            );
+        };
+
+        input.click();
+    });
+}
+
+
+/* ============================================================
+   SELECT AUDIO FOLDER
+   ============================================================ */
+
+async function selectAudioFolder() {
+
+    /*
+        Modern Chrome / Edge.
+    */
+
+    if (
+        typeof window.showDirectoryPicker ===
+        "function"
+    ) {
+
+        try {
+
+            state.localDirectoryHandle =
+                await window.showDirectoryPicker();
+
+            return true;
+
+        } catch (error) {
+
+            if (
+                error.name === "AbortError"
+            ) {
+                return false;
+            }
+
+            throw error;
+        }
+    }
+
+    /*
+        Fallback.
+    */
+
+    return new Promise((resolve, reject) => {
+
+        const input =
+            document.createElement("input");
+
+        input.type = "file";
+        input.multiple = true;
+        input.webkitdirectory = true;
+
+        input.onchange = function() {
+
+            for (
+                const file of input.files
+            ) {
+
+                addLocalFile(file);
+            }
+
+            resolve(
+                input.files.length > 0
+            );
+        };
+
+        input.onerror = function() {
+            reject(
+                new Error(
+                    "Could not select folder."
+                )
+            );
+        };
+
+        input.click();
+    });
+}
+
+
+/* ============================================================
+   DIRECTORY FILE
+   ============================================================ */
+
+async function getDirectoryFile(path) {
+
+    if (!state.localDirectoryHandle) {
+        return null;
+    }
+
+    let directory =
+        state.localDirectoryHandle;
+
+    const parts =
+        path
+            .replace(/\\/g, "/")
+            .split("/")
+            .filter(Boolean);
+
+    if (!parts.length) {
+        return null;
+    }
+
+    try {
+
+        for (
+            let i = 0;
+            i < parts.length - 1;
+            i++
+        ) {
+
+            directory =
+                await directory.getDirectoryHandle(
+                    parts[i]
+                );
+        }
+
+        const handle =
+            await directory.getFileHandle(
+                parts[parts.length - 1]
+            );
+
+        return await handle.getFile();
+
+    } catch (error) {
+
+        return null;
+    }
+}
+
+
+/* ============================================================
+   FIND LOCAL AUDIO
+   ============================================================ */
+
+async function findLocalAudio(name) {
+
+    const direct =
+        findLocalFile(name);
+
+    if (direct) {
+        return direct;
+    }
+
+    return await getDirectoryFile(name);
+}
+
+
+/* ============================================================
+   PLAY CURRENT RECORD
+   ============================================================ */
+
+async function playCurrentRecord() {
+
+    if (
+        state.currentIndex === null
+    ) {
+        throw new Error(
+            "No current song."
+        );
+    }
+
+    const record =
+        state.currentSeries[
+            state.currentIndex
+        ];
+
+    if (!record) {
+        throw new Error(
+            "Current record does not exist."
+        );
+    }
+
+    validateRecord(record);
+
+    /*
+    ==========================================================
+    LIVE RADIO STREAM
+    ==========================================================
+    */
+
+    if (
+        state.sourceType === "stream"
+    ) {
+
+        /*
+            CRITICAL:
+
+            Do NOT fetch().
+            Do NOT create Blob.
+            Do NOT create ObjectURL.
+
+            Give the stream URL directly to audio.
+        */
+
+        revokeObjectURL();
+
+        audio.pause();
+
+        audio.src =
+            record.urlFileName;
+
+        audio.load();
+
+        await audio.play();
+
+        state.playing = true;
+        state.paused = false;
+
+        updateNowPlaying(record);
+        updateDebug();
+
+        return;
+    }
+
+
+    /*
+    ==========================================================
+    LOCAL CSV AUDIO
+    ==========================================================
+    */
+
+    if (
+        state.sourceType === "csv" &&
+        state.localCSV
+    ) {
+
+        const file =
+            await findLocalAudio(
+                record.urlFileName
+            );
+
+        if (!file) {
+
+            throw new Error(
+                `Local audio file not found:\n${record.urlFileName}`
+            );
+        }
+
+        revokeObjectURL();
+
+        state.objectUrl =
+            URL.createObjectURL(file);
+
+        audio.pause();
+
+        audio.src =
+            state.objectUrl;
+
+        audio.load();
+
+        await audio.play();
+
+        state.playing = true;
+        state.paused = false;
+
+        updateNowPlaying(record);
+        updateDebug();
+
+        return;
+    }
+
+
+    /*
+    ==========================================================
+    LOCAL SINGLE FILE
+    ==========================================================
+    */
+
+    if (
+        state.sourceType === "single" &&
+        state.loadedExternalFile
+    ) {
+
+        if (!state.objectUrl) {
+
+            state.objectUrl =
+                URL.createObjectURL(
+                    state.loadedExternalFile
+                );
+        }
+
+        audio.pause();
+
+        audio.src =
+            state.objectUrl;
+
+        audio.load();
+
+        await audio.play();
+
+        state.playing = true;
+        state.paused = false;
+
+        updateNowPlaying(record);
+        updateDebug();
+
+        return;
+    }
+
+
+    /*
+    ==========================================================
+    REMOTE / RELATIVE NORMAL AUDIO
+    ==========================================================
+    */
+
+    let url =
+        record.urlFileName;
+
+    if (!isHttpUrl(url)) {
+
+        url =
+            new URL(
+                url,
+                document.baseURI
+            ).href;
+    }
+
+    revokeObjectURL();
+
+    audio.pause();
+
+    audio.src = url;
+
+    audio.load();
+
+    await audio.play();
+
+    state.playing = true;
+    state.paused = false;
+
+    updateNowPlaying(record);
+    updateDebug();
+}
+
+
+/* ============================================================
+   LOAD LIVE RADIO
+   ============================================================ */
+
+async function loadLiveStream(url) {
+
+    const record = {
+
+        author:
+            authorInput.value.trim(),
+
+        title:
+            titleInput.value.trim(),
+
+        urlFileName:
+            url
+    };
+
+    validateRecord(record);
+
+    state.sourceType =
+        "stream";
+
+    state.currentSeries =
+        [record];
+
+    state.currentIndex =
+        0;
+
+    state.currentUrlFileName =
+        url;
+
+    state.previousUrlFileName =
+        url;
+
+    state.loadedExternalFile =
+        null;
+
+    state.localCSV =
+        false;
+
+    clearLocalFiles();
+
+    state.localDirectoryHandle =
+        null;
+
+    revokeObjectURL();
+
+    /*
+        Direct assignment to audio.
+    */
+
+    audio.pause();
+
+    audio.src = url;
+
+    audio.load();
+
+    updateNowPlaying(record);
+    updateDebug();
+
+    try {
+
+        await audio.play();
+
+        state.playing = true;
+        state.paused = false;
+
+        message(
+            "Live radio stream playing.",
+            "success"
+        );
+
+    } catch (error) {
+
+        /*
+            Autoplay may be blocked.
+        */
+
+        state.playing = false;
+
+        message(
+            "Radio loaded, but the browser blocked automatic playback. Press PLAY.",
+            "info"
+        );
+    }
+
+    updateDebug();
+}
+
+
+/* ============================================================
+   LOAD REMOTE CSV
+   ============================================================ */
+
+async function loadRemoteCSV(url) {
+
+    const response =
+        await fetch(url);
+
+    if (!response.ok) {
+
+        throw new Error(
+            `Cannot load CSV: HTTP ${response.status}`
+        );
+    }
+
+    const text =
+        await response.text();
+
+    const records =
+        parseCSV(text);
+
+    state.sourceType =
+        "csv";
+
+    state.currentSeries =
+        records;
+
+    state.currentIndex =
+        0;
+
+    state.currentUrlFileName =
+        url;
+
+    state.previousUrlFileName =
+        url;
+
+    state.localCSV =
+        false;
+
+    state.loadedExternalFile =
+        null;
+
+    clearLocalFiles();
+
+    state.localDirectoryHandle =
+        null;
+
+    revokeObjectURL();
+
+    updateDebug();
+
+    await playCurrentRecord();
+
+    message(
+        `Remote CSV loaded: ${records.length} record(s).`,
+        "success"
+    );
+}
+
+
+/* ============================================================
+   LOAD LOCAL FILE
+   ============================================================ */
+
+async function loadLocalFile() {
+
+    const file =
+        await selectLocalFile();
+
+    if (!file) {
+        return;
+    }
+
+    /*
+        CSV
+    */
+
+    if (
+        file.name
+            .toLowerCase()
+            .endsWith(".csv")
+    ) {
+
+        const text =
+            await file.text();
+
+        const records =
+            parseCSV(text);
+
+        /*
+            Select audio folder.
+        */
+
+        message(
+            "CSV loaded. Now select the folder containing the audio files."
+        );
+
+        const selected =
+            await selectAudioFolder();
+
+        if (!selected) {
+
+            throw new Error(
+                "Audio folder was not selected."
+            );
+        }
+
+        state.sourceType =
+            "csv";
+
+        state.currentSeries =
+            records;
+
+        state.currentIndex =
+            0;
+
+        state.currentUrlFileName =
+            urlInput.value.trim() ||
+            file.name;
+
+        state.previousUrlFileName =
+            state.currentUrlFileName;
+
+        state.loadedExternalFile =
+            file;
+
+        state.localCSV =
+            true;
+
+        updateDebug();
+
+        try {
+
+            await playCurrentRecord();
+
+            message(
+                `Local CSV loaded: ${records.length} record(s).`,
+                "success"
+            );
+
+        } catch (error) {
+
+            /*
+                CSV is loaded even if first local audio
+                could not be found.
+            */
+
+            message(
+                error.message,
+                "error"
+            );
+        }
+
+        return;
+    }
+
+
+    /*
+        Single audio.
+    */
+
+    if (
+        file.type.startsWith("audio/") ||
+        isAudioName(file.name)
+    ) {
+
+        const author =
+            authorInput.value.trim();
+
+        const title =
+            titleInput.value.trim();
+
+        if (!author) {
+            throw new Error(
+                "Author is required."
+            );
+        }
+
+        if (!title) {
+            throw new Error(
+                "Title is required."
+            );
+        }
+
+        revokeObjectURL();
+
+        state.objectUrl =
+            URL.createObjectURL(file);
+
+        state.sourceType =
+            "single";
+
+        state.currentSeries = [
+
+            {
+                author: author,
+                title: title,
+                urlFileName: file.name
+            }
+
+        ];
+
+        state.currentIndex =
+            0;
+
+        state.currentUrlFileName =
+            urlInput.value.trim() ||
+            file.name;
+
+        state.previousUrlFileName =
+            state.currentUrlFileName;
+
+        state.loadedExternalFile =
+            file;
+
+        state.localCSV =
+            false;
+
+        /*
+            Put actual filename into field.
+        */
+
+        urlInput.value =
+            file.name;
+
+        updateDebug();
+
+        await playCurrentRecord();
+
+        message(
+            `Local sound file loaded: ${file.name}`,
+            "success"
+        );
+
+        return;
+    }
+
+
+    throw new Error(
+        "Selected file is not a supported CSV or audio file."
+    );
+}
+
+
+/* ============================================================
+   LOAD BUTTON
+   ============================================================ */
+
+async function loadAction() {
+
+    try {
+
+        const value =
+            urlInput.value.trim();
+
+        /*
+            EMPTY:
+            local Desktop picker.
+        */
+
+        if (!value) {
+
+            await loadLocalFile();
+
+            return;
+        }
+
+
+        /*
+            HTTP/HTTPS LIVE STREAM
+
+            Example:
+
+            http://blueswave.radio:8050/flac-md
+        */
+
+        if (
+            isLiveStreamURL(value)
+        ) {
+
+            await loadLiveStream(
+                value
+            );
+
+            return;
+        }
+
+
+        /*
+            HTTP/HTTPS CSV
+        */
+
+        if (
+            isHttpUrl(value) &&
+            isCSVName(value)
+        ) {
+
+            await loadRemoteCSV(
+                value
+            );
+
+            return;
+        }
+
+
+        /*
+            HTTP/HTTPS normal audio
+        */
+
+        if (
+            isHttpUrl(value)
+        ) {
+
+            const record = {
+
+                author:
+                    authorInput.value.trim(),
+
+                title:
+                    titleInput.value.trim(),
+
+                urlFileName:
+                    value
+            };
+
+            validateRecord(record);
+
+            state.sourceType =
+                "single";
+
+            state.currentSeries =
+                [record];
+
+            state.currentIndex =
+                0;
+
+            state.currentUrlFileName =
+                value;
+
+            state.previousUrlFileName =
+                value;
+
+            state.loadedExternalFile =
+                null;
+
+            state.localCSV =
+                false;
+
+            revokeObjectURL();
+
+            await playCurrentRecord();
+
+            message(
+                "Remote audio loaded.",
+                "success"
+            );
+
+            return;
+        }
+
+
+        /*
+            LOCAL FILENAME / RELATIVE URL
+
+            When running file:// we cannot safely
+            fetch arbitrary Desktop filenames.
+
+            Therefore open picker.
+        */
+
+        if (
+            location.protocol === "file:"
+        ) {
+
+            await loadLocalFile();
+
+            return;
+        }
+
+
+        /*
+            If served by HTTP server, relative URL.
+        */
+
+        const url =
+            new URL(
+                value,
+                document.baseURI
+            ).href;
+
+        if (isCSVName(value)) {
+
+            await loadRemoteCSV(url);
+
+            return;
+        }
+
+        const record = {
+
+            author:
+                authorInput.value.trim(),
+
+            title:
+                titleInput.value.trim(),
+
+            urlFileName:
+                value
+        };
+
+        validateRecord(record);
+
+        state.sourceType =
+            "single";
+
+        state.currentSeries =
+            [record];
+
+        state.currentIndex =
+            0;
+
+        state.currentUrlFileName =
+            value;
+
+        state.previousUrlFileName =
+            value;
+
+        state.loadedExternalFile =
+            null;
+
+        state.localCSV =
+            false;
+
+        revokeObjectURL();
+
+        await playCurrentRecord();
+
+        message(
+            "Relative audio loaded.",
+            "success"
+        );
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        message(
+            "LOAD error:\n" +
+            error.message,
+            "error"
+        );
+
+        updateDebug();
+    }
+}
+
+
+/* ============================================================
+   PLAY BUTTON
+   ============================================================ */
+
+async function playAction() {
+
+    try {
+
+        const userValue =
+            urlInput.value.trim();
+
+
+        /*
+        ========================================================
+        NOT CURRENTLY PLAYING
+        ========================================================
+        */
+
+        if (!state.playing) {
+
+            /*
+                If we have paused audio and the URL has
+                not changed, continue it.
+            */
+
+            if (
+                state.paused &&
+                userValue ===
+                    state.currentUrlFileName &&
+                state.currentIndex !== null
+            ) {
+
+                await audio.play();
+
+                state.playing =
+                    true;
+
+                state.paused =
+                    false;
+
+                pauseCheckbox.checked =
+                    false;
+
+                message(
+                    "Playback resumed.",
+                    "success"
+                );
+
+                updateDebug();
+
+                return;
+            }
+
+
+            /*
+                EMPTY USER FIELD:
+
+                use DB first record.
+            */
+
+            if (!userValue) {
+
+                const records =
+                    await getAllRecords();
+
+                if (!records.length) {
+
+                    message(
+                        "DB empty, you need to load a CSV from your local desktop or remotely, or some sound file/radio stream. Next, by pressing SAVE you will fill your DB."
+                    );
+
+                    return;
+                }
+
+                state.sourceType =
+                    "db";
+
+                state.currentSeries =
+                    records;
+
+                state.currentIndex =
+                    0;
+
+                state.currentUrlFileName =
+                    "";
+
+                state.previousUrlFileName =
+                    "";
+
+                state.loadedExternalFile =
+                    null;
+
+                state.localCSV =
+                    false;
+
+                clearLocalFiles();
+
+                state.localDirectoryHandle =
+                    null;
+
+                revokeObjectURL();
+
+                /*
+                    DB record can itself be a live stream.
+                */
+
+                if (
+                    isLiveStreamURL(
+                        records[0].urlFileName
+                    )
+                ) {
+
+                    state.sourceType =
+                        "stream";
+                }
+
+                updateDebug();
+
+                try {
+
+                    await playCurrentRecord();
+
+                } catch (error) {
+
+                    if (
+                        error.name ===
+                        "NotAllowedError"
+                    ) {
+
+                        message(
+                            "Browser blocked automatic playback. Press PLAY again.",
+                            "info"
+                        );
+
+                    } else {
+
+                        throw error;
+                    }
+                }
+
+                return;
+            }
+
+
+            /*
+                USER FIELD IS FILLED.
+
+                If HTTP live stream:
+                load it directly.
+            */
+
+            if (
+                isLiveStreamURL(
+                    userValue
+                )
+            ) {
+
+                await loadLiveStream(
+                    userValue
+                );
+
+                return;
+            }
+
+
+            /*
+                HTTP CSV.
+            */
+
+            if (
+                isHttpUrl(userValue) &&
+                isCSVName(userValue)
+            ) {
+
+                await loadRemoteCSV(
+                    userValue
+                );
+
+                return;
+            }
+
+
+            /*
+                HTTP normal audio.
+            */
+
+            if (
+                isHttpUrl(userValue)
+            ) {
+
+                const record = {
+
+                    author:
+                        authorInput.value.trim(),
+
+                    title:
+                        titleInput.value.trim(),
+
+                    urlFileName:
+                        userValue
+                };
+
+                validateRecord(record);
+
+                state.sourceType =
+                    "single";
+
+                state.currentSeries =
+                    [record];
+
+                state.currentIndex =
+                    0;
+
+                state.currentUrlFileName =
+                    userValue;
+
+                state.previousUrlFileName =
+                    userValue;
+
+                state.loadedExternalFile =
+                    null;
+
+                state.localCSV =
+                    false;
+
+                revokeObjectURL();
+
+                await playCurrentRecord();
+
+                return;
+            }
+
+
+            /*
+                LOCAL FILENAME.
+            */
+
+            if (
+                location.protocol === "file:"
+            ) {
+
+                await loadLocalFile();
+
+                return;
+            }
+        }
+
+
+        /*
+        ========================================================
+        CURRENTLY PLAYING
+        ========================================================
+
+        SAME URL:
+            NEXT RECORD
+
+        DIFFERENT OR EMPTY:
+            KEEP INDEX / REPLAY SAME RECORD
+        ========================================================
+        */
+
+        if (
+            userValue &&
+            userValue ===
+                state.currentUrlFileName
+        ) {
+
+            /*
+                LIVE RADIO STREAM:
+
+                It is one continuous source.
+                Its "next song" is itself.
+                Reconnect/restart it.
+            */
+
+            if (
+                state.sourceType ===
+                "stream"
+            ) {
+
+                state.currentIndex =
+                    0;
+
+                await playCurrentRecord();
+
+                message(
+                    "Radio stream restarted.",
+                    "success"
+                );
+
+                return;
+            }
+
+
+            /*
+                Single sound:
+                its own next song.
+            */
+
+            if (
+                state.currentSeries.length <= 1
+            ) {
+
+                state.currentIndex =
+                    0;
+
+            } else {
+
+                state.currentIndex =
+                    (
+                        state.currentIndex + 1
+                    ) %
+                    state.currentSeries.length;
+            }
+
+            await playCurrentRecord();
+
+            message(
+                `Playing item ${
+                    state.currentIndex + 1
+                } of ${
+                    state.currentSeries.length
+                }.`,
+                "success"
+            );
+
+            return;
+        }
+
+
+        /*
+            DIFFERENT OR EMPTY:
+
+            keep current index and replay it.
+        */
+
+        if (
+            state.currentIndex !== null
+        ) {
+
+            await playCurrentRecord();
+
+            message(
+                "Current item replayed; index kept.",
+                "success"
+            );
+
+            return;
+        }
+
+
+        /*
+            No state at all:
+            start from DB.
+        */
+
+        const records =
+            await getAllRecords();
+
+        if (!records.length) {
+
+            message(
+                "DB is empty."
+            );
+
+            return;
+        }
+
+        state.sourceType =
+            isLiveStreamURL(
+                records[0].urlFileName
+            )
+                ? "stream"
+                : "db";
+
+        state.currentSeries =
+            records;
+
+        state.currentIndex =
+            0;
+
+        await playCurrentRecord();
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        message(
+            "PLAY error:\n" +
+            error.message,
+            "error"
+        );
+
+        updateDebug();
+    }
+}
+
+
+/* ============================================================
+   PAUSE CHECKBOX
+   ============================================================ */
+
+pauseCheckbox.addEventListener(
+    "change",
+    async function() {
+
+        try {
+
+            if (
+                pauseCheckbox.checked
+            ) {
+
+                if (!audio.paused) {
+
+                    audio.pause();
+
+                    state.playing =
+                        false;
+
+                    state.paused =
+                        true;
+
+                    message(
+                        "Paused."
+                    );
+                }
+
+            } else {
+
+                if (
+                    state.currentIndex !== null &&
+                    audio.src
+                ) {
+
+                    await audio.play();
+
+                    state.playing =
+                        true;
+
+                    state.paused =
+                        false;
+
+                    message(
+                        "Resumed.",
+                        "success"
+                    );
+                }
+            }
+
+            updateDebug();
+
+        } catch (error) {
+
+            message(
+                "PAUSE error:\n" +
+                error.message,
+                "error"
+            );
+        }
+    }
+);
+
+
+/* ============================================================
+   STOP
+   ============================================================ */
+
+function stopAction() {
+
+    audio.pause();
+
+    audio.removeAttribute("src");
+
+    audio.load();
+
+    revokeObjectURL();
+
+    state.sourceType =
+        null;
+
+    state.currentSeries =
+        [];
+
+    state.currentIndex =
+        null;
+
+    state.currentUrlFileName =
+        "";
+
+    state.previousUrlFileName =
+        "";
+
+    state.playing =
+        false;
+
+    state.paused =
+        false;
+
+    state.loadedExternalFile =
+        null;
+
+    state.localCSV =
+        false;
+
+    clearLocalFiles();
+
+    state.localDirectoryHandle =
+        null;
+
+    pauseCheckbox.checked =
+        false;
+
+    updateNowPlaying(null);
+
+    message(
+        "STOP: playback state completely reset. IndexedDB was not deleted."
+    );
+
+    updateDebug();
+}
+
+
+/* ============================================================
+   SAVE
+   ============================================================ */
+
+async function saveAction() {
+
+    try {
+
+        /*
+            CSV:
+            save all CSV records.
+        */
+
+        if (
+            state.sourceType === "csv" &&
+            state.currentSeries.length
+        ) {
+
+            let saved = 0;
+            let duplicates = 0;
+
+            for (
+                const record
+                of state.currentSeries
+            ) {
+
+                validateRecord(record);
+
+                if (
+                    await recordExists(record)
+                ) {
+
+                    duplicates++;
+                    continue;
+                }
+
+                await addRecord(record);
+
+                saved++;
+            }
+
+            message(
+                `CSV SAVE completed.\n\n` +
+                `Saved: ${saved}\n` +
+                `Duplicates skipped: ${duplicates}`,
+                "success"
+            );
+
+            return;
+        }
+
+
+        /*
+            Radio / single audio:
+
+            Save current record using USER FIELDS.
+        */
+
+        const record =
+            getUserRecord();
+
+        if (
+            await recordExists(record)
+        ) {
+
+            message(
+                "This exact record already exists in DB."
+            );
+
+            return;
+        }
+
+        await addRecord(record);
+
+        message(
+            "Record saved to IndexedDB.",
+            "success"
+        );
+
+    } catch (error) {
+
+        console.error(error);
+
+        message(
+            "SAVE error:\n" +
+            error.message,
+            "error"
+        );
+    }
+}
+
+
+/* ============================================================
+   EXPORT CSV
+   ============================================================ */
+
+async function exportCSVAction() {
+
+    try {
+
+        const records =
+            await getAllRecords();
+
+        if (!records.length) {
+
+            message(
+                "DB is empty. Nothing to export."
+            );
+
+            return;
+        }
+
+        const csv =
+            recordsToCSV(records);
+
+        const win =
+            window.open(
+                "",
+                "_blank"
+            );
+
+        if (!win) {
+
+            throw new Error(
+                "New tab was blocked by the browser."
+            );
+        }
+
+        const safeText =
+            csv
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;");
+
+        win.document.write(`
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>CSV Export</title>
+<style>
+body {
+    font-family: monospace;
+    padding: 20px;
+}
+textarea {
+    width: 100%;
+    height: 70vh;
+}
+</style>
+</head>
+<body>
+
+<h2>CSV Export</h2>
+
+<p>
+<a
+    download="songs.csv"
+    href="data:text/csv;charset=utf-8,${encodeURIComponent(csv)}"
+>
+Download songs.csv
+</a>
+</p>
+
+<textarea readonly>${safeText}</textarea>
+
+</body>
+</html>
+`);
+
+        win.document.close();
+
+        message(
+            `Exported ${records.length} record(s).`,
+            "success"
+        );
+
+    } catch (error) {
+
+        message(
+            "EXPORT error:\n" +
+            error.message,
+            "error"
+        );
+    }
+}
+
+
+/* ============================================================
+   DELETE DB
+   ============================================================ */
+
+async function deleteDatabaseAction() {
+
+    if (
+        !confirm(
+            "Delete ALL IndexedDB records?"
+        )
+    ) {
+        return;
+    }
+
+    stopAction();
+
+    if (db) {
+        db.close();
+        db = null;
+    }
+
+    await new Promise(
+        (resolve, reject) => {
+
+            const request =
+                indexedDB.deleteDatabase(
+                    DB_NAME
+                );
+
+            request.onsuccess =
+                resolve;
+
+            request.onerror =
+                () => reject(
+                    request.error
+                );
+
+            request.onblocked =
+                () => {
+
+                    message(
+                        "Database deletion is blocked. Close other player tabs.",
+                        "error"
+                    );
+                };
+        }
+    );
+
+    await openDatabase();
+
+    message(
+        "IndexedDB deleted. All records removed.",
+        "success"
+    );
+
+    updateDebug();
+}
+
+
+/* ============================================================
+   AUDIO EVENTS
+   ============================================================ */
+
+audio.addEventListener(
+    "play",
+    function() {
+
+        state.playing =
+            true;
+
+        state.paused =
+            false;
+
+        updateDebug();
+    }
+);
+
+
+audio.addEventListener(
+    "pause",
+    function() {
+
+        if (!audio.ended) {
+
+            state.playing =
+                false;
+
+            if (
+                pauseCheckbox.checked
+            ) {
+
+                state.paused =
+                    true;
+            }
+        }
+
+        updateDebug();
+    }
+);
+
+
+audio.addEventListener(
+    "ended",
+    function() {
+
+        /*
+            Live radio should normally never emit ended.
+            Normal files can.
+        */
+
+        state.playing =
+            false;
+
+        state.paused =
+            false;
+
+        updateDebug();
+
+        message(
+            "Playback ended. Press PLAY."
+        );
+    }
+);
+
+
+audio.addEventListener(
+    "error",
+    function() {
+
+        state.playing =
+            false;
+
+        let text =
+            "Audio error.";
+
+        if (audio.error) {
+
+            switch (
+                audio.error.code
+            ) {
+
+                case 1:
+                    text =
+                        "Audio loading was aborted.";
+                    break;
+
+                case 2:
+                    text =
+                        "Network error while loading the stream/audio.";
+                    break;
+
+                case 3:
+                    text =
+                        "Audio decoding error. The browser may not support this stream codec.";
+                    break;
+
+                case 4:
+                    text =
+                        "Audio source is not supported or could not be accessed.";
+                    break;
+            }
+        }
+
+        message(
+            text,
+            "error"
+        );
+
+        updateDebug();
+    }
+);
+
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+
+loadBtn.addEventListener(
+    "click",
+    loadAction
+);
+
+playBtn.addEventListener(
+    "click",
+    playAction
+);
+
+stopBtn.addEventListener(
+    "click",
+    stopAction
+);
+
+saveBtn.addEventListener(
+    "click",
+    saveAction
+);
+
+exportBtn.addEventListener(
+    "click",
+    exportCSVAction
+);
+
+deleteDbBtn.addEventListener(
+    "click",
+    deleteDatabaseAction
+);
+
+
+/* ============================================================
+   INITIALIZATION
+   ============================================================ */
+
+async function initialize() {
+
+    try {
+
+        if (!window.indexedDB) {
+
+            throw new Error(
+                "IndexedDB is not supported by this browser."
+            );
+        }
+
+        await openDatabase();
+
+        updateDebug();
+
+        /*
+            Required behavior:
+
+            On refresh:
+            play first DB record.
+
+            If empty:
+            display DB empty message.
+        */
+
+        const records =
+            await getAllRecords();
+
+        if (!records.length) {
+
+            message(
+                "DB empty, you need to load a CSV from your local desktop or remotely, or some sound file/radio stream. Next, by pressing SAVE you will fill your DB."
+            );
+
+            updateDebug();
+
+            return;
+        }
+
+        /*
+            Load DB series.
+        */
+
+        state.currentSeries =
+            records;
+
+        state.currentIndex =
+            0;
+
+        state.currentUrlFileName =
+            "";
+
+        state.previousUrlFileName =
+            "";
+
+        /*
+            Detect whether first DB record is a radio stream.
+        */
+
+        if (
+            isLiveStreamURL(
+                records[0].urlFileName
+            )
+        ) {
+
+            state.sourceType =
+                "stream";
+
+        } else {
+
+            state.sourceType =
+                "db";
+        }
+
+        updateNowPlaying(
+            records[0]
+        );
+
+        updateDebug();
+
+        /*
+            Try automatic playback.
+
+            Browser may reject this because of autoplay
+            policy. In that case PLAY will work.
+        */
+
+        try {
+
+            await playCurrentRecord();
+
+        } catch (error) {
+
+            if (
+                error.name ===
+                "NotAllowedError"
+            ) {
+
+                message(
+                    "DB loaded. The browser blocked automatic playback. Press PLAY to start the first item."
+                );
+
+            } else {
+
+                message(
+                    "DB loaded, but playback failed:\n" +
+                    error.message,
+                    "error"
+                );
+            }
+        }
+
+        updateDebug();
+
+    } catch (error) {
+
+        console.error(error);
+
+        message(
+            "Initialization error:\n" +
+            error.message,
+            "error"
+        );
+    }
+}
+
+
+initialize();
+
+</script>
+
+</body>
+</html>
