@@ -11,38 +11,85 @@ body {
     background:#eee;
     margin:0;
     padding:20px;
-}
-.page-layout {
-    display:grid;
-    grid-template-columns:minmax(140px,1fr) minmax(520px,900px) minmax(140px,1fr);
-    gap:20px;
-    align-items:start;
-    width:100vw;
-    max-width:none;
-    margin-left:calc(50% - 50vw);
-}
-.side-container {
-    width: 100%;
-    box-sizing: border-box;
-    min-height: 180px;
-    padding-left:20px;
-}
-.container {
     width:100%;
+    overflow-x:hidden;
+}
+
+.page-layout {
+    display:flex;
+    flex-direction:row;
+    align-items:flex-start;
+    gap:20px;
+    width:100%;
+    max-width:1800px;
+    margin:0 auto;
+}
+
+.page-layout > .side-container {
+    flex:1 1 0;
+    min-width:0;
+    width:auto;
+}
+
+.page-layout > .container {
+    flex:0 1 900px;
+    width:900px;
+    min-width:520px;
+}
+
+.side-container {
+    box-sizing:border-box;
+    min-height:180px;
+    padding:0 20px;
+    overflow-wrap:anywhere;
+}
+
+.side-container h1,
+.side-container h2 {
+    margin-top:0;
+}
+
+.container {
     box-sizing:border-box;
     background:white;
     padding:20px;
     border-radius:10px;
 }
+
 .side-container p {
     margin-bottom:0;
 }
+
+@media (max-width:1250px) and (min-width:901px) {
+    .page-layout {
+        gap:15px;
+    }
+
+    .page-layout > .container {
+        width:760px;
+        min-width:520px;
+    }
+
+    .side-container {
+        padding-left:10px;
+        padding-right:10px;
+    }
+}
+
 @media (max-width:900px) {
     .page-layout {
-        grid-template-columns:1fr;
+        flex-direction:column;
     }
+
+    .page-layout > .container {
+        width:100%;
+        min-width:0;
+    }
+
     .side-container {
         min-height:0;
+        padding:0;
+        width:100%;
     }
 }
 .field {
@@ -121,11 +168,13 @@ audio {
 <div class="page-layout">
 
 <aside class="side-container">Notes:<br><br>
-<div style='margin-bottom:5px;text-align:justify;'><span style='padding-left:40px;'>Upon loading the page, the first song from the database will play automatically; if the database is empty, the "radio stream" (http://radio.streemlion.com:2740/stream) will play.</span></div>
-<div style='margin-bottom:5px;text-align:justify;'><span style='padding-left:40px;'>Playlists can be in CSV or m3u format. A single entry allows for the inclusion of radio station streams, multiple individual songs from YouTube or other servers, and even other playlists. If asingle entry fails (song, radio station, playlist) the next in that list will play.</span></div>
-<div style='margin-bottom:5px;text-align:justify;'><span style='padding-left:40px;'><b>In the primary player, a record of a playlist can correspond to a radio station</b>; typically, the broadcasts are continuous, requiring the user to switch stations manually. Therefore, if a radio station is added to a secondary playlist, playback will not normally advance to the subsequent entries while that station is playing.</span></div>
-<div style='margin-bottom:5px;text-align:justify;'><span style='padding-left:40px;'><b>In the primary player, a playlist entry may correspond to a YouTube playlist</b>; in that case, the playlist loads in the secondary player (it can be exported by clicking the "EXPORT PLAYLIST" button). Generally, YouTube playlists do not function like radio station playlists: when one ends, the next song from the primary playlist plays.</span></div>
-<div style='margin-bottom:5px;text-align:justify;'><span style='padding-left:40px;'>When you click the "Load" button while a "CSV List" is playing, the list is cleared, and only the song, the stream, or the compact audio that was currently playing continues to play. The song-stream-compact will repeat.</span></div>
+<div style='margin-bottom:5px;text-align:justify;'><span style='padding-left:35px;'>Upon loading the page, the first song from the database will play automatically; if the database is empty, the "radio stream" (http://radio.streemlion.com:2740/stream) will play. You can load a file of a single song or a playlist by the 'LOAD' button after pressing the 'STOP' button; press the 'Play' button to play the url shown in the 'Url/file' field.</span></div>
+<div style='margin-bottom:5px;text-align:justify;'><span style='padding-left:35px;'>Playlists can be in CSV or m3u format. A CSV/m3u playlist allows single entries of radio station streams, multiple individual songs from YouTube or other sources, and even other 'url playlists'. If a single entry fails (song, radio station, playlist) the next in that list will play. </span>
+<li style='margin:10px 0 15px 40px'>"<b>AUTOPLAY AFTER LOAD</b>" checkbox marked will force the playlist to repeat after finishing.</li>
+</div>
+<div style='margin-bottom:5px;text-align:justify;'><span style='padding-left:35px;'><b>In the primary player, a record of a playlist can correspond to a radio station</b>; typically, the broadcasts are continuous, requiring the user to switch stations manually. Therefore, if a radio station is added to a secondary playlist, playback will not normally advance to the subsequent entries while that station is playing.</span></div>
+<div style='margin-bottom:5px;text-align:justify;'><span style='padding-left:35px;'><b>In the primary player, a playlist entry may correspond to a YouTube playlist</b>; in that case, the playlist loads in the secondary player (it can be exported by clicking the "EXPORT PLAYLIST" button). Generally, YouTube playlists do not function like radio station playlists: when one ends, the next song from the primary playlist plays.</span></div>
+<div style='margin-bottom:5px;text-align:justify;'><span style='padding-left:35px;'>When you click the "Load" button while a "CSV List" is playing, the list is cleared, and only the song, the stream, or the compact audio that was currently playing continue playing.</span></div>
 </aside>
 
 <main class="container">
@@ -137,8 +186,9 @@ audio {
 </span>
 <span class=""><input id="title" type="text" style='width:70%;'></span>
 
-<div class="" style='margin-top:5px'> <label>Url/file</label> <input id="urlFileName" type="text" placeholder="song.flac, songs.csv, or http://radio.example/stream"></div>
-<div class="" style='margin-top:5px'> <label>Lyric Url</label> <input id="urlLyric" type="text"> </div>
+<div class="" style='margin-top:5px'> <label>Url/file</label> <input id="urlFileName" style="width:95%;" type="text" placeholder="song.flac, songs.csv, or http://radio.example/stream"> <label style="color:maroon;cursor:pointer;" onclick="window.open(document.getElementById('urlFileName').value, '_blank')"> <b> GO</b></label></div>
+
+<div class="" style='margin-top:5px'> <label>Lyric Url</label> <input id="urlLyric" style="width:95%;" type="text" onclick="window.open(this.value, '_blank')"><label style="color:maroon;cursor:pointer;" onclick="window.open(document.getElementById('urlLyric').value, '_blank')"> <b> GO</b></label> </div>
 
 <div class="buttons">
 
@@ -150,6 +200,10 @@ audio {
     <button id="saveBtn" style='background-color:navy;color:white;'>SAVE</button><label><input id="saveSongCheckbox" type="checkbox" style="width:auto">SONG</label>
     <button id="exportBtn">EXPORT PLAYLIST</button>
     <button id="deleteDbBtn">DELETE DB</button>
+    <button id="repairDbBtn" style="display:none;background:#8b0000;color:white;">REPAIR DB</button>
+    <span id="dbVersionNote" style="font-size:11px;color:#555;margin-left:4px;">
+        DB v2
+    </span>
 
 </div>
 
@@ -207,11 +261,16 @@ audio {
 
 <div id="debug"></div>
 
-</div>
-
 </main>
 
-<aside class="side-container">
+<aside class="side-container"><h1 style='text-align:center;'>Tetrahedra playlists</h1>
+<div style='margin-bottom:5px;text-align:justify;'><span style='padding-left:30px;'>
+A "tetrahedron-type" playlist is a CSV or m3u file containing a list of exactly five entries. The first four correspond to the tetrahedron itself, while the fifth corresponds to its center of gravity. Each entry can be an individual song or a playlist URL; the fifth can act as a connector between tetrahedra. This allows tetrahedra to be chained together, facilitating the management of long chains, transitions between different elements, and shared exchanges.</span></div><br>
+<h2 style='color:#cccc33;text-align:center;'><b>Tribute to Normandy's World Heroes</b></h2>
+<div style=''></div>
+
+
+
 </aside>
 
 </div>
@@ -226,10 +285,10 @@ audio {
    CONFIGURATION
    ========================================================= */
 
-const DB_NAME = "TACE_Audio_Player";
+const DB_NAME = "TACE_Audio_Player_v2";
 const DB_VERSION = 1;
 const STORE_NAME = "songs";
-const LAST_PLAYBACK_KEY = "TACE_Audio_Player_Last_Playback";
+const LAST_PLAYBACK_KEY = "TACE_Audio_Player_v2_Last_Playback";
 
 const DEFAULT_RADIO_RECORD = {
     author: "Streemlion",
@@ -306,6 +365,9 @@ const youtubePlaylistSelect =
 
 const sourceTypeText =
     document.getElementById("sourceTypeText");
+
+const repairDbBtn =
+    document.getElementById("repairDbBtn");
 
 
 /* =========================================================
@@ -495,107 +557,336 @@ ${audio.src || "(empty)"}
    DATABASE
    ========================================================= */
 
+let dbOpenPromise = null;
+
+
+function isUsableDB(database) {
+
+    return Boolean(
+        database &&
+        database.objectStoreNames &&
+        database.objectStoreNames.contains(STORE_NAME)
+    );
+}
+
+
 function openDB() {
 
-    return new Promise((resolve, reject) => {
+    if (isUsableDB(db)) {
+        return Promise.resolve(db);
+    }
 
-        const request =
-            indexedDB.open(
-                DB_NAME,
-                DB_VERSION
+    if (dbOpenPromise) {
+        return dbOpenPromise;
+    }
+
+    dbOpenPromise = new Promise((resolve, reject) => {
+
+        let settled = false;
+        let request = null;
+
+        const finishReject = error => {
+            if (settled) return;
+            settled = true;
+            clearTimeout(timeout);
+
+            reject(
+                error instanceof Error
+                    ? error
+                    : new Error(String(error))
             );
+        };
 
-        request.onupgradeneeded = function(e) {
+        const finishResolve = database => {
+            if (settled) return;
+            settled = true;
+            clearTimeout(timeout);
+            resolve(database);
+        };
 
-            const database =
-                e.target.result;
+        const timeout =
+            setTimeout(() => {
+
+                /*
+                 * A normal IndexedDB open should complete quickly.
+                 * If it remains pending, the browser is normally waiting
+                 * for another connection/tab or the storage subsystem.
+                 */
+                try {
+                    if (request) {
+                        request.onblocked = null;
+                    }
+                }
+                catch (ignore) {}
+
+                finishReject(
+                    new Error(
+                        "IndexedDB did not open within 5 seconds. " +
+                        "The browser is holding the database open or " +
+                        "the local storage is stuck. Close every other " +
+                        "localhost:8000 player tab/window, then refresh. " +
+                        "If none is open, use REPAIR DB."
+                    )
+                );
+
+            }, 5000);
+
+        try {
 
             if (
-                !database.objectStoreNames.contains(
-                    STORE_NAME
-                )
+                !window.indexedDB
             ) {
-
-                database.createObjectStore(
-                    STORE_NAME,
-                    {
-                        keyPath: "id",
-                        autoIncrement: true
-                    }
+                finishReject(
+                    new Error(
+                        "IndexedDB is not available in this browser/context."
+                    )
                 );
+                return;
+            }
+
+            request =
+                indexedDB.open(
+                    DB_NAME,
+                    DB_VERSION
+                );
+
+        }
+        catch (error) {
+
+            finishReject(error);
+            return;
+        }
+
+        request.onupgradeneeded = function(event) {
+
+            try {
+
+                const database =
+                    event.target.result;
+
+                if (
+                    !database.objectStoreNames.contains(
+                        STORE_NAME
+                    )
+                ) {
+
+                    database.createObjectStore(
+                        STORE_NAME,
+                        {
+                            keyPath: "id",
+                            autoIncrement: true
+                        }
+                    );
+                }
+
+            }
+            catch (error) {
+
+                finishReject(error);
             }
         };
 
         request.onsuccess = function() {
 
-            db = request.result;
+            const database =
+                request.result;
 
-            resolve(db);
+            database.onversionchange =
+                function() {
+
+                    database.close();
+
+                    if (
+                        db === database
+                    ) {
+                        db = null;
+                    }
+                };
+
+            database.onclose =
+                function() {
+
+                    if (
+                        db === database
+                    ) {
+                        db = null;
+                    }
+                };
+
+            db = database;
+
+            finishResolve(database);
         };
 
         request.onerror = function() {
 
-            reject(request.error);
+            finishReject(
+                request.error ||
+                new Error(
+                    "IndexedDB could not be opened."
+                )
+            );
+        };
+
+        request.onblocked = function() {
+
+            finishReject(
+                new Error(
+                    "IndexedDB is blocked by another open connection. " +
+                    "Close other music2.html tabs/windows and refresh."
+                )
+            );
         };
     });
+
+    const result =
+        dbOpenPromise.finally(
+            () => {
+                dbOpenPromise = null;
+            }
+        );
+
+    return result;
+}
+
+async function ensureDB() {
+
+    if (isUsableDB(db)) {
+        return db;
+    }
+
+    db = null;
+
+    const database =
+        await openDB();
+
+    if (!isUsableDB(database)) {
+
+        throw new Error(
+            `IndexedDB object store "${STORE_NAME}" is unavailable.`
+        );
+    }
+
+    return database;
 }
 
 
 function getRecords() {
 
-    return new Promise((resolve, reject) => {
+    return ensureDB().then(
+        database =>
+            new Promise((resolve, reject) => {
 
-        const tx =
-            db.transaction(
-                STORE_NAME,
-                "readonly"
-            );
+                let tx;
 
-        const store =
-            tx.objectStore(
-                STORE_NAME
-            );
+                try {
 
-        const request =
-            store.getAll();
+                    tx =
+                        database.transaction(
+                            STORE_NAME,
+                            "readonly"
+                        );
 
-        request.onsuccess =
-            () => resolve(request.result);
+                }
+                catch (error) {
 
-        request.onerror =
-            () => reject(request.error);
-    });
+                    reject(error);
+                    return;
+                }
+
+                const request =
+                    tx.objectStore(
+                        STORE_NAME
+                    ).getAll();
+
+                request.onsuccess =
+                    () => resolve(
+                        request.result
+                    );
+
+                request.onerror =
+                    () => reject(
+                        request.error ||
+                        new Error(
+                            "IndexedDB read failed."
+                        )
+                    );
+
+                tx.onerror =
+                    () => reject(
+                        tx.error ||
+                        new Error(
+                            "IndexedDB read transaction failed."
+                        )
+                    );
+            })
+    );
 }
 
 
 function saveRecord(record) {
 
-    return new Promise((resolve, reject) => {
+    return ensureDB().then(
+        database =>
+            new Promise((resolve, reject) => {
 
-        const tx =
-            db.transaction(
-                STORE_NAME,
-                "readwrite"
-            );
+                let tx;
 
-        const request =
-            tx.objectStore(
-                STORE_NAME
-            ).add({
-                author: record.author,
-                title: record.title,
-                urlFileName: record.urlFileName,
-                urlLyric: record.urlLyric || ""
-            });
+                try {
 
-        request.onsuccess =
-            () => resolve(request.result);
+                    tx =
+                        database.transaction(
+                            STORE_NAME,
+                            "readwrite"
+                        );
 
-        request.onerror =
-            () => reject(request.error);
-    });
+                }
+                catch (error) {
+
+                    reject(error);
+                    return;
+                }
+
+                const request =
+                    tx.objectStore(
+                        STORE_NAME
+                    ).add({
+                        author:
+                            record.author,
+
+                        title:
+                            record.title,
+
+                        urlFileName:
+                            record.urlFileName,
+
+                        urlLyric:
+                            record.urlLyric || ""
+                    });
+
+                request.onsuccess =
+                    () => resolve(
+                        request.result
+                    );
+
+                request.onerror =
+                    () => reject(
+                        request.error ||
+                        new Error(
+                            "IndexedDB save failed."
+                        )
+                    );
+
+                tx.onerror =
+                    () => reject(
+                        tx.error ||
+                        new Error(
+                            "IndexedDB write transaction failed."
+                        )
+                    );
+            })
+    );
 }
-
 
 async function recordExists(record) {
 
@@ -1892,6 +2183,7 @@ function isStream(value) {
         isHTTP(value) &&
         !isYouTube(value) &&
         !isCSV(value) &&
+        !isM3U(value) &&
         !isAudio(value)
     );
 }
@@ -1997,6 +2289,159 @@ function parseM3U(text) {
     }
 
     return records;
+}
+
+
+/* =========================================================
+   LOAD M3U
+   ========================================================= */
+
+async function loadM3U(
+    url,
+    shouldPlay = false
+) {
+
+    const response =
+        await fetch(url);
+
+    if (!response.ok) {
+
+        throw new Error(
+            `M3U HTTP error ${response.status}`
+        );
+    }
+
+    const text =
+        await response.text();
+
+    const parsedRecords =
+        parseM3U(text);
+
+    /*
+        M3U entries may be relative URLs.
+        Resolve them relative to the M3U file itself,
+        not relative to music2.html.
+    */
+    const records =
+        parsedRecords.map(record => {
+
+            let entryURL =
+                record.urlFileName;
+
+            try {
+
+                if (!isHTTP(entryURL)) {
+
+                    entryURL =
+                        new URL(
+                            entryURL,
+                            url
+                        ).href;
+                }
+
+            }
+            catch (error) {
+
+                throw new Error(
+                    `Invalid M3U entry: ${entryURL}`
+                );
+            }
+
+            return {
+                ...record,
+                urlFileName:
+                    entryURL
+            };
+        });
+
+    state.sourceType =
+        "csv";
+
+    /*
+        Internally use the existing "csv" playlist
+        state because all of the existing playlist
+        advancement/error-handling code already
+        supports that state.
+    */
+    state.series =
+        records;
+
+    state.index =
+        0;
+
+    state.currentUrl =
+        url;
+
+    state.previousUrl =
+        url;
+
+    /*
+     * The M3U URL remains in Url/file, but Author and Title must describe
+     * the first actual playlist entry. This also prevents PLAY from
+     * treating the M3U URL as a single song.
+     */
+    fillRecordFields(
+        records[0]
+    );
+
+    if (
+        isYouTube(
+            records[0].urlFileName
+        )
+    ) {
+
+        if (shouldPlay) {
+
+            loadYouTubeRecord(
+                records[0],
+                true
+            ).catch(
+                error => {
+
+                    message(
+                        `YouTube playback error:\n${error.message}`,
+                        "error"
+                    );
+                }
+            );
+
+        }
+        else {
+
+            prepareRecord(
+                records[0]
+            );
+        }
+
+    }
+    else {
+
+        prepareRecord(
+            records[0]
+        );
+
+        if (shouldPlay) {
+
+            playRecord(
+                records[0]
+            ).catch(
+                error => {
+
+                    message(
+                        `M3U playback error:\n${error.message}`,
+                        "error"
+                    );
+                }
+            );
+        }
+    }
+
+    message(
+        `M3U playlist loaded: ${records.length} item${records.length === 1 ? "" : "s"}.`,
+        "success"
+    );
+
+    updateDebug();
 }
 
 
@@ -2936,6 +3381,22 @@ async function loadAction() {
         }
 
 
+        /* REMOTE M3U / M3U8 */
+
+        if (
+            isHTTP(value) &&
+            isM3U(value)
+        ) {
+
+            await loadM3U(
+                value,
+                autoplayCheckbox.checked
+            );
+
+            return;
+        }
+
+
         /* LIVE RADIO */
 
         if (
@@ -3520,6 +3981,39 @@ async function playAction() {
 
                 message(
                     `Playing item ${state.index + 1} of ${state.series.length}.`,
+                    "success"
+                );
+
+                return;
+            }
+
+
+            /* LOADED M3U / M3U8 */
+
+            if (
+                isM3U(userValue) &&
+                state.series.length > 0 &&
+                state.currentUrl === userValue
+            ) {
+
+                /*
+                 * The Url/file field contains the playlist URL.
+                 * Play the current parsed playlist item instead of
+                 * validating the playlist URL as a song record.
+                 */
+                if (
+                    state.index === null ||
+                    !state.series[state.index]
+                ) {
+                    state.index = 0;
+                }
+
+                await playRecord(
+                    state.series[state.index]
+                );
+
+                message(
+                    `Playing M3U item ${state.index + 1} of ${state.series.length}.`,
                     "success"
                 );
 
@@ -4186,6 +4680,12 @@ async function saveAction() {
 
     try {
 
+        /*
+         * SAVE is allowed to be clicked immediately after the page opens.
+         * Never access IndexedDB through the global `db` variable directly.
+         */
+        await ensureDB();
+
         if (
             saveSongCheckbox.checked &&
             state.index !== null &&
@@ -4497,6 +4997,146 @@ function escapeHTML(text) {
    DELETE DB
    ========================================================= */
 
+async function repairDatabase() {
+
+    const confirmed =
+        confirm(
+            "IndexedDB cannot currently be opened.\n\n" +
+            "REPAIR DB will delete the existing " +
+            `"${DB_NAME}" database and recreate it.\n\n` +
+            "Any songs currently stored in IndexedDB will be lost.\n\n" +
+            "Continue?"
+        );
+
+    if (!confirmed) {
+        return;
+    }
+
+    repairDbBtn.disabled = true;
+
+    message(
+        "Repairing IndexedDB..."
+    );
+
+    try {
+
+        if (db) {
+
+            try {
+                db.close();
+            }
+            catch (ignore) {}
+
+            db = null;
+        }
+
+        dbOpenPromise = null;
+
+        await new Promise(
+            (resolve, reject) => {
+
+                const request =
+                    indexedDB.deleteDatabase(
+                        DB_NAME
+                    );
+
+                let timer =
+                    setTimeout(
+                        () => {
+                            reject(
+                                new Error(
+                                    "Database deletion is still blocked. " +
+                                    "Close every other localhost:8000 tab " +
+                                    "using this player and try REPAIR DB again."
+                                )
+                            );
+                        },
+                        10000
+                    );
+
+                request.onsuccess =
+                    () => {
+                        clearTimeout(timer);
+                        resolve();
+                    };
+
+                request.onerror =
+                    () => {
+                        clearTimeout(timer);
+                        reject(
+                            request.error ||
+                            new Error(
+                                "IndexedDB database deletion failed."
+                            )
+                        );
+                    };
+
+                request.onblocked =
+                    () => {
+                        // Keep waiting until the timeout. Another
+                        // connection must release the database.
+                    };
+            }
+        );
+
+        await ensureDB();
+
+        repairDbBtn.style.display =
+            "none";
+
+        state.sourceType =
+            "stream";
+
+        state.series =
+            [DEFAULT_RADIO_RECORD];
+
+        state.index =
+            0;
+
+        state.currentUrl =
+            DEFAULT_RADIO_RECORD.urlFileName;
+
+        state.previousUrl =
+            DEFAULT_RADIO_RECORD.urlFileName;
+
+        fillRecordFields(
+            DEFAULT_RADIO_RECORD
+        );
+
+        showRecord(
+            DEFAULT_RADIO_RECORD
+        );
+
+        updateSourceType(
+            DEFAULT_RADIO_RECORD
+        );
+
+        message(
+            "IndexedDB repaired. The database is empty; the default radio stream is ready.",
+            "success"
+        );
+
+        updateDebug();
+
+    }
+    catch (error) {
+
+        repairDbBtn.disabled = false;
+
+        message(
+            "IndexedDB repair failed:\n" +
+            error.message,
+            "error"
+        );
+
+        console.error(
+            "IndexedDB repair failed:",
+            error
+        );
+    }
+}
+
+
 async function deleteDBAction() {
 
     if (
@@ -4508,10 +5148,12 @@ async function deleteDBAction() {
 
     audio.pause();
 
-    if (db)
+    if (db) {
         db.close();
+        db = null;
+    }
 
-    db = null;
+    dbOpenPromise = null;
 
     await new Promise(
         (resolve, reject) => {
@@ -4531,7 +5173,7 @@ async function deleteDBAction() {
         }
     );
 
-    await openDB();
+    await ensureDB();
 
     stopAction();
 
@@ -5171,6 +5813,9 @@ document
     .onclick =
     deleteDBAction;
 
+repairDbBtn.onclick =
+    repairDatabase;
+
 openYoutubeBtn.onclick =
     openCurrentYouTube;
 
@@ -5235,7 +5880,17 @@ async function initialize() {
 
     try {
 
-        await openDB();
+        message(
+            "Opening IndexedDB..."
+        );
+
+        updateDebug();
+
+        await ensureDB();
+
+        message(
+            "IndexedDB opened. Reading songs..."
+        );
 
         const records =
             await getRecords();
@@ -5444,6 +6099,14 @@ async function initialize() {
             error.message,
             "error"
         );
+
+        /*
+         * The page cannot use the player database if the open request
+         * never completes. Offer a deliberate, destructive recovery
+         * instead of silently doing nothing.
+         */
+        repairDbBtn.style.display =
+            "inline-block";
     }
 
     updateDebug();
@@ -5452,6 +6115,38 @@ async function initialize() {
 }
 
 
-initialize();
+initialize()
+    .catch(error => {
+
+        console.error(
+            "Fatal initialization error:",
+            error
+        );
+
+        message(
+            "Initialization failed:\n" +
+            error.message,
+            "error"
+        );
+
+        updateDebug();
+    });
+
+window.addEventListener(
+    "beforeunload",
+    () => {
+
+        if (db) {
+
+            try {
+                db.close();
+            }
+            catch (error) {}
+
+            db = null;
+        }
+    }
+);
 
 </script></body></html>
+

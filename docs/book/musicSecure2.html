@@ -530,6 +530,17 @@ function openDB() {
 
             db = request.result;
 
+            // If another tab/page deletes or upgrades the DB,
+            // this connection must not remain as a stale reference.
+            db.onversionchange = function() {
+                db.close();
+                db = null;
+            };
+
+            db.onclose = function() {
+                db = null;
+            };
+
             resolve(db);
         };
 
@@ -541,15 +552,78 @@ function openDB() {
 }
 
 
-function getRecords() {
+async function ensureDB() {
+
+    if (
+        db &&
+        db.objectStoreNames &&
+        db.objectStoreNames.contains(STORE_NAME)
+    ) {
+        return db;
+    }
+
+    // Re-open the database if the connection was closed or lost.
+    db = await openDB();
+
+    if (
+        !db ||
+        !db.objectStoreNames.contains(STORE_NAME)
+    ) {
+        throw new Error(
+            `IndexedDB object store "${STORE_NAME}" is unavailable.`
+        );
+    }
+
+    return db;
+}
+
+
+async function getRecords() {
+
+    const database = await ensureDB();
 
     return new Promise((resolve, reject) => {
 
-        const tx =
-            db.transaction(
+        let tx;
+
+        try {
+            tx = database.transaction(
                 STORE_NAME,
                 "readonly"
             );
+        }
+        catch (error) {
+            // The connection may have been closed between
+            // ensureDB() and transaction(). Re-open once.
+            db = null;
+
+            ensureDB()
+                .then(retryDB => {
+                    const retryTx =
+                        retryDB.transaction(
+                            STORE_NAME,
+                            "readonly"
+                        );
+
+                    const retryRequest =
+                        retryTx.objectStore(
+                            STORE_NAME
+                        ).getAll();
+
+                    retryRequest.onsuccess =
+                        () => resolve(
+                            retryRequest.result
+                        );
+
+                    retryRequest.onerror =
+                        () => reject(
+                            retryRequest.error
+                        );
+                })
+                .catch(reject);
+
+            return;
+        }
 
         const store =
             tx.objectStore(
@@ -564,19 +638,72 @@ function getRecords() {
 
         request.onerror =
             () => reject(request.error);
+
+        tx.onerror =
+            () => reject(
+                tx.error ||
+                new Error("IndexedDB read transaction failed.")
+            );
     });
 }
 
 
-function saveRecord(record) {
+async function saveRecord(record) {
+
+    const database = await ensureDB();
 
     return new Promise((resolve, reject) => {
 
-        const tx =
-            db.transaction(
+        let tx;
+
+        try {
+            tx = database.transaction(
                 STORE_NAME,
                 "readwrite"
             );
+        }
+        catch (error) {
+            // The DB connection may have been closed. Re-open it
+            // and retry the write exactly once.
+            db = null;
+
+            ensureDB()
+                .then(retryDB => {
+
+                    const retryTx =
+                        retryDB.transaction(
+                            STORE_NAME,
+                            "readwrite"
+                        );
+
+                    const request =
+                        retryTx.objectStore(
+                            STORE_NAME
+                        ).add({
+                            author: record.author,
+                            title: record.title,
+                            urlFileName: record.urlFileName,
+                            urlLyric: record.urlLyric || ""
+                        });
+
+                    request.onsuccess =
+                        () => resolve(request.result);
+
+                    request.onerror =
+                        () => reject(request.error);
+
+                    retryTx.onerror =
+                        () => reject(
+                            retryTx.error ||
+                            new Error(
+                                "IndexedDB write transaction failed."
+                            )
+                        );
+                })
+                .catch(reject);
+
+            return;
+        }
 
         const request =
             tx.objectStore(
@@ -593,6 +720,12 @@ function saveRecord(record) {
 
         request.onerror =
             () => reject(request.error);
+
+        tx.onerror =
+            () => reject(
+                tx.error ||
+                new Error("IndexedDB write transaction failed.")
+            );
     });
 }
 
@@ -4186,6 +4319,10 @@ async function saveAction() {
 
     try {
 
+        // SAVE can be clicked before initialize() has finished,
+        // so never assume that the global `db` connection exists.
+        await ensureDB();
+
         if (
             saveSongCheckbox.checked &&
             state.index !== null &&
@@ -5235,7 +5372,7 @@ async function initialize() {
 
     try {
 
-        await openDB();
+        await ensureDB();
 
         const records =
             await getRecords();
