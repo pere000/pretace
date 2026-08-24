@@ -167,14 +167,19 @@ audio {
 
 <div class="page-layout">
 
-<aside class="side-container">Notes:<br><br>
+<aside class="side-container" style='margin:0 -20px 0 -80px'>Notes:<br><br>
 <div style='margin-bottom:5px;text-align:justify;'><span style='padding-left:35px;'>Upon loading the page, the first song from the database will play automatically; if the database is empty, the "radio stream" (http://radio.streemlion.com:2740/stream) will play. You can load a file of a single song or a playlist by the 'LOAD' button after pressing the 'STOP' button; press the 'Play' button to play the url shown in the 'Url/file' field.</span></div>
 <div style='margin-bottom:5px;text-align:justify;'><span style='padding-left:35px;'>Playlists can be in CSV or m3u format. A CSV/m3u playlist allows single entries of radio station streams, multiple individual songs from YouTube or other sources, and even other 'url playlists'. If a single entry fails (song, radio station, playlist) the next in that list will play. </span>
 <li style='margin:10px 0 15px 40px'>"<b>AUTOPLAY AFTER LOAD</b>" checkbox marked will force the playlist to repeat after finishing.</li>
 </div>
 <div style='margin-bottom:5px;text-align:justify;'><span style='padding-left:35px;'><b>In the primary player, a record of a playlist can correspond to a radio station</b>; typically, the broadcasts are continuous, requiring the user to switch stations manually. Therefore, if a radio station is added to a secondary playlist, playback will not normally advance to the subsequent entries while that station is playing.</span></div>
 <div style='margin-bottom:5px;text-align:justify;'><span style='padding-left:35px;'><b>In the primary player, a playlist entry may correspond to a YouTube playlist</b>; in that case, the playlist loads in the secondary player (it can be exported by clicking the "EXPORT PLAYLIST" button). Generally, YouTube playlists do not function like radio station playlists: when one ends, the next song from the primary playlist plays.</span></div>
-<div style='margin-bottom:5px;text-align:justify;'><span style='padding-left:35px;'>When you click the "Load" button while a "CSV List" is playing, the list is cleared, and only the song, the stream, or the compact audio that was currently playing continue playing.</span></div>
+<div style='margin-bottom:5px;text-align:justify;'><span style='padding-left:35px;'>When you click the "Load" button while a "CSV List" is playing, the list is cleared, and only the song, the stream, or the compact audio that was currently playing continue playing.</span></div><br>
+
+Test the possibility to play csv/m3u playlists:<br><br>
+1. copy the following url in the 'Url/file' field: https://pretace.surge.sh/book/jimiHendrixAndOthers.csv. Click on 'Play' button.<br>
+2. copy the following url in the 'Url/file' field: https://pretace.surge.sh/book/myBlues.m3u. Click on 'Play' button.<br>
+
 </aside>
 
 <main class="container">
@@ -263,7 +268,7 @@ audio {
 
 </main>
 
-<aside class="side-container"><h1 style='text-align:center;'>Tetrahedra playlists</h1>
+<aside class="side-container" style='margin:0 -30px 0 -30px'><h1 style='text-align:center;'>Tetrahedra playlists</h1>
 <div style='margin-bottom:5px;text-align:justify;'><span style='padding-left:30px;'>
 A "tetrahedron-type" playlist is a CSV or m3u file containing a list of exactly five entries. The first four correspond to the tetrahedron itself, while the fifth corresponds to its center of gravity. Each entry can be an individual song or a playlist URL; the fifth can act as a connector between tetrahedra. This allows tetrahedra to be chained together, facilitating the management of long chains, transitions between different elements, and shared exchanges.</span></div><br>
 <h2 style='color:#cccc33;text-align:center;'><b>Tribute to Normandy's World Heroes</b></h2>
