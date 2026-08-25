@@ -390,7 +390,7 @@ Test the possibility to play csv/m3u playlists:<br><br>
 
 <main class="container">
 
-<h1 style='width:100%;text-align:center;'>IndexedDB Audio Player<div style='margin-top:-1px;color:maroon;font-size:12px;'><i style='color:navy'>Cortesy</i>: <i>Compassionate Heart of the Myistici Corporis Christi</i></div></h1>
+<h1 style='width:100%;text-align:center;'>Compassionate Heart of the Myistici Corporis Christi<div style='margin-top:-1px;color:maroon;font-size:12px;'><i style='color:navy'>IndexedDB Audio Player</i>: <i></i></div></h1>
 
 <span class=""><label style='padding-right:22.5%'>Author</label><b>Title</b><br>
     <input id="author" type="text" style='width:28%;margin-right:10px;'>
@@ -418,13 +418,10 @@ Test the possibility to play csv/m3u playlists:<br><br>
 
 </div>
 
-<!--<label>
+<label>
     <input
-        id="pauseCheckbox"
-        type="checkbox"
-        style="width:auto">
-    PAUSE
-</label>-->
+        id="pauseCheckbox">
+</label>
 
 <label>
     <input
@@ -486,6 +483,7 @@ Test the possibility to play csv/m3u playlists:<br><br>
 <div id="debug"></div>
 
 </main>
+
 
 <aside class="side-container"><h1 style='text-align:center;'>Tetrahedra playlists</h1>
 <div style='padding-left:10px;margin-bottom:5px;text-align:justify;'><span style='padding-left:30px;'>
@@ -2805,38 +2803,11 @@ async function loadM3U(
      * the first actual playlist entry. This also prevents PLAY from
      * treating the M3U URL as a single song.
      */
-    fillRecordFields(
-        records[0]
-    );
+    if (shouldPlay) {
 
-    if (
-        isYouTube(
-            records[0].urlFileName
-        )
-    ) {
-
-        if (shouldPlay) {
-
-            loadYouTubeRecord(
-                records[0],
-                true
-            ).catch(
-                error => {
-
-                    message(
-                        `YouTube playback error:\n${error.message}`,
-                        "error"
-                    );
-                }
-            );
-
-        }
-        else {
-
-            prepareRecord(
-                records[0]
-            );
-        }
+        await playRecord(
+            records[0]
+        );
 
     }
     else {
@@ -2844,21 +2815,6 @@ async function loadM3U(
         prepareRecord(
             records[0]
         );
-
-        if (shouldPlay) {
-
-            playRecord(
-                records[0]
-            ).catch(
-                error => {
-
-                    message(
-                        `M3U playback error:\n${error.message}`,
-                        "error"
-                    );
-                }
-            );
-        }
     }
 
     message(
@@ -3510,13 +3466,48 @@ function prepareRecord(record) {
 
 async function playRecord(record) {
 
+    validate(record);
+
+    /*
+     * A playlist entry can itself point to another CSV/M3U.
+     * Resolve that entry immediately instead of sending the playlist
+     * URL to the <audio> element and waiting for the 30-second recovery.
+     */
+    if (
+        isCSV(record.urlFileName)
+    ) {
+
+        await loadCSV(
+            cacheBustedURL(
+                serverURL(
+                    record.urlFileName
+                )
+            ),
+            true
+        );
+
+        return;
+    }
+
+    if (
+        isM3U(record.urlFileName)
+    ) {
+
+        await loadM3U(
+            serverURL(
+                record.urlFileName
+            ),
+            true
+        );
+
+        return;
+    }
+
     if (
         isYouTube(
             record.urlFileName
         )
     ) {
-
-        validate(record);
 
         fillRecordFields(record);
 
@@ -3525,6 +3516,8 @@ async function playRecord(record) {
         updateSourceType(record);
 
         updateStationList();
+
+        showYouTubeAudioControls(true);
 
         await playYouTubeRecord(
             record
@@ -3567,7 +3560,12 @@ async function loadCSV(
 ) {
 
     const response =
-        await fetch(url);
+        await fetch(
+            cacheBustedURL(
+                serverURL(url)
+            ),
+            { cache: "no-store" }
+        );
 
     if (!response.ok) {
 
@@ -3598,8 +3596,13 @@ async function loadCSV(
         if (!line)
             continue;
 
+        /*
+         * Skip the header based on the first non-empty line.
+         * A blank line before the header must not turn the header
+         * into a playable "song".
+         */
         if (
-            i === 0 &&
+            records.length === 0 &&
             /^author\s*\|\s*title\s*\|\s*urlfilename(?:\s*\|\s*urllyric)?$/i
                 .test(line)
         ) {
@@ -3664,38 +3667,15 @@ async function loadCSV(
     state.previousUrl =
         url;
 
-    fillRecordFields(
-        records[0]
-    );
+    if (shouldPlay) {
 
-    if (
-        isYouTube(
-            records[0].urlFileName
-        )
-    ) {
-
-        if (shouldPlay) {
-
-            loadYouTubeRecord(
-                records[0],
-                true
-            ).catch(
-                error => {
-
-                    message(
-                        `YouTube playback error:\n${error.message}`,
-                        "error"
-                    );
-                }
-            );
-
-        }
-        else {
-
-            prepareRecord(
-                records[0]
-            );
-        }
+        /*
+         * Use the same playback dispatcher for every first item.
+         * This is important when the first item is itself a CSV/M3U.
+         */
+        await playRecord(
+            records[0]
+        );
 
     }
     else {
@@ -3703,11 +3683,6 @@ async function loadCSV(
         prepareRecord(
             records[0]
         );
-
-        if (shouldPlay) {
-
-            selectLoadedRecord(0);
-        }
     }
 
     message(
