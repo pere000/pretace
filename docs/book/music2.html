@@ -6039,15 +6039,22 @@ async function initialize() {
          */
         if (!records.length) {
 
+            /*
+             * The default playlist follows the AUTOPLAY AFTER LOAD
+             * checkbox. It is checked by default, but the user can
+             * uncheck it before loading.
+             */
             await loadCSV(
                 DEFAULT_PLAYLIST_URL,
-                false
+                autoplayCheckbox.checked
             );
 
             updateDebug();
 
             message(
-                "Default playlist loaded. Press PLAY to start."
+                autoplayCheckbox.checked
+                    ? "Default playlist loaded and autoplay requested."
+                    : "Default playlist loaded. Press PLAY to start."
             );
 
             return;
