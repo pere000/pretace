@@ -6,42 +6,52 @@
 <title>IndexedDB Audio / CSV / Radio Player Server</title>
 <link rel="icon" type="image/png" href="./favicon.png">
 <style>
+* {
+    box-sizing:border-box;
+}
+
+html {
+    min-width:320px;
+    background:#eef1f5;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    background:#eee;
+    font-family:Arial, Helvetica, sans-serif;
+    background:linear-gradient(180deg,#eef1f5 0%,#e5e9ef 100%);
+    color:#20242a;
     margin:0;
-    padding:20px;
+    padding:18px;
     width:100%;
+    min-height:100vh;
     overflow-x:hidden;
 }
 
 .page-layout {
-    display:flex;
-    flex-direction:row;
-    align-items:flex-start;
-    gap:20px;
+    display:grid;
+    grid-template-columns:minmax(230px,1fr) minmax(620px,50vw) minmax(230px,1fr);
+    align-items:start;
+    gap:24px;
     width:100%;
-    max-width:1800px;
+    max-width:1900px;
     margin:0 auto;
 }
 
 .page-layout > .side-container {
-    flex:1 1 0;
     min-width:0;
-    width:auto;
+    width:100%;
 }
 
 .page-layout > .container {
-    flex:0 1 900px;
-    width:900px;
-    min-width:520px;
+    width:100%;
+    min-width:0;
 }
 
 .side-container {
     box-sizing:border-box;
     min-height:180px;
-    padding:0 20px;
+    padding:4px 8px;
     overflow-wrap:anywhere;
+    line-height:1.48;
 }
 
 .side-container h1,
@@ -49,47 +59,62 @@ body {
     margin-top:0;
 }
 
+.side-container h1 {
+    font-size:22px;
+}
+
+.side-container h2 {
+    font-size:17px;
+}
+
 .container {
     box-sizing:border-box;
-    background:white;
-    padding:20px;
-    border-radius:10px;
+    background:#fff;
+    padding:24px;
+    border:1px solid #d7dce3;
+    border-radius:14px;
+    box-shadow:0 6px 24px rgba(0,0,0,.08);
 }
 
-.side-container p {
-    margin-bottom:0;
-}
-
-@media (max-width:1250px) and (min-width:901px) {
+@media (max-width:1250px) {
     .page-layout {
-        gap:15px;
+        grid-template-columns:minmax(190px,1fr) minmax(600px,58vw) minmax(190px,1fr);
+        gap:16px;
     }
 
-    .page-layout > .container {
-        width:760px;
-        min-width:520px;
+    .container {
+        padding:20px;
     }
 
     .side-container {
-        padding-left:10px;
-        padding-right:10px;
+        padding:2px 4px;
     }
 }
 
-@media (max-width:900px) {
+@media (max-width:980px) {
+    body {
+        padding:12px;
+    }
+
     .page-layout {
-        flex-direction:column;
+        grid-template-columns:1fr;
+        gap:18px;
     }
 
     .page-layout > .container {
-        width:100%;
-        min-width:0;
+        order:1;
+    }
+
+    .page-layout > .side-container:first-child {
+        order:2;
+    }
+
+    .page-layout > .side-container:last-child {
+        order:3;
     }
 
     .side-container {
-        min-height:0;
         padding:0;
-        width:100%;
     }
 }
 .field {
@@ -160,6 +185,132 @@ audio {
     white-space:pre-wrap;
     font-size:13px;
 }
+
+/* UI refinement */
+.container h1 {
+    margin:0 0 20px;
+    padding-bottom:14px;
+    border-bottom:1px solid #e1e5ea;
+}
+
+.container h1 > div {
+    line-height:1.35;
+}
+
+.container label {
+    color:#343a40;
+}
+
+.container input[type="text"],
+.container select {
+    border:1px solid #c8ced6;
+    border-radius:7px;
+    background:#fff;
+    transition:border-color .15s ease, box-shadow .15s ease;
+}
+
+.container input[type="text"]:focus,
+.container select:focus {
+    outline:none;
+    border-color:#65758b;
+    box-shadow:0 0 0 3px rgba(70,100,140,.12);
+}
+
+#author,
+#title {
+    vertical-align:middle;
+}
+
+.buttons {
+    align-items:center;
+    margin:18px 0 12px;
+}
+
+.buttons button {
+    min-height:32px;
+    padding:6px 10px;
+    border:1px solid #b8bec7;
+    border-radius:6px;
+    background:#f7f8fa;
+    color:#20242a;
+    font-weight:600;
+}
+
+.buttons button:hover:not(:disabled) {
+    filter:brightness(.97);
+}
+
+.buttons button:disabled {
+    opacity:.5;
+    cursor:not-allowed;
+}
+
+#playBtn,
+#saveBtn {
+    border-color:#172a4d;
+}
+
+#pauseCheckbox,
+#autoplayCheckbox,
+#repeatCheckbox,
+#saveSongCheckbox {
+    accent-color:#263d64;
+}
+
+audio {
+    display:block;
+    height:42px;
+}
+
+#youtubePlaylistSelect,
+#stationSelect {
+    border-radius:7px;
+    background:#fff;
+}
+
+#nowPlaying {
+    border:1px solid #d9dee5;
+    border-radius:9px;
+    background:#f7f8fa;
+    line-height:1.45;
+}
+
+#nowPlayingText {
+    overflow-wrap:anywhere;
+}
+
+#message {
+    border-radius:8px;
+    line-height:1.4;
+}
+
+#metadata {
+    overflow-wrap:anywhere;
+}
+
+#debug {
+    border-radius:8px;
+    max-height:260px;
+    overflow:auto;
+    border:1px solid #222;
+}
+
+.side-container > div,
+.side-container > li {
+    max-width:100%;
+}
+
+.side-container a,
+.side-container b {
+    overflow-wrap:anywhere;
+}
+
+@media (max-width:980px) {
+    .container {
+        padding:18px;
+    }
+}
+
 </style>
 </head>
 
@@ -167,7 +318,7 @@ audio {
 
 <div class="page-layout">
 
-<aside class="side-container" style='margin:0 -20px 0 -80px'>Notes:<br><br>
+<aside class="side-container">Notes:<br><br>
 <div style='margin-bottom:5px;text-align:justify;'><span style='padding-left:35px;'>Upon loading the page, the first song from the database will play automatically; if the database is empty, the "radio stream" (http://radio.streemlion.com:2740/stream) will play. You can load a file of a single song or a playlist by the 'LOAD' button after pressing the 'STOP' button; press the 'Play' button to play the url shown in the 'Url/file' field.</span></div>
 <div style='margin-bottom:5px;text-align:justify;'><span style='padding-left:35px;'>Playlists can be in CSV or m3u format. A CSV/m3u playlist allows single entries of radio station streams, multiple individual songs from YouTube or other sources, and even other 'url playlists'. If a single entry fails (song, radio station, playlist) the next in that list will play. </span>
 <li style='margin:10px 0 15px 40px'>"<b>AUTOPLAY AFTER LOAD</b>" checkbox marked will force the playlist to repeat after finishing.</li>
@@ -268,7 +419,7 @@ Test the possibility to play csv/m3u playlists:<br><br>
 
 </main>
 
-<aside class="side-container" style='margin:0 -30px 0 -30px'><h1 style='text-align:center;'>Tetrahedra playlists</h1>
+<aside class="side-container"><h1 style='text-align:center;'>Tetrahedra playlists</h1>
 <div style='margin-bottom:5px;text-align:justify;'><span style='padding-left:30px;'>
 A "tetrahedron-type" playlist is a CSV or m3u file containing a list of exactly five entries. The first four correspond to the tetrahedron itself, while the fifth corresponds to its center of gravity. Each entry can be an individual song or a playlist URL; the fifth can act as a connector between tetrahedra. This allows tetrahedra to be chained together, facilitating the management of long chains, transitions between different elements, and shared exchanges.</span></div><br>
 <h2 style='color:#cccc33;text-align:center;'><b>Tribute to Normandy's World Heroes</b></h2>
@@ -294,6 +445,21 @@ const DB_NAME = "TACE_Audio_Player_v2";
 const DB_VERSION = 1;
 const STORE_NAME = "songs";
 const LAST_PLAYBACK_KEY = "TACE_Audio_Player_v2_Last_Playback";
+const PLAYLIST_CACHE_VERSION = "1";
+
+function cacheBustedURL(value) {
+    try {
+        const url = new URL(value, document.baseURI);
+        if (isCSV(url.href) || isM3U(url.href)) {
+            url.searchParams.set("v", PLAYLIST_CACHE_VERSION);
+        }
+        return url.href;
+    }
+    catch (error) {
+        return value;
+    }
+}
+
 
 const DEFAULT_RADIO_RECORD = {
     author: "Streemlion",
@@ -2307,7 +2473,7 @@ async function loadM3U(
 ) {
 
     const response =
-        await fetch(url);
+        await fetch(cacheBustedURL(url), { cache: "no-store" });
 
     if (!response.ok) {
 
@@ -6154,4 +6320,3 @@ window.addEventListener(
 );
 
 </script></body></html>
-
