@@ -319,7 +319,7 @@ audio {
 <div class="page-layout">
 
 <aside class="side-container"><b>Notes</b>:<br>
-<div style='margin-bottom:5px;text-align:justify;'><span style='padding-left:35px;'>Upon loading the page, the current database playlist starts automatically. If IndexedDB is empty, the default playlist <b>t1Omaha.csv</b> is loaded and its first entry is played automatically. You can load a file of a single song or a playlist by the 'LOAD' button after pressing the 'STOP' button; press the 'Play' button to play the url shown in the 'Url/file' field.</span></div>
+<div style='margin-bottom:5px;text-align:justify;'><span style='padding-left:35px;'>Upon loading the page, the first song from the database will play automatically; if the database is empty, the "radio stream" (http://radio.streemlion.com:2740/stream) will play. You can load a file of a single song or a playlist by the 'LOAD' button after pressing the 'STOP' button; press the 'Play' button to play the url shown in the 'Url/file' field.</span></div>
 <div style='margin-bottom:5px;text-align:justify;'><span style='padding-left:35px;'>Playlists can be in CSV or m3u format. A CSV/m3u playlist allows single entries of radio station streams, multiple individual songs from YouTube or other sources, and even other 'url playlists'. If a single entry fails (song, radio station, playlist) the next in that list will play. </span>
 <li style='margin:10px 0 15px 40px'>"<b>AUTOPLAY AFTER LOAD</b>" checkbox marked will force the playlist to repeat after finishing.</li>
 </div>
@@ -402,11 +402,6 @@ Test the possibility to play csv/m3u playlists:<br><br>
 <label for="stationSelect" style='display:block;margin-top:10px;'>
     Audio source: <span id="sourceTypeText">None</span>
 </label>
-<div id="defaultPlaylistInfo" style="margin-top:8px;font-size:12px;color:#555;">
-    Default startup playlist:
-    <a href="https://pere000.github.io/pretace/book/t1Omaha.csv"
-       target="_blank" rel="noopener">t1Omaha.csv</a>
-</div>
 <select id="stationSelect" disabled>
     <option>No audio source loaded</option>
 </select>
@@ -472,13 +467,6 @@ const DEFAULT_RADIO_RECORD = {
     title: "Radio Stream",
     urlFileName: "http://radio.streemlion.com:2740/stream"
 };
-
-/*
- * Default startup playlist.
- * Used only when IndexedDB contains no songs.
- */
-const DEFAULT_PLAYLIST_URL =
-    "https://pere000.github.io/pretace/book/t1Omaha.csv";
 
 const AUDIO_EXTENSIONS = [
     ".mp3",
@@ -4115,24 +4103,12 @@ async function playAction() {
 
                 if (!records.length) {
 
-            /*
-             * Empty DB:
-             * load the configured remote CSV playlist.
-             * The second argument makes loadCSV start playback.
-             */
-            message(
-                "IndexedDB is empty. Loading default playlist..."
-            );
+                    message(
+                        "DB empty, you need to load a CSV from your local desktop or remotely, or some sound file/radio stream."
+                    );
 
-            await loadCSV(
-                DEFAULT_PLAYLIST_URL,
-                true
-            );
-
-            updateDebug();
-
-            return;
-        }
+                    return;
+                }
 
                 state.series =
                     records;
