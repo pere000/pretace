@@ -319,7 +319,7 @@ audio {
 <div class="page-layout">
 
 <aside class="side-container"><b>Notes</b>:<br>
-<div style='margin-bottom:5px;text-align:justify;'><span style='padding-left:35px;'>Upon loading the page, the current database playlist starts automatically. If IndexedDB is empty, the default playlist <b>t1Omaha.csv</b> is loaded and its first entry is played automatically. You can load a file of a single song or a playlist by the 'LOAD' button after pressing the 'STOP' button; press the 'Play' button to play the url shown in the 'Url/file' field.</span></div>
+<div style='margin-bottom:5px;text-align:justify;'><span style='padding-left:35px;'>Upon loading the page, the first song from the database will play automatically; if the database is empty, the "radio stream" (http://radio.streemlion.com:2740/stream) will play. You can load a file of a single song or a playlist by the 'LOAD' button after pressing the 'STOP' button; press the 'Play' button to play the url shown in the 'Url/file' field.</span></div>
 <div style='margin-bottom:5px;text-align:justify;'><span style='padding-left:35px;'>Playlists can be in CSV or m3u format. A CSV/m3u playlist allows single entries of radio station streams, multiple individual songs from YouTube or other sources, and even other 'url playlists'. If a single entry fails (song, radio station, playlist) the next in that list will play. </span>
 <li style='margin:10px 0 15px 40px'>"<b>AUTOPLAY AFTER LOAD</b>" checkbox marked will force the playlist to repeat after finishing.</li>
 </div>
@@ -376,7 +376,7 @@ Test the possibility to play csv/m3u playlists:<br><br>
     <input
         id="autoplayCheckbox"
         type="checkbox"
-        checked
+        disabled
         style="width:auto"
     >
     AUTOPLAY AFTER LOAD
@@ -402,11 +402,6 @@ Test the possibility to play csv/m3u playlists:<br><br>
 <label for="stationSelect" style='display:block;margin-top:10px;'>
     Audio source: <span id="sourceTypeText">None</span>
 </label>
-<div id="defaultPlaylistInfo" style="margin-top:8px;font-size:12px;color:#555;">
-    Default startup playlist:
-    <a href="https://pere000.github.io/pretace/book/t1Omaha.csv"
-       target="_blank" rel="noopener">t1Omaha.csv</a>
-</div>
 <select id="stationSelect" disabled>
     <option>No audio source loaded</option>
 </select>
@@ -473,10 +468,6 @@ const DEFAULT_RADIO_RECORD = {
     urlFileName: "http://radio.streemlion.com:2740/stream"
 };
 
-/*
- * Default startup playlist.
- * Used only when IndexedDB contains no songs.
- */
 const DEFAULT_PLAYLIST_URL =
     "https://pere000.github.io/pretace/book/t1Omaha.csv";
 
@@ -537,6 +528,10 @@ const pauseCheckbox =
 
 const autoplayCheckbox =
     document.getElementById("autoplayCheckbox");
+
+// AUTOPLAY IS PERMANENTLY DISABLED.
+autoplayCheckbox.checked = false;
+autoplayCheckbox.disabled = true;
 
 const repeatCheckbox =
     document.getElementById("repeatCheckbox");
@@ -3284,44 +3279,6 @@ async function playRecord(record) {
 }
 
 
-function autoplayLoadedRecord(record) {
-
-    audio.autoplay =
-        autoplayCheckbox.checked;
-
-    playRecord(record).catch(error => {
-
-        if (error.name !== "NotAllowedError") {
-            message(
-                `Audio playback error:\n${error.message}`,
-                "error"
-            );
-            return;
-        }
-
-        message(
-            "Playlist loaded. Click anywhere to start playback.",
-            "info"
-        );
-
-        const retry = () => {
-            playRecord(record).catch(retryError => {
-                message(
-                    `Audio playback error:\n${retryError.message}`,
-                    "error"
-                );
-            });
-        };
-
-        document.addEventListener(
-            "pointerdown",
-            retry,
-            {once:true}
-        );
-    });
-}
-
-
 /* =========================================================
    LOAD CSV
    ========================================================= */
@@ -4115,24 +4072,12 @@ async function playAction() {
 
                 if (!records.length) {
 
-            /*
-             * Empty DB:
-             * load the configured remote CSV playlist.
-             * The second argument makes loadCSV start playback.
-             */
-            message(
-                "IndexedDB is empty. Loading default playlist..."
-            );
+                    message(
+                        "DB empty, you need to load a CSV from your local desktop or remotely, or some sound file/radio stream."
+                    );
 
-            await loadCSV(
-                DEFAULT_PLAYLIST_URL,
-                true
-            );
-
-            updateDebug();
-
-            return;
-        }
+                    return;
+                }
 
                 state.series =
                     records;
@@ -6091,122 +6036,26 @@ async function initialize() {
         const records =
             await getRecords();
 
+        /*
+         * IMPORTANT:
+         * Initialization NEVER starts playback.
+         * The PLAY button is the only way to start playback.
+         */
         if (!records.length) {
 
-            const record =
-                DEFAULT_RADIO_RECORD;
-
-            state.sourceType =
-                "stream";
-
-            state.series =
-                [record];
-
-            state.index =
-                0;
-
-            state.currentUrl =
-                record.urlFileName;
-
-            state.previousUrl =
-                record.urlFileName;
-
-            author.value =
-                record.author;
-
-            title.value =
-                record.title;
-
-            urlFileName.value =
-                record.urlFileName;
-
-            showRecord(
-                record
+            await loadCSV(
+                DEFAULT_PLAYLIST_URL,
+                false
             );
-
-            audio.autoplay =
-                true;
-
-            playRecord(record)
-                .catch(
-                    error => {
-
-                        if (
-                            error.name ===
-                            "NotAllowedError"
-                        ) {
-
-                            message(
-                                "Radio stream loaded. Click PLAY to start it."
-                            );
-
-                            const startRadio =
-                                async () => {
-
-                                    document.removeEventListener(
-                                        "pointerdown",
-                                        startRadio
-                                    );
-
-                                    try {
-
-                                        await playRecord(
-                                            record
-                                        );
-
-                                        message(
-                                            "Playing: My Blues Radio.",
-                                            "success"
-                                        );
-
-                                    }
-                                    catch (
-                                        retryError
-                                    ) {
-
-                                        message(
-                                            "Radio playback failed:\n" +
-                                            retryError.message,
-                                            "error"
-                                        );
-                                    }
-                                };
-
-                            document.addEventListener(
-                                "pointerdown",
-                                startRadio,
-                                {
-                                    once: true
-                                }
-                            );
-
-                        }
-                        else {
-
-                            message(
-                                "Radio stream loaded but playback failed:\n" +
-                                error.message,
-                                "error"
-                            );
-                        }
-                    }
-                );
 
             updateDebug();
 
             message(
-                "Ready."
+                "Default playlist loaded. Press PLAY to start."
             );
 
             return;
         }
-
-
-        /*
-        =====================================================
-        DATABASE EXISTS
-        =====================================================
-        */
 
         state.series =
             records;
@@ -6216,75 +6065,31 @@ async function initialize() {
                 records
             );
 
-        /*
-        Determine source type.
-        */
         state.sourceType =
             isStream(
-                records[
-                    state.index
-                ].urlFileName
+                records[state.index].urlFileName
             )
                 ? "stream"
                 : "db";
 
-
-        /*
-        Fill fields with the starting record.
-        */
         fillRecordFields(
-            records[
-                state.index
-            ]
+            records[state.index]
         );
 
         showRecord(
-            records[
-                state.index
-            ]
+            records[state.index]
         );
 
         updateSourceType(
-            records[
-                state.index
-            ]
+            records[state.index]
         );
 
         updateStationList();
 
         updateDebug();
 
-
-        /*
-        Try autoplay.
-        */
-        playRecord(
-            records[
-                state.index
-            ]
-        )
-        .catch(
-            error => {
-
-                if (
-                    error.name ===
-                    "NotAllowedError"
-                ) {
-
-                    message(
-                        "DB loaded. Browser autoplay was blocked. Press PLAY."
-                    );
-
-                }
-                else {
-
-                    message(
-                        "DB loaded but playback failed:\n" +
-                        error.message,
-                        "error"
-                    );
-                }
-            }
+        message(
+            "Database loaded. Press PLAY to start."
         );
 
     }
@@ -6296,11 +6101,6 @@ async function initialize() {
             "error"
         );
 
-        /*
-         * The page cannot use the player database if the open request
-         * never completes. Offer a deliberate, destructive recovery
-         * instead of silently doing nothing.
-         */
         repairDbBtn.style.display =
             "inline-block";
     }
@@ -6309,7 +6109,6 @@ async function initialize() {
 
     setInitializedMessage();
 }
-
 
 initialize()
     .catch(error => {
