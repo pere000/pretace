@@ -6452,7 +6452,6 @@ window.addEventListener(
     }
 );
 
-<script>
 window.addEventListener("error", (event) => {
     const diagnostic = document.getElementById("diagnostic");
     if (!diagnostic) return;
@@ -6479,6 +6478,5 @@ reason:         ${event.reason?.stack || event.reason || "(none)"}
 
 ` + diagnostic.textContent;
 });
-</script>
 
 </script></body></html>
