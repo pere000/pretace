@@ -478,6 +478,8 @@ Test the possibility to play csv/m3u playlists:<br><br>
 
 <div id="debug"></div>
 
+<div id="diagnostic" style="margin-top:15px;padding:15px;background:#fff7d6;border:1px solid #d8c36a;border-radius:8px;white-space:pre-wrap;font-family:monospace;font-size:13px;">YouTube diagnostic: waiting</div>
+
 </main>
 
 
@@ -951,6 +953,34 @@ function setInitializedMessage() {
 /* =========================================================
    DEBUG
    ========================================================= */
+
+function ytDiagnostic(label, data = {}) {
+    const diagnostic = document.getElementById("diagnostic");
+    if (!diagnostic) return;
+
+    const lines = [
+        `=== ${label} ===`,
+        `time:           ${new Date().toISOString()}`,
+        `origin:         ${location.origin}`,
+        `page URL:       ${location.href}`,
+        `referrer:       ${document.referrer || "(empty)"}`
+    ];
+
+    Object.entries(data).forEach(([key, value]) => {
+        let rendered;
+        try {
+            rendered = typeof value === "string"
+                ? value
+                : JSON.stringify(value, null, 2);
+        } catch (error) {
+            rendered = String(value);
+        }
+        lines.push(`${key}: ${rendered}`);
+    });
+
+    diagnostic.textContent =
+        lines.join("\n") + "\n\n" + diagnostic.textContent;
+}
 
 function updateDebug() {
 
@@ -1974,6 +2004,12 @@ async function loadYouTubeSource(
             0
         );
 
+        ytDiagnostic("YOUTUBE COMMAND", {
+            command: shouldPlay ? "loadVideoById" : "cueVideoById",
+            videoId,
+            origin: location.origin
+        });
+
         if (shouldPlay) {
 
             youtubePlayer.loadVideoById(
@@ -2088,6 +2124,17 @@ async function loadYouTubeRecord(
             record.urlFileName
         );
 
+    ytDiagnostic("YOUTUBE RECORD REQUEST", {
+        sourceType: state.sourceType,
+        author: record.author,
+        title: record.title,
+        recordUrl: record.urlFileName,
+        videoId: videoId || "(invalid)",
+        playlistInfo: playlistInfo || null,
+        shouldPlay,
+        youtubeApiLoaded: Boolean(window.YT && window.YT.Player)
+    });
+
     if (!videoId) {
 
         throw new Error(
@@ -2130,35 +2177,29 @@ async function loadYouTubeRecord(
         await new Promise(
             (resolve) => {
 
+                const diagnosticPlayerVars = {
+                    controls: 0,
+                    playsinline: 1,
+                    rel: 0,
+                    ...(location.protocol === "http:" ||
+                      location.protocol === "https:"
+                        ? { origin: location.origin }
+                        : {})
+                };
+
+                ytDiagnostic("YOUTUBE PLAYER CONSTRUCTION", {
+                    videoId,
+                    playerVars: diagnosticPlayerVars
+                });
+
                 youtubePlayer =
                     new YT.Player(
                         "youtubePlayer",
                         {
-
                             width: "1",
-
                             height: "1",
-
                             videoId,
-
-                            playerVars: {
-
-                                controls: 0,
-
-                                playsinline: 1,
-
-                                rel: 0,
-
-                                ...(location.protocol ===
-                                    "http:" ||
-                                    location.protocol ===
-                                    "https:"
-                                    ? {
-                                        origin:
-                                            location.origin
-                                    }
-                                    : {})
-                            },
+                            playerVars: diagnosticPlayerVars,
 
                             events: {
 
@@ -2167,6 +2208,15 @@ async function loadYouTubeRecord(
 
                                 onStateChange:
                                     (event) => {
+
+                                        ytDiagnostic("YOUTUBE STATE CHANGE", {
+                                            videoId,
+                                            stateCode: event.data,
+                                            stateName:
+                                                Object.entries(YT.PlayerState || {})
+                                                    .find(([, value]) => value === event.data)?.[0]
+                                                || "UNKNOWN"
+                                        });
 
                                         if (
                                             event.data ===
@@ -2338,6 +2388,14 @@ async function loadYouTubeRecord(
 
                                 onError:
                                     (event) => {
+
+                                        ytDiagnostic("YOUTUBE ERROR", {
+                                            videoId,
+                                            errorCode: event.data,
+                                            errorDescription: youtubeErrorMessage(event.data),
+                                            playerOrigin: location.origin,
+                                            currentUrl: state.currentUrl
+                                        });
 
                                         state.playing =
                                             false;
@@ -6393,5 +6451,34 @@ window.addEventListener(
         }
     }
 );
+
+<script>
+window.addEventListener("error", (event) => {
+    const diagnostic = document.getElementById("diagnostic");
+    if (!diagnostic) return;
+    diagnostic.textContent =
+        `=== BROWSER ERROR ===
+time:           ${new Date().toISOString()}
+origin:         ${location.origin}
+message:        ${event.message || "(none)"}
+source:         ${event.filename || "(none)"}
+line:           ${event.lineno || "(none)"}
+column:         ${event.colno || "(none)"}
+
+` + diagnostic.textContent;
+});
+
+window.addEventListener("unhandledrejection", (event) => {
+    const diagnostic = document.getElementById("diagnostic");
+    if (!diagnostic) return;
+    diagnostic.textContent =
+        `=== UNHANDLED PROMISE REJECTION ===
+time:           ${new Date().toISOString()}
+origin:         ${location.origin}
+reason:         ${event.reason?.stack || event.reason || "(none)"}
+
+` + diagnostic.textContent;
+});
+</script>
 
 </script></body></html>
