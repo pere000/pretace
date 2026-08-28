@@ -395,13 +395,13 @@ Use a local html server like 'php -S localhost:8000'
 <h1 style='width:100%;text-align:center;'>Compassionate Heart of the Mystici Corporis Christi<div style='margin-top:-1px;color:maroon;font-size:12px;'><i style='color:navy'>IndexedDB Audio Player</i></div></h1>
 
 <span class=""><label style='padding-right:22.5%'>Author</label><b>Title</b><br>
-    <input id="author" type="text" style='width:28%;margin-right:10px;'>
+    <input id="author" type="text" style='width:28%;margin-right:10px;color:red;font-weight:bold;' value='Compassionate Heart'>
 </span>
-<span class=""><input id="title" type="text" style='width:70%;'></span>
+<span class=""><input id="title" type="text" style='width:70%;' value='Blues Radio'></span>
 
-<div class="" style='margin-top:5px'> <label>Url/file</label> <input id="urlFileName" style="width:95%;" type="text" placeholder="song.flac, songs.csv, or http://radio.example/stream"> <label style="color:maroon;cursor:pointer;" onclick="window.open(document.getElementById('urlFileName').value, '_blank')"> <b><span style='font-size:25px'> 📽 </span></b></label></div>
+<div class="" style='margin-top:5px'> <label>Url/file</label> <input id="urlFileName" style="width:95%;" type="text" placeholder="song.flac, songs.csv, or http://radio.example/stream" value='myBlues.csv'> <label style="color:maroon;cursor:pointer;" onclick="window.open(document.getElementById('urlFileName').value, '_blank')"> <b><span style='font-size:25px'> 📽 </span></b></label></div>
 
-<div class="" style='margin-top:5px'> <label>Lyric Url</label> <input id="urlLyric" style="width:95%;" type="text"><label style="color:maroon;cursor:pointer;" onclick="window.open(document.getElementById('urlLyric').value, '_blank')"> <b> <span style='font-size:20px'> 🎼 </span></b></label> </div>
+<div class="" style='margin-top:5px'> <label>Lyric Url</label> <input id="urlLyric" style="width:95%;" type="text" value='https://www.google.com/search?q=searcher+lyric'><label style="color:maroon;cursor:pointer;" onclick="window.open(document.getElementById('urlLyric').value, '_blank')"> <b> <span style='font-size:20px'> 🎼 </span></b></label> </div>
 
 <div class="buttons">
 
@@ -495,8 +495,14 @@ A "tetrahedron-type" playlist is a CSV or m3u file containing a list of exactly 
 <br>
 <div style='width:100%;text-align:right;padding-right:40px;color:'><i>Courtesy of</i> <a href='https://diaspora.psyco.fr/tags/trondiasporapsycofr_1745558058926' target='_blank' style='color:navy;cursor:pointer;text-decoration: none;'><b>The Lady</b></a></div>
 <br><br>
-<div style=''>Friends</div>
-<div style='padding-left:10px;color:maroon;'><span style='padding-left:5px;color:navy;'><b>Eric Schabler</b>: <b style='color:#cccc33;cursor:pointer;' onclick="document.getElementById('urlFileName').value='https://pretace.surge.sh/book/sinatra0.csv'">sinatra@diaspora.psyco.fr</b></div>
+<div style='padding-left:10px;color:maroon;'><b>
+    Friends:</br>
+        <span style='padding-left:10px;'><a href='https://diaspora.psyco.fr/people/d20083707bd50132351e00224d868582' target='_blank' style='cursor:pointer;text-decoration: none;'><u>E</u>ric Schaber</a>: <b style='color:#cccc33;cursor:pointer;' onclick="document.getElementById('urlFileName').value='https://pretace.surge.sh/book/sinatra0.csv'">sinatra@diaspora.psyco.fr</b></span>
+    <br><br>
+
+    Downloads:<br>
+        <a href='https://pretace.surge.sh/book/musicHeart.zip' target='_blank' style='padding-left:10px;color:navy;text-decoration: none;'><u>m</u>usicHeart.zip</a>
+</div>
 </aside>
 
 </div>
@@ -6270,12 +6276,176 @@ lyricBtn.onclick =
 
 
 /* =========================================================
+   URL SOURCE PARAMETER
+   ========================================================= */
+
+/*
+ * If the page is opened as:
+ *
+ *   music.html?source=t2Gold.csv
+ *
+ * the complete value after ?source= is placed into the existing
+ * Url/file field and the normal PLAY action is invoked.
+ *
+ * The complete remainder is read deliberately rather than with
+ * URLSearchParams.get("source"), because a source URL may itself
+ * contain query parameters, e.g.
+ *
+ *   ?source=https://www.youtube.com/watch?v=VIDEO&list=PLAYLIST
+ *
+ * The source is data only and is never executed.
+ */
+function getSourceFromURLParameter() {
+
+    try {
+
+        const query =
+            window.location.search;
+
+        if (!query.startsWith("?source=")) {
+            return null;
+        }
+
+        const raw =
+            query.slice("?source=".length).trim();
+
+        if (!raw) {
+            throw new Error(
+                "The source parameter is empty."
+            );
+        }
+
+        let value;
+
+        try {
+            /*
+             * Supports both:
+             *
+             *   ?source=https://www.youtube.com/watch?v=X&list=Y
+             *
+             * and the safely encoded equivalent.
+             */
+            value =
+                decodeURIComponent(raw);
+        }
+        catch (error) {
+            throw new Error(
+                "The source parameter is not valid URL encoding."
+            );
+        }
+
+        if (!value.trim()) {
+            throw new Error(
+                "The source parameter is empty."
+            );
+        }
+
+        value =
+            value.trim();
+
+        /*
+         * Reject control characters and characters that could turn
+         * the parameter into HTML/script rather than data.
+         */
+        if (
+            /[\u0000-\u001F\u007F<>"'`]/.test(value)
+        ) {
+            throw new Error(
+                "The source parameter contains forbidden characters."
+            );
+        }
+
+        /*
+         * Never accept executable or local-browser schemes.
+         */
+        if (
+            /^(?:javascript|data|vbscript|file):/i.test(value)
+        ) {
+            throw new Error(
+                "The source parameter uses a forbidden scheme."
+            );
+        }
+
+        /*
+         * HTTP(S) sources are allowed.
+         */
+        if (/^https?:\/\//i.test(value)) {
+
+            const parsed =
+                new URL(value);
+
+            if (
+                parsed.protocol !== "http:" &&
+                parsed.protocol !== "https:"
+            ) {
+                throw new Error(
+                    "The source URL must use HTTP or HTTPS."
+                );
+            }
+
+            return value;
+        }
+
+        /*
+         * Relative resource names are allowed.
+         * Reject traversal, absolute paths, backslashes and
+         * protocol-like forms.
+         */
+        if (
+            value.startsWith("/") ||
+            value.startsWith("\\") ||
+            value.includes("..") ||
+            value.includes("\\") ||
+            value.includes(":")
+        ) {
+            throw new Error(
+                "The source parameter contains an unsafe path."
+            );
+        }
+
+        return value;
+    }
+    catch (error) {
+
+        throw new Error(
+            `Invalid source URL parameter: ${error.message}`
+        );
+    }
+}
+
+
+/* =========================================================
    START
    ========================================================= */
+
 
 async function initialize() {
 
     try {
+
+        /*
+         * A source supplied in the page URL has priority over IndexedDB
+         * and the default playlist. Put it into the same Url/file field
+         * used by the normal UI. Playback is deliberately NOT started
+         * here: a synthetic click is not a trusted browser user gesture.
+         * The user can press the real PLAY button.
+         */
+        const urlSource =
+            getSourceFromURLParameter();
+
+        if (urlSource !== null) {
+
+            urlFileName.value =
+                urlSource;
+
+            message(
+                `URL source selected: ${urlSource}`
+            );
+
+            updateDebug();
+
+            return;
+        }
 
         message(
             "Opening IndexedDB..."

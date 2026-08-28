@@ -383,8 +383,10 @@ audio {
 
 
 Test the possibility to play csv/m3u playlists:<br><br>
-1. copy the following url in the 'Url/file' field: <b>https://pere000.github.io/pretace/book/jimiHendrixAndOthers.csv</b> Click on 'Play' button.<br>
-2. copy the following url in the 'Url/file' field: <b>https://pere000.github.io/pretace/book/myBlues.m3u</b> Click on 'Play' button.<br>
+1. copy the following url in the 'Url/file' field: <b>https://pretace.surge.sh/book/jimiHendrixAndOthers.csv</b> Click on 'Play' button.<br>
+2. copy the following url in the 'Url/file' field: <b>https://pretace.surge.sh/book/myBlues.m3u</b> Click on 'Play' button.<br>
+<br><br>
+Use a local html server like 'php -S localhost:8000'
 
 </aside>
 
@@ -393,13 +395,13 @@ Test the possibility to play csv/m3u playlists:<br><br>
 <h1 style='width:100%;text-align:center;'>Compassionate Heart of the Mystici Corporis Christi<div style='margin-top:-1px;color:maroon;font-size:12px;'><i style='color:navy'>IndexedDB Audio Player</i></div></h1>
 
 <span class=""><label style='padding-right:22.5%'>Author</label><b>Title</b><br>
-    <input id="author" type="text" style='width:28%;margin-right:10px;'>
+    <input id="author" type="text" style='width:28%;margin-right:10px;color:red;font-weight:bold;' value='Compassionate Heart'>
 </span>
-<span class=""><input id="title" type="text" style='width:70%;'></span>
+<span class=""><input id="title" type="text" style='width:70%;' value='Blues Radio'></span>
 
-<div class="" style='margin-top:5px'> <label>Url/file</label> <input id="urlFileName" style="width:95%;" type="text" placeholder="song.flac, songs.csv, or http://radio.example/stream"> <label style="color:maroon;cursor:pointer;" onclick="window.open(document.getElementById('urlFileName').value, '_blank')"> <b><span style='font-size:25px'> 📽 </span></b></label></div>
+<div class="" style='margin-top:5px'> <label>Url/file</label> <input id="urlFileName" style="width:95%;" type="text" placeholder="song.flac, songs.csv, or http://radio.example/stream" value='myBlues.csv'> <label style="color:maroon;cursor:pointer;" onclick="window.open(document.getElementById('urlFileName').value, '_blank')"> <b><span style='font-size:25px'> 📽 </span></b></label></div>
 
-<div class="" style='margin-top:5px'> <label>Lyric Url</label> <input id="urlLyric" style="width:95%;" type="text"><label style="color:maroon;cursor:pointer;" onclick="window.open(document.getElementById('urlLyric').value, '_blank')"> <b> <span style='font-size:20px'> 🎼 </span></b></label> </div>
+<div class="" style='margin-top:5px'> <label>Lyric Url</label> <input id="urlLyric" style="width:95%;" type="text" value='https://www.google.com/search?q=searcher+lyric'><label style="color:maroon;cursor:pointer;" onclick="window.open(document.getElementById('urlLyric').value, '_blank')"> <b> <span style='font-size:20px'> 🎼 </span></b></label> </div>
 
 <div class="buttons">
 
@@ -477,22 +479,30 @@ Test the possibility to play csv/m3u playlists:<br><br>
 </div>
 
 <div id="debug"></div>
-<div id="diagnostic" style="margin-top:15px;padding:15px;background:#fff7d6;border:1px solid #d8c36a;border-radius:8px;white-space:pre-wrap;font-family:monospace;font-size:13px;">YouTube diagnostic: waiting</div>
 
 </main>
 
 
-<aside class="side-container"><h1 style='text-align:center;'>Tetrahedra playlists</h1>tu puta magree
+<aside class="side-container"><h1 style='text-align:center;'>Tetrahedra playlists</h1>
 <div style='padding-left:10px;margin-bottom:5px;text-align:justify;'><span style='padding-left:30px;'>
 A "tetrahedron-type" playlist is a CSV or m3u file containing a list of exactly five entries. The first four correspond to the tetrahedron itself, while the fifth corresponds to its center of gravity. Each entry can be an individual song or a playlist URL; the fifth can act as a connector between tetrahedra. This allows tetrahedra to be chained together, facilitating the management of long chains, transitions between different elements, and shared exchanges.</span></div><br>
 <h1 style='color:#cccc33;text-align:center;'><b>Tribute to Normandy's World Heroes</b></h1>
-<div style='padding-left:10px;'>1. The World Heroes of Omaha Beach (~2.400 to 2.500): <br><span style='padding-left:20px;'><b style='color:#cccc33;cursor:pointer;' onclick="document.getElementById('urlFileName').value='https://pere000.github.io/pretace/book/t1Omaha.csv'">🎵 Omaha Tribute Playlist (CSV)</b> <img src='Flag_of_the_United_States_(DDD-F-416E_specifications).svg.webp' style='margin-left:10px;width:10%;'></div>
-<div style='padding-left:10px;'>2. The World Heroes of Gold Beach (~1.100): <br><span style='padding-left:20px;'><b style='color:#cccc33;cursor:pointer;' onclick="document.getElementById('urlFileName').value='https://pere000.github.io/pretace/book/t2Gold.csv'">🎵 Gold Tribute Playlist (CSV)</b><img src='Flag_of_the_United_Kingdom_(1-2).svg.webp' style='margin-left:10px;width:10%;'></div>
-<div style='padding-left:10px;'>3. The World Heroes of Juno Beach (~961): <br><span style='padding-left:20px;'><b style='color:#cccc33;cursor:pointer;' onclick="document.getElementById('urlFileName').value='https://pere000.github.io/pretace/book/t3Juno.csv'">🎵 Juno Tribute Playlist (CSV)</b><img src='Flag_of_Canada_(Pantone).svg.webp' style='margin-left:10px;width:10%;'></div>
-<div style='padding-left:10px;'>4. The World Heroes of Sword Beach (~683): <br><span style='padding-left:20px;'><b style='color:#cccc33;cursor:pointer;' onclick="document.getElementById('urlFileName').value='https://pere000.github.io/pretace/book/t4Sword.csv'">🎵 Sword Tribute Playlist (CSV)</b><img src='Flag_of_the_United_Kingdom_(1-2).svg.webp' style='margin-left:10px;width:10%;'></div>
-<div style='padding-left:10px;'>5. The World Heroes of Utah Beach (~197): <br><span style='padding-left:20px;'><b style='color:#cccc33;cursor:pointer;' onclick="document.getElementById('urlFileName').value='https://pere000.github.io/pretace/book/t5Utah.csv'">🎵 Utah Tribute Playlist (CSV)</b><img src='Flag_of_the_United_States_(DDD-F-416E_specifications).svg.webp' style='margin-left:10px;width:10%;'></div>
+<div style='padding-left:10px;'>1. The World Heroes of Omaha Beach (~2.400 to 2.500): <br><span style='padding-left:20px;'><b style='color:#cccc33;cursor:pointer;' onclick="document.getElementById('urlFileName').value='https://pretace.surge.sh/book/t1Omaha.csv'">🎵 Omaha Tribute Playlist (CSV)</b> <img src='Flag_of_the_United_States_(DDD-F-416E_specifications).svg.webp' style='margin-left:10px;width:10%;'></div>
+<div style='padding-left:10px;'>2. The World Heroes of Gold Beach (~1.100): <br><span style='padding-left:20px;'><b style='color:#cccc33;cursor:pointer;' onclick="document.getElementById('urlFileName').value='https://pretace.surge.sh/book/t2Gold.csv'">🎵 Gold Tribute Playlist (CSV)</b><img src='Flag_of_the_United_Kingdom_(1-2).svg.webp' style='margin-left:10px;width:10%;'></div>
+<div style='padding-left:10px;'>3. The World Heroes of Juno Beach (~961): <br><span style='padding-left:20px;'><b style='color:#cccc33;cursor:pointer;' onclick="document.getElementById('urlFileName').value='https://pretace.surge.sh/book/t3Juno.csv'">🎵 Juno Tribute Playlist (CSV)</b><img src='Flag_of_Canada_(Pantone).svg.webp' style='margin-left:10px;width:10%;'></div>
+<div style='padding-left:10px;'>4. The World Heroes of Sword Beach (~683): <br><span style='padding-left:20px;'><b style='color:#cccc33;cursor:pointer;' onclick="document.getElementById('urlFileName').value='https://pretace.surge.sh/book/t4Sword.csv'">🎵 Sword Tribute Playlist (CSV)</b><img src='Flag_of_the_United_Kingdom_(1-2).svg.webp' style='margin-left:10px;width:10%;'></div>
+<div style='padding-left:10px;'>5. The World Heroes of Utah Beach (~197): <br><span style='padding-left:20px;'><b style='color:#cccc33;cursor:pointer;' onclick="document.getElementById('urlFileName').value='https://pretace.surge.sh/book/t5Utah.csv'">🎵 Utah Tribute Playlist (CSV)</b><img src='Flag_of_the_United_States_(DDD-F-416E_specifications).svg.webp' style='margin-left:10px;width:10%;'></div>
 <br>
 <div style='width:100%;text-align:right;padding-right:40px;color:'><i>Courtesy of</i> <a href='https://diaspora.psyco.fr/tags/trondiasporapsycofr_1745558058926' target='_blank' style='color:navy;cursor:pointer;text-decoration: none;'><b>The Lady</b></a></div>
+<br><br>
+<div style='padding-left:10px;color:maroon;'><b>
+    Friends:</br>
+        <span style='padding-left:10px;'><a href='https://diaspora.psyco.fr/people/d20083707bd50132351e00224d868582' target='_blank' style='cursor:pointer;text-decoration: none;'><u>E</u>ric Schaber</a>: <b style='color:#cccc33;cursor:pointer;' onclick="document.getElementById('urlFileName').value='https://pretace.surge.sh/book/sinatra0.csv'">sinatra@diaspora.psyco.fr</b></span>
+    <br><br>
+
+    Downloads:<br>
+        <a href='https://pretace.surge.sh/book/musicHeart.zip' target='_blank' style='padding-left:10px;color:navy;text-decoration: none;'><u>m</u>usicHeart.zip</a>
+</div>
 </aside>
 
 </div>
@@ -534,7 +544,7 @@ const DEFAULT_RADIO_RECORD = {
 };
 
 const DEFAULT_PLAYLIST_URL =
-    "https://pere000.github.io/pretace/book/t1Omaha.csv";
+    "https://pretace.surge.sh/book/t1Omaha.csv";
 
 const AUDIO_EXTENSIONS = [
     ".mp3",
@@ -6266,12 +6276,154 @@ lyricBtn.onclick =
 
 
 /* =========================================================
+   URL CSV PARAMETER
+   ========================================================= */
+
+/*
+ * If the page is opened as:
+ *
+ *   music.html?csv=t2Gold.csv
+ *
+ * use that CSV instead of the normal database/default startup.
+ *
+ * The query parameter is treated strictly as data.  Only a relative
+ * CSV path or an HTTP(S) CSV URL is accepted.  No javascript:, data:,
+ * file:, HTML, or other executable scheme is permitted.
+ */
+function getCSVFromURLParameter() {
+
+    try {
+
+        const params =
+            new URLSearchParams(
+                window.location.search
+            );
+
+        if (!params.has("csv")) {
+            return null;
+        }
+
+        const raw =
+            params.get("csv");
+
+        if (!raw) {
+            throw new Error(
+                "The csv parameter is empty."
+            );
+        }
+
+        const value =
+            raw.trim();
+
+        /*
+         * Reject control characters and characters that could turn the
+         * parameter into HTML/script rather than a filename/URL.
+         */
+        if (
+            /[\\u0000-\\u001F\\u007F<>"'`]/.test(value)
+        ) {
+            throw new Error(
+                "The csv parameter contains forbidden characters."
+            );
+        }
+
+        /*
+         * A direct HTTP(S) URL is allowed only when it identifies a CSV.
+         */
+        if (/^https?:\/\//i.test(value)) {
+
+            const parsed =
+                new URL(value);
+
+            if (
+                parsed.protocol !== "http:" &&
+                parsed.protocol !== "https:"
+            ) {
+                throw new Error(
+                    "The csv URL must use HTTP or HTTPS."
+                );
+            }
+
+            if (!isCSV(parsed.href)) {
+                throw new Error(
+                    "The csv URL must point to a .csv file."
+                );
+            }
+
+            return parsed.href;
+        }
+
+        /*
+         * For the intended form, e.g. csv=t2Gold.csv, allow only a
+         * relative pathname ending in .csv.  Reject protocol-like,
+         * absolute, traversal, and encoded executable forms.
+         */
+        if (
+            value.startsWith("/") ||
+            value.startsWith("\\") ||
+            value.includes(":") ||
+            value.includes("..") ||
+            value.includes("\\")
+        ) {
+            throw new Error(
+                "The csv parameter must be a safe relative CSV filename/path."
+            );
+        }
+
+        if (
+            !/^[A-Za-z0-9._/-]+\.csv$/i.test(value)
+        ) {
+            throw new Error(
+                "The csv parameter must be a CSV filename/path."
+            );
+        }
+
+        return value;
+
+    }
+    catch (error) {
+
+        throw new Error(
+            `Invalid csv URL parameter: ${error.message}`
+        );
+    }
+}
+
+
+/* =========================================================
    START
    ========================================================= */
 
 async function initialize() {
 
     try {
+
+        /*
+         * A CSV supplied in the page URL has priority over IndexedDB
+         * and the default playlist.  Put it into the same Url/file field
+         * used by the normal UI and invoke the real PLAY button, so the
+         * exact same playback path is used as a user click.
+         */
+        const urlCSV =
+            getCSVFromURLParameter();
+
+        if (urlCSV !== null) {
+
+            urlFileName.value =
+                urlCSV;
+
+            message(
+                `URL CSV selected: ${urlCSV}`
+            );
+
+            updateDebug();
+
+            document
+                .getElementById("playBtn")
+                .click();
+
+            return;
+        }
 
         message(
             "Opening IndexedDB..."
@@ -6395,79 +6547,4 @@ window.addEventListener(
     }
 );
 
-</script></body>
-<script>
-(function () {
-    const box = document.getElementById("diagnostic");
-    if (!box) return;
-
-    function write(label, data) {
-        const lines = [
-            "=== " + label + " ===",
-            "time:     " + new Date().toISOString(),
-            "origin:   " + location.origin,
-            "page:     " + location.href,
-            "referrer: " + (document.referrer || "(empty)")
-        ];
-        for (const [k, v] of Object.entries(data || {})) {
-            let s;
-            try { s = typeof v === "string" ? v : JSON.stringify(v, null, 2); }
-            catch (_) { s = String(v); }
-            lines.push(k + ": " + s);
-        }
-        box.textContent = lines.join("\n") + "\n\n" + box.textContent;
-    }
-
-    // Confirm that the original buttons are actually receiving clicks.
-    ["loadBtn", "playBtn", "stopBtn", "saveBtn"].forEach(function (id) {
-        const el = document.getElementById(id);
-        if (el) el.addEventListener("click", function () {
-            write("BUTTON CLICK", { button: id });
-        }, true);
-    });
-
-    // Observe the YouTube API without modifying the application's code.
-    let wrapped = false;
-    const timer = setInterval(function () {
-        try {
-            if (!window.YT || !window.YT.Player || wrapped) return;
-            const OriginalPlayer = window.YT.Player;
-            function DiagnosticPlayer() {
-                const args = Array.from(arguments);
-                const options = args[1] || {};
-                write("YOUTUBE PLAYER CONSTRUCTION", {
-                    videoId: options.videoId || "(none)",
-                    playerVars: options.playerVars || {},
-                    origin: location.origin
-                });
-                return Reflect.construct(OriginalPlayer, args, DiagnosticPlayer);
-            }
-            DiagnosticPlayer.prototype = OriginalPlayer.prototype;
-            Object.setPrototypeOf(DiagnosticPlayer, OriginalPlayer);
-            window.YT.Player = DiagnosticPlayer;
-            wrapped = true;
-            clearInterval(timer);
-            write("YOUTUBE API DETECTED", { available: true });
-        } catch (e) {
-            write("DIAGNOSTIC ERROR", { message: e.message || String(e) });
-            clearInterval(timer);
-        }
-    }, 100);
-
-    window.addEventListener("error", function (e) {
-        write("BROWSER ERROR", {
-            message: e.message,
-            source: e.filename,
-            line: e.lineno,
-            column: e.colno
-        });
-    });
-
-    window.addEventListener("unhandledrejection", function (e) {
-        write("UNHANDLED PROMISE", {
-            reason: e.reason && (e.reason.stack || e.reason.message || String(e.reason))
-        });
-    });
-})();
-</script>
-</html>
+</script></body></html>

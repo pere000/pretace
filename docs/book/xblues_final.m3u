@@ -156,7 +156,7 @@ http://mnlvmradio1.pro-fhi.net:3150/stream
 #EXTINF:-1,BayouCity Radio [adult-contemporary] 
 http://hq3.yesstreaming.net:7155/stream
 #EXTINF:-1,Bay Smooth Jazz [Smooth Jazz] 
-http://radio2.vip-radios.fm:8039/relay-shoutcast-bay_autodj
+http://radio2.vip-radios.fm:8039/stream-64aac-bay_autodj
 #EXTINF:-1,Bay Smooth Jazz [Smooth Jazz] 
 http://radio2.vip-radios.fm:8039/stream-192kmp3-BaySmoothJazz_autodj
 #EXTINF:-1,BBR Jazz'Bar Café [Jazz amp Chill] 
@@ -1194,7 +1194,7 @@ http://manager8.streamradio.fr:3080/stream
 #EXTINF:-1,saravadio [indie post punk folk funk afrobeat latin ambient experimental French electronica free jazz] 
 http://manager8.streamradio.fr:3350/stream
 #EXTINF:-1,Sax4Love Radio [Smooth Jazz] 
-http://radio2.vip-radios.fm:8054/relay-shoutcast-Sax4Love_autodj
+http://radio2.vip-radios.fm:8054/stream-64aac-Sax4Love_autodj
 #EXTINF:-1,Sax4Love Radio [Smooth Jazz] 
 http://radio2.vip-radios.fm:8054/stream-64aac-Sax4love_autodj
 #EXTINF:-1,Saxo.Jazz [various] 

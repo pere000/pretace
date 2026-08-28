@@ -6,43 +6,115 @@
 <title>IndexedDB Audio / CSV / Radio Player Server</title>
 <link rel="icon" type="image/png" href="./favicon.png">
 <style>
-body {
-    font-family: Arial, sans-serif;
-    background:#eee;
-    margin:0;
-    padding:20px;
+* {
+    box-sizing:border-box;
 }
+
+html {
+    min-width:320px;
+    background:#eef1f5;
+}
+
+body {
+    font-family:Arial, Helvetica, sans-serif;
+    background:linear-gradient(180deg,#eef1f5 0%,#e5e9ef 100%);
+    color:#20242a;
+    margin:0;
+    padding:5px;
+    width:100%;
+    min-height:100vh;
+    overflow-x:hidden;
+}
+
 .page-layout {
     display:grid;
-    grid-template-columns:minmax(140px,1fr) minmax(520px,900px) minmax(140px,1fr);
-    gap:20px;
+    grid-template-columns:minmax(230px,1fr) minmax(620px,50vw) minmax(230px,1fr);
     align-items:start;
-    width:100vw;
-    max-width:none;
-    margin-left:calc(50% - 50vw);
-}
-.side-container {
-    width: 100%;
-    box-sizing: border-box;
-    min-height: 180px;
-    padding-left:20px;
-}
-.container {
+    gap:5px;
     width:100%;
+    max-width:1900px;
+    margin:0 auto;
+}
+
+.page-layout > .side-container {
+    min-width:0;
+    width:100%;
+}
+
+.page-layout > .container {
+    width:100%;
+    min-width:0;
+}
+
+.side-container {
     box-sizing:border-box;
-    background:white;
-    padding:20px;
-    border-radius:10px;
+    min-height:180px;
+    margin:0px 0px 0 0px;
+    overflow-wrap:anywhere;
+    line-height:1.48;
 }
-.side-container p {
-    margin-bottom:0;
+
+.side-container h1,
+.side-container h2 {
+    margin-top:0;
 }
-@media (max-width:900px) {
+
+.side-container h1 {
+    font-size:22px;
+}
+
+.side-container h2 {
+    font-size:17px;
+}
+
+.container {
+    box-sizing:border-box;
+    background:#fff;
+    padding:24px;
+    border:1px solid #d7dce3;
+    border-radius:14px;
+    box-shadow:0 6px 24px rgba(0,0,0,.08);
+}
+
+@media (max-width:1250px) {
+    .page-layout {
+        grid-template-columns:minmax(190px,1fr) minmax(600px,58vw) minmax(190px,1fr);
+        gap:16px;
+    }
+
+    .container {
+        padding:20px;
+    }
+
+    .side-container {
+        padding:2px 4px;
+    }
+}
+
+@media (max-width:980px) {
+    body {
+        padding:12px;
+    }
+
     .page-layout {
         grid-template-columns:1fr;
+        gap:18px;
     }
+
+    .page-layout > .container {
+        order:1;
+    }
+
+    .page-layout > .side-container:first-child {
+        order:2;
+    }
+
+    .page-layout > .side-container:last-child {
+        order:3;
+    }
+
     .side-container {
-        min-height:0;
+        padding:0;
     }
 }
 .field {
@@ -113,6 +185,186 @@ audio {
     white-space:pre-wrap;
     font-size:13px;
 }
+
+/* UI refinement */
+.container h1 {
+    margin:0 0 20px;
+    padding-bottom:14px;
+    border-bottom:1px solid #e1e5ea;
+}
+
+.container h1 > div {
+    line-height:1.35;
+}
+
+.container label {
+    color:#343a40;
+}
+
+.container input[type="text"],
+.container select {
+    border:1px solid #c8ced6;
+    border-radius:7px;
+    background:#fff;
+    transition:border-color .15s ease, box-shadow .15s ease;
+}
+
+.container input[type="text"]:focus,
+.container select:focus {
+    outline:none;
+    border-color:#65758b;
+    box-shadow:0 0 0 3px rgba(70,100,140,.12);
+}
+
+#author,
+#title {
+    vertical-align:middle;
+}
+
+.buttons {
+    align-items:center;
+    margin:18px 0 12px;
+}
+
+.buttons button {
+    min-height:32px;
+    padding:6px 10px;
+    border:1px solid #b8bec7;
+    border-radius:6px;
+    background:#f7f8fa;
+    color:#20242a;
+    font-weight:600;
+}
+
+.buttons button:hover:not(:disabled) {
+    filter:brightness(.97);
+}
+
+.buttons button:disabled {
+    opacity:.5;
+    cursor:not-allowed;
+}
+
+#playBtn,
+#saveBtn {
+    border-color:#172a4d;
+}
+
+#pauseCheckbox,
+#autoplayCheckbox,
+#repeatCheckbox,
+#saveSongCheckbox {
+    accent-color:#263d64;
+}
+
+audio {
+    display:block;
+    height:42px;
+}
+
+#youtubePlaylistSelect,
+#stationSelect {
+    border-radius:7px;
+    background:#fff;
+}
+
+#nowPlaying {
+    border:1px solid #d9dee5;
+    border-radius:9px;
+    background:#f7f8fa;
+    line-height:1.45;
+}
+
+#nowPlayingText {
+    overflow-wrap:anywhere;
+}
+
+#message {
+    border-radius:8px;
+    line-height:1.4;
+}
+
+#metadata {
+    overflow-wrap:anywhere;
+}
+
+#debug {
+    border-radius:8px;
+    max-height:260px;
+    overflow:auto;
+    border:1px solid #222;
+}
+
+.side-container > div,
+.side-container > li {
+    max-width:100%;
+}
+
+.side-container a,
+.side-container b {
+    overflow-wrap:anywhere;
+}
+
+@media (max-width:980px) {
+    .container {
+        padding:18px;
+    }
+}
+
+
+#youtubeAudioControls {
+    display:none;
+    align-items:center;
+    gap:8px;
+    width:100%;
+    box-sizing:border-box;
+    padding:10px 12px;
+    margin-top:10px;
+    border-radius:18px;
+    background:#eef1f4;
+    color:#222;
+}
+
+#youtubeAudioControls button {
+    border:1px solid #b9c0c8;
+    border-radius:6px;
+    background:#fff;
+    padding:6px 10px;
+    cursor:pointer;
+    font-weight:600;
+}
+
+#youtubeAudioControls button:hover {
+    background:#e8edf2;
+}
+
+#youtubeAudioSeek {
+    flex:1 1 auto;
+    min-width:100px;
+}
+
+#ytAudioVolume {
+    width:90px;
+}
+
+#ytAudioTime {
+    white-space:nowrap;
+    min-width:82px;
+    text-align:center;
+    font-variant-numeric:tabular-nums;
+}
+
+@media (max-width:700px) {
+    #youtubeAudioControls {
+        flex-wrap:wrap;
+    }
+
+    #youtubeAudioSeek {
+        order:5;
+        flex-basis:100%;
+    }
+}
+
 </style>
 </head>
 
@@ -120,25 +372,36 @@ audio {
 
 <div class="page-layout">
 
-<aside class="side-container">Notes:<br><br>
-<div style='margin-bottom:5px;text-align:justify;'><span style='padding-left:40px;'>Upon loading the page, the first song from the database will play automatically; if the database is empty, the "radio stream" (http://radio.streemlion.com:2740/stream) will play.</span></div>
-<div style='margin-bottom:5px;text-align:justify;'><span style='padding-left:40px;'>Playlists can be in CSV or m3u format. A single entry allows for the inclusion of radio station streams, multiple individual songs from YouTube or other servers, and even other playlists. If asingle entry fails (song, radio station, playlist) the next in that list will play.</span></div>
-<div style='margin-bottom:5px;text-align:justify;'><span style='padding-left:40px;'><b>In the primary player, a record of a playlist can correspond to a radio station</b>; typically, the broadcasts are continuous, requiring the user to switch stations manually. Therefore, if a radio station is added to a secondary playlist, playback will not normally advance to the subsequent entries while that station is playing.</span></div>
-<div style='margin-bottom:5px;text-align:justify;'><span style='padding-left:40px;'><b>In the primary player, a playlist entry may correspond to a YouTube playlist</b>; in that case, the playlist loads in the secondary player (it can be exported by clicking the "EXPORT PLAYLIST" button). Generally, YouTube playlists do not function like radio station playlists: when one ends, the next song from the primary playlist plays.</span></div>
-<div style='margin-bottom:5px;text-align:justify;'><span style='padding-left:40px;'>When you click the "Load" button while a "CSV List" is playing, the list is cleared, and only the song, the stream, or the compact audio that was currently playing continues to play. The song-stream-compact will repeat.</span></div>
+<aside class="side-container"><b>Notes</b>:<br>
+<div style='margin-bottom:5px;text-align:justify;'><span style='padding-left:35px;'>Upon loading the page, the first song from the database will play automatically; if the database is empty, the "radio stream" (http://radio.streemlion.com:2740/stream) will play. You can load a file of a single song or a playlist by the 'LOAD' button after pressing the 'STOP' button; press the 'Play' button to play the url shown in the 'Url/file' field.</span></div>
+<div style='margin-bottom:5px;text-align:justify;'><span style='padding-left:35px;'>Playlists can be in CSV or m3u format. A CSV/m3u playlist allows single entries of radio station streams, multiple individual songs from YouTube or other sources, and even other 'url playlists'. If a single entry fails (song, radio station, playlist) the next in that list will play. </span>
+<li style='margin:10px 0 15px 40px'>"<b>AUTOPLAY AFTER LOAD</b>" checkbox marked will force the playlist to repeat after finishing.</li>
+</div>
+<div style='margin-bottom:5px;text-align:justify;'><span style='padding-left:35px;'><b>In the primary player, a record of a playlist can correspond to a radio station</b>; typically, the broadcasts are continuous, requiring the user to switch stations manually. Therefore, if a radio station is added to a secondary playlist, playback will not normally advance to the subsequent entries while that station is playing.</span></div>
+<div style='margin-bottom:5px;text-align:justify;'><span style='padding-left:35px;'><b>In the primary player, a playlist entry may correspond to a YouTube playlist</b>; in that case, the playlist loads in the secondary player (it can be exported by clicking the "EXPORT PLAYLIST" button). Generally, YouTube playlists do not function like radio station playlists: when one ends, the next song from the primary playlist plays.</span></div>
+<div style='margin-bottom:5px;text-align:justify;'><span style='padding-left:35px;'>When you click the "Load" button while a "CSV List" is playing, the list is cleared, and only the song, the stream, or the compact audio that was currently playing continue playing.</span></div>
+
+
+Test the possibility to play csv/m3u playlists:<br><br>
+1. copy the following url in the 'Url/file' field: <b>https://pretace.surge.sh/book/jimiHendrixAndOthers.csv</b> Click on 'Play' button.<br>
+2. copy the following url in the 'Url/file' field: <b>https://pretace.surge.sh/book/myBlues.m3u</b> Click on 'Play' button.<br>
+<br><br>
+Use a local html server like 'php -S localhost:8000'
+
 </aside>
 
 <main class="container">
 
-<h1 style='width:100%;text-align:center;'>IndexedDB Audio Player<div style='margin-top:-1px;color:maroon;font-size:12px;'><i style='color:navy'>Cortesy</i>: <i>Compassionate Heart of the Myistici Corporis Christi</i></div></h1>
+<h1 style='width:100%;text-align:center;'>Compassionate Heart of the Mystici Corporis Christi<div style='margin-top:-1px;color:maroon;font-size:12px;'><i style='color:navy'>IndexedDB Audio Player</i></div></h1>
 
 <span class=""><label style='padding-right:22.5%'>Author</label><b>Title</b><br>
-    <input id="author" type="text" style='width:28%;margin-right:10px;'>
+    <input id="author" type="text" style='width:28%;margin-right:10px;color:red;font-weight:bold;' value='Compassionate Heart'>
 </span>
-<span class=""><input id="title" type="text" style='width:70%;'></span>
+<span class=""><input id="title" type="text" style='width:70%;' value='Blues Radio'></span>
 
-<div class="" style='margin-top:5px'> <label>Url/file</label> <input id="urlFileName" type="text" placeholder="song.flac, songs.csv, or http://radio.example/stream"></div>
-<div class="" style='margin-top:5px'> <label>Lyric Url</label> <input id="urlLyric" type="text"> </div>
+<div class="" style='margin-top:5px'> <label>Url/file</label> <input id="urlFileName" style="width:95%;" type="text" placeholder="song.flac, songs.csv, or http://radio.example/stream" value='myBlues.csv'> <label style="color:maroon;cursor:pointer;" onclick="window.open(document.getElementById('urlFileName').value, '_blank')"> <b><span style='font-size:25px'> 📽 </span></b></label></div>
+
+<div class="" style='margin-top:5px'> <label>Lyric Url</label> <input id="urlLyric" style="width:95%;" type="text" value='https://www.google.com/search?q=searcher+lyric'><label style="color:maroon;cursor:pointer;" onclick="window.open(document.getElementById('urlLyric').value, '_blank')"> <b> <span style='font-size:20px'> 🎼 </span></b></label> </div>
 
 <div class="buttons">
 
@@ -149,16 +412,13 @@ audio {
     <button id='lyricBtn'>SHOW LYRIC</button>
     <button id="saveBtn" style='background-color:navy;color:white;'>SAVE</button><label><input id="saveSongCheckbox" type="checkbox" style="width:auto">SONG</label>
     <button id="exportBtn">EXPORT PLAYLIST</button>
-    <button id="deleteDbBtn">DELETE DB</button>
-
+    <button id="deleteDbBtn">DELETE DB</button><br>
+    <button id="repairDbBtn" style="display:none;background:#8b0000;color:navy;">REPAIR DB</button>
+    <span id="dbVersionNote" style="display:none;font-size:11px;color:#555;margin-left:4px;">fG</span>
 </div>
 
-<label>
-    <input
-        id="pauseCheckbox"
-        type="checkbox"
-        style="width:auto">
-    PAUSE
+<label style='display:none;'>
+    <input id="pauseCheckbox">
 </label>
 
 <label>
@@ -180,7 +440,20 @@ audio {
     REPEAT CURRENT
 </label>
 
-<audio id="audio" controls preload="none"></audio>
+<audio id="audio" controls preload="none" style="display:none;width:100%;"></audio>
+
+<div id="youtubeAudioControls" aria-label="YouTube audio controls" style="display:none;">
+    <button type="button" id="ytAudioPlay">PLAY</button>
+    <button type="button" id="ytAudioPause">PAUSE</button>
+    <button type="button" id="ytAudioStop">STOP</button>
+    <input id="ytAudioSeek" type="range" min="0" max="100" value="0" step="0.1" aria-label="Seek">
+    <span id="ytAudioTime">0:00 / 0:00</span>
+    <label style="display:flex;align-items:center;gap:5px;margin:0;">
+        VOL
+        <input id="ytAudioVolume" type="range" min="0" max="100" value="100" step="1" aria-label="Volume">
+    </label>
+</div>
+
 <div id="youtubePlayer"></div>
 
 <label for="youtubePlaylistSelect">Secondary playlist</label>
@@ -207,11 +480,29 @@ audio {
 
 <div id="debug"></div>
 
-</div>
-
 </main>
 
-<aside class="side-container">seadstgfhh
+
+<aside class="side-container"><h1 style='text-align:center;'>Tetrahedra playlists</h1>
+<div style='padding-left:10px;margin-bottom:5px;text-align:justify;'><span style='padding-left:30px;'>
+A "tetrahedron-type" playlist is a CSV or m3u file containing a list of exactly five entries. The first four correspond to the tetrahedron itself, while the fifth corresponds to its center of gravity. Each entry can be an individual song or a playlist URL; the fifth can act as a connector between tetrahedra. This allows tetrahedra to be chained together, facilitating the management of long chains, transitions between different elements, and shared exchanges.</span></div><br>
+<h1 style='color:#cccc33;text-align:center;'><b>Tribute to Normandy's World Heroes</b></h1>
+<div style='padding-left:10px;'>1. The World Heroes of Omaha Beach (~2.400 to 2.500): <br><span style='padding-left:20px;'><b style='color:#cccc33;cursor:pointer;' onclick="document.getElementById('urlFileName').value='https://pretace.surge.sh/book/t1Omaha.csv'">🎵 Omaha Tribute Playlist (CSV)</b> <img src='Flag_of_the_United_States_(DDD-F-416E_specifications).svg.webp' style='margin-left:10px;width:10%;'></div>
+<div style='padding-left:10px;'>2. The World Heroes of Gold Beach (~1.100): <br><span style='padding-left:20px;'><b style='color:#cccc33;cursor:pointer;' onclick="document.getElementById('urlFileName').value='https://pretace.surge.sh/book/t2Gold.csv'">🎵 Gold Tribute Playlist (CSV)</b><img src='Flag_of_the_United_Kingdom_(1-2).svg.webp' style='margin-left:10px;width:10%;'></div>
+<div style='padding-left:10px;'>3. The World Heroes of Juno Beach (~961): <br><span style='padding-left:20px;'><b style='color:#cccc33;cursor:pointer;' onclick="document.getElementById('urlFileName').value='https://pretace.surge.sh/book/t3Juno.csv'">🎵 Juno Tribute Playlist (CSV)</b><img src='Flag_of_Canada_(Pantone).svg.webp' style='margin-left:10px;width:10%;'></div>
+<div style='padding-left:10px;'>4. The World Heroes of Sword Beach (~683): <br><span style='padding-left:20px;'><b style='color:#cccc33;cursor:pointer;' onclick="document.getElementById('urlFileName').value='https://pretace.surge.sh/book/t4Sword.csv'">🎵 Sword Tribute Playlist (CSV)</b><img src='Flag_of_the_United_Kingdom_(1-2).svg.webp' style='margin-left:10px;width:10%;'></div>
+<div style='padding-left:10px;'>5. The World Heroes of Utah Beach (~197): <br><span style='padding-left:20px;'><b style='color:#cccc33;cursor:pointer;' onclick="document.getElementById('urlFileName').value='https://pretace.surge.sh/book/t5Utah.csv'">🎵 Utah Tribute Playlist (CSV)</b><img src='Flag_of_the_United_States_(DDD-F-416E_specifications).svg.webp' style='margin-left:10px;width:10%;'></div>
+<br>
+<div style='width:100%;text-align:right;padding-right:40px;color:'><i>Courtesy of</i> <a href='https://diaspora.psyco.fr/tags/trondiasporapsycofr_1745558058926' target='_blank' style='color:navy;cursor:pointer;text-decoration: none;'><b>The Lady</b></a></div>
+<br><br>
+<div style='padding-left:10px;color:maroon;'><b>
+    Friends:</br>
+        <span style='padding-left:10px;'><a href='https://diaspora.psyco.fr/people/d20083707bd50132351e00224d868582' target='_blank' style='cursor:pointer;text-decoration: none;'><u>E</u>ric Schaber</a>: <b style='color:#cccc33;cursor:pointer;' onclick="document.getElementById('urlFileName').value='https://pretace.surge.sh/book/sinatra0.csv'">sinatra@diaspora.psyco.fr</b></span>
+    <br><br>
+
+    Downloads:<br>
+        <a href='https://pretace.surge.sh/book/musicHeart.zip' target='_blank' style='padding-left:10px;color:navy;text-decoration: none;'><u>m</u>usicHeart.zip</a>
+</div>
 </aside>
 
 </div>
@@ -226,16 +517,34 @@ audio {
    CONFIGURATION
    ========================================================= */
 
-const DB_NAME = "TACE_Audio_Player";
+const DB_NAME = "TACE_Audio_Player_v2";
 const DB_VERSION = 1;
 const STORE_NAME = "songs";
-const LAST_PLAYBACK_KEY = "TACE_Audio_Player_Last_Playback";
+const LAST_PLAYBACK_KEY = "TACE_Audio_Player_v2_Last_Playback";
+const PLAYLIST_CACHE_VERSION = "1";
+
+function cacheBustedURL(value) {
+    try {
+        const url = new URL(value, document.baseURI);
+        if (isCSV(url.href) || isM3U(url.href)) {
+            url.searchParams.set("v", PLAYLIST_CACHE_VERSION);
+        }
+        return url.href;
+    }
+    catch (error) {
+        return value;
+    }
+}
+
 
 const DEFAULT_RADIO_RECORD = {
     author: "Streemlion",
     title: "Radio Stream",
     urlFileName: "http://radio.streemlion.com:2740/stream"
 };
+
+const DEFAULT_PLAYLIST_URL =
+    "https://pretace.surge.sh/book/t1Omaha.csv";
 
 const AUDIO_EXTENSIONS = [
     ".mp3",
@@ -274,6 +583,8 @@ const saveSongCheckbox =
 const audio =
     document.getElementById("audio");
 
+audio.style.display = "none";
+
 const stationSelect =
     document.getElementById("stationSelect");
 
@@ -306,6 +617,9 @@ const youtubePlaylistSelect =
 
 const sourceTypeText =
     document.getElementById("sourceTypeText");
+
+const repairDbBtn =
+    document.getElementById("repairDbBtn");
 
 
 /* =========================================================
@@ -342,6 +656,186 @@ const state = {
 let metadataController = null;
 let youtubePlayer = null;
 let youtubeApiPromise = null;
+
+const youtubeAudioControls =
+    document.getElementById("youtubeAudioControls");
+
+const ytAudioPlay =
+    document.getElementById("ytAudioPlay");
+
+const ytAudioPause =
+    document.getElementById("ytAudioPause");
+
+const ytAudioStop =
+    document.getElementById("ytAudioStop");
+
+const ytAudioSeek =
+    document.getElementById("ytAudioSeek");
+
+const ytAudioTime =
+    document.getElementById("ytAudioTime");
+
+const ytAudioVolume =
+    document.getElementById("ytAudioVolume");
+
+let youtubeAudioTimer = null;
+
+function formatPlayerTime(seconds) {
+    if (!Number.isFinite(seconds) || seconds < 0) {
+        return "0:00";
+    }
+
+    const total =
+        Math.floor(seconds);
+
+    const minutes =
+        Math.floor(total / 60);
+
+    const secs =
+        String(total % 60)
+            .padStart(2, "0");
+
+    return `${minutes}:${secs}`;
+}
+
+function showYouTubeAudioControls(show) {
+    youtubeAudioControls.style.display =
+        show ? "flex" : "none";
+
+    if (!show) {
+        if (youtubeAudioTimer) {
+            clearInterval(youtubeAudioTimer);
+            youtubeAudioTimer = null;
+        }
+
+        ytAudioSeek.value = "0";
+        ytAudioTime.textContent =
+            "0:00 / 0:00";
+    }
+    else if (!youtubeAudioTimer) {
+        youtubeAudioTimer =
+            setInterval(
+                updateYouTubeAudioControls,
+                250
+            );
+    }
+}
+
+function updateYouTubeAudioControls() {
+    if (
+        !youtubePlayer ||
+        !isYouTube(state.currentUrl)
+    ) {
+        return;
+    }
+
+    try {
+        const duration =
+            youtubePlayer.getDuration();
+
+        const current =
+            youtubePlayer.getCurrentTime();
+
+        if (
+            Number.isFinite(duration) &&
+            duration > 0
+        ) {
+            ytAudioSeek.max =
+                String(duration);
+
+            ytAudioSeek.value =
+                String(
+                    Math.min(
+                        current,
+                        duration
+                    )
+                );
+
+            ytAudioTime.textContent =
+                `${formatPlayerTime(current)} / ${formatPlayerTime(duration)}`;
+        }
+
+        const volume =
+            youtubePlayer.getVolume();
+
+        if (Number.isFinite(volume)) {
+            ytAudioVolume.value =
+                String(volume);
+        }
+    }
+    catch (error) {
+        // YouTube may not be ready between state transitions.
+    }
+}
+
+ytAudioPlay.addEventListener(
+    "click",
+    () => {
+        if (!youtubePlayer) {
+            return;
+        }
+
+        youtubePlayer.playVideo();
+    }
+);
+
+ytAudioPause.addEventListener(
+    "click",
+    () => {
+        if (!youtubePlayer) {
+            return;
+        }
+
+        youtubePlayer.pauseVideo();
+    }
+);
+
+ytAudioStop.addEventListener(
+    "click",
+    () => {
+        if (!youtubePlayer) {
+            return;
+        }
+
+        youtubePlayer.stopVideo();
+    }
+);
+
+ytAudioSeek.addEventListener(
+    "input",
+    () => {
+        if (!youtubePlayer) {
+            return;
+        }
+
+        const position =
+            Number(
+                ytAudioSeek.value
+            );
+
+        if (Number.isFinite(position)) {
+            youtubePlayer.seekTo(
+                position,
+                true
+            );
+        }
+    }
+);
+
+ytAudioVolume.addEventListener(
+    "input",
+    () => {
+        if (!youtubePlayer) {
+            return;
+        }
+
+        youtubePlayer.setVolume(
+            Number(
+                ytAudioVolume.value
+            )
+        );
+    }
+);
 let youtubePlaylistGeneration = 0;
 let youtubeNoAudioSince = null;
 let youtubeWatchdogTimer = null;
@@ -495,107 +989,336 @@ ${audio.src || "(empty)"}
    DATABASE
    ========================================================= */
 
+let dbOpenPromise = null;
+
+
+function isUsableDB(database) {
+
+    return Boolean(
+        database &&
+        database.objectStoreNames &&
+        database.objectStoreNames.contains(STORE_NAME)
+    );
+}
+
+
 function openDB() {
 
-    return new Promise((resolve, reject) => {
+    if (isUsableDB(db)) {
+        return Promise.resolve(db);
+    }
 
-        const request =
-            indexedDB.open(
-                DB_NAME,
-                DB_VERSION
+    if (dbOpenPromise) {
+        return dbOpenPromise;
+    }
+
+    dbOpenPromise = new Promise((resolve, reject) => {
+
+        let settled = false;
+        let request = null;
+
+        const finishReject = error => {
+            if (settled) return;
+            settled = true;
+            clearTimeout(timeout);
+
+            reject(
+                error instanceof Error
+                    ? error
+                    : new Error(String(error))
             );
+        };
 
-        request.onupgradeneeded = function(e) {
+        const finishResolve = database => {
+            if (settled) return;
+            settled = true;
+            clearTimeout(timeout);
+            resolve(database);
+        };
 
-            const database =
-                e.target.result;
+        const timeout =
+            setTimeout(() => {
+
+                /*
+                 * A normal IndexedDB open should complete quickly.
+                 * If it remains pending, the browser is normally waiting
+                 * for another connection/tab or the storage subsystem.
+                 */
+                try {
+                    if (request) {
+                        request.onblocked = null;
+                    }
+                }
+                catch (ignore) {}
+
+                finishReject(
+                    new Error(
+                        "IndexedDB did not open within 5 seconds. " +
+                        "The browser is holding the database open or " +
+                        "the local storage is stuck. Close every other " +
+                        "localhost:8000 player tab/window, then refresh. " +
+                        "If none is open, use REPAIR DB."
+                    )
+                );
+
+            }, 5000);
+
+        try {
 
             if (
-                !database.objectStoreNames.contains(
-                    STORE_NAME
-                )
+                !window.indexedDB
             ) {
-
-                database.createObjectStore(
-                    STORE_NAME,
-                    {
-                        keyPath: "id",
-                        autoIncrement: true
-                    }
+                finishReject(
+                    new Error(
+                        "IndexedDB is not available in this browser/context."
+                    )
                 );
+                return;
+            }
+
+            request =
+                indexedDB.open(
+                    DB_NAME,
+                    DB_VERSION
+                );
+
+        }
+        catch (error) {
+
+            finishReject(error);
+            return;
+        }
+
+        request.onupgradeneeded = function(event) {
+
+            try {
+
+                const database =
+                    event.target.result;
+
+                if (
+                    !database.objectStoreNames.contains(
+                        STORE_NAME
+                    )
+                ) {
+
+                    database.createObjectStore(
+                        STORE_NAME,
+                        {
+                            keyPath: "id",
+                            autoIncrement: true
+                        }
+                    );
+                }
+
+            }
+            catch (error) {
+
+                finishReject(error);
             }
         };
 
         request.onsuccess = function() {
 
-            db = request.result;
+            const database =
+                request.result;
 
-            resolve(db);
+            database.onversionchange =
+                function() {
+
+                    database.close();
+
+                    if (
+                        db === database
+                    ) {
+                        db = null;
+                    }
+                };
+
+            database.onclose =
+                function() {
+
+                    if (
+                        db === database
+                    ) {
+                        db = null;
+                    }
+                };
+
+            db = database;
+
+            finishResolve(database);
         };
 
         request.onerror = function() {
 
-            reject(request.error);
+            finishReject(
+                request.error ||
+                new Error(
+                    "IndexedDB could not be opened."
+                )
+            );
+        };
+
+        request.onblocked = function() {
+
+            finishReject(
+                new Error(
+                    "IndexedDB is blocked by another open connection. " +
+                    "Close other music2.html tabs/windows and refresh."
+                )
+            );
         };
     });
+
+    const result =
+        dbOpenPromise.finally(
+            () => {
+                dbOpenPromise = null;
+            }
+        );
+
+    return result;
+}
+
+async function ensureDB() {
+
+    if (isUsableDB(db)) {
+        return db;
+    }
+
+    db = null;
+
+    const database =
+        await openDB();
+
+    if (!isUsableDB(database)) {
+
+        throw new Error(
+            `IndexedDB object store "${STORE_NAME}" is unavailable.`
+        );
+    }
+
+    return database;
 }
 
 
 function getRecords() {
 
-    return new Promise((resolve, reject) => {
+    return ensureDB().then(
+        database =>
+            new Promise((resolve, reject) => {
 
-        const tx =
-            db.transaction(
-                STORE_NAME,
-                "readonly"
-            );
+                let tx;
 
-        const store =
-            tx.objectStore(
-                STORE_NAME
-            );
+                try {
 
-        const request =
-            store.getAll();
+                    tx =
+                        database.transaction(
+                            STORE_NAME,
+                            "readonly"
+                        );
 
-        request.onsuccess =
-            () => resolve(request.result);
+                }
+                catch (error) {
 
-        request.onerror =
-            () => reject(request.error);
-    });
+                    reject(error);
+                    return;
+                }
+
+                const request =
+                    tx.objectStore(
+                        STORE_NAME
+                    ).getAll();
+
+                request.onsuccess =
+                    () => resolve(
+                        request.result
+                    );
+
+                request.onerror =
+                    () => reject(
+                        request.error ||
+                        new Error(
+                            "IndexedDB read failed."
+                        )
+                    );
+
+                tx.onerror =
+                    () => reject(
+                        tx.error ||
+                        new Error(
+                            "IndexedDB read transaction failed."
+                        )
+                    );
+            })
+    );
 }
 
 
 function saveRecord(record) {
 
-    return new Promise((resolve, reject) => {
+    return ensureDB().then(
+        database =>
+            new Promise((resolve, reject) => {
 
-        const tx =
-            db.transaction(
-                STORE_NAME,
-                "readwrite"
-            );
+                let tx;
 
-        const request =
-            tx.objectStore(
-                STORE_NAME
-            ).add({
-                author: record.author,
-                title: record.title,
-                urlFileName: record.urlFileName,
-                urlLyric: record.urlLyric || ""
-            });
+                try {
 
-        request.onsuccess =
-            () => resolve(request.result);
+                    tx =
+                        database.transaction(
+                            STORE_NAME,
+                            "readwrite"
+                        );
 
-        request.onerror =
-            () => reject(request.error);
-    });
+                }
+                catch (error) {
+
+                    reject(error);
+                    return;
+                }
+
+                const request =
+                    tx.objectStore(
+                        STORE_NAME
+                    ).add({
+                        author:
+                            record.author,
+
+                        title:
+                            record.title,
+
+                        urlFileName:
+                            record.urlFileName,
+
+                        urlLyric:
+                            record.urlLyric || ""
+                    });
+
+                request.onsuccess =
+                    () => resolve(
+                        request.result
+                    );
+
+                request.onerror =
+                    () => reject(
+                        request.error ||
+                        new Error(
+                            "IndexedDB save failed."
+                        )
+                    );
+
+                tx.onerror =
+                    () => reject(
+                        tx.error ||
+                        new Error(
+                            "IndexedDB write transaction failed."
+                        )
+                    );
+            })
+    );
 }
-
 
 async function recordExists(record) {
 
@@ -1892,6 +2615,7 @@ function isStream(value) {
         isHTTP(value) &&
         !isYouTube(value) &&
         !isCSV(value) &&
+        !isM3U(value) &&
         !isAudio(value)
     );
 }
@@ -1997,6 +2721,117 @@ function parseM3U(text) {
     }
 
     return records;
+}
+
+
+/* =========================================================
+   LOAD M3U
+   ========================================================= */
+
+async function loadM3U(
+    url,
+    shouldPlay = false
+) {
+
+    const response =
+        await fetch(cacheBustedURL(url), { cache: "no-store" });
+
+    if (!response.ok) {
+
+        throw new Error(
+            `M3U HTTP error ${response.status}`
+        );
+    }
+
+    const text =
+        await response.text();
+
+    const parsedRecords =
+        parseM3U(text);
+
+    /*
+        M3U entries may be relative URLs.
+        Resolve them relative to the M3U file itself,
+        not relative to music2.html.
+    */
+    const records =
+        parsedRecords.map(record => {
+
+            let entryURL =
+                record.urlFileName;
+
+            try {
+
+                if (!isHTTP(entryURL)) {
+
+                    entryURL =
+                        new URL(
+                            entryURL,
+                            url
+                        ).href;
+                }
+
+            }
+            catch (error) {
+
+                throw new Error(
+                    `Invalid M3U entry: ${entryURL}`
+                );
+            }
+
+            return {
+                ...record,
+                urlFileName:
+                    entryURL
+            };
+        });
+
+    state.sourceType =
+        "csv";
+
+    /*
+        Internally use the existing "csv" playlist
+        state because all of the existing playlist
+        advancement/error-handling code already
+        supports that state.
+    */
+    state.series =
+        records;
+
+    state.index =
+        0;
+
+    state.currentUrl =
+        url;
+
+    state.previousUrl =
+        url;
+
+    /*
+     * The M3U URL remains in Url/file, but Author and Title must describe
+     * the first actual playlist entry. This also prevents PLAY from
+     * treating the M3U URL as a single song.
+     */
+    if (shouldPlay) {
+
+        await playRecord(
+            records[0]
+        );
+
+    }
+    else {
+
+        prepareRecord(
+            records[0]
+        );
+    }
+
+    message(
+        `M3U playlist loaded: ${records.length} item${records.length === 1 ? "" : "s"}.`,
+        "success"
+    );
+
+    updateDebug();
 }
 
 
@@ -2498,6 +3333,21 @@ function selectLoadedRecord(index = 0) {
 }
 
 
+
+function updateNativeAudioVisibility(record) {
+    const hasRecord = !!record;
+    const youtube = hasRecord && isYouTube(record.urlFileName);
+    const nativeSource = hasRecord && !youtube;
+
+    audio.style.display = nativeSource ? "block" : "none";
+
+    if (nativeSource) {
+        audio.controls = true;
+        audio.style.width = "100%";
+    }
+}
+
+
 /* =========================================================
    PREPARE RECORD
    ========================================================= */
@@ -2505,6 +3355,8 @@ function selectLoadedRecord(index = 0) {
 function prepareRecord(record) {
 
     validate(record);
+
+    updateNativeAudioVisibility(record);
 
     stopPrimaryNoAudioTimer();
 
@@ -2524,6 +3376,9 @@ function prepareRecord(record) {
             record.urlFileName
         )
     ) {
+
+        audio.style.display = "none";
+        showYouTubeAudioControls(true);
 
         openYoutubeBtn.disabled =
             false;
@@ -2547,6 +3402,8 @@ function prepareRecord(record) {
     openYoutubeBtn.disabled =
         true;
 
+    showYouTubeAudioControls(false);
+
     stopSecondaryNoAudioTimer();
     activeSecondaryPlaylist =
         null;
@@ -2565,10 +3422,16 @@ function prepareRecord(record) {
         "stream"
     ) {
 
+        showYouTubeAudioControls(false);
+
         audio.pause();
 
         audio.src =
             record.urlFileName;
+
+        audio.controls = true;
+        audio.style.display = "block";
+        audio.style.width = "100%";
 
         audio.load();
 
@@ -2596,6 +3459,10 @@ function prepareRecord(record) {
     audio.src =
         src;
 
+    audio.controls = true;
+    audio.style.display = "block";
+    audio.style.width = "100%";
+
     audio.load();
 
     startPrimaryNoAudioTimer();
@@ -2608,13 +3475,48 @@ function prepareRecord(record) {
 
 async function playRecord(record) {
 
+    validate(record);
+
+    /*
+     * A playlist entry can itself point to another CSV/M3U.
+     * Resolve that entry immediately instead of sending the playlist
+     * URL to the <audio> element and waiting for the 30-second recovery.
+     */
+    if (
+        isCSV(record.urlFileName)
+    ) {
+
+        await loadCSV(
+            cacheBustedURL(
+                serverURL(
+                    record.urlFileName
+                )
+            ),
+            true
+        );
+
+        return;
+    }
+
+    if (
+        isM3U(record.urlFileName)
+    ) {
+
+        await loadM3U(
+            serverURL(
+                record.urlFileName
+            ),
+            true
+        );
+
+        return;
+    }
+
     if (
         isYouTube(
             record.urlFileName
         )
     ) {
-
-        validate(record);
 
         fillRecordFields(record);
 
@@ -2623,6 +3525,8 @@ async function playRecord(record) {
         updateSourceType(record);
 
         updateStationList();
+
+        showYouTubeAudioControls(true);
 
         await playYouTubeRecord(
             record
@@ -2655,44 +3559,6 @@ async function playRecord(record) {
 }
 
 
-function autoplayLoadedRecord(record) {
-
-    audio.autoplay =
-        autoplayCheckbox.checked;
-
-    playRecord(record).catch(error => {
-
-        if (error.name !== "NotAllowedError") {
-            message(
-                `Audio playback error:\n${error.message}`,
-                "error"
-            );
-            return;
-        }
-
-        message(
-            "Playlist loaded. Click anywhere to start playback.",
-            "info"
-        );
-
-        const retry = () => {
-            playRecord(record).catch(retryError => {
-                message(
-                    `Audio playback error:\n${retryError.message}`,
-                    "error"
-                );
-            });
-        };
-
-        document.addEventListener(
-            "pointerdown",
-            retry,
-            {once:true}
-        );
-    });
-}
-
-
 /* =========================================================
    LOAD CSV
    ========================================================= */
@@ -2703,7 +3569,12 @@ async function loadCSV(
 ) {
 
     const response =
-        await fetch(url);
+        await fetch(
+            cacheBustedURL(
+                serverURL(url)
+            ),
+            { cache: "no-store" }
+        );
 
     if (!response.ok) {
 
@@ -2734,8 +3605,13 @@ async function loadCSV(
         if (!line)
             continue;
 
+        /*
+         * Skip the header based on the first non-empty line.
+         * A blank line before the header must not turn the header
+         * into a playable "song".
+         */
         if (
-            i === 0 &&
+            records.length === 0 &&
             /^author\s*\|\s*title\s*\|\s*urlfilename(?:\s*\|\s*urllyric)?$/i
                 .test(line)
         ) {
@@ -2800,38 +3676,15 @@ async function loadCSV(
     state.previousUrl =
         url;
 
-    fillRecordFields(
-        records[0]
-    );
+    if (shouldPlay) {
 
-    if (
-        isYouTube(
-            records[0].urlFileName
-        )
-    ) {
-
-        if (shouldPlay) {
-
-            loadYouTubeRecord(
-                records[0],
-                true
-            ).catch(
-                error => {
-
-                    message(
-                        `YouTube playback error:\n${error.message}`,
-                        "error"
-                    );
-                }
-            );
-
-        }
-        else {
-
-            prepareRecord(
-                records[0]
-            );
-        }
+        /*
+         * Use the same playback dispatcher for every first item.
+         * This is important when the first item is itself a CSV/M3U.
+         */
+        await playRecord(
+            records[0]
+        );
 
     }
     else {
@@ -2839,11 +3692,6 @@ async function loadCSV(
         prepareRecord(
             records[0]
         );
-
-        if (shouldPlay) {
-
-            selectLoadedRecord(0);
-        }
     }
 
     message(
@@ -2930,6 +3778,22 @@ async function loadAction() {
                     ? "YouTube audio loaded and playing."
                     : "YouTube audio loaded. Press PLAY to start.",
                 "success"
+            );
+
+            return;
+        }
+
+
+        /* REMOTE M3U / M3U8 */
+
+        if (
+            isHTTP(value) &&
+            isM3U(value)
+        ) {
+
+            await loadM3U(
+                value,
+                autoplayCheckbox.checked
             );
 
             return;
@@ -3520,6 +4384,39 @@ async function playAction() {
 
                 message(
                     `Playing item ${state.index + 1} of ${state.series.length}.`,
+                    "success"
+                );
+
+                return;
+            }
+
+
+            /* LOADED M3U / M3U8 */
+
+            if (
+                isM3U(userValue) &&
+                state.series.length > 0 &&
+                state.currentUrl === userValue
+            ) {
+
+                /*
+                 * The Url/file field contains the playlist URL.
+                 * Play the current parsed playlist item instead of
+                 * validating the playlist URL as a song record.
+                 */
+                if (
+                    state.index === null ||
+                    !state.series[state.index]
+                ) {
+                    state.index = 0;
+                }
+
+                await playRecord(
+                    state.series[state.index]
+                );
+
+                message(
+                    `Playing M3U item ${state.index + 1} of ${state.series.length}.`,
                     "success"
                 );
 
@@ -4186,6 +5083,12 @@ async function saveAction() {
 
     try {
 
+        /*
+         * SAVE is allowed to be clicked immediately after the page opens.
+         * Never access IndexedDB through the global `db` variable directly.
+         */
+        await ensureDB();
+
         if (
             saveSongCheckbox.checked &&
             state.index !== null &&
@@ -4497,6 +5400,146 @@ function escapeHTML(text) {
    DELETE DB
    ========================================================= */
 
+async function repairDatabase() {
+
+    const confirmed =
+        confirm(
+            "IndexedDB cannot currently be opened.\n\n" +
+            "REPAIR DB will delete the existing " +
+            `"${DB_NAME}" database and recreate it.\n\n` +
+            "Any songs currently stored in IndexedDB will be lost.\n\n" +
+            "Continue?"
+        );
+
+    if (!confirmed) {
+        return;
+    }
+
+    repairDbBtn.disabled = true;
+
+    message(
+        "Repairing IndexedDB..."
+    );
+
+    try {
+
+        if (db) {
+
+            try {
+                db.close();
+            }
+            catch (ignore) {}
+
+            db = null;
+        }
+
+        dbOpenPromise = null;
+
+        await new Promise(
+            (resolve, reject) => {
+
+                const request =
+                    indexedDB.deleteDatabase(
+                        DB_NAME
+                    );
+
+                let timer =
+                    setTimeout(
+                        () => {
+                            reject(
+                                new Error(
+                                    "Database deletion is still blocked. " +
+                                    "Close every other localhost:8000 tab " +
+                                    "using this player and try REPAIR DB again."
+                                )
+                            );
+                        },
+                        10000
+                    );
+
+                request.onsuccess =
+                    () => {
+                        clearTimeout(timer);
+                        resolve();
+                    };
+
+                request.onerror =
+                    () => {
+                        clearTimeout(timer);
+                        reject(
+                            request.error ||
+                            new Error(
+                                "IndexedDB database deletion failed."
+                            )
+                        );
+                    };
+
+                request.onblocked =
+                    () => {
+                        // Keep waiting until the timeout. Another
+                        // connection must release the database.
+                    };
+            }
+        );
+
+        await ensureDB();
+
+        repairDbBtn.style.display =
+            "none";
+
+        state.sourceType =
+            "stream";
+
+        state.series =
+            [DEFAULT_RADIO_RECORD];
+
+        state.index =
+            0;
+
+        state.currentUrl =
+            DEFAULT_RADIO_RECORD.urlFileName;
+
+        state.previousUrl =
+            DEFAULT_RADIO_RECORD.urlFileName;
+
+        fillRecordFields(
+            DEFAULT_RADIO_RECORD
+        );
+
+        showRecord(
+            DEFAULT_RADIO_RECORD
+        );
+
+        updateSourceType(
+            DEFAULT_RADIO_RECORD
+        );
+
+        message(
+            "IndexedDB repaired. The database is empty; the default radio stream is ready.",
+            "success"
+        );
+
+        updateDebug();
+
+    }
+    catch (error) {
+
+        repairDbBtn.disabled = false;
+
+        message(
+            "IndexedDB repair failed:\n" +
+            error.message,
+            "error"
+        );
+
+        console.error(
+            "IndexedDB repair failed:",
+            error
+        );
+    }
+}
+
+
 async function deleteDBAction() {
 
     if (
@@ -4508,10 +5551,12 @@ async function deleteDBAction() {
 
     audio.pause();
 
-    if (db)
+    if (db) {
         db.close();
+        db = null;
+    }
 
-    db = null;
+    dbOpenPromise = null;
 
     await new Promise(
         (resolve, reject) => {
@@ -4531,7 +5576,7 @@ async function deleteDBAction() {
         }
     );
 
-    await openDB();
+    await ensureDB();
 
     stopAction();
 
@@ -5171,6 +6216,9 @@ document
     .onclick =
     deleteDBAction;
 
+repairDbBtn.onclick =
+    repairDatabase;
+
 openYoutubeBtn.onclick =
     openCurrentYouTube;
 
@@ -5235,127 +6283,41 @@ async function initialize() {
 
     try {
 
-        await openDB();
+        message(
+            "Opening IndexedDB..."
+        );
+
+        updateDebug();
+
+        await ensureDB();
+
+        message(
+            "IndexedDB opened. Reading songs..."
+        );
 
         const records =
             await getRecords();
 
+        /*
+         * IMPORTANT:
+         * Initialization NEVER starts playback.
+         * The PLAY button is the only way to start playback.
+         */
         if (!records.length) {
 
-            const record =
-                DEFAULT_RADIO_RECORD;
-
-            state.sourceType =
-                "stream";
-
-            state.series =
-                [record];
-
-            state.index =
-                0;
-
-            state.currentUrl =
-                record.urlFileName;
-
-            state.previousUrl =
-                record.urlFileName;
-
-            author.value =
-                record.author;
-
-            title.value =
-                record.title;
-
-            urlFileName.value =
-                record.urlFileName;
-
-            showRecord(
-                record
+            await loadCSV(
+                DEFAULT_PLAYLIST_URL,
+                autoplayCheckbox.checked
             );
-
-            audio.autoplay =
-                true;
-
-            playRecord(record)
-                .catch(
-                    error => {
-
-                        if (
-                            error.name ===
-                            "NotAllowedError"
-                        ) {
-
-                            message(
-                                "Radio stream loaded. Click PLAY to start it."
-                            );
-
-                            const startRadio =
-                                async () => {
-
-                                    document.removeEventListener(
-                                        "pointerdown",
-                                        startRadio
-                                    );
-
-                                    try {
-
-                                        await playRecord(
-                                            record
-                                        );
-
-                                        message(
-                                            "Playing: My Blues Radio.",
-                                            "success"
-                                        );
-
-                                    }
-                                    catch (
-                                        retryError
-                                    ) {
-
-                                        message(
-                                            "Radio playback failed:\n" +
-                                            retryError.message,
-                                            "error"
-                                        );
-                                    }
-                                };
-
-                            document.addEventListener(
-                                "pointerdown",
-                                startRadio,
-                                {
-                                    once: true
-                                }
-                            );
-
-                        }
-                        else {
-
-                            message(
-                                "Radio stream loaded but playback failed:\n" +
-                                error.message,
-                                "error"
-                            );
-                        }
-                    }
-                );
 
             updateDebug();
 
             message(
-                "Ready."
+                "Default playlist loaded. Press PLAY to start."
             );
 
             return;
         }
-
-
-        /*
-        =====================================================
-        DATABASE EXISTS
-        =====================================================
-        */
 
         state.series =
             records;
@@ -5365,75 +6327,31 @@ async function initialize() {
                 records
             );
 
-        /*
-        Determine source type.
-        */
         state.sourceType =
             isStream(
-                records[
-                    state.index
-                ].urlFileName
+                records[state.index].urlFileName
             )
                 ? "stream"
                 : "db";
 
-
-        /*
-        Fill fields with the starting record.
-        */
         fillRecordFields(
-            records[
-                state.index
-            ]
+            records[state.index]
         );
 
         showRecord(
-            records[
-                state.index
-            ]
+            records[state.index]
         );
 
         updateSourceType(
-            records[
-                state.index
-            ]
+            records[state.index]
         );
 
         updateStationList();
 
         updateDebug();
 
-
-        /*
-        Try autoplay.
-        */
-        playRecord(
-            records[
-                state.index
-            ]
-        )
-        .catch(
-            error => {
-
-                if (
-                    error.name ===
-                    "NotAllowedError"
-                ) {
-
-                    message(
-                        "DB loaded. Browser autoplay was blocked. Press PLAY."
-                    );
-
-                }
-                else {
-
-                    message(
-                        "DB loaded but playback failed:\n" +
-                        error.message,
-                        "error"
-                    );
-                }
-            }
+        message(
+            "Database loaded. Press PLAY to start."
         );
 
     }
@@ -5444,6 +6362,9 @@ async function initialize() {
             error.message,
             "error"
         );
+
+        repairDbBtn.style.display =
+            "inline-block";
     }
 
     updateDebug();
@@ -5451,8 +6372,38 @@ async function initialize() {
     setInitializedMessage();
 }
 
+initialize()
+    .catch(error => {
 
-initialize();
+        console.error(
+            "Fatal initialization error:",
+            error
+        );
+
+        message(
+            "Initialization failed:\n" +
+            error.message,
+            "error"
+        );
+
+        updateDebug();
+    });
+
+window.addEventListener(
+    "beforeunload",
+    () => {
+
+        if (db) {
+
+            try {
+                db.close();
+            }
+            catch (error) {}
+
+            db = null;
+        }
+    }
+);
 
 </script></body></html>
 
