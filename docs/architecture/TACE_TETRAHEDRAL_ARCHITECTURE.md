@@ -1,9 +1,9 @@
-# TACE Architectural Axioms and Recent Discoveries
+# TACE Tetrahedral Architecture
 
-**Status:** Canonical — Living Architectural Document
+**Status:** Canonical — Current Tetrahedral Specification
 
-**Purpose:** Preserve the currently accepted architectural organization of TACE
-and prevent regression to superseded formulations.
+**Purpose:** Define the current canonical tetrahedral architecture of TACE and
+prevent regression to superseded tetrahedral formulations.
 
 ## 1. Prime Potency
 
